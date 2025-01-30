@@ -205,11 +205,11 @@
         }
 
         .stat-card p {
-  color: blue !important; /* Forcer la couleur du texte en blanc */
-  margin: 0;
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
+            color: blue !important; 
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
 
         .stat-number {
             font-size: 3rem;
@@ -356,11 +356,7 @@
                         </div>
                     </div>
                 </div>
-    
-<!--                 <div class="cta-container" data-aos="fade-up" data-aos-delay="600">
-                    <button class="cta-button primary">Voir mes projets</button>
-                    <button class="cta-button secondary">Me contacter</button>
-                </div> -->
+
             </div>
         </div>
     
@@ -807,7 +803,7 @@
     <section class="section">
         <div class="container">
             <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;" data-aos="fade-up">Contact</h2>
-            <div class="contact-form" data-aos="fade-up">
+            <form class="contact-form" data-aos="fade-up"> <!-- Ajout de la balise form -->
                 <div class="input-group">
                     <label for="name">Nom complet</label>
                     <input type="text" id="name" placeholder="Votre nom">
@@ -820,14 +816,14 @@
                     <label for="message">Message</label>
                     <textarea id="message" rows="5" placeholder="Votre message"></textarea>
                 </div>
-                <button class="btn">Envoyer</button>
+                <button type="submit" class="btn">Envoyer</button> <!-- Ajout de type="submit" -->
                 
                 <div style="margin-top: 2rem; text-align: center;">
                     <p>📍 Gbegamey, Cotonou-Bénin</p>
                     <p>📧 merluxsolitaire@gmail.com</p>
                     <p>📱 +229 50375976</p>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
@@ -859,5 +855,92 @@
             });
         });
     </script>
+ 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialisation de EmailJS
+    emailjs.init("bmCMEhNAfLCj0kynF");
+
+    // Sélectionner les éléments du formulaire
+    const contactForm = document.querySelector('.contact-form');
+    const nameInput = document.querySelector('#name');
+    const emailInput = document.querySelector('#email');
+    const messageInput = document.querySelector('#message');
+    const submitButton = document.querySelector('.btn');
+
+    // Fonction pour valider l'email
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Fonction pour afficher les messages
+    function showMessage(message, isError = false) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageElement.style.padding = '10px';
+        messageElement.style.marginTop = '10px';
+        messageElement.style.borderRadius = '4px';
+        messageElement.style.textAlign = 'center';
+        messageElement.style.backgroundColor = isError ? '#ffebee' : '#e8f5e9';
+        messageElement.style.color = isError ? '#c62828' : '#2e7d32';
+
+        // Insérer le message juste après le bouton
+        submitButton.parentNode.insertBefore(messageElement, submitButton.nextSibling);
+
+        setTimeout(() => messageElement.remove(), 5000);
+    }
+
+    // Gestionnaire de soumission du formulaire
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('Formulaire soumis'); // Debug
+
+        // Récupérer les valeurs
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+
+        // Validation
+        if (!name || !email || !message) {
+            showMessage('Veuillez remplir tous les champs.', true);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showMessage('Veuillez entrer une adresse email valide.', true);
+            return;
+        }
+
+        // Désactiver le bouton
+        submitButton.disabled = true;
+        submitButton.textContent = 'Envoi en cours...';
+
+        try {
+            console.log('Tentative d\'envoi...'); // Debug
+            const response = await emailjs.send(
+                'service_ri40tbt',
+                'template_eoqn5wg',
+                {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    to_email: 'merluxsolitaire@gmail.com',
+                }
+            );
+            console.log('Réponse:', response); // Debug
+            contactForm.reset();
+            showMessage('Message envoyé avec succès!');
+        } catch (error) {
+            console.error('Erreur:', error);
+            showMessage('Une erreur est survenue. Veuillez réessayer.', true);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Envoyer';
+        }
+    });
+});
+</script>
 </body>
 </html>
