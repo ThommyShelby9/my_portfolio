@@ -190,6 +190,9 @@ const translations = {
         
         'project-tadagbe-title': 'TadagbeRhPlus',
         'project-tadagbe-desc': 'Plateforme de gestion RH avec suivi complet des employés, paie et fonctionnalités d\'évaluation de performance.',
+
+        'project-bilal-title': 'Portfolio Bilal Sekou',
+        'project-bilal-desc': 'Portfolio en ligne montrant les talents et les projets de Bilal Sekou.',
         
         'project-consultant-title': 'Plateforme LeConsultant',
         'project-consultant-desc': 'Plateforme d\'annonce d\'appels d\'offres fournissant aux entreprises des mises à jour opportunes sur les nouvelles opportunités.',
