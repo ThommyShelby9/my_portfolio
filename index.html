@@ -1,1304 +1,702 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- CSS pour l'impression du CV -->
-    <style media="print">
-        /* Masquer uniquement les éléments non nécessaires pour le CV */
-        nav, 
-        .hamburger, 
-        #mobile-menu,
-        .fixed,
-        footer,
-        #download-cv,
-        #lang-toggle,
-        .toggle-checkbox,
-        .toggle-label,
-        section#projects,
-        section#contact,
-        section#home .flex.justify-center.space-x-6,
-        section#home .flex.flex-wrap.justify-center.gap-4 {
-            display: none !important;
-        }
-        
-        /* S'assurer que le corps et les sections principales sont visibles */
-        body, 
-        section#home,
-        section#about, 
-        section#experience, 
-        section#skills, 
-        section#education {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        /* Styles généraux pour l'impression */
-        body {
-            font-family: 'Poppins', sans-serif !important;
-            background: white !important;
-            color: black !important;
-            line-height: 1.5 !important;
-            font-size: 10pt !important;
-            width: 100% !important;
-            height: auto !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        
-        /* Éliminer l'arrière-plan animé et autres effets */
-        .animated-bg, section, div {
-            background: white !important;
-            color: black !important;
-            border-color: #ddd !important;
-            animation: none !important;
-        }
-        
-        /* Supprimer la photo du header mais garder le nom et le titre */
-        section#home .w-32.h-32 {
-            display: none !important;
-        }
-        
-        /* Layout spécifique au CV imprimé */
-        section {
-            padding: 0.5cm 0 !important;
-            page-break-inside: avoid !important;
-            margin: 0 !important;
-        }
-        
-        h1, h2, h3, h4 {
-            color: #3B82F6 !important;
-            margin-bottom: 10pt !important;
-        }
-        
-        h2 {
-            border-bottom: 1pt solid #3B82F6 !important;
-            padding-bottom: 5pt !important;
-        }
-        
-        /* Section Hero optimisée pour le header du CV */
-        #home {
-            height: auto !important;
-            min-height: 0 !important;
-            padding-top: 0 !important;
-            padding-bottom: 0.5cm !important;
-        }
-        
-        #home .container {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        
-        #home h1 {
-            font-size: 18pt !important;
-            margin-bottom: 5pt !important;
-            text-align: center !important;
-            color: #000 !important;
-        }
-        
-        #home h2 {
-            font-size: 12pt !important;
-            border-bottom: none !important;
-            text-align: center !important;
-            font-weight: normal !important;
-            color: #666 !important;
-        }
-        
-        /* Style pour les timeline items */
-        .timeline-item {
-            margin-bottom: 10pt !important;
-            padding-left: 0 !important;
-        }
-        
-        .timeline-item::before,
-        .timeline-item::after {
-            display: none !important;
-        }
-        
-        .skill-tag {
-            display: inline-block !important;
-            border: 1pt solid #3B82F6 !important;
-            color: #3B82F6 !important;
-            margin: 2pt !important;
-            padding: 2pt 5pt !important;
-        }
-        
-        /* Ajustement des marges et de la mise en page */
-        .container {
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 1cm !important;
-        }
-        
-        /* Force l'affichage des grilles */
-        .grid {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 10pt !important;
-        }
-        
-        .card {
-            margin-bottom: 5pt !important;
-            padding: 5pt !important;
-            box-shadow: none !important;
-            border: 1pt solid #ddd !important;
-        }
-        
-        /* Textes et listes */
-        p, li {
-            margin-bottom: 5pt !important;
-            font-size: 9pt !important;
-            color: #000 !important;
-        }
-        
-        /* Faire apparaître les infos de contact en haut */
-        .cv-contact-header {
-            display: flex !important;
-            justify-content: center !important;
-            margin: 0.5cm 0 !important;
-            font-size: 9pt !important;
-            color: #000 !important;
-        }
-        
-        .cv-contact-header span {
-            margin: 0 5pt !important;
-        }
-        
-        /* Affichage du pied de page */
-        .cv-footer {
-            display: block !important;
-            margin-top: 1cm !important;
-            text-align: center !important;
-            font-size: 8pt !important;
-            color: #666 !important;
-        }
-        
-        /* S'assurer que .reveal est visible */
-        .reveal {
-            opacity: 1 !important;
-            transform: none !important;
-            visibility: visible !important;
-            display: block !important;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rostel PANOUMASSI | Portfolio</title>
-    <!-- Tailwind CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <title>Rostel PANOUMASSI | Full-Stack Developer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        .animated-bg {
-            background: linear-gradient(-45deg, #3B82F6, #10B981, #1E40AF, #EC4899);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background-color: #3B82F6;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .skill-tag {
-            transition: all 0.3s ease;
-        }
-        
-        .skill-tag:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #3B82F6;
-            left: -8px;
-            top: 5px;
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: calc(100% + 30px);
-            background-color: #E5E7EB;
-            left: 0;
-            top: 5px;
-            z-index: -1;
-        }
-        
-        .timeline-item:last-child::after {
-            height: calc(100% - 5px);
-        }
-        
-        .card {
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Dark mode switch */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #10B981;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #10B981;
-        }
-
-        /* Hamburger Animation */
-        .hamburger-line {
-            transition: all 0.3s ease;
-        }
-        
-        .hamburger.active .hamburger-line:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        
-        .hamburger.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active .hamburger-line:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        /* Scroll Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Dark mode fixes */
-        .dark .text-gray-700, 
-        .dark .text-gray-800, 
-        .dark .text-gray-900 {
-            color: #E5E7EB !important;
-        }
-        
-        .dark .text-gray-600 {
-            color: #9CA3AF !important;
-        }
-        
-        .dark .bg-gray-50,
-        .dark .bg-white {
-            background-color: #1F2937 !important;
-        }
-        
-        .dark .bg-gray-900 {
-            background-color: #111827 !important;
-        }
-        
-        .dark .bg-gray-800 {
-            background-color: #1F2937 !important;
-        }
-        
-        .dark .bg-gray-700 {
-            background-color: #374151 !important;
-        }
-        
-        .dark .border-gray-200,
-        .dark .border-gray-300 {
-            border-color: #4B5563 !important;
-        }
-        
-        .dark input, 
-        .dark textarea {
-            background-color: #374151 !important;
-            color: #F9FAFB !important;
-            border-color: #4B5563 !important;
-        }
-        
-        /* Make sure all sections are visible */
-        section {
-            display: block;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
 </head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-    <!-- Language Switcher + Dark Mode Toggle -->
-    <div class="fixed top-5 right-5 z-50 flex space-x-4">
-        <button id="download-cv" class="flex items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none mr-2">
-            <span class="text-sm font-medium mr-2 lang-download-cv">CV</span>
-            <i class="fas fa-download text-blue-500"></i>
-        </button>
-        
-        <button id="lang-toggle" class="flex items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none">
-            <span id="current-lang" class="text-sm font-medium mr-2">EN</span>
-            <i class="fas fa-globe text-blue-500"></i>
-        </button>
-        
-        <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
-            <input type="checkbox" name="toggle" id="dark-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer top-0 right-0 focus:outline-none"/>
-            <label for="dark-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader">
+            <div class="loader-text">Loading</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <div class="fixed top-5 left-5 z-50 md:hidden">
-        <button id="menu-toggle" class="hamburger flex flex-col justify-center items-center w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none">
-            <span class="hamburger-line w-6 h-0.5 bg-gray-900 dark:bg-gray-100 mb-1.5"></span>
-            <span class="hamburger-line w-6 h-0.5 bg-gray-900 dark:bg-gray-100 mb-1.5"></span>
-            <span class="hamburger-line w-6 h-0.5 bg-gray-900 dark:bg-gray-100"></span>
+    <!-- Language & Theme Toggles -->
+    <div class="toggle-container">
+        <button id="language-toggle" aria-label="Change language">
+            <span id="current-lang">EN</span>
+            <i class="fas fa-globe"></i>
+        </button>
+        <button id="theme-toggle" aria-label="Change theme">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+        <button id="download-cv" aria-label="Download CV">
+            <span>CV</span>
+            <i class="fas fa-download"></i>
         </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex flex-col justify-center items-center hidden">
-        <nav class="text-center">
-            <ul class="space-y-8">
-                <li><a href="#home" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">Home</a></li>
-                <li><a href="#about" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">About</a></li>
-                <li><a href="#experience" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">Experience</a></li>
-                <li><a href="#skills" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">Skills</a></li>
-                <li><a href="#education" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">Education</a></li>
-                <li><a href="#contact" class="text-white text-2xl font-bold hover:text-blue-400 transition-all duration-300 mobile-nav-link">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
+    <!-- Nano Animation Container -->
+    <div id="nano-container"></div>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex fixed top-0 left-0 right-0 z-30 bg-white dark:bg-gray-800 shadow-md py-4 px-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-400">RP<span class="text-gray-900 dark:text-white">.</span></a>
-            
-            <ul class="flex space-x-8">
-                <li><a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-home">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-about">About</a></li>
-                <li><a href="#experience" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-experience">Experience</a></li>
-                <li><a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-skills">Skills</a></li>
-                <li><a href="#education" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-education">Education</a></li>
-                <li><a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 lang-contact">Contact</a></li>
-            </ul>
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <a href="#home">RP<span>.</span></a>
         </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active" data-text="Home">Home</a></li>
+            <li><a href="#about" class="nav-link" data-text="About">About</a></li>
+            <li><a href="#experience" class="nav-link" data-text="Experience">Experience</a></li>
+            <li><a href="#skills" class="nav-link" data-text="Skills">Skills</a></li>
+            <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
+            <li><a href="#education" class="nav-link" data-text="Education">Education</a></li>
+            <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="animated-bg min-h-screen flex items-center justify-center pt-16 pb-24 px-4" style="background: linear-gradient(-45deg, #3B82F6, #10B981, #1E40AF, #EC4899); background-size: 400% 400%; animation: gradient 15s ease infinite;">
-        <div class="container mx-auto text-center">
-            <div class="w-32 h-32 mx-auto mb-8 overflow-hidden rounded-full border-4 border-white shadow-lg">
-                <img src="/logo1.jpg" alt="Rostel PANOUMASSI" class="w-full h-full object-cover">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Floating Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Content Wrapper -->
+    <main class="content-wrapper">
+        <!-- Home Section -->
+        <!-- Home Section avec disposition corrigée -->
+<section id="home" class="section">
+    <div class="section-content">
+        <div class="home-content">
+            <!-- Texte à gauche -->
+            <div class="home-text">
+                <h1 class="glitch-text" data-text="Rostel PANOUMASSI">Rostel PANOUMASSI</h1>
+                <h2 class="typewriter">Full-Stack Developer</h2>
+                <p class="gradient-text">Backend Specialist | Frontend Expertise | Cybersecurity</p>
+                
+                <div class="home-buttons">
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                    <a href="#about" class="btn btn-outline">About Me</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:rmissimawu@gmail.com" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
             </div>
             
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Rostel PANOUMASSI</h1>
-            <h2 class="text-xl md:text-2xl font-medium text-white mb-8 lang-hero-subtitle">Full-Stack Developer | Backend Specialist | Frontend Expertise</h2>
-            
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <a href="#contact" class="px-8 py-3 bg-white text-blue-600 rounded-full font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg lang-hire-me">Hire Me</a>
-                <a href="#about" class="px-8 py-3 bg-transparent text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-md hover:shadow-lg lang-about-me">About Me</a>
-            </div>
-            
-            <div class="flex justify-center space-x-6">
-                <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank" class="text-white hover:text-blue-200 transition-all duration-300">
-                    <i class="fab fa-linkedin text-3xl"></i>
-                </a>
-                <a href="mailto:rmissimawu@gmail.com" class="text-white hover:text-blue-200 transition-all duration-300">
-                    <i class="fas fa-envelope text-3xl"></i>
-                </a>
-                <a href="https://github.com" target="_blank" class="text-white hover:text-blue-200 transition-all duration-300">
-                    <i class="fab fa-github text-3xl"></i>
-                </a>
+            <!-- Image à droite -->
+            <div class="home-image">
+                <div class="image-container">
+                    <img src="images/logo1.jpg" alt="Rostel PANOUMASSI" id="profile-image">
+                    <div class="image-overlay"></div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="about-title">About Me</h2>
+                
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/logo2.jpg" alt="Rostel working">
+                        <div class="tech-icons">
+                            <i class="fab fa-java"></i>
+                            <i class="fab fa-vuejs"></i>
+                            <i class="fab fa-laravel"></i>
+                            <i class="fab fa-python"></i>
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="about-text">
+                        <h3 class="gradient-text" data-lang="about-greeting">Hello, I'm Rostel</h3>
+                        <p data-lang="about-p1">
+                            Stepping into the tech arena with a certification in web and mobile development from Ecole 229 
+                            and specialized knowledge in cybersecurity, Django, Spring-Boot, Laravel, VueJs, I have embraced 
+                            the Full-stack Developer role at Cabinet GPRHME. Here, I focus on advancing our HR management platform, 
+                            TadagbeRhPlus, ensuring robust security and seamless functionality.
+                        </p>
+                        <p data-lang="about-p2">
+                            My recent freelance experience with N01ZET allowed me to refine my expertise in QA test automation, 
+                            employing tools like Selenium and Java. At Cabinet GPRHME, we prioritize innovation and the relentless 
+                            pursuit of improvement, aligning perfectly with my proactive problem-solving approach and dedication 
+                            to delivering cutting-edge software solutions.
+                        </p>
+                        
+                        <div class="about-details">
+                            <div class="detail-item">
+                                <span data-lang="about-name">Name:</span>
+                                <span>Rostel PANOUMASSI</span>
+                            </div>
+                            <div class="detail-item">
+                                <span data-lang="about-email">Email:</span>
+                                <span>rmissimawu@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <span data-lang="about-location">Location:</span>
+                                <span>Cotonou, Benin</span>
+                            </div>
+                            <div class="detail-item">
+                                <span data-lang="about-role">Role:</span>
+                                <span>Full-Stack Developer</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="btn btn-primary" data-lang="btn-contact">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 px-4 bg-white dark:bg-gray-800">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-about-title">About Me</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <div class="relative w-full h-80 md:h-96 rounded-lg overflow-hidden shadow-xl">
-                        <img src="/logo2.jpg" alt="Rostel PANOUMASSI" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-20"></div>
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="exp-title">Work Experience</h2>
+                
+                <div class="timeline">
+                    <!-- Experience 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Cabinet GPRHME</h3>
+                                <span class="timeline-tag" data-lang="exp-gprhme-role">Full-stack Developer</span>
+                                <span class="timeline-date" data-lang="exp-gprhme-date">September 2024 - Present</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li data-lang="exp-gprhme-resp1">Development and improvement of the TadagbeRhPlus HR management platform.</li>
+                                <li data-lang="exp-gprhme-resp2">Redesign of the TadagbeRhPlus platform.</li>
+                                <li data-lang="exp-gprhme-resp3">Design of other related platforms (INTER-NAT, HIPEJUS).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>LeConsultant</h3>
+                                <span class="timeline-tag" data-lang="exp-consultant-role">Full Stack Developer</span>
+                                <span class="timeline-date" data-lang="exp-consultant-date">August 2023 - December 2024</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li data-lang="exp-consultant-resp1">Design and continuous improvement of the LeConsultant tender announcement platform.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>N01zet</h3>
+                                <span class="timeline-tag" data-lang="exp-noizet-role">QA Tests Automation</span>
+                                <span class="timeline-date" data-lang="exp-noizet-date">March 2024 - August 2024</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li data-lang="exp-noizet-resp1">Implementation of automated tests with Selenium, Java, JUnit at N01ZET (Freelance).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>DSMC Benin</h3>
+                                <span class="timeline-tag" data-lang="exp-dsmc-role">Full-stack Developer</span>
+                                <span class="timeline-date" data-lang="exp-dsmc-date">March 2024 - July 2024</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li data-lang="exp-dsmc-resp1">Design of a payment aggregator (Full Laravel).</li>
+                                <li data-lang="exp-dsmc-resp2">Improvement of the DSMC MILLENIUM CYBERSECURITY platform (Full Laravel).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 5 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>JSCOM-Bénin</h3>
+                                <span class="timeline-tag" data-lang="exp-jscom-role">Professional Internship</span>
+                                <span class="timeline-date" data-lang="exp-jscom-date">November 2023 - March 2024</span>
+                            </div>
+                            <ul class="timeline-details">
+                                <li data-lang="exp-jscom-resp1">Development of an inventory management platform in Spring-Boot (Java) and VueJs.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="skills-title">Technical Skills</h2>
+                
+                <div class="skills-container">
+                    <!-- Backend Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 data-lang="skills-backend">Backend</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Java/Spring Boot</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">Hibernate</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 data-lang="skills-frontend">Frontend</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">Next.js</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Database Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 data-lang="skills-database">Databases</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                    </div>
+                    
+                    <!-- DevOps Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 data-lang="skills-devops">DevOps</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux Server</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Linux Administration</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Testing Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 data-lang="skills-testing">Testing</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">JUnit</span>
+                            <span class="skill-tag">QA Automation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Skills -->
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 data-lang="skills-security">Security</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Cybersecurity</span>
+                            <span class="skill-tag">Cyber Defense</span>
+                            <span class="skill-tag">Web App Security</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="reveal">
-                    <h3 class="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400 lang-about-greeting">Hello, I'm Rostel</h3>
-                    <p class="text-gray-700 dark:text-gray-300 mb-6 lang-about-description">
-                        Stepping into the tech arena with a certification in web and mobile development from Ecole 229 and specialized knowledge in cybersecurity, Django, Spring-Boot, Laravel, VueJs, I have embraced the Full-stack Developer role at Cabinet GPRHME. Here, I focus on advancing our HR management platform, TadagbeRhPlus, ensuring robust security and seamless functionality.
-                    </p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-8 lang-about-description2">
-                        My recent freelance experience with N01ZET allowed me to refine my expertise in QA test automation, employing tools like Selenium and Java. At Cabinet GPRHME, we prioritize innovation and the relentless pursuit of improvement, aligning perfectly with my proactive problem-solving approach and dedication to delivering cutting-edge software solutions.
-                    </p>
+                <!-- Skill Bars -->
+                <div class="skill-bars-container">
+                    <h3 data-lang="skills-proficiency">Proficiency Levels</h3>
                     
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <p class="font-medium text-gray-700 dark:text-gray-300 lang-about-name">Name:</p>
-                            <p class="text-gray-800 dark:text-white mb-3">Rostel PANOUMASSI</p>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Backend Development</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-percent="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Frontend Development</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-percent="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Database Management</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-percent="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>DevOps & System Administration</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-percent="80"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Cybersecurity</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-percent="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="projects-title">Featured Projects</h2>
+                
+                <div class="projects-container">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/zenlife.png" alt="ZenLife">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://zenlife-gs2w.onrender.com/" class="project-link" aria-label="View Project">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="project-link" aria-label="View Code">
+                                        <i class="fas fa-code"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-lang="project-zenlife-title">ZenLife</h3>
+                            <p data-lang="project-zenlife-desc">
+                                Find your balance and serenity. ZenLife accompanies you in your quest for daily well-being. 
+                                Plan your life, manage your finances, track your health, and cultivate positivity with ease.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Spring Boot</span>
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/ccns.png" alt="CCNS Platform">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://ccnsbenin.vercel.app/" class="project-link" aria-label="View Project">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="project-link" aria-label="View Code">
+                                        <i class="fas fa-code"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-lang="project-ccns-title">Commission Catholique Nationale pour la Santé</h3>
+                            <p data-lang="project-ccns-desc">
+                                Complete platform for the National Catholic Health Commission, offering management, 
+                                monitoring, and coordination services for nationwide health initiatives.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/tadagbe.png" alt="TadagbeRhPlus">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link" aria-label="View Project">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="project-link" aria-label="View Code">
+                                        <i class="fas fa-code"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-lang="project-tadagbe-title">TadagbeRhPlus</h3>
+                            <p data-lang="project-tadagbe-desc">
+                                HR management platform with comprehensive employee tracking, payroll, 
+                                and performance evaluation features.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Spring Boot</span>
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/consultant.png" alt="LeConsultant Platform">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://leconsultant.bj/" class="project-link" aria-label="View Project">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="project-link" aria-label="View Code">
+                                        <i class="fas fa-code"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-lang="project-consultant-title">LeConsultant Platform</h3>
+                            <p data-lang="project-consultant-desc">
+                                Tender announcement platform providing businesses with timely updates on new opportunities.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="education-title">Education & Certifications</h2>
+                
+                <div class="education-container">
+                    <!-- Education 1 -->
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3 data-lang="edu-ecole229-title">Ecole 229</h3>
+                            <span class="education-degree" data-lang="edu-ecole229-degree">Certification, Web and Mobile Development</span>
+                            <span class="education-date" data-lang="edu-ecole229-date">March 2023 - March 2024</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Education 2 -->
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3 data-lang="edu-mindluster-title">Mindluster</h3>
+                            <span class="education-degree" data-lang="edu-mindluster-degree">Certificate, Computer and Information Systems Security</span>
+                            <span class="education-date" data-lang="edu-mindluster-date">January 2025 - February 2025</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Education 3 -->
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3 data-lang="edu-asin-title">ASIN</h3>
+                            <span class="education-degree" data-lang="edu-asin-degree">Attestation, Computer and Information Systems Security</span>
+                            <span class="education-date" data-lang="edu-asin-date">December 2023</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Education 4 -->
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3 data-lang="edu-injeps-title">INJEPS</h3>
+                            <span class="education-degree" data-lang="edu-injeps-degree">Professional License, STASE option Andragogie</span>
+                            <span class="education-date" data-lang="edu-injeps-date">October 2019 - August 2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-content">
+                <h2 class="section-title" data-lang="contact-title">Get In Touch</h2>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3 data-lang="contact-info">Contact Information</h3>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4 data-lang="contact-email">Email</h4>
+                                    <a href="mailto:rmissimawu@gmail.com">rmissimawu@gmail.com</a>
+                                </div>
+                            </div>
                             
-                            <p class="font-medium text-gray-700 dark:text-gray-300 lang-about-email">Email:</p>
-                            <p class="text-gray-800 dark:text-white mb-3">rmissimawu@gmail.com</p>
-                        </div>
-                        
-                        <div>
-                            <p class="font-medium text-gray-700 dark:text-gray-300 lang-about-location">Location:</p>
-                            <p class="text-gray-800 dark:text-white mb-3">Cotonou, Benin</p>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4 data-lang="contact-location">Location</h4>
+                                    <p>Cotonou, Littoral, Benin</p>
+                                </div>
+                            </div>
                             
-                            <p class="font-medium text-gray-700 dark:text-gray-300 lang-about-role">Role:</p>
-                            <p class="text-gray-800 dark:text-white mb-3">Full-Stack Developer</p>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>LinkedIn</h4>
+                                    <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank">Rostel PANOUMASSI</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <a href="#contact" class="inline-block mt-6 px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg lang-contact-me">Contact Me</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-24 px-4 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-experience-title">Work Experience</h2>
-            
-            <div class="max-w-3xl mx-auto">
-                <!-- Experience 1 -->
-                <div class="timeline-item reveal">
-                    <div class="mb-2">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Cabinet GPRHME</h3>
-                        <p class="text-blue-600 dark:text-blue-400 font-medium lang-role-fullstack">Full-stack Developer</p>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-gprhme">September 2024 - Present</p>
-                    </div>
-                    <div class="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <ul class="list-disc text-gray-700 dark:text-gray-300 ml-4 space-y-1">
-                            <li class="lang-gprhme-resp1">Development and improvement of the TadagbeRhPlus HR management platform.</li>
-                            <li class="lang-gprhme-resp2">Redesign of the TadagbeRhPlus platform.</li>
-                            <li class="lang-gprhme-resp3">Design of other related platforms (INTER-NAT, HIPEJUS).</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Experience 2 -->
-                <div class="timeline-item reveal">
-                    <div class="mb-2">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">LeConsultant</h3>
-                        <p class="text-blue-600 dark:text-blue-400 font-medium lang-role-fullstack">Full Stack Developer</p>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-consultant">August 2023 - December 2024</p>
-                    </div>
-                    <div class="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <ul class="list-disc text-gray-700 dark:text-gray-300 ml-4 space-y-1">
-                            <li class="lang-consultant-resp1">Design and continuous improvement of the LeConsultant tender announcement platform.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Experience 3 -->
-                <div class="timeline-item reveal">
-                    <div class="mb-2">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">N01zet</h3>
-                        <p class="text-blue-600 dark:text-blue-400 font-medium lang-role-qa">QA TESTS AUTOMATION FULL STACK</p>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-noizet">March 2024 - August 2024</p>
-                    </div>
-                    <div class="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <ul class="list-disc text-gray-700 dark:text-gray-300 ml-4 space-y-1">
-                            <li class="lang-noizet-resp1">Implementation of automated tests with Selenium, Java, JUnit at N01ZET (Freelance).</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Experience 4 -->
-                <div class="timeline-item reveal">
-                    <div class="mb-2">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">DSMC Benin</h3>
-                        <p class="text-blue-600 dark:text-blue-400 font-medium lang-role-fullstack">Full-stack Developer</p>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-dsmc">March 2024 - July 2024</p>
-                    </div>
-                    <div class="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <ul class="list-disc text-gray-700 dark:text-gray-300 ml-4 space-y-1">
-                            <li class="lang-dsmc-resp1">Design of a payment aggregator (Full Laravel).</li>
-                            <li class="lang-dsmc-resp2">Improvement of the DSMC MILLENIUM CYBERSECURITY platform (Full Laravel).</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Experience 5 -->
-                <div class="timeline-item reveal">
-                    <div class="mb-2">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">JSCOM-Bénin</h3>
-                        <p class="text-blue-600 dark:text-blue-400 font-medium lang-role-intern">PROFESSIONAL INTERNSHIP</p>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-jscom">November 2023 - March 2024</p>
-                    </div>
-                    <div class="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <ul class="list-disc text-gray-700 dark:text-gray-300 ml-4 space-y-1">
-                            <li class="lang-jscom-resp1">Development of an inventory management platform in Spring-Boot (Java) and VueJs.</li>
-                        </ul>
+                    <div class="contact-form">
+                        <h3 data-lang="contact-form">Send Message</h3>
+                        
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name" data-lang="contact-name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" data-lang="contact-email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" data-lang="contact-subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" data-lang="contact-message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" data-lang="btn-send">Send Message</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 px-4 bg-white dark:bg-gray-800">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-skills-title">Technical Skills</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Backend Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-backend-title">Backend</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Java/Spring Boot</span>
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Node.js</span>
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Django</span>
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Laravel</span>
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">PHP</span>
-                        <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">Hibernate</span>
-                    </div>
-                </div>
-                
-                <!-- Frontend Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-frontend-title">Frontend</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Vue.js</span>
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Bootstrap</span>
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">HTML/CSS</span>
-                        <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">Next.js</span>
-                    </div>
-                </div>
-                
-                <!-- Database Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-database-title">Databases</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">MySQL</span>
-                        <span class="skill-tag bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-full text-sm">MongoDB</span>
-                    </div>
-                </div>
-                
-                <!-- DevOps Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-devops-title">DevOps</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Linux Server</span>
-                        <span class="skill-tag bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Docker</span>
-                        <span class="skill-tag bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">Linux Administration</span>
-                    </div>
-                </div>
-                
-                <!-- Testing Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-vial"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-testing-title">Testing</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded-full text-sm">Selenium</span>
-                        <span class="skill-tag bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded-full text-sm">JUnit</span>
-                        <span class="skill-tag bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded-full text-sm">QA Automation</span>
-                    </div>
-                </div>
-                
-                <!-- Security Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-security-title">Security</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm">Cybersecurity</span>
-                        <span class="skill-tag bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm">Cyber Defense</span>
-                        <span class="skill-tag bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full text-sm">Web App Security</span>
-                    </div>
-                </div>
-                
-                <!-- Other Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-plus-circle"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-other-title">Other</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">PaaS</span>
-                        <span class="skill-tag bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">Mobile Web Design</span>
-                        <span class="skill-tag bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm">Video Art</span>
-                    </div>
-                </div>
-                
-                <!-- Soft Skills -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="text-blue-600 dark:text-blue-400 text-4xl mb-4">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white lang-soft-title">Soft Skills</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Communication</span>
-                        <span class="skill-tag bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Problem Solving</span>
-                        <span class="skill-tag bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-3 py-1 rounded-full text-sm">Teamwork</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section (Inferred from Experience) -->
-    <section id="projects" class="py-24 px-4 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-projects-title">Featured Projects</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 - ZenLife (New Personal Project) -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/zenlife.png" alt="ZenLife" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">ZenLife</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">ZenLife</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project-zenlife-desc">
-                            Retrouvez votre équilibre et sérénité. ZenLife vous accompagne dans votre quête de bien-être quotidien. Planifiez votre vie, gérez vos finances, suivez votre santé et cultivez la positivité en toute simplicité.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Spring Boot</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Vue.js</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 - CCNS Platform (New) -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/ccns.png" alt="CCNS Platform" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">CCNS</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Commission Catholique Nationale pour la Santé</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project-ccns-desc">
-                            Plateforme complète pour la Commission Catholique Nationale pour la Santé, offrant des services de gestion, suivi et coordination des initiatives de santé à l'échelle nationale.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Node.js</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Vue.js</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/tadagbe.png" alt="TadagbeRhPlus" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">TadagbeRhPlus</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">TadagbeRhPlus</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project1-desc">
-                            HR management platform with comprehensive employee tracking, payroll, and performance evaluation features.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Spring Boot</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Vue.js</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/consultant.png" alt="LeConsultant Platform" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">LeConsultant</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">LeConsultant Platform</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project2-desc">
-                            Tender announcement platform providing businesses with timely updates on new opportunities.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Laravel</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">JavaScript</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 5 -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/noizet.png" alt="QA Automation Framework" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">QA Automation</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">N01zet QA Automation Framework</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project-qa-desc">
-                            Comprehensive test automation framework for web applications using Selenium and Java. Developed during freelance work with N01zet.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Java</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Selenium</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">JUnit</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 6 -->
-                <div class="card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg reveal">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <img src="/inventoring.jpg" alt="Inventory Management" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center">
-                            <h3 class="text-xl font-bold text-white">Inventory Management</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Inventory Management System</h4>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 lang-project4-desc">
-                            Comprehensive inventory tracking system with real-time stock updates and reporting.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Spring Boot</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Vue.js</span>
-                            <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="py-24 px-4 bg-white dark:bg-gray-800">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-education-title">Education & Certifications</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Education 1 -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                            <i class="fas fa-graduation-cap text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Ecole 229</h3>
-                            <p class="text-blue-600 dark:text-blue-400 font-medium lang-cert-web">Certification, Web and Mobile Development</p>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-ecole">March 2023 - March 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Education 2 -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                            <i class="fas fa-graduation-cap text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Mindluster</h3>
-                            <p class="text-blue-600 dark:text-blue-400 font-medium lang-cert-security">Certificate, Computer and Information Systems Security</p>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-mindluster">January 2025 - February 2025</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Education 3 -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                            <i class="fas fa-shield-alt text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">ASIN</h3>
-                            <p class="text-blue-600 dark:text-blue-400 font-medium lang-cert-defense">Attestation, Computer and Information Systems Security</p>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-asin">December 2023</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Education 4 -->
-                <div class="card bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md reveal">
-                    <div class="flex items-start">
-                        <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                            <i class="fas fa-university text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">INJEPS</h3>
-                            <p class="text-blue-600 dark:text-blue-400 font-medium lang-licence-stase">Professional License, STASE option Andragogie</p>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm lang-date-injeps">October 2019 - August 2022</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-4 bg-gray-50 dark:bg-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 reveal lang-contact-title">Get In Touch</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="reveal">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white lang-contact-info">Contact Information</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-medium text-gray-900 dark:text-white lang-email">Email</h4>
-                                <p class="text-gray-700 dark:text-gray-300">rmissimawu@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-medium text-gray-900 dark:text-white lang-location-title">Location</h4>
-                                <p class="text-gray-700 dark:text-gray-300">Cotonou, Littoral, Benin</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-blue-600 text-white p-3 rounded-lg mr-4">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">LinkedIn</h4>
-                                <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Rostel PANOUMASSI</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reveal">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white lang-contact-form">Send Message</h3>
-                    
-                    <form class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 lang-name">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white">
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 lang-email">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white">
-                        </div>
-                        
-                        <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 lang-subject">Subject</label>
-                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white">
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 lang-message">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all duration-300 lang-send">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 bg-gray-900 text-white">
-        <div class="container mx-auto text-center">
-            <a href="#" class="text-2xl font-bold text-blue-400 mb-4 inline-block">RP<span class="text-white">.</span></a>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <a href="#home">RP<span>.</span></a>
+            </div>
             
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300">
-                    <i class="fab fa-linkedin text-xl"></i>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/rostel-panoumassi-6b6608335" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="mailto:rmissimawu@gmail.com" class="text-gray-400 hover:text-white transition-all duration-300">
-                    <i class="fas fa-envelope text-xl"></i>
+                <a href="mailto:rmissimawu@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
                 </a>
-                <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300">
-                    <i class="fab fa-github text-xl"></i>
+                <a href="https://github.com" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
                 </a>
             </div>
             
-            <p class="text-gray-400 text-sm lang-copyright">&copy; 2025 Rostel PANOUMASSI. All rights reserved.</p>
+            <div class="footer-copyright">
+                &copy; <span id="current-year" data-lang="copyright"></span>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Dark Mode Toggle
-        const darkToggle = document.getElementById('dark-toggle');
-        const htmlElement = document.documentElement;
-        
-        // Check for saved theme preference or use user's system preference
-        if (localStorage.getItem('darkMode') === 'true' || 
-            (localStorage.getItem('darkMode') === null && 
-             window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-            darkToggle.checked = true;
-        }
-        
-        darkToggle.addEventListener('change', function() {
-            if (this.checked) {
-                htmlElement.classList.add('dark');
-                localStorage.setItem('darkMode', 'true');
-            } else {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('darkMode', 'false');
-            }
-        });
-        
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-        });
-        
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                mobileMenu.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            });
-        });
-        
-        // Scroll Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        function checkReveal() {
-            const windowHeight = window.innerHeight;
-            const revealPoint = 150;
-            
-            revealElements.forEach(element => {
-                const revealTop = element.getBoundingClientRect().top;
-                
-                if (revealTop < windowHeight - revealPoint) {
-                    element.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkReveal);
-        window.addEventListener('load', checkReveal);
-        
-        // Download CV
-        const downloadCV = document.getElementById('download-cv');
-        downloadCV.addEventListener('click', function() {
-            // Préparer le titre du document en fonction de la langue
-            const docTitle = currentLanguage === 'en' ? 
-                'Rostel PANOUMASSI - CV' : 
-                'Rostel PANOUMASSI - CV';
-            
-            // Changer temporairement le titre du document pour l'impression
-            const originalTitle = document.title;
-            document.title = docTitle;
-            
-            // Trigger l'impression
-            window.print();
-            
-            // Restaurer le titre original
-            document.title = originalTitle;
-        });
-        
-        // Language Switcher
-        const langToggle = document.getElementById('lang-toggle');
-        const currentLang = document.getElementById('current-lang');
-        let currentLanguage = localStorage.getItem('language') || 'en';
-        
-        // Language translations
-        const translations = {
-            en: {
-                // Navigation
-                'lang-home': 'Home',
-                'lang-about': 'About',
-                'lang-experience': 'Experience',
-                'lang-skills': 'Skills',
-                'lang-education': 'Education',
-                'lang-contact': 'Contact',
-                'lang-download-cv': 'CV',
-                
-                // Hero
-                'lang-hero-subtitle': 'Full-Stack Developer | Backend Specialist | Frontend Expertise',
-                'lang-hire-me': 'Hire Me',
-                'lang-about-me': 'About Me',
-                
-                // About
-                'lang-about-title': 'About Me',
-                'lang-about-greeting': 'Hello, I\'m Rostel',
-                'lang-about-description': 'Stepping into the tech arena with a certification in web and mobile development from Ecole 229 and specialized knowledge in cybersecurity, Django, Spring-Boot, Laravel, VueJs, I have embraced the Full-stack Developer role at Cabinet GPRHME. Here, I focus on advancing our HR management platform, TadagbeRhPlus, ensuring robust security and seamless functionality.',
-                'lang-about-description2': 'My recent freelance experience with N01ZET allowed me to refine my expertise in QA test automation, employing tools like Selenium and Java. At Cabinet GPRHME, we prioritize innovation and the relentless pursuit of improvement, aligning perfectly with my proactive problem-solving approach and dedication to delivering cutting-edge software solutions.',
-                'lang-about-name': 'Name:',
-                'lang-about-email': 'Email:',
-                'lang-about-location': 'Location:',
-                'lang-about-role': 'Role:',
-                'lang-contact-me': 'Contact Me',
-                
-                // Experience
-                'lang-experience-title': 'Work Experience',
-                'lang-role-fullstack': 'Full-stack Developer',
-                'lang-date-gprhme': 'September 2024 - Present',
-                'lang-gprhme-resp1': 'Development and improvement of the TadagbeRhPlus HR management platform.',
-                'lang-gprhme-resp2': 'Redesign of the TadagbeRhPlus platform.',
-                'lang-gprhme-resp3': 'Design of other related platforms (INTER-NAT, HIPEJUS).',
-                'lang-date-consultant': 'August 2023 - December 2024',
-                'lang-consultant-resp1': 'Design and continuous improvement of the LeConsultant tender announcement platform.',
-                'lang-role-qa': 'QA TESTS AUTOMATION FULL STACK',
-                'lang-date-noizet': 'March 2024 - August 2024',
-                'lang-noizet-resp1': 'Implementation of automated tests with Selenium, Java, JUnit at N01ZET (Freelance).',
-                'lang-date-dsmc': 'March 2024 - July 2024',
-                'lang-dsmc-resp1': 'Design of a payment aggregator (Full Laravel).',
-                'lang-dsmc-resp2': 'Improvement of the DSMC MILLENIUM CYBERSECURITY platform (Full Laravel).',
-                'lang-role-intern': 'PROFESSIONAL INTERNSHIP',
-                'lang-date-jscom': 'November 2023 - March 2024',
-                'lang-jscom-resp1': 'Development of an inventory management platform in Spring-Boot (Java) and VueJs.',
-                
-                // Skills
-                'lang-skills-title': 'Technical Skills',
-                'lang-backend-title': 'Backend',
-                'lang-frontend-title': 'Frontend',
-                'lang-database-title': 'Databases',
-                'lang-devops-title': 'DevOps',
-                'lang-testing-title': 'Testing',
-                'lang-security-title': 'Security',
-                'lang-other-title': 'Other',
-                'lang-soft-title': 'Soft Skills',
-                
-                // Projects
-                'lang-projects-title': 'Featured Projects',
-                'lang-project-zenlife-desc': 'Find your balance and serenity. ZenLife accompanies you in your quest for daily well-being. Plan your life, manage your finances, track your health, and cultivate positivity with ease.',
-                'lang-project-ccns-desc': 'Complete platform for the National Catholic Health Commission, offering management, monitoring, and coordination services for nationwide health initiatives.',
-                'lang-project1-desc': 'HR management platform with comprehensive employee tracking, payroll, and performance evaluation features.',
-                'lang-project2-desc': 'Tender announcement platform providing businesses with timely updates on new opportunities.',
-                'lang-project-qa-desc': 'Comprehensive test automation framework for web applications using Selenium and Java. Developed during freelance work with N01zet.',
-                'lang-project4-desc': 'Comprehensive inventory tracking system with real-time stock updates and reporting.',
-                
-                // Education
-                'lang-education-title': 'Education & Certifications',
-                'lang-cert-web': 'Certification, Web and Mobile Development',
-                'lang-date-ecole': 'March 2023 - March 2024',
-                'lang-cert-security': 'Certificate, Computer and Information Systems Security',
-                'lang-date-mindluster': 'January 2025 - February 2025',
-                'lang-cert-defense': 'Attestation, Computer and Information Systems Security',
-                'lang-date-asin': 'December 2023',
-                'lang-licence-stase': 'Professional License, STASE option Andragogie',
-                'lang-date-injeps': 'October 2019 - August 2022',
-                
-                // Contact
-                'lang-contact-title': 'Get In Touch',
-                'lang-contact-info': 'Contact Information',
-                'lang-email': 'Email',
-                'lang-location-title': 'Location',
-                'lang-contact-form': 'Send Message',
-                'lang-name': 'Name',
-                'lang-subject': 'Subject',
-                'lang-message': 'Message',
-                'lang-send': 'Send Message',
-                
-                // Footer
-                'lang-copyright': '© 2025 Rostel PANOUMASSI. All rights reserved.'
-            },
-            fr: {
-                // Navigation
-                'lang-home': 'Accueil',
-                'lang-about': 'À Propos',
-                'lang-experience': 'Expérience',
-                'lang-skills': 'Compétences',
-                'lang-education': 'Formation',
-                'lang-contact': 'Contact',
-                'lang-download-cv': 'CV',
-                
-                // Hero
-                'lang-hero-subtitle': 'Développeur Full-Stack | Spécialiste Backend | Expert Frontend',
-                'lang-hire-me': 'Embauchez-moi',
-                'lang-about-me': 'À Propos de Moi',
-                
-                // About
-                'lang-about-title': 'À Propos de Moi',
-                'lang-about-greeting': 'Bonjour, je suis Rostel',
-                'lang-about-description': 'Avec une certification en développement web et mobile de l\'Ecole 229 et des connaissances spécialisées en cybersécurité, Django, Spring-Boot, Laravel, VueJs, j\'ai embrassé le rôle de développeur Full-stack au sein du Cabinet GPRHME. Ici, je me concentre sur l\'avancement de notre plateforme de gestion des ressources humaines TadagbeRhPlus, assurant une sécurité robuste et une fonctionnalité fluide.',
-                'lang-about-description2': 'Ma récente expérience en tant que freelance chez N01ZET m\'a permis d\'affiner mon expertise dans l\'automatisation des tests d\'assurance qualité, en utilisant des outils tels que Selenium et Java. Au Cabinet GPRHME, nous donnons la priorité à l\'innovation et à la poursuite incessante de l\'amélioration, ce qui correspond parfaitement à mon approche proactive de la résolution de problèmes et à mon dévouement à la fourniture de solutions logicielles de pointe.',
-                'lang-about-name': 'Nom:',
-                'lang-about-email': 'Email:',
-                'lang-about-location': 'Localisation:',
-                'lang-about-role': 'Rôle:',
-                'lang-contact-me': 'Contactez-moi',
-                
-                // Experience
-                'lang-experience-title': 'Expérience Professionnelle',
-                'lang-role-fullstack': 'Développeur Full-stack',
-                'lang-date-gprhme': 'Septembre 2024 - Présent',
-                'lang-gprhme-resp1': 'Réalisation et amélioration d\'une plateforme de gestion des ressources humaines TadagbeRhPlus.',
-                'lang-gprhme-resp2': 'Refonte de la plateforme TadagbeRhPlus.',
-                'lang-gprhme-resp3': 'Conception d\'autres plateformes connexes (INTER-NAT, HIPEJUS).',
-                'lang-date-consultant': 'Août 2023 - Décembre 2024',
-                'lang-consultant-resp1': 'Conception et amélioration continue de la plateforme d\'annonce d\'appels d\'offres LeConsultant.',
-                'lang-role-qa': 'AUTOMATISATION DES TESTS QA FULL STACK',
-                'lang-date-noizet': 'Mars 2024 - Août 2024',
-                'lang-noizet-resp1': 'Réalisation de tests automatisés avec Selenium, Java, JUnit à N01ZET (Freelance).',
-                'lang-date-dsmc': 'Mars 2024 - Juillet 2024',
-                'lang-dsmc-resp1': 'Conception d\'un agrégateur de paiement (Full Laravel).',
-                'lang-dsmc-resp2': 'Amélioration de la plateforme DSMC MILLENIUM CYBERSECURITY (Full Laravel).',
-                'lang-role-intern': 'STAGE PROFESSIONNEL',
-                'lang-date-jscom': 'Novembre 2023 - Mars 2024',
-                'lang-jscom-resp1': 'Réalisation d\'une plateforme de gestion de stock en Spring-Boot (Java) et VueJs.',
-                
-                // Skills
-                'lang-skills-title': 'Compétences Techniques',
-                'lang-backend-title': 'Backend',
-                'lang-frontend-title': 'Frontend',
-                'lang-database-title': 'Bases de Données',
-                'lang-devops-title': 'DevOps',
-                'lang-testing-title': 'Tests',
-                'lang-security-title': 'Sécurité',
-                'lang-other-title': 'Autres',
-                'lang-soft-title': 'Compétences Personnelles',
-                
-                // Projects
-                'lang-projects-title': 'Projets Présentés',
-                'lang-project-zenlife-desc': 'Retrouvez votre équilibre et sérénité. ZenLife vous accompagne dans votre quête de bien-être quotidien. Planifiez votre vie, gérez vos finances, suivez votre santé et cultivez la positivité en toute simplicité.',
-                'lang-project-ccns-desc': 'Plateforme complète pour la Commission Catholique Nationale pour la Santé, offrant des services de gestion, suivi et coordination des initiatives de santé à l\'échelle nationale.',
-                'lang-project1-desc': 'Plateforme de gestion RH avec suivi complet des employés, paie et fonctionnalités d\'évaluation de performance.',
-                'lang-project2-desc': 'Plateforme d\'annonce d\'appels d\'offres fournissant aux entreprises des mises à jour opportunes sur les nouvelles opportunités.',
-                'lang-project-qa-desc': 'Framework complet d\'automatisation des tests pour les applications web utilisant Selenium et Java. Développé lors de mon travail freelance avec N01zet.',
-                'lang-project4-desc': 'Système complet de suivi des stocks avec mises à jour en temps réel et rapports.',
-                
-                // Education
-                'lang-education-title': 'Formation & Certifications',
-                'lang-cert-web': 'Certification, Développement Web et Mobile',
-                'lang-date-ecole': 'Mars 2023 - Mars 2024',
-                'lang-cert-security': 'Certificat, Sécurité des Systèmes Informatiques et d\'Information',
-                'lang-date-mindluster': 'Janvier 2025 - Février 2025',
-                'lang-cert-defense': 'Attestation, Sécurité des Systèmes Informatiques et d\'Information',
-                'lang-date-asin': 'Décembre 2023',
-                'lang-licence-stase': 'Licence Professionnelle, STASE option Andragogie',
-                'lang-date-injeps': 'Octobre 2019 - Août 2022',
-                
-                // Contact
-                'lang-contact-title': 'Entrer en Contact',
-                'lang-contact-info': 'Informations de Contact',
-                'lang-email': 'Email',
-                'lang-location-title': 'Localisation',
-                'lang-contact-form': 'Envoyer un Message',
-                'lang-name': 'Nom',
-                'lang-subject': 'Sujet',
-                'lang-message': 'Message',
-                'lang-send': 'Envoyer le Message',
-                
-                // Footer
-                'lang-copyright': '© 2025 Rostel PANOUMASSI. Tous droits réservés.'
-            }
-        };
-        
-        // Update displayed language
-        function updateLanguage(lang) {
-            currentLang.textContent = lang.toUpperCase();
-            
-            for (const [key, value] of Object.entries(translations[lang])) {
-                const elements = document.querySelectorAll(`.${key}`);
-                elements.forEach(el => {
-                    el.textContent = value;
-                });
-            }
-            
-            // Save preference
-            localStorage.setItem('language', lang);
-            currentLanguage = lang;
-        }
-        
-        // Initialize language
-        updateLanguage(currentLanguage);
-        
-        // Toggle language
-        langToggle.addEventListener('click', function() {
-            const newLang = currentLanguage === 'en' ? 'fr' : 'en';
-            updateLanguage(newLang);
-        });
-    </script>
-    <!-- Informations de contact pour le header du CV (visible uniquement à l'impression) -->
-    <div class="cv-contact-header" style="display: none;">
-        <span>Email: rmissimawu@gmail.com</span>
-        <span>|</span>
-        <span>LinkedIn: www.linkedin.com/in/rostel-panoumassi-6b6608335</span>
-        <span>|</span>
-        <span>Localisation: Cotonou, Bénin</span>
-    </div>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <!-- Pied de page du CV pour impression uniquement -->
-    <div class="cv-footer" style="display: none;">
-        <p>CV de Rostel PANOUMASSI | Full-Stack Developer</p>
-        <p>Contact: rmissimawu@gmail.com | www.linkedin.com/in/rostel-panoumassi-6b6608335</p>
-    </div>
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/nano-animation.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html>
