@@ -24,7 +24,7 @@ export function useTerminal() {
   } = storeToRefs(store)
 
   /**
-   * Execute a command (will be implemented in Sprint 2 with useCommands)
+   * Execute a command with full implementation
    */
   async function executeCommand(input: string) {
     if (!input.trim()) return
@@ -32,14 +32,40 @@ export function useTerminal() {
     // Add input to history
     addLine({ type: 'input', content: input })
 
-    // Parse command (actual execution will be in Sprint 2)
+    // Parse command
     const parsed = parseCommand(input)
 
-    // Placeholder response for Sprint 1
-    addOutput(
-      `Command "${parsed.command}" recognized. Handler will be implemented in Sprint 2.`,
-      'system'
-    )
+    if (!parsed.command) {
+      return
+    }
+
+    // Import commands dynamically to avoid circular dependencies
+    const { useCommands } = await import('./useCommands')
+    const commands = useCommands()
+
+    try {
+      // Execute command
+      const result = await commands.executeCommand(
+        parsed.command,
+        parsed.args,
+        parsed.flags
+      )
+
+      // Handle result based on type
+      if (result.type === 'panel' && result.panelName) {
+        openPanel(result.panelName, result.panelData)
+      } else if (result.type === 'text' || result.type === 'error' || result.type === 'success') {
+        if (result.content) {
+          addLine({
+            type: result.type === 'error' ? 'error' : result.type === 'success' ? 'system' : 'output',
+            content: result.content
+          })
+        }
+      }
+      // 'system' type doesn't output anything (used for clear, back, etc.)
+    } catch (error) {
+      handleError(error)
+    }
   }
 
   /**

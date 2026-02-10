@@ -4,7 +4,7 @@
  */
 
 export interface CommandResult {
-  type: 'text' | 'panel' | 'error' | 'success'
+  type: 'text' | 'panel' | 'error' | 'success' | 'system'
   content?: string
   panelName?: string
   panelData?: any
