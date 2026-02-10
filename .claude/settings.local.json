@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(test -d:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat\\(sprint-0\\): initialize vite + vue3 + typescript + tailwind\n\n- Initialize Vite project with Vue 3 + TypeScript\n- Install dependencies: TailwindCSS, GSAP, Pinia, @vueuse/core\n- Configure TailwindCSS with custom cyan neon theme\n- Configure TypeScript strict mode\n- Create directory structure \\(components, stores, composables, types, utils\\)\n- Configure path aliases \\(@/, @components/, etc.\\)\n- Set up Pinia in main.ts\n- Create basic App.vue with welcome screen\n- Rename old index.html to old_index.html\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

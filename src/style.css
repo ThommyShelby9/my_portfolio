@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theming (will be overridden by theme system) */
+:root {
+  /* Default: Cyan Neon theme */
+  --color-bg: #0b0f14;
+  --color-bg-secondary: #1a1f26;
+  --color-text: #e4e4e7;
+  --color-text-secondary: #a1a1aa;
+  --color-accent: #00fff7;
+  --color-accent-dark: #0891b2;
+  --color-error: #ef4444;
+  --color-success: #10b981;
+  --color-border: #27272a;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+}
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-mono);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection colors */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+::-moz-selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Focus outline using accent color */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Utility classes */
+.glow {
+  text-shadow: 0 0 10px var(--color-accent);
+}
+
+.accent {
+  color: var(--color-accent);
+}
