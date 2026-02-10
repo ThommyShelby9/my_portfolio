@@ -19,5 +19,28 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true
+  },
+  build: {
+    // Target modern browsers for smaller bundle
+    target: 'esnext',
+    // Minify with esbuild for faster builds
+    minify: 'esbuild',
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Chunk size warnings
+    chunkSizeWarningLimit: 500,
+    rollupOptions: {
+      output: {
+        // Manual chunks for better caching
+        manualChunks: {
+          // Vendor chunk: Vue ecosystem
+          'vendor-vue': ['vue', 'pinia'],
+          // Animations chunk: GSAP
+          'vendor-animations': ['gsap'],
+          // Utils chunk: VueUse
+          'vendor-utils': ['@vueuse/core']
+        }
+      }
+    }
   }
 })

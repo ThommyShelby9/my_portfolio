@@ -32,7 +32,7 @@ const store = useTerminalStore()
 const { mode, activePanel, theme, fxEnabled } = storeToRefs(store)
 
 const username = 'rostel'
-const hostname = 'kps'
+const hostname = 'missimawu'
 
 const title = computed(() => {
   if (mode.value === 'panel' && activePanel.value) {
