@@ -260,27 +260,11 @@ Type any command to get started!
   }
 
   function commandAbout(): CommandResult {
-    const aboutText = `
-╔═══════════════════════════════════════════════════════════╗
-║                      ${aboutData.name}                      ║
-╚═══════════════════════════════════════════════════════════╝
-
-Role:        ${aboutData.role}
-Company:     ${aboutData.company}
-Location:    ${aboutData.location}
-Email:       ${aboutData.email}
-LinkedIn:    ${aboutData.linkedin}
-
-${aboutData.bio}
-
-Status: ${aboutData.availability}
-
-Type 'experience' to see my work history
-Type 'skills' to see my technical expertise
-Type 'projects' to view my portfolio
-    `.trim()
-
-    return { type: 'text', content: aboutText }
+    return {
+      type: 'panel',
+      panelName: 'about',
+      panelData: { about: aboutData }
+    }
   }
 
   function commandSkills(): CommandResult {

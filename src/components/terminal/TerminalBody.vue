@@ -21,6 +21,7 @@ import TerminalHistory from './TerminalHistory.vue'
 import TerminalInput from './TerminalInput.vue'
 
 // Lazy load panel components
+const AboutPanel = defineAsyncComponent(() => import('@/components/panels/AboutPanel.vue'))
 const ProjectsPanel = defineAsyncComponent(() => import('@/components/panels/ProjectsPanel.vue'))
 const ProjectDetailPanel = defineAsyncComponent(() => import('@/components/panels/ProjectDetailPanel.vue'))
 const SkillsPanel = defineAsyncComponent(() => import('@/components/panels/SkillsPanel.vue'))
@@ -44,6 +45,7 @@ watch(history, async () => {
 // Get current panel component
 const currentPanelComponent = computed(() => {
   const panelMap: Record<string, any> = {
+    'about': AboutPanel,
     'projects': ProjectsPanel,
     'project-detail': ProjectDetailPanel,
     'skills': SkillsPanel,
