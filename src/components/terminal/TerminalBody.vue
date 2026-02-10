@@ -8,28 +8,24 @@
 
     <!-- Panel Mode: Show active panel -->
     <div v-else-if="mode === 'panel'" class="panel-mode">
-      <div class="panel-placeholder">
-        <h2 class="text-cyan-neon text-2xl mb-4">{{ activePanel }}</h2>
-        <p class="text-text-secondary">
-          Panel component will be implemented in Sprint 4
-        </p>
-        <button
-          @click="closePanel"
-          class="mt-4 px-4 py-2 bg-cyan-neon text-bg-dark rounded hover:bg-cyan-dark transition-colors"
-        >
-          Back to Terminal
-        </button>
-      </div>
+      <component :is="currentPanelComponent" v-if="currentPanelComponent" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, computed, defineAsyncComponent } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
 import TerminalHistory from './TerminalHistory.vue'
 import TerminalInput from './TerminalInput.vue'
+
+// Lazy load panel components
+const ProjectsPanel = defineAsyncComponent(() => import('@/components/panels/ProjectsPanel.vue'))
+const ProjectDetailPanel = defineAsyncComponent(() => import('@/components/panels/ProjectDetailPanel.vue'))
+const SkillsPanel = defineAsyncComponent(() => import('@/components/panels/SkillsPanel.vue'))
+const ExperiencePanel = defineAsyncComponent(() => import('@/components/panels/ExperiencePanel.vue'))
+const ContactPanel = defineAsyncComponent(() => import('@/components/panels/ContactPanel.vue'))
 
 const store = useTerminalStore()
 const { mode, activePanel, history } = storeToRefs(store)
@@ -44,9 +40,18 @@ watch(history, async () => {
   }
 }, { deep: true })
 
-function closePanel() {
-  store.closePanel()
-}
+// Get current panel component
+const currentPanelComponent = computed(() => {
+  const panelMap: Record<string, any> = {
+    'projects': ProjectsPanel,
+    'project-detail': ProjectDetailPanel,
+    'skills': SkillsPanel,
+    'experience': ExperiencePanel,
+    'contact': ContactPanel
+  }
+
+  return activePanel.value ? panelMap[activePanel.value] : null
+})
 </script>
 
 <style scoped>
@@ -79,11 +84,6 @@ function closePanel() {
 }
 
 .panel-mode {
-  @apply flex items-center justify-center;
   min-height: 100%;
-}
-
-.panel-placeholder {
-  @apply text-center;
 }
 </style>
