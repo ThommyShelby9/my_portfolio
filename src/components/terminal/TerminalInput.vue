@@ -36,12 +36,14 @@ import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
 import { useTerminal } from '@/composables/useTerminal'
 import { useKeyboard } from '@/composables/useKeyboard'
+import { useAnimations } from '@/composables/useAnimations'
 import TerminalCursor from './TerminalCursor.vue'
 
 const store = useTerminalStore()
 const { currentInput } = storeToRefs(store)
 const { executeCommand } = useTerminal()
 const keyboard = useKeyboard()
+const animations = useAnimations()
 
 const inputRef = ref<HTMLInputElement>()
 const isFocused = ref(false)
@@ -107,6 +109,9 @@ async function handleSubmit() {
   const input = currentInput.value.trim()
 
   if (!input) return
+
+  // Animate command execution
+  animations.animateCommandExecute()
 
   // Add to command history
   if (input !== commandHistory.value[commandHistory.value.length - 1]) {

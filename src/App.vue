@@ -15,10 +15,14 @@ import { useTerminalStore } from '@/stores/terminal'
 import TerminalWindow from '@/components/terminal/TerminalWindow.vue'
 import BootSequence from '@/components/boot/BootSequence.vue'
 import { useTerminal } from '@/composables/useTerminal'
+import { useReducedMotion } from '@/composables/useReducedMotion'
 
 const store = useTerminalStore()
 const { bootComplete } = storeToRefs(store)
 const { loadSettings, addOutput } = useTerminal()
+
+// Initialize reduced motion detection
+useReducedMotion()
 
 const showBoot = ref(true)
 

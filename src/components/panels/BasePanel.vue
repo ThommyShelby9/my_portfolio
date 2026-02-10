@@ -1,6 +1,6 @@
 <template>
   <div class="panel-overlay" @click="handleOverlayClick">
-    <div class="panel-container" @click.stop>
+    <div ref="panelRef" class="panel-container" @click.stop>
       <!-- Panel Header -->
       <div class="panel-header">
         <h2 class="panel-title">{{ title }}</h2>
@@ -26,17 +26,27 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useTerminalStore } from '@/stores/terminal'
+import { useAnimations } from '@/composables/useAnimations'
 
 defineProps<{
   title: string
 }>()
 
 const store = useTerminalStore()
+const animations = useAnimations()
+
+const panelRef = ref<HTMLElement>()
 
 function close() {
-  store.closePanel()
+  if (panelRef.value) {
+    animations.animatePanelClose(panelRef.value).then(() => {
+      store.closePanel()
+    })
+  } else {
+    store.closePanel()
+  }
 }
 
 function handleOverlayClick() {
@@ -52,6 +62,11 @@ function handleKeyDown(event: KeyboardEvent) {
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeyDown)
+
+  // Animate panel open
+  if (panelRef.value) {
+    animations.animatePanelOpen(panelRef.value)
+  }
 })
 
 onUnmounted(() => {

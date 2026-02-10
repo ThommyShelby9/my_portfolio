@@ -90,6 +90,14 @@ export function useTerminal() {
       type: 'error',
       content: `Error: ${message}`,
     })
+
+    // Trigger error animation
+    if (typeof window !== 'undefined') {
+      import('./useAnimations').then(({ useAnimations }) => {
+        const animations = useAnimations()
+        animations.animateError()
+      })
+    }
   }
 
   /**
