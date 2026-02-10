@@ -70,6 +70,9 @@ function handleBodyClick() {
   @apply flex-1 overflow-y-auto overflow-x-hidden;
   @apply bg-theme-primary p-4;
   @apply relative;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 /* Custom scrollbar */
@@ -96,5 +99,14 @@ function handleBodyClick() {
 
 .panel-mode {
   min-height: 100%;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .terminal-body {
+    @apply p-3;
+    /* Prevent iOS safari from hiding content behind browser chrome */
+    min-height: -webkit-fill-available;
+  }
 }
 </style>

@@ -136,6 +136,9 @@ onUnmounted(() => {
 .panel-body {
   @apply flex-1 overflow-y-auto overflow-x-hidden;
   @apply px-6 py-4;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 /* Custom scrollbar */
@@ -172,10 +175,35 @@ kbd {
 
 .footer-btn {
   @apply px-4 py-2 rounded;
-  @apply bg-theme-accent text-bg-dark;
+  @apply bg-theme-accent text-gray-900;
   @apply hover:bg-theme-accent-dark;
   @apply transition-colors duration-200;
   @apply font-semibold text-sm;
 }
 
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .panel-body {
+    @apply px-4 py-3;
+    /* Better mobile scrolling */
+    min-height: 0;
+  }
+
+  .panel-header {
+    @apply px-4 py-3;
+  }
+
+  .panel-footer {
+    @apply px-4 py-2;
+    @apply flex-col gap-2;
+  }
+
+  .footer-btn {
+    @apply w-full;
+  }
+
+  .footer-hint {
+    @apply text-center w-full;
+  }
+}
 </style>

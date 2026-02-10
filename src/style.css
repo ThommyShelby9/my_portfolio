@@ -44,6 +44,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  html, body {
+    /* Fix mobile viewport height issues */
+    height: 100vh;
+    height: -webkit-fill-available;
+    overflow: hidden;
+  }
+
+  body {
+    /* Prevent pull-to-refresh on mobile */
+    overscroll-behavior-y: none;
+    /* Improve touch scrolling performance */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #app {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+}
+
 /* Selection colors */
 ::selection {
   background: var(--color-accent);

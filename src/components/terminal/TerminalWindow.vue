@@ -91,6 +91,10 @@ function toggleFullscreen() {
 
 .terminal-window.mobile {
   @apply fixed inset-0 w-screen h-screen max-w-none rounded-none;
+  /* Better mobile height handling */
+  height: 100vh;
+  height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
 }
 
 /* macOS Chrome */
@@ -160,5 +164,26 @@ function toggleFullscreen() {
   );
   pointer-events: none;
   z-index: 10;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+  .terminal-chrome {
+    @apply h-10 px-4;
+    /* Make buttons larger on mobile */
+  }
+
+  .chrome-btn {
+    @apply w-4 h-4;
+  }
+
+  .terminal-content {
+    @apply h-[calc(100%-2.5rem)];
+  }
+
+  /* Disable reflection on mobile for performance */
+  .terminal-window::before {
+    display: none;
+  }
 }
 </style>

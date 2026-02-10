@@ -340,6 +340,14 @@ function highlightMatch(name: string): string {
 .palette-content {
   @apply overflow-y-auto;
   @apply max-h-[calc(80vh-180px)];
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 768px) {
+  .palette-content {
+    @apply max-h-[calc(100vh-200px)];
+  }
 }
 
 @media (max-width: 768px) {
