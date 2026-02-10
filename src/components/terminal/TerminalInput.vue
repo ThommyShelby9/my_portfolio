@@ -203,10 +203,18 @@ function handleClear() {
   @apply w-full bg-transparent border-none outline-none;
   @apply text-text-primary font-mono;
   @apply caret-transparent;
+  font-size: 16px; /* Prevent iOS auto-zoom on focus */
 }
 
 .input-field::placeholder {
   @apply text-text-secondary;
+}
+
+/* Mobile: Ensure minimum font size */
+@media (max-width: 768px) {
+  .input-field {
+    font-size: 16px !important;
+  }
 }
 
 .accent {

@@ -1,5 +1,5 @@
 <template>
-  <div class="terminal-window" :class="{ 'minimized': isMinimized, 'fullscreen': isFullscreen }">
+  <div class="terminal-window" :class="{ 'minimized': isMinimized, 'fullscreen': isFullscreen, 'mobile': isMobile }">
     <!-- macOS Chrome Header -->
     <div class="terminal-chrome">
       <div class="chrome-buttons">
@@ -40,11 +40,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useBreakpoints } from '@vueuse/core'
 import TerminalHeader from './TerminalHeader.vue'
 import TerminalBody from './TerminalBody.vue'
 import { useTerminal } from '@/composables/useTerminal'
 
 const { clearHistory, closePanel } = useTerminal()
+
+// Responsive breakpoints
+const breakpoints = useBreakpoints({
+  mobile: 0,
+  tablet: 768,
+  desktop: 1024
+})
+
+const isMobile = breakpoints.smaller('tablet')
 
 const isMinimized = ref(false)
 const isFullscreen = ref(false)
@@ -77,6 +87,10 @@ function toggleFullscreen() {
 
 .terminal-window.fullscreen {
   @apply w-screen h-screen max-w-none rounded-none;
+}
+
+.terminal-window.mobile {
+  @apply fixed inset-0 w-screen h-screen max-w-none rounded-none;
 }
 
 /* macOS Chrome */

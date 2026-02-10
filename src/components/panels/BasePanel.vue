@@ -1,6 +1,6 @@
 <template>
   <div class="panel-overlay" @click="handleOverlayClick">
-    <div ref="panelRef" class="panel-container" @click.stop>
+    <div ref="panelRef" class="panel-container" :class="{ 'mobile': isMobile }" @click.stop>
       <!-- Panel Header -->
       <div class="panel-header">
         <h2 class="panel-title">{{ title }}</h2>
@@ -16,7 +16,8 @@
 
       <!-- Panel Footer -->
       <div class="panel-footer">
-        <span class="footer-hint">Press <kbd>ESC</kbd> to close</span>
+        <span class="footer-hint" v-if="!isMobile">Press <kbd>ESC</kbd> to close</span>
+        <span class="footer-hint" v-else>Swipe right to close</span>
         <button @click="close" class="footer-btn">
           Back to Terminal
         </button>
@@ -27,8 +28,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useBreakpoints } from '@vueuse/core'
 import { useTerminalStore } from '@/stores/terminal'
 import { useAnimations } from '@/composables/useAnimations'
+import { useTouchGestures } from '@/composables/useTouchGestures'
 
 defineProps<{
   title: string
@@ -36,6 +39,15 @@ defineProps<{
 
 const store = useTerminalStore()
 const animations = useAnimations()
+
+// Responsive breakpoints
+const breakpoints = useBreakpoints({
+  mobile: 0,
+  tablet: 768,
+  desktop: 1024
+})
+
+const isMobile = breakpoints.smaller('tablet')
 
 const panelRef = ref<HTMLElement>()
 
@@ -67,6 +79,11 @@ onMounted(() => {
   if (panelRef.value) {
     animations.animatePanelOpen(panelRef.value)
   }
+
+  // Initialize touch gestures for mobile
+  if (panelRef.value) {
+    useTouchGestures(panelRef.value)
+  }
 })
 
 onUnmounted(() => {
@@ -88,6 +105,12 @@ onUnmounted(() => {
   @apply shadow-2xl;
   box-shadow: 0 0 50px rgba(0, 255, 247, 0.3);
   animation: slideIn 0.3s ease-out;
+}
+
+/* Mobile: Fullscreen panel */
+.panel-container.mobile {
+  @apply fixed inset-0 w-full h-full max-w-none max-h-none rounded-none;
+  @apply border-0;
 }
 
 .panel-header {
