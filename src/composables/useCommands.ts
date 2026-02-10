@@ -523,24 +523,29 @@ Type 'about' to learn about Rostel PANOUMASSI.`
   }
 
   function commandMatrix(): CommandResult {
-    // TODO: Implement matrix rain effect
-    // For now, return ASCII art
+    // Trigger Matrix rain effect
+    if (typeof window !== 'undefined' && (window as any).triggerMatrix) {
+      (window as any).triggerMatrix()
+
+      return {
+        type: 'success',
+        content: `
+╔════════════════════════════════════════╗
+║  Welcome to the Matrix, Neo...  ║
+╚════════════════════════════════════════╝
+
+Following the white rabbit... 🐰
+
+The Matrix rain effect is now active!
+Press ESC or click anywhere to exit.
+
+"There is no spoon."`
+      }
+    }
+
     return {
-      type: 'text',
-      content: `
-Follow the white rabbit... 🐰
-
-        Wake up, Neo...
-   The Matrix has you...
-
-      ╔═══════════════╗
-      ║  Coming Soon  ║
-      ╚═══════════════╝
-
-Matrix rain effect will be implemented soon!
-For now, enjoy exploring the terminal.
-
-Type 'theme green' for a Matrix-like experience.`
+      type: 'error',
+      content: 'Matrix effect not available. Please reload the page.'
     }
   }
 

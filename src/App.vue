@@ -10,6 +10,7 @@
     <GrainEffect v-if="bootComplete" />
     <ScanlinesEffect v-if="bootComplete" />
     <GlitchEffect ref="glitchRef" />
+    <MatrixRainEffect ref="matrixRef" />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import BootSequence from '@/components/boot/BootSequence.vue'
 import GrainEffect from '@/components/effects/GrainEffect.vue'
 import ScanlinesEffect from '@/components/effects/ScanlinesEffect.vue'
 import GlitchEffect from '@/components/effects/GlitchEffect.vue'
+import MatrixRainEffect from '@/components/effects/MatrixRainEffect.vue'
 import { useTerminal } from '@/composables/useTerminal'
 import { useReducedMotion } from '@/composables/useReducedMotion'
 import { useTheme } from '@/composables/useTheme'
@@ -34,6 +36,13 @@ const { initTheme } = useTheme()
 
 // Initialize reduced motion detection
 useReducedMotion()
+
+// Expose matrix trigger globally via window
+;(window as any).triggerMatrix = () => {
+  if (matrixRef.value) {
+    matrixRef.value.start()
+  }
+}
 
 // Initialize Konami code detector
 useKonamiCode(() => {
@@ -63,6 +72,8 @@ const showBoot = ref(true)
 // Reference to glitch effect for programmatic triggering (e.g., errors, Easter eggs)
 // @ts-ignore - Reserved for future use
 const glitchRef = ref<InstanceType<typeof GlitchEffect>>()
+// Reference to matrix rain effect
+const matrixRef = ref<InstanceType<typeof MatrixRainEffect>>()
 
 // Load settings on mount
 onMounted(() => {
