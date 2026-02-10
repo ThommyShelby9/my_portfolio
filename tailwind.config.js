@@ -33,5 +33,43 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.bg-theme-primary': {
+          'background-color': 'var(--color-bg)',
+        },
+        '.bg-theme-secondary': {
+          'background-color': 'var(--color-bg-secondary)',
+        },
+        '.bg-theme-accent': {
+          'background-color': 'var(--color-accent)',
+        },
+        '.bg-theme-accent-dark': {
+          'background-color': 'var(--color-accent-dark)',
+        },
+        '.text-theme-primary': {
+          'color': 'var(--color-text)',
+        },
+        '.text-theme-secondary': {
+          'color': 'var(--color-text-secondary)',
+        },
+        '.text-theme-accent': {
+          'color': 'var(--color-accent)',
+        },
+        '.text-theme-accent-dark': {
+          'color': 'var(--color-accent-dark)',
+        },
+        '.border-theme': {
+          'border-color': 'var(--color-border)',
+        },
+        '.border-theme-accent': {
+          'border-color': 'var(--color-accent)',
+        },
+        '.caret-theme-accent': {
+          'caret-color': 'var(--color-accent)',
+        },
+      })
+    }
+  ],
 }
