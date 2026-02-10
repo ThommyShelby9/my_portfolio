@@ -5,6 +5,11 @@
 
     <!-- Terminal Window -->
     <TerminalWindow v-show="bootComplete" />
+
+    <!-- Visual Effects -->
+    <GrainEffect v-if="bootComplete" />
+    <ScanlinesEffect v-if="bootComplete" />
+    <GlitchEffect ref="glitchRef" />
   </div>
 </template>
 
@@ -14,6 +19,9 @@ import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
 import TerminalWindow from '@/components/terminal/TerminalWindow.vue'
 import BootSequence from '@/components/boot/BootSequence.vue'
+import GrainEffect from '@/components/effects/GrainEffect.vue'
+import ScanlinesEffect from '@/components/effects/ScanlinesEffect.vue'
+import GlitchEffect from '@/components/effects/GlitchEffect.vue'
 import { useTerminal } from '@/composables/useTerminal'
 import { useReducedMotion } from '@/composables/useReducedMotion'
 
@@ -25,6 +33,9 @@ const { loadSettings, addOutput } = useTerminal()
 useReducedMotion()
 
 const showBoot = ref(true)
+// Reference to glitch effect for programmatic triggering (e.g., errors, Easter eggs)
+// @ts-ignore - Reserved for future use
+const glitchRef = ref<InstanceType<typeof GlitchEffect>>()
 
 // Load settings on mount
 onMounted(() => {
