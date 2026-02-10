@@ -95,7 +95,6 @@ onUnmounted(() => {
 .panel-overlay {
   @apply fixed inset-0 bg-black/80 z-50;
   @apply flex items-center justify-center;
-  animation: fadeIn 0.2s ease-out;
 }
 
 .panel-container {
@@ -104,7 +103,6 @@ onUnmounted(() => {
   @apply flex flex-col;
   @apply shadow-2xl;
   box-shadow: 0 0 50px rgba(0, 255, 247, 0.3);
-  animation: slideIn 0.3s ease-out;
 }
 
 /* Mobile: Fullscreen panel */
@@ -180,23 +178,4 @@ kbd {
   @apply font-semibold text-sm;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 </style>
