@@ -164,6 +164,11 @@ function handleCancel() {
 function handleClear() {
   store.clearHistory()
 }
+
+// Expose focusInput method for parent component
+defineExpose({
+  focusInput
+})
 </script>
 
 <style scoped>

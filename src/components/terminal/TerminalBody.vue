@@ -1,9 +1,9 @@
 <template>
-  <div class="terminal-body" ref="bodyRef">
+  <div class="terminal-body" ref="bodyRef" @click="handleBodyClick">
     <!-- Terminal Mode: Show history and input -->
     <div v-if="mode === 'terminal'" class="terminal-mode">
       <TerminalHistory />
-      <TerminalInput />
+      <TerminalInput ref="inputComponentRef" />
     </div>
 
     <!-- Panel Mode: Show active panel -->
@@ -31,6 +31,7 @@ const store = useTerminalStore()
 const { mode, activePanel, history } = storeToRefs(store)
 
 const bodyRef = ref<HTMLElement>()
+const inputComponentRef = ref<InstanceType<typeof TerminalInput>>()
 
 // Auto-scroll to bottom when history updates
 watch(history, async () => {
@@ -52,6 +53,14 @@ const currentPanelComponent = computed(() => {
 
   return activePanel.value ? panelMap[activePanel.value] : null
 })
+
+// Auto-refocus input when clicking anywhere in terminal body
+function handleBodyClick() {
+  // Only refocus if we're in terminal mode (not panel mode)
+  if (mode.value === 'terminal' && inputComponentRef.value) {
+    inputComponentRef.value.focusInput()
+  }
+}
 </script>
 
 <style scoped>
