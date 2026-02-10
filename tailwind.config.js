@@ -7,15 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'cyan-neon': '#00fff7',
-        'cyan-dark': '#0891b2',
-        'bg-dark': '#0b0f14',
-        'bg-secondary': '#1a1f26',
-        'text-primary': '#e4e4e7',
-        'text-secondary': '#a1a1aa',
-        'border-color': '#27272a',
-        'error': '#ef4444',
-        'success': '#10b981',
+        // Dynamic theme colors using CSS variables
+        'cyan-neon': 'var(--color-accent)',
+        'cyan-dark': 'var(--color-accent-dark)',
+        'bg-dark': 'var(--color-bg)',
+        'bg-secondary': 'var(--color-bg-secondary)',
+        'text-primary': 'var(--color-text)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'border-color': 'var(--color-border)',
+        'error': 'var(--color-error)',
+        'success': 'var(--color-success)',
+        'warning': 'var(--color-warning)',
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'IBM Plex Mono', 'monospace'],

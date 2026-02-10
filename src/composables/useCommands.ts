@@ -6,6 +6,7 @@
 import { useTerminalStore } from '@/stores/terminal'
 import type { CommandResult, Command } from '@/types'
 import { getCommandSuggestions } from '@/utils/commandParser'
+import { useTheme, getThemeNames } from './useTheme'
 import {
   aboutData,
   projectsData,
@@ -16,6 +17,7 @@ import {
 
 export function useCommands() {
   const store = useTerminalStore()
+  const { setTheme } = useTheme()
 
   /**
    * Command registry
@@ -350,7 +352,7 @@ Type 'experience' to see work history
   }
 
   function commandTheme(args: string[]): CommandResult {
-    const validThemes = ['cyan', 'amber', 'green', 'mono']
+    const validThemes = getThemeNames()
 
     if (args.length === 0) {
       return {
@@ -368,7 +370,16 @@ Type 'experience' to see work history
       }
     }
 
-    store.setTheme(themeName)
+    // Apply theme using useTheme composable
+    const success = setTheme(themeName)
+
+    if (!success) {
+      return {
+        type: 'error',
+        content: `Failed to apply theme: ${themeName}`
+      }
+    }
+
     return {
       type: 'success',
       content: `Theme changed to: ${themeName}`

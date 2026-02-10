@@ -24,10 +24,12 @@ import ScanlinesEffect from '@/components/effects/ScanlinesEffect.vue'
 import GlitchEffect from '@/components/effects/GlitchEffect.vue'
 import { useTerminal } from '@/composables/useTerminal'
 import { useReducedMotion } from '@/composables/useReducedMotion'
+import { useTheme } from '@/composables/useTheme'
 
 const store = useTerminalStore()
 const { bootComplete } = storeToRefs(store)
 const { loadSettings, addOutput } = useTerminal()
+const { initTheme } = useTheme()
 
 // Initialize reduced motion detection
 useReducedMotion()
@@ -40,6 +42,7 @@ const glitchRef = ref<InstanceType<typeof GlitchEffect>>()
 // Load settings on mount
 onMounted(() => {
   loadSettings()
+  initTheme()
 
   // Check if intro is enabled
   const introEnabled = store.introEnabled

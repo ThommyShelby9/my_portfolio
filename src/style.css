@@ -6,15 +6,16 @@
 :root {
   /* Default: Cyan Neon theme */
   --color-bg: #0b0f14;
-  --color-bg-secondary: #1a1f26;
+  --color-bg-secondary: #151b23;
   --color-text: #e4e4e7;
   --color-text-secondary: #a1a1aa;
   --color-accent: #00fff7;
   --color-accent-dark: #0891b2;
-  --color-error: #ef4444;
-  --color-success: #10b981;
   --color-border: #27272a;
-  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* Global styles */
