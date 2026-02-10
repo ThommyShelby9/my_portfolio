@@ -70,23 +70,23 @@ const visibleHistory = computed(() => history.value)
 
 .prompt-user,
 .prompt-path {
-  @apply text-cyan-neon font-semibold;
+  @apply text-theme-accent font-semibold;
 }
 
 .prompt-separator {
-  @apply text-text-secondary;
+  @apply text-theme-secondary;
 }
 
 .prompt-host {
-  @apply text-text-primary;
+  @apply text-theme-primary;
 }
 
 .prompt-symbol {
-  @apply text-cyan-neon ml-1;
+  @apply text-theme-accent ml-1;
 }
 
 .input-text {
-  @apply text-text-primary;
+  @apply text-theme-primary;
 }
 
 /* Output line */
@@ -95,7 +95,7 @@ const visibleHistory = computed(() => history.value)
 }
 
 .output-text {
-  @apply text-text-primary whitespace-pre-wrap font-mono;
+  @apply text-theme-primary whitespace-pre-wrap font-mono;
   word-break: break-word;
 }
 
@@ -119,16 +119,16 @@ const visibleHistory = computed(() => history.value)
 }
 
 .system-icon {
-  @apply text-cyan-neon flex-shrink-0 mt-0.5 text-xs;
+  @apply text-theme-accent flex-shrink-0 mt-0.5 text-xs;
 }
 
 .system-text {
-  @apply text-cyan-neon whitespace-pre-wrap font-mono;
+  @apply text-theme-accent whitespace-pre-wrap font-mono;
   word-break: break-word;
 }
 
 /* Accent color */
 .accent {
-  @apply text-cyan-neon;
+  @apply text-theme-accent;
 }
 </style>

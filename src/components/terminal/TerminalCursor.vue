@@ -10,7 +10,7 @@ defineProps<{
 
 <style scoped>
 .terminal-cursor {
-  @apply inline-block w-2 h-4 bg-cyan-neon ml-0.5;
+  @apply inline-block w-2 h-4 bg-theme-accent ml-0.5;
   animation: none;
 }
 

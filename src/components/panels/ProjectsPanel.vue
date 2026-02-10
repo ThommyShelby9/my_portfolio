@@ -47,7 +47,7 @@
 
     <!-- Summary -->
     <div class="projects-summary">
-      <p class="text-text-secondary text-sm">
+      <p class="text-theme-secondary text-sm">
         {{ projects.length }} projects total • Click on a project to view details
       </p>
     </div>
@@ -85,9 +85,9 @@ function truncate(text: string, length: number): string {
 }
 
 .project-card {
-  @apply bg-bg-secondary border border-border-color rounded-lg overflow-hidden;
+  @apply bg-theme-secondary border border-theme rounded-lg overflow-hidden;
   @apply cursor-pointer transition-all duration-300;
-  @apply hover:border-cyan-neon hover:shadow-lg;
+  @apply hover:border-theme-accent hover:shadow-lg;
 }
 
 .project-card:hover {
@@ -95,7 +95,7 @@ function truncate(text: string, length: number): string {
 }
 
 .project-image {
-  @apply relative h-48 overflow-hidden bg-bg-dark;
+  @apply relative h-48 overflow-hidden bg-theme-primary;
 }
 
 .project-image img {
@@ -110,7 +110,7 @@ function truncate(text: string, length: number): string {
 }
 
 .overlay-text {
-  @apply text-cyan-neon font-semibold;
+  @apply text-theme-accent font-semibold;
 }
 
 .project-info {
@@ -122,7 +122,7 @@ function truncate(text: string, length: number): string {
 }
 
 .project-name {
-  @apply text-lg font-bold text-cyan-neon;
+  @apply text-lg font-bold text-theme-accent;
 }
 
 .project-status {
@@ -139,11 +139,11 @@ function truncate(text: string, length: number): string {
 }
 
 .project-company {
-  @apply text-sm text-text-secondary mb-2;
+  @apply text-sm text-theme-secondary mb-2;
 }
 
 .project-description {
-  @apply text-sm text-text-primary mb-3 leading-relaxed;
+  @apply text-sm text-theme-primary mb-3 leading-relaxed;
 }
 
 .project-tech {
@@ -152,10 +152,10 @@ function truncate(text: string, length: number): string {
 
 .tech-tag {
   @apply text-xs px-2 py-1 rounded;
-  @apply bg-bg-dark border border-cyan-dark text-cyan-neon;
+  @apply bg-theme-primary border border-cyan-dark text-theme-accent;
 }
 
 .projects-summary {
-  @apply pt-4 border-t border-border-color text-center;
+  @apply pt-4 border-t border-theme text-center;
 }
 </style>

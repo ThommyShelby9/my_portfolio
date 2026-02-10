@@ -159,7 +159,7 @@ function completeBoot() {
 <style scoped>
 .boot-overlay {
   @apply fixed inset-0 z-[100];
-  @apply bg-bg-dark;
+  @apply bg-theme-primary;
   @apply flex items-center justify-center;
 }
 
@@ -168,14 +168,14 @@ function completeBoot() {
 }
 
 .boot-logo {
-  @apply text-6xl font-bold text-cyan-neon mb-2;
+  @apply text-6xl font-bold text-theme-accent mb-2;
   @apply font-mono;
   text-shadow: 0 0 30px rgba(0, 255, 247, 0.5);
   letter-spacing: 0.1em;
 }
 
 .boot-version {
-  @apply text-text-secondary text-sm mb-8 font-mono;
+  @apply text-theme-secondary text-sm mb-8 font-mono;
 }
 
 .boot-logs {
@@ -192,7 +192,7 @@ function completeBoot() {
 }
 
 .log-text {
-  @apply text-text-primary;
+  @apply text-theme-primary;
 }
 
 .boot-log-success .log-icon {
@@ -204,7 +204,7 @@ function completeBoot() {
 }
 
 .boot-progress {
-  @apply w-full max-w-md mx-auto h-1 bg-bg-secondary rounded-full overflow-hidden;
+  @apply w-full max-w-md mx-auto h-1 bg-theme-secondary rounded-full overflow-hidden;
   @apply mb-8;
   opacity: 0;
 }
@@ -215,8 +215,8 @@ function completeBoot() {
 }
 
 .boot-skip {
-  @apply text-text-secondary text-xs font-mono;
-  @apply hover:text-cyan-neon transition-colors;
+  @apply text-theme-secondary text-xs font-mono;
+  @apply hover:text-theme-accent transition-colors;
   @apply border-none bg-transparent cursor-pointer;
   animation: pulse-text 2s ease-in-out infinite;
 }

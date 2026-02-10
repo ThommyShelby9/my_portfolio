@@ -18,7 +18,7 @@ defineProps<{
 }
 
 .spinner-ring {
-  @apply rounded-full border-4 border-border-color;
+  @apply rounded-full border-4 border-theme;
   border-top-color: var(--color-accent);
   animation: spin 1s linear infinite;
   width: 40px;
@@ -37,7 +37,7 @@ defineProps<{
 }
 
 .spinner-text {
-  @apply text-sm text-text-secondary font-mono;
+  @apply text-sm text-theme-secondary font-mono;
 }
 
 @keyframes spin {

@@ -70,7 +70,7 @@ defineExpose({
 <style scoped>
 .autocomplete-dropdown {
   @apply absolute left-0 bottom-full mb-2;
-  @apply bg-bg-secondary border border-border-color rounded-lg;
+  @apply bg-theme-secondary border border-theme rounded-lg;
   @apply shadow-2xl;
   @apply min-w-[200px] max-w-[400px];
   @apply overflow-hidden;
@@ -81,10 +81,10 @@ defineExpose({
 .autocomplete-item {
   @apply flex items-center justify-between;
   @apply px-4 py-2;
-  @apply text-text-primary font-mono text-sm;
+  @apply text-theme-primary font-mono text-sm;
   @apply cursor-pointer;
   @apply transition-all duration-150;
-  @apply border-b border-border-color/50;
+  @apply border-b border-theme/50;
 }
 
 .autocomplete-item:last-child {
@@ -93,11 +93,11 @@ defineExpose({
 
 .autocomplete-item:hover,
 .autocomplete-item.active {
-  @apply bg-cyan-neon/10;
+  @apply bg-theme-accent/10;
 }
 
 .autocomplete-item.active .suggestion-text {
-  @apply text-cyan-neon;
+  @apply text-theme-accent;
 }
 
 .suggestion-text {
@@ -105,13 +105,13 @@ defineExpose({
 }
 
 .suggestion-hint {
-  @apply text-xs text-text-secondary;
+  @apply text-xs text-theme-secondary;
   @apply px-2 py-0.5 rounded;
-  @apply bg-bg-dark border border-border-color;
+  @apply bg-theme-primary border border-theme;
 }
 
 .autocomplete-item.active .suggestion-hint {
-  @apply text-cyan-neon border-cyan-neon;
+  @apply text-theme-accent border-theme-accent;
 }
 
 @keyframes slideUp {

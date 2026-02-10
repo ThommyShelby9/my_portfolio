@@ -54,7 +54,7 @@
 
       <!-- Summary -->
       <div class="experience-summary">
-        <p class="text-text-secondary text-sm text-center">
+        <p class="text-theme-secondary text-sm text-center">
           {{ experiences.length }} positions • {{ calculateTotalYears() }} of experience
         </p>
       </div>
@@ -99,18 +99,18 @@ function calculateTotalYears(): string {
 }
 
 .timeline-dot {
-  @apply w-4 h-4 rounded-full bg-cyan-neon;
+  @apply w-4 h-4 rounded-full bg-theme-accent;
   @apply border-4 border-bg-dark;
   box-shadow: 0 0 0 2px var(--color-cyan-neon);
 }
 
 .timeline-line {
-  @apply w-0.5 flex-1 bg-cyan-dark mt-2;
+  @apply w-0.5 flex-1 bg-theme-accent-dark mt-2;
   min-height: 60px;
 }
 
 .experience-content {
-  @apply flex-1 bg-bg-secondary border border-border-color rounded-lg p-4;
+  @apply flex-1 bg-theme-secondary border border-theme rounded-lg p-4;
   @apply hover:border-cyan-dark transition-colors duration-300;
 }
 
@@ -119,15 +119,15 @@ function calculateTotalYears(): string {
 }
 
 .experience-company {
-  @apply text-xl font-bold text-cyan-neon;
+  @apply text-xl font-bold text-theme-accent;
 }
 
 .experience-position {
-  @apply text-text-primary font-semibold;
+  @apply text-theme-primary font-semibold;
 }
 
 .experience-meta {
-  @apply flex flex-col items-end gap-1 text-sm text-text-secondary;
+  @apply flex flex-col items-end gap-1 text-sm text-theme-secondary;
 }
 
 .experience-period {
@@ -139,7 +139,7 @@ function calculateTotalYears(): string {
 }
 
 .experience-description {
-  @apply text-text-primary text-sm leading-relaxed mb-4;
+  @apply text-theme-primary text-sm leading-relaxed mb-4;
 }
 
 .achievements {
@@ -147,7 +147,7 @@ function calculateTotalYears(): string {
 }
 
 .achievements-title {
-  @apply text-sm font-semibold text-cyan-neon mb-2;
+  @apply text-sm font-semibold text-theme-accent mb-2;
 }
 
 .achievements-list {
@@ -155,23 +155,23 @@ function calculateTotalYears(): string {
 }
 
 .achievements-list li {
-  @apply flex items-start gap-2 text-sm text-text-primary;
+  @apply flex items-start gap-2 text-sm text-theme-primary;
 }
 
 .achievement-bullet {
-  @apply text-cyan-neon flex-shrink-0 mt-0.5;
+  @apply text-theme-accent flex-shrink-0 mt-0.5;
 }
 
 .experience-tech {
-  @apply flex flex-wrap gap-2 pt-3 border-t border-border-color;
+  @apply flex flex-wrap gap-2 pt-3 border-t border-theme;
 }
 
 .tech-tag {
   @apply text-xs px-2 py-1 rounded;
-  @apply bg-bg-dark border border-cyan-dark text-cyan-neon;
+  @apply bg-theme-primary border border-cyan-dark text-theme-accent;
 }
 
 .experience-summary {
-  @apply pt-4 border-t border-border-color;
+  @apply pt-4 border-t border-theme;
 }
 </style>

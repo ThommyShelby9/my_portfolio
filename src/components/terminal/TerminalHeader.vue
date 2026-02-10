@@ -44,8 +44,8 @@ const title = computed(() => {
 
 <style scoped>
 .terminal-header {
-  @apply flex items-center justify-between px-4 py-2 bg-bg-secondary;
-  @apply border-b border-border-color text-sm;
+  @apply flex items-center justify-between px-4 py-2 bg-theme-secondary;
+  @apply border-b border-theme text-sm;
 }
 
 .header-left {
@@ -53,19 +53,19 @@ const title = computed(() => {
 }
 
 .header-user {
-  @apply text-cyan-neon font-semibold;
+  @apply text-theme-accent font-semibold;
 }
 
 .header-separator {
-  @apply text-text-secondary;
+  @apply text-theme-secondary;
 }
 
 .header-host {
-  @apply text-text-primary;
+  @apply text-theme-primary;
 }
 
 .header-path {
-  @apply text-cyan-neon;
+  @apply text-theme-accent;
 }
 
 .header-center {
@@ -73,7 +73,7 @@ const title = computed(() => {
 }
 
 .header-title {
-  @apply text-text-primary font-semibold;
+  @apply text-theme-primary font-semibold;
 }
 
 .header-right {
@@ -81,12 +81,12 @@ const title = computed(() => {
 }
 
 .header-indicator {
-  @apply text-xs px-2 py-1 rounded bg-bg-dark text-text-secondary;
-  @apply border border-border-color;
+  @apply text-xs px-2 py-1 rounded bg-theme-primary text-theme-secondary;
+  @apply border border-theme;
   transition: all 0.2s ease;
 }
 
 .header-indicator.active {
-  @apply text-cyan-neon border-cyan-neon;
+  @apply text-theme-accent border-theme-accent;
 }
 </style>

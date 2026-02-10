@@ -135,14 +135,14 @@ async function copyEmail() {
 
 .contact-card {
   @apply flex items-center gap-4 p-4;
-  @apply bg-bg-secondary border border-border-color rounded-lg;
+  @apply bg-theme-secondary border border-theme rounded-lg;
   @apply transition-all duration-300;
   @apply cursor-pointer;
   text-decoration: none;
 }
 
 .contact-card:not(.static):hover {
-  @apply border-cyan-neon;
+  @apply border-theme-accent;
   box-shadow: 0 0 20px rgba(0, 255, 247, 0.2);
   transform: translateY(-2px);
 }
@@ -153,7 +153,7 @@ async function copyEmail() {
 
 .contact-icon {
   @apply w-12 h-12 rounded-full;
-  @apply bg-bg-dark border border-cyan-dark;
+  @apply bg-theme-primary border border-cyan-dark;
   @apply flex items-center justify-center;
   @apply text-2xl;
 }
@@ -167,28 +167,28 @@ async function copyEmail() {
 }
 
 .contact-label {
-  @apply text-sm font-semibold text-cyan-neon mb-1;
+  @apply text-sm font-semibold text-theme-accent mb-1;
 }
 
 .contact-value {
-  @apply text-text-primary text-sm;
+  @apply text-theme-primary text-sm;
 }
 
 .contact-arrow {
-  @apply text-cyan-neon text-xl;
+  @apply text-theme-accent text-xl;
 }
 
 .quick-contact {
-  @apply bg-bg-secondary border border-border-color rounded-lg p-6;
+  @apply bg-theme-secondary border border-theme rounded-lg p-6;
   @apply text-center;
 }
 
 .section-title {
-  @apply text-xl font-bold text-cyan-neon mb-3;
+  @apply text-xl font-bold text-theme-accent mb-3;
 }
 
 .section-description {
-  @apply text-text-primary leading-relaxed mb-6;
+  @apply text-theme-primary leading-relaxed mb-6;
 }
 
 .contact-actions {
@@ -202,18 +202,18 @@ async function copyEmail() {
 }
 
 .action-btn.primary {
-  @apply bg-cyan-neon text-bg-dark;
-  @apply hover:bg-cyan-dark;
+  @apply bg-theme-accent text-bg-dark;
+  @apply hover:bg-theme-accent-dark;
 }
 
 .action-btn.secondary {
-  @apply bg-bg-dark border border-cyan-neon text-cyan-neon;
-  @apply hover:bg-cyan-neon hover:text-bg-dark;
+  @apply bg-theme-primary border border-theme-accent text-theme-accent;
+  @apply hover:bg-theme-accent hover:text-bg-dark;
 }
 
 .availability {
   @apply flex items-center justify-center gap-2;
-  @apply text-sm text-text-secondary;
+  @apply text-sm text-theme-secondary;
 }
 
 .availability-indicator {

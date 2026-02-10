@@ -88,3 +88,65 @@ body {
 .accent {
   color: var(--color-accent);
 }
+
+/* Theme-aware utility classes using CSS variables */
+@layer utilities {
+  /* Backgrounds */
+  .bg-theme-primary {
+    background-color: var(--color-bg) !important;
+  }
+
+  .bg-theme-secondary {
+    background-color: var(--color-bg-secondary) !important;
+  }
+
+  /* Text colors */
+  .text-theme-primary {
+    color: var(--color-text) !important;
+  }
+
+  .text-theme-secondary {
+    color: var(--color-text-secondary) !important;
+  }
+
+  .text-theme-accent {
+    color: var(--color-accent) !important;
+  }
+
+  .text-theme-accent-dark {
+    color: var(--color-accent-dark) !important;
+  }
+
+  /* Borders */
+  .border-theme {
+    border-color: var(--color-border) !important;
+  }
+
+  /* Caret */
+  .caret-theme-accent {
+    caret-color: var(--color-accent) !important;
+  }
+
+  /* Background accents */
+  .bg-theme-accent {
+    background-color: var(--color-accent) !important;
+  }
+
+  .bg-theme-accent-dark {
+    background-color: var(--color-accent-dark) !important;
+  }
+
+  /* Border accents */
+  .border-theme-accent {
+    border-color: var(--color-accent) !important;
+  }
+
+  /* Hover states */
+  .hover\:text-theme-accent:hover {
+    color: var(--color-accent) !important;
+  }
+
+  .hover\:bg-theme-accent:hover {
+    background-color: var(--color-accent) !important;
+  }
+}

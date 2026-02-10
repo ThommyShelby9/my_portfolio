@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="min-h-screen flex items-center justify-center bg-bg-dark p-4">
+  <div id="app" class="min-h-screen flex items-center justify-center bg-theme-primary p-4">
     <!-- Boot Sequence -->
     <BootSequence v-if="showBoot && !bootComplete" />
 
@@ -39,9 +39,14 @@ themeSystem.initTheme()
 
 // Watch store.theme and apply changes to DOM directly
 watch(() => store.theme, (newThemeName) => {
+  console.log('🎨 Theme watch triggered:', newThemeName)
   const theme = getTheme(newThemeName)
   if (theme) {
+    console.log('✅ Applying theme:', theme.displayName, theme.colors)
     applyThemeToDom(theme)
+    console.log('✅ Theme applied to DOM')
+  } else {
+    console.error('❌ Theme not found:', newThemeName)
   }
 }, { immediate: true })
 

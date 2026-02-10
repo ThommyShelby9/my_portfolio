@@ -76,8 +76,8 @@ function toggleFullscreen() {
 
 <style scoped>
 .terminal-window {
-  @apply relative w-[90vw] max-w-6xl h-[85vh] bg-bg-dark rounded-lg shadow-2xl;
-  @apply border border-border-color overflow-hidden;
+  @apply relative w-[90vw] max-w-6xl h-[85vh] bg-theme-primary rounded-lg shadow-2xl;
+  @apply border border-theme overflow-hidden;
   transition: all 0.3s ease;
 }
 
@@ -95,7 +95,7 @@ function toggleFullscreen() {
 
 /* macOS Chrome */
 .terminal-chrome {
-  @apply relative flex items-center h-8 bg-bg-secondary border-b border-border-color;
+  @apply relative flex items-center h-8 bg-theme-secondary border-b border-theme;
   @apply px-3;
 }
 

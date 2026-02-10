@@ -99,7 +99,7 @@ onUnmounted(() => {
 }
 
 .panel-container {
-  @apply bg-bg-dark border border-cyan-neon rounded-lg;
+  @apply bg-theme-primary border border-theme-accent rounded-lg;
   @apply w-[90vw] max-w-4xl max-h-[85vh];
   @apply flex flex-col;
   @apply shadow-2xl;
@@ -115,19 +115,19 @@ onUnmounted(() => {
 
 .panel-header {
   @apply flex items-center justify-between;
-  @apply px-6 py-4 border-b border-border-color;
-  @apply bg-bg-secondary;
+  @apply px-6 py-4 border-b border-theme;
+  @apply bg-theme-secondary;
 }
 
 .panel-title {
-  @apply text-xl font-bold text-cyan-neon;
+  @apply text-xl font-bold text-theme-accent;
 }
 
 .panel-close {
   @apply w-8 h-8 rounded-full;
   @apply flex items-center justify-center;
-  @apply bg-bg-dark border border-border-color;
-  @apply text-text-secondary hover:text-error hover:border-error;
+  @apply bg-theme-primary border border-theme;
+  @apply text-theme-secondary hover:text-error hover:border-error;
   @apply transition-all duration-200;
 }
 
@@ -146,36 +146,36 @@ onUnmounted(() => {
 }
 
 .panel-body::-webkit-scrollbar-track {
-  @apply bg-bg-secondary;
+  @apply bg-theme-secondary;
 }
 
 .panel-body::-webkit-scrollbar-thumb {
-  @apply bg-cyan-dark rounded;
+  @apply bg-theme-accent-dark rounded;
 }
 
 .panel-body::-webkit-scrollbar-thumb:hover {
-  @apply bg-cyan-neon;
+  @apply bg-theme-accent;
 }
 
 .panel-footer {
   @apply flex items-center justify-between;
-  @apply px-6 py-3 border-t border-border-color;
-  @apply bg-bg-secondary;
+  @apply px-6 py-3 border-t border-theme;
+  @apply bg-theme-secondary;
 }
 
 .footer-hint {
-  @apply text-xs text-text-secondary flex items-center gap-2;
+  @apply text-xs text-theme-secondary flex items-center gap-2;
 }
 
 kbd {
-  @apply px-2 py-1 rounded bg-bg-dark border border-border-color;
-  @apply text-cyan-neon font-mono text-xs;
+  @apply px-2 py-1 rounded bg-theme-primary border border-theme;
+  @apply text-theme-accent font-mono text-xs;
 }
 
 .footer-btn {
   @apply px-4 py-2 rounded;
-  @apply bg-cyan-neon text-bg-dark;
-  @apply hover:bg-cyan-dark;
+  @apply bg-theme-accent text-bg-dark;
+  @apply hover:bg-theme-accent-dark;
   @apply transition-colors duration-200;
   @apply font-semibold text-sm;
 }

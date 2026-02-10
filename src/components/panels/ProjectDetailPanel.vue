@@ -112,11 +112,11 @@ function backToProjects() {
 }
 
 .detail-title {
-  @apply text-3xl font-bold text-cyan-neon mb-2;
+  @apply text-3xl font-bold text-theme-accent mb-2;
 }
 
 .detail-meta {
-  @apply text-sm text-text-secondary flex items-center gap-2;
+  @apply text-sm text-theme-secondary flex items-center gap-2;
 }
 
 .meta-separator {
@@ -136,8 +136,8 @@ function backToProjects() {
 }
 
 .detail-image {
-  @apply rounded-lg overflow-hidden border border-border-color;
-  @apply h-64 bg-bg-secondary;
+  @apply rounded-lg overflow-hidden border border-theme;
+  @apply h-64 bg-theme-secondary;
 }
 
 .detail-image img {
@@ -149,11 +149,11 @@ function backToProjects() {
 }
 
 .section-title {
-  @apply text-lg font-semibold text-cyan-neon;
+  @apply text-lg font-semibold text-theme-accent;
 }
 
 .section-content {
-  @apply text-text-primary leading-relaxed;
+  @apply text-theme-primary leading-relaxed;
 }
 
 .highlights-list {
@@ -161,11 +161,11 @@ function backToProjects() {
 }
 
 .highlights-list li {
-  @apply flex items-start gap-3 text-text-primary;
+  @apply flex items-start gap-3 text-theme-primary;
 }
 
 .highlight-bullet {
-  @apply text-cyan-neon flex-shrink-0 mt-1;
+  @apply text-theme-accent flex-shrink-0 mt-1;
 }
 
 .tech-stack {
@@ -174,7 +174,7 @@ function backToProjects() {
 
 .tech-badge {
   @apply px-3 py-1.5 rounded;
-  @apply bg-bg-dark border border-cyan-dark text-cyan-neon;
+  @apply bg-theme-primary border border-cyan-dark text-theme-accent;
   @apply text-sm font-semibold;
 }
 
@@ -184,21 +184,21 @@ function backToProjects() {
 
 .link-btn {
   @apply px-4 py-2 rounded;
-  @apply bg-cyan-neon text-bg-dark;
-  @apply hover:bg-cyan-dark;
+  @apply bg-theme-accent text-bg-dark;
+  @apply hover:bg-theme-accent-dark;
   @apply transition-colors duration-200;
   @apply font-semibold text-sm;
   @apply flex items-center gap-2;
 }
 
 .detail-footer {
-  @apply pt-4 border-t border-border-color;
+  @apply pt-4 border-t border-theme;
 }
 
 .back-btn {
   @apply px-4 py-2 rounded;
-  @apply bg-bg-secondary border border-border-color text-text-primary;
-  @apply hover:border-cyan-neon hover:text-cyan-neon;
+  @apply bg-theme-secondary border border-theme text-theme-primary;
+  @apply hover:border-theme-accent hover:text-theme-accent;
   @apply transition-all duration-200;
   @apply font-semibold text-sm;
 }

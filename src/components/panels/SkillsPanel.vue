@@ -88,11 +88,11 @@ function getLevelText(level?: number): string {
 }
 
 .skill-category {
-  @apply bg-bg-secondary border border-border-color rounded-lg p-4;
+  @apply bg-theme-secondary border border-theme rounded-lg p-4;
 }
 
 .category-title {
-  @apply text-lg font-bold text-cyan-neon mb-4;
+  @apply text-lg font-bold text-theme-accent mb-4;
 }
 
 .skills-list {
@@ -108,15 +108,15 @@ function getLevelText(level?: number): string {
 }
 
 .skill-name {
-  @apply text-sm text-text-primary font-medium;
+  @apply text-sm text-theme-primary font-medium;
 }
 
 .skill-level {
-  @apply text-xs text-text-secondary;
+  @apply text-xs text-theme-secondary;
 }
 
 .skill-bar {
-  @apply h-2 bg-bg-dark rounded-full overflow-hidden;
+  @apply h-2 bg-theme-primary rounded-full overflow-hidden;
 }
 
 .skill-progress {
@@ -125,11 +125,11 @@ function getLevelText(level?: number): string {
 }
 
 .proficiency-section {
-  @apply pt-6 border-t border-border-color;
+  @apply pt-6 border-t border-theme;
 }
 
 .section-title {
-  @apply text-xl font-bold text-cyan-neon mb-4;
+  @apply text-xl font-bold text-theme-accent mb-4;
 }
 
 .proficiency-bars {
@@ -145,15 +145,15 @@ function getLevelText(level?: number): string {
 }
 
 .proficiency-name {
-  @apply text-text-primary font-medium;
+  @apply text-theme-primary font-medium;
 }
 
 .proficiency-percentage {
-  @apply text-cyan-neon font-bold;
+  @apply text-theme-accent font-bold;
 }
 
 .proficiency-bar {
-  @apply h-3 bg-bg-secondary rounded-full overflow-hidden border border-border-color;
+  @apply h-3 bg-theme-secondary rounded-full overflow-hidden border border-theme;
 }
 
 .proficiency-fill {

@@ -66,7 +66,7 @@ function handleBodyClick() {
 <style scoped>
 .terminal-body {
   @apply flex-1 overflow-y-auto overflow-x-hidden;
-  @apply bg-bg-dark p-4;
+  @apply bg-theme-primary p-4;
   @apply relative;
 }
 
@@ -76,15 +76,15 @@ function handleBodyClick() {
 }
 
 .terminal-body::-webkit-scrollbar-track {
-  @apply bg-bg-secondary;
+  @apply bg-theme-secondary;
 }
 
 .terminal-body::-webkit-scrollbar-thumb {
-  @apply bg-cyan-dark rounded;
+  @apply bg-theme-accent-dark rounded;
 }
 
 .terminal-body::-webkit-scrollbar-thumb:hover {
-  @apply bg-cyan-neon;
+  @apply bg-theme-accent;
 }
 
 .terminal-mode {

@@ -183,19 +183,19 @@ defineExpose({
 
 .prompt-user,
 .prompt-path {
-  @apply text-cyan-neon font-semibold;
+  @apply text-theme-accent font-semibold;
 }
 
 .prompt-separator {
-  @apply text-text-secondary;
+  @apply text-theme-secondary;
 }
 
 .prompt-host {
-  @apply text-text-primary;
+  @apply text-theme-primary;
 }
 
 .prompt-symbol {
-  @apply text-cyan-neon ml-1;
+  @apply text-theme-accent ml-1;
 }
 
 .input-wrapper {
@@ -204,13 +204,13 @@ defineExpose({
 
 .input-field {
   @apply w-full bg-transparent border-none outline-none;
-  @apply text-text-primary font-mono;
-  @apply caret-cyan-neon;
+  @apply text-theme-primary font-mono;
+  @apply caret-theme-accent;
   font-size: 16px; /* Prevent iOS auto-zoom on focus */
 }
 
 .input-field::placeholder {
-  @apply text-text-secondary;
+  @apply text-theme-secondary;
 }
 
 /* Mobile: Ensure minimum font size */
@@ -221,6 +221,6 @@ defineExpose({
 }
 
 .accent {
-  @apply text-cyan-neon;
+  @apply text-theme-accent;
 }
 </style>
