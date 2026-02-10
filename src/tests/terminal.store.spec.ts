@@ -9,8 +9,10 @@ import { useTerminalStore } from '@/stores/terminal'
 
 describe('Terminal Store', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    // Clear localStorage before each test
     localStorage.clear()
+    // Create fresh Pinia instance
+    setActivePinia(createPinia())
   })
 
   describe('Initial State', () => {
@@ -201,7 +203,7 @@ describe('Terminal Store', () => {
 
       store.setTheme('green')
 
-      expect(localStorage.getItem('terminal_theme')).toBe('green')
+      expect(localStorage.getItem('rostel_theme')).toBe('green')
     })
   })
 
@@ -229,7 +231,7 @@ describe('Terminal Store', () => {
 
       store.toggleFx(false)
 
-      expect(localStorage.getItem('terminal_fx_enabled')).toBe('false')
+      expect(localStorage.getItem('rostel_fx')).toBe('false')
     })
   })
 
@@ -257,7 +259,7 @@ describe('Terminal Store', () => {
 
       store.toggleIntro(false)
 
-      expect(localStorage.getItem('terminal_intro_enabled')).toBe('false')
+      expect(localStorage.getItem('rostel_intro')).toBe('false')
     })
   })
 
@@ -273,7 +275,7 @@ describe('Terminal Store', () => {
 
   describe('loadSettings', () => {
     it('should load theme from localStorage', () => {
-      localStorage.setItem('terminal_theme', 'mono')
+      localStorage.setItem('rostel_theme', 'mono')
 
       const store = useTerminalStore()
       store.loadSettings()
@@ -282,7 +284,7 @@ describe('Terminal Store', () => {
     })
 
     it('should load FX setting from localStorage', () => {
-      localStorage.setItem('terminal_fx_enabled', 'false')
+      localStorage.setItem('rostel_fx', 'false')
 
       const store = useTerminalStore()
       store.loadSettings()
@@ -291,7 +293,7 @@ describe('Terminal Store', () => {
     })
 
     it('should load intro setting from localStorage', () => {
-      localStorage.setItem('terminal_intro_enabled', 'false')
+      localStorage.setItem('rostel_intro', 'false')
 
       const store = useTerminalStore()
       store.loadSettings()

@@ -82,46 +82,48 @@ describe('parseCommand', () => {
 })
 
 describe('getCommandSuggestions', () => {
+  const commands = ['help', 'about', 'skills', 'projects', 'project', 'experience', 'education', 'contact', 'theme', 'home', 'exit']
+
   it('should return suggestions for partial command', () => {
-    const suggestions = getCommandSuggestions('pro')
+    const suggestions = getCommandSuggestions('pro', commands)
 
     expect(suggestions).toContain('projects')
     expect(suggestions).toContain('project')
   })
 
   it('should return suggestions for partial command "th"', () => {
-    const suggestions = getCommandSuggestions('th')
+    const suggestions = getCommandSuggestions('th', commands)
 
     expect(suggestions).toContain('theme')
   })
 
   it('should return suggestions for single letter', () => {
-    const suggestions = getCommandSuggestions('h')
+    const suggestions = getCommandSuggestions('h', commands)
 
     expect(suggestions).toContain('help')
     expect(suggestions).toContain('home')
   })
 
   it('should return empty array for non-matching input', () => {
-    const suggestions = getCommandSuggestions('xyz')
+    const suggestions = getCommandSuggestions('xyz', commands)
 
     expect(suggestions).toEqual([])
   })
 
-  it('should return empty array for empty input', () => {
-    const suggestions = getCommandSuggestions('')
+  it('should return all commands for empty input', () => {
+    const suggestions = getCommandSuggestions('', commands)
 
-    expect(suggestions).toEqual([])
+    expect(suggestions).toEqual(commands)
   })
 
   it('should be case insensitive', () => {
-    const suggestions = getCommandSuggestions('HEL')
+    const suggestions = getCommandSuggestions('HEL', commands)
 
     expect(suggestions).toContain('help')
   })
 
   it('should return all matching commands', () => {
-    const suggestions = getCommandSuggestions('e')
+    const suggestions = getCommandSuggestions('e', commands)
 
     // Should include: experience, education, exit
     expect(suggestions.length).toBeGreaterThan(0)
