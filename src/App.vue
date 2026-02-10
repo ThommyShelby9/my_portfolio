@@ -25,6 +25,7 @@ import GlitchEffect from '@/components/effects/GlitchEffect.vue'
 import { useTerminal } from '@/composables/useTerminal'
 import { useReducedMotion } from '@/composables/useReducedMotion'
 import { useTheme } from '@/composables/useTheme'
+import { useKonamiCode } from '@/composables/useKonamiCode'
 
 const store = useTerminalStore()
 const { bootComplete } = storeToRefs(store)
@@ -33,6 +34,30 @@ const { initTheme } = useTheme()
 
 // Initialize reduced motion detection
 useReducedMotion()
+
+// Initialize Konami code detector
+useKonamiCode(() => {
+  // Show secret message
+  addOutput(`
+╔═══════════════════════════════════════════════════════════╗
+║              🎮 KONAMI CODE ACTIVATED! 🎮                 ║
+╚═══════════════════════════════════════════════════════════╝
+
+Congratulations! You've unlocked the secret developer mode! 🚀
+
+  ↑ ↑ ↓ ↓ ← → ← → B A
+
+Easter egg discovered! You're a true gamer at heart.
+As a reward, here's a secret: I love building interactive experiences
+that surprise and delight users. This portfolio is just the beginning!
+
+Type 'matrix' to enter the Matrix (coming soon).
+Type 'sudo' for a laugh.
+Type 'whoami' to identify yourself.
+
+Keep exploring! 🕹️
+  `.trim(), 'system')
+})
 
 const showBoot = ref(true)
 // Reference to glitch effect for programmatic triggering (e.g., errors, Easter eggs)

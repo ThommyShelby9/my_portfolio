@@ -34,7 +34,7 @@ export function useCommands() {
       name: 'about',
       description: 'Display information about me',
       usage: 'about',
-      aliases: ['whoami', 'info'],
+      aliases: ['info'],
       handler: () => commandAbout()
     },
 
@@ -134,6 +134,28 @@ export function useCommands() {
       description: 'Return to home screen',
       usage: 'home',
       handler: () => commandHome()
+    },
+
+    // Easter egg commands
+    sudo: {
+      name: 'sudo',
+      description: 'Execute command as superuser',
+      usage: 'sudo <command>',
+      handler: () => commandSudo()
+    },
+
+    whoami: {
+      name: 'whoami',
+      description: 'Display current user information',
+      usage: 'whoami',
+      handler: () => commandWhoami()
+    },
+
+    matrix: {
+      name: 'matrix',
+      description: 'Enter the Matrix',
+      usage: 'matrix',
+      handler: () => commandMatrix()
     }
   }
 
@@ -456,6 +478,62 @@ Type 'experience' to see work history
     return {
       type: 'system',
       content: 'Welcome back! Type \'help\' to see available commands.'
+    }
+  }
+
+  /**
+   * Easter Egg Commands
+   */
+
+  function commandSudo(): CommandResult {
+    return {
+      type: 'error',
+      content: `[sudo] password for rostel:
+Permission denied.
+
+Nice try! But you don't have root access here. 😏
+This is my portfolio, not your server!
+
+Try 'help' to see what you CAN do.`
+    }
+  }
+
+  function commandWhoami(): CommandResult {
+    return {
+      type: 'text',
+      content: `visitor@rostel-os
+
+╭──────────────────────────────────╮
+│  Role: Guest User                │
+│  Permissions: Read-only          │
+│  Access Level: Public            │
+│  Session: Active                 │
+╰──────────────────────────────────╯
+
+Want to know more about the owner?
+Type 'about' to learn about Rostel PANOUMASSI.`
+    }
+  }
+
+  function commandMatrix(): CommandResult {
+    // TODO: Implement matrix rain effect
+    // For now, return ASCII art
+    return {
+      type: 'text',
+      content: `
+Follow the white rabbit... 🐰
+
+        Wake up, Neo...
+   The Matrix has you...
+
+      ╔═══════════════╗
+      ║  Coming Soon  ║
+      ╚═══════════════╝
+
+Matrix rain effect will be implemented soon!
+For now, enjoy exploring the terminal.
+
+Type 'theme green' for a Matrix-like experience.`
     }
   }
 
