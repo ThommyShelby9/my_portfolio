@@ -4,7 +4,7 @@
     <div class="input-prompt">
       <span class="prompt-user accent">rostel</span>
       <span class="prompt-separator">@</span>
-      <span class="prompt-host">missimawu</span>
+      <span class="prompt-host">kps</span>
       <span class="prompt-separator">:</span>
       <span class="prompt-path accent">~</span>
       <span class="prompt-symbol">$</span>

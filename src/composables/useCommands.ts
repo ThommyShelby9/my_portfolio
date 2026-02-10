@@ -361,10 +361,17 @@ Type 'experience' to see work history
   }
 
   function commandCV(): CommandResult {
-    // In a real implementation, this would trigger a download
+    // Open CV in new tab
+    window.open('/assets/Rostel_Missimawu.pdf', '_blank')
+
     return {
       type: 'success',
-      content: 'Opening CV...\n\nCV download link: /assets/Rostel_Missimawu.pdf\n\nYou can also find my full profile on LinkedIn:\n' + aboutData.linkedin
+      content: `Opening CV in new tab... ✓
+
+Download: /assets/Rostel_Missimawu.pdf
+
+You can also find my full profile on LinkedIn:
+${aboutData.linkedin}`
     }
   }
 
