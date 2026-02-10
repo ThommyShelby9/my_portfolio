@@ -7,12 +7,31 @@ import type { Experience } from '@/types'
 
 export const experienceData: Experience[] = [
   {
+    id: 'kps',
+    company: 'KPS CONSULTING ANALYTICS',
+    position: 'Responsable Ingénierie et Innovation',
+    period: 'July 2025 - Present',
+    location: 'Cotonou, Benin',
+    description: 'Leading engineering teams and driving technological innovation across KPS Groupe platforms with focus on scalability, security, and performance.',
+    achievements: [
+      'Defining strategic technological orientations',
+      'Ensuring scalability, security and performance of platforms',
+      'Managing and coaching development teams',
+      'Implementing Agile and DevOps methodologies',
+      'Participating in complex and critical developments',
+      'Designing robust and scalable architectures',
+      'Aligning tech vision with business objectives',
+      'Contributing to monetization and expansion strategy'
+    ],
+    tech: ['Django', 'Spring Boot', 'Laravel', 'Vue.js', 'Node.js', 'PostgreSQL', 'Docker', 'Kubernetes']
+  },
+  {
     id: 'gprhme',
     company: 'Cabinet GPRHME',
     position: 'Full-stack Developer',
-    period: 'September 2024 - Present',
+    period: 'September 2024 - July 2025',
     location: 'Cotonou, Benin',
-    description: 'Leading the development and continuous improvement of HR management platforms with a focus on security and user experience.',
+    description: 'Development and continuous improvement of HR management platforms with a focus on security and user experience.',
     achievements: [
       'Development and improvement of the TadagbeRhPlus HR management platform',
       'Redesign of the TadagbeRhPlus platform for enhanced UX',
@@ -37,9 +56,9 @@ export const experienceData: Experience[] = [
   {
     id: 'noizet',
     company: 'N01zet',
-    position: 'QA Tests Automation (Freelance)',
+    position: 'QA Tests Automation Full Stack (Freelance)',
     period: 'March 2024 - August 2024',
-    location: 'Remote',
+    location: 'Paris, France',
     description: 'Implemented automated testing solutions to ensure software quality and reliability.',
     achievements: [
       'Implementation of automated tests with Selenium, Java, and JUnit',
