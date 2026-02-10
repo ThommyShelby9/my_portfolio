@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
 import TerminalWindow from '@/components/terminal/TerminalWindow.vue'
@@ -26,16 +26,24 @@ import GlitchEffect from '@/components/effects/GlitchEffect.vue'
 import MatrixRainEffect from '@/components/effects/MatrixRainEffect.vue'
 import { useTerminal } from '@/composables/useTerminal'
 import { useReducedMotion } from '@/composables/useReducedMotion'
-import { useTheme } from '@/composables/useTheme'
+import { useTheme, applyThemeToDom, getTheme } from '@/composables/useTheme'
 import { useKonamiCode } from '@/composables/useKonamiCode'
 
 const store = useTerminalStore()
 const { bootComplete } = storeToRefs(store)
 const { loadSettings, addOutput } = useTerminal()
 
-// Initialize theme system (keep watch active)
+// Initialize theme system
 const themeSystem = useTheme()
 themeSystem.initTheme()
+
+// Watch store.theme and apply changes to DOM directly
+watch(() => store.theme, (newThemeName) => {
+  const theme = getTheme(newThemeName)
+  if (theme) {
+    applyThemeToDom(theme)
+  }
+}, { immediate: true })
 
 // Initialize reduced motion detection
 useReducedMotion()
