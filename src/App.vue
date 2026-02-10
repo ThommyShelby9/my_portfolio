@@ -32,7 +32,10 @@ import { useKonamiCode } from '@/composables/useKonamiCode'
 const store = useTerminalStore()
 const { bootComplete } = storeToRefs(store)
 const { loadSettings, addOutput } = useTerminal()
-const { initTheme } = useTheme()
+
+// Initialize theme system (keep watch active)
+const themeSystem = useTheme()
+themeSystem.initTheme()
 
 // Initialize reduced motion detection
 useReducedMotion()
@@ -78,7 +81,6 @@ const matrixRef = ref<InstanceType<typeof MatrixRainEffect>>()
 // Load settings on mount
 onMounted(() => {
   loadSettings()
-  initTheme()
 
   // Check if intro is enabled
   const introEnabled = store.introEnabled

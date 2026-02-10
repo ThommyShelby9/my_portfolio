@@ -4,11 +4,10 @@
  */
 
 import { afterEach } from 'vitest'
-import { cleanup } from '@vue/test-utils'
 
 // Cleanup after each test
 afterEach(() => {
-  cleanup()
+  // Cleanup logic here if needed
 })
 
 // Mock window.matchMedia for reduced motion tests

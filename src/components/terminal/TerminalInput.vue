@@ -25,7 +25,6 @@
         @focus="isFocused = true"
         @blur="isFocused = false"
       />
-      <TerminalCursor v-if="isFocused" :blink="true" />
     </div>
   </div>
 </template>
@@ -37,7 +36,6 @@ import { useTerminalStore } from '@/stores/terminal'
 import { useTerminal } from '@/composables/useTerminal'
 import { useKeyboard } from '@/composables/useKeyboard'
 import { useAnimations } from '@/composables/useAnimations'
-import TerminalCursor from './TerminalCursor.vue'
 
 const store = useTerminalStore()
 const { currentInput } = storeToRefs(store)
@@ -202,7 +200,7 @@ function handleClear() {
 .input-field {
   @apply w-full bg-transparent border-none outline-none;
   @apply text-text-primary font-mono;
-  @apply caret-transparent;
+  @apply caret-cyan-neon;
   font-size: 16px; /* Prevent iOS auto-zoom on focus */
 }
 
