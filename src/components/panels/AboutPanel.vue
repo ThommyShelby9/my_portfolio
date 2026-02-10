@@ -185,7 +185,7 @@ function getInitials(name: string): string {
   @apply flex items-center gap-2;
   @apply px-4 py-2 rounded;
   @apply bg-theme-secondary text-theme-primary;
-  @apply hover:bg-theme-accent hover:text-theme-primary;
+  @apply hover:bg-theme-accent hover:text-gray-900;
   @apply transition-all duration-200;
   @apply text-sm;
   @apply no-underline;
@@ -219,9 +219,13 @@ function getInitials(name: string): string {
   @apply px-4 py-3 rounded;
   @apply bg-theme-secondary;
   @apply border border-theme;
-  @apply hover:border-theme-accent hover:bg-theme-accent-dark;
+  @apply hover:border-theme-accent hover:bg-theme-accent;
   @apply transition-all duration-200;
   @apply cursor-pointer;
+}
+
+.quick-link-btn:hover .link-text {
+  @apply text-gray-900;
 }
 
 .link-icon {
@@ -230,6 +234,7 @@ function getInitials(name: string): string {
 
 .link-text {
   @apply text-sm text-theme-primary font-medium;
+  @apply transition-colors duration-200;
 }
 
 /* Mobile adjustments */

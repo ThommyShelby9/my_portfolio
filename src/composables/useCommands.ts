@@ -4,9 +4,11 @@
  */
 
 import { useTerminalStore } from '@/stores/terminal'
+import { useAchievementsStore } from '@/stores/achievements'
 import type { CommandResult, Command } from '@/types'
 import { getCommandSuggestions } from '@/utils/commandParser'
 import { useTheme, getThemeNames } from './useTheme'
+import { useTour } from './useTour'
 import {
   aboutData,
   projectsData,
@@ -17,7 +19,9 @@ import {
 
 export function useCommands() {
   const store = useTerminalStore()
+  const achievementsStore = useAchievementsStore()
   const { setTheme } = useTheme()
+  const tour = useTour()
 
   /**
    * Command registry
@@ -27,6 +31,7 @@ export function useCommands() {
       name: 'help',
       description: 'Show all available commands',
       usage: 'help',
+      category: 'navigation',
       handler: () => commandHelp()
     },
 
@@ -34,6 +39,7 @@ export function useCommands() {
       name: 'about',
       description: 'Display information about me',
       usage: 'about',
+      category: 'navigation',
       aliases: ['info'],
       handler: () => commandAbout()
     },
@@ -42,6 +48,7 @@ export function useCommands() {
       name: 'skills',
       description: 'View technical skills and proficiency',
       usage: 'skills',
+      category: 'navigation',
       handler: () => commandSkills()
     },
 
@@ -49,6 +56,7 @@ export function useCommands() {
       name: 'projects',
       description: 'List all projects',
       usage: 'projects',
+      category: 'navigation',
       aliases: ['ls', 'list'],
       handler: () => commandProjects()
     },
@@ -57,6 +65,7 @@ export function useCommands() {
       name: 'project',
       description: 'View project details',
       usage: 'project <slug>',
+      category: 'navigation',
       aliases: ['cd', 'open'],
       handler: (args) => commandProject(args)
     },
@@ -65,6 +74,7 @@ export function useCommands() {
       name: 'experience',
       description: 'View work experience timeline',
       usage: 'experience',
+      category: 'navigation',
       aliases: ['exp', 'work'],
       handler: () => commandExperience()
     },
@@ -73,6 +83,7 @@ export function useCommands() {
       name: 'education',
       description: 'View education and certifications',
       usage: 'education',
+      category: 'navigation',
       aliases: ['edu', 'cert'],
       handler: () => commandEducation()
     },
@@ -81,6 +92,7 @@ export function useCommands() {
       name: 'contact',
       description: 'Get contact information',
       usage: 'contact',
+      category: 'navigation',
       handler: () => commandContact()
     },
 
@@ -88,6 +100,7 @@ export function useCommands() {
       name: 'cv',
       description: 'Download CV/Resume',
       usage: 'cv',
+      category: 'navigation',
       aliases: ['resume', 'download'],
       handler: () => commandCV()
     },
@@ -96,6 +109,7 @@ export function useCommands() {
       name: 'clear',
       description: 'Clear terminal screen',
       usage: 'clear',
+      category: 'configuration',
       aliases: ['cls'],
       handler: () => commandClear()
     },
@@ -104,6 +118,7 @@ export function useCommands() {
       name: 'theme',
       description: 'Change color theme',
       usage: 'theme <cyan|amber|green|mono>',
+      category: 'configuration',
       handler: (args) => commandTheme(args)
     },
 
@@ -111,6 +126,7 @@ export function useCommands() {
       name: 'fx',
       description: 'Toggle visual effects',
       usage: 'fx <on|off>',
+      category: 'configuration',
       handler: (args) => commandFx(args)
     },
 
@@ -118,6 +134,7 @@ export function useCommands() {
       name: 'intro',
       description: 'Toggle boot sequence',
       usage: 'intro <on|off>',
+      category: 'configuration',
       handler: (args) => commandIntro(args)
     },
 
@@ -125,6 +142,7 @@ export function useCommands() {
       name: 'back',
       description: 'Go back to terminal',
       usage: 'back',
+      category: 'navigation',
       aliases: ['exit', 'close'],
       handler: () => commandBack()
     },
@@ -133,7 +151,17 @@ export function useCommands() {
       name: 'home',
       description: 'Return to home screen',
       usage: 'home',
+      category: 'navigation',
       handler: () => commandHome()
+    },
+
+    tour: {
+      name: 'tour',
+      description: 'Start guided tour',
+      usage: 'tour',
+      category: 'system',
+      aliases: ['guide', 'help-tour'],
+      handler: () => commandTour()
     },
 
     // Easter egg commands
@@ -141,6 +169,7 @@ export function useCommands() {
       name: 'sudo',
       description: 'Execute command as superuser',
       usage: 'sudo <command>',
+      category: 'easter-eggs',
       handler: () => commandSudo()
     },
 
@@ -148,12 +177,14 @@ export function useCommands() {
       name: 'whoami',
       description: 'Display current user information',
       usage: 'whoami',
+      category: 'easter-eggs',
       handler: () => commandWhoami()
     },
 
     matrix: {
       name: 'matrix',
       description: 'Enter the Matrix',
+      category: 'easter-eggs',
       usage: 'matrix',
       handler: () => commandMatrix()
     }
@@ -191,6 +222,9 @@ export function useCommands() {
     }
 
     try {
+      // Track command execution for achievements
+      achievementsStore.trackAction('command_executed', { command: commandName })
+
       return await command.handler(args, flags)
     } catch (error) {
       return {
@@ -256,10 +290,13 @@ ALIASES
 Type any command to get started!
     `.trim()
 
-    return { type: 'text', content: helpText }
+    return { type: 'text', content: helpText, animated: true, animationSpeed: 0.005 }
   }
 
   function commandAbout(): CommandResult {
+    // Track panel view for achievements
+    achievementsStore.trackAction('panel_viewed', { panel: 'about' })
+
     return {
       type: 'panel',
       panelName: 'about',
@@ -268,6 +305,9 @@ Type any command to get started!
   }
 
   function commandSkills(): CommandResult {
+    // Track panel view for achievements
+    achievementsStore.trackAction('panel_viewed', { panel: 'skills' })
+
     return {
       type: 'panel',
       panelName: 'skills',
@@ -276,6 +316,9 @@ Type any command to get started!
   }
 
   function commandProjects(): CommandResult {
+    // Track panel view for achievements
+    achievementsStore.trackAction('panel_viewed', { panel: 'projects' })
+
     return {
       type: 'panel',
       panelName: 'projects',
@@ -310,6 +353,9 @@ Type any command to get started!
   }
 
   function commandExperience(): CommandResult {
+    // Track panel view for achievements
+    achievementsStore.trackAction('panel_viewed', { panel: 'experience' })
+
     return {
       type: 'panel',
       panelName: 'experience',
@@ -333,10 +379,13 @@ Type 'skills' to see technical proficiency
 Type 'experience' to see work history
     `.trim()
 
-    return { type: 'text', content: eduText }
+    return { type: 'text', content: eduText, animated: true, animationSpeed: 0.01 }
   }
 
   function commandContact(): CommandResult {
+    // Track panel view for achievements
+    achievementsStore.trackAction('panel_viewed', { panel: 'contact' })
+
     return {
       type: 'panel',
       panelName: 'contact',
@@ -392,6 +441,9 @@ ${aboutData.linkedin}`
         content: `Failed to apply theme: ${themeName}`
       }
     }
+
+    // Track theme change for achievements
+    achievementsStore.trackAction('theme_changed', { theme: themeName })
 
     return {
       type: 'success',
@@ -472,6 +524,14 @@ ${aboutData.linkedin}`
     }
   }
 
+  function commandTour(): CommandResult {
+    tour.startTour()
+    return {
+      type: 'success',
+      content: 'Starting guided tour... Follow the instructions on screen!'
+    }
+  }
+
   /**
    * Easter Egg Commands
    */
@@ -502,7 +562,9 @@ Try 'help' to see what you CAN do.`
 ╰──────────────────────────────────╯
 
 Want to know more about the owner?
-Type 'about' to learn about Rostel PANOUMASSI.`
+Type 'about' to learn about Rostel PANOUMASSI.`,
+      animated: true,
+      animationSpeed: 0.015
     }
   }
 
@@ -523,7 +585,9 @@ Following the white rabbit... 🐰
 The Matrix rain effect is now active!
 Press ESC or click anywhere to exit.
 
-"There is no spoon."`
+"There is no spoon."`,
+        animated: true,
+        animationSpeed: 0.02
       }
     }
 

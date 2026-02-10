@@ -13,6 +13,14 @@
     </div>
 
     <div class="header-right">
+      <button
+        class="help-button"
+        @click="startTour"
+        title="Start guided tour"
+        aria-label="Start guided tour"
+      >
+        ?
+      </button>
       <span class="header-indicator" :class="{ active: fxEnabled }" title="Visual Effects">
         FX
       </span>
@@ -27,9 +35,16 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
+import { useTour } from '@/composables/useTour'
 
 const store = useTerminalStore()
 const { mode, activePanel, theme, fxEnabled } = storeToRefs(store)
+
+const tour = useTour()
+
+function startTour() {
+  tour.startTour()
+}
 
 const username = 'rostel'
 const hostname = 'missimawu'
@@ -78,6 +93,26 @@ const title = computed(() => {
 
 .header-right {
   @apply flex items-center gap-3;
+}
+
+.help-button {
+  @apply w-6 h-6 flex items-center justify-center;
+  @apply rounded-full;
+  @apply bg-transparent;
+  @apply border border-theme-accent;
+  @apply text-theme-accent;
+  @apply cursor-pointer;
+  @apply transition-all duration-200;
+  @apply text-sm font-bold;
+}
+
+.help-button:hover {
+  @apply bg-theme-accent text-theme-primary;
+  @apply scale-110;
+}
+
+.help-button:active {
+  @apply scale-95;
 }
 
 .header-indicator {

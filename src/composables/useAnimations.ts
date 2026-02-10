@@ -4,7 +4,11 @@
  */
 
 import gsap from 'gsap'
+import { TextPlugin } from 'gsap/TextPlugin'
 import { useTerminalStore } from '@/stores/terminal'
+
+// Register GSAP plugins
+gsap.registerPlugin(TextPlugin)
 
 export function useAnimations() {
   const store = useTerminalStore()
@@ -181,7 +185,7 @@ export function useAnimations() {
 
   /**
    * Type text animation (for easter eggs)
-   * Character by character reveal
+   * Character by character reveal - preserves newlines and formatting
    */
   function typeText(element: HTMLElement, text: string, speed = 0.03): gsap.core.Tween {
     if (store.reducedMotion) {
@@ -189,10 +193,21 @@ export function useAnimations() {
       return gsap.to({}, { duration: 0 })
     }
 
-    return gsap.to(element, {
+    // Custom typing animation that preserves all formatting
+    const obj = { progress: 0 }
+
+    return gsap.to(obj, {
+      progress: text.length,
       duration: text.length * speed,
-      text: text,
-      ease: 'none'
+      ease: 'none',
+      onUpdate: () => {
+        const currentLength = Math.floor(obj.progress)
+        element.textContent = text.substring(0, currentLength)
+      },
+      onComplete: () => {
+        // Ensure full text is displayed at the end
+        element.textContent = text
+      }
     })
   }
 

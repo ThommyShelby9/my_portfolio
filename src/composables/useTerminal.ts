@@ -56,10 +56,14 @@ export function useTerminal() {
         openPanel(result.panelName, result.panelData)
       } else if (result.type === 'text' || result.type === 'error' || result.type === 'success') {
         if (result.content) {
-          addLine({
-            type: result.type === 'error' ? 'error' : result.type === 'success' ? 'system' : 'output',
-            content: result.content
-          })
+          const lineType = result.type === 'error' ? 'error' : result.type === 'success' ? 'system' : 'output'
+
+          // Use animated line if specified (errors are never animated)
+          if (result.animated && result.type !== 'error') {
+            store.addAnimatedLine({ type: lineType, content: result.content }, result.animationSpeed)
+          } else {
+            addLine({ type: lineType, content: result.content })
+          }
         }
       }
       // 'system' type doesn't output anything (used for clear, back, etc.)
@@ -80,6 +84,13 @@ export function useTerminal() {
    */
   function addOutput(content: string, type: 'output' | 'system' = 'output') {
     store.addLine({ type, content })
+  }
+
+  /**
+   * Add animated output to terminal (typing effect)
+   */
+  function addAnimatedOutput(content: string, type: 'output' | 'system' = 'output', speed?: number) {
+    store.addAnimatedLine({ type, content }, speed)
   }
 
   /**
@@ -168,6 +179,7 @@ export function useTerminal() {
     executeCommand,
     addLine,
     addOutput,
+    addAnimatedOutput,
     addError,
     handleError,
     clearHistory,

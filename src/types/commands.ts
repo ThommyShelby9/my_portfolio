@@ -8,12 +8,17 @@ export interface CommandResult {
   content?: string
   panelName?: string
   panelData?: any
+  animated?: boolean
+  animationSpeed?: number
 }
+
+export type CommandCategory = 'navigation' | 'configuration' | 'system' | 'easter-eggs'
 
 export interface Command {
   name: string
   description: string
   usage: string
+  category?: CommandCategory
   aliases?: string[]
   handler: (args: string[], flags: Record<string, string | boolean>) => Promise<CommandResult> | CommandResult
 }

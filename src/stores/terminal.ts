@@ -44,6 +44,20 @@ export const useTerminalStore = defineStore('terminal', {
     },
 
     /**
+     * Add an animated line to terminal history
+     */
+    addAnimatedLine(line: Omit<TerminalLine, 'id' | 'timestamp'>, speed?: number) {
+      const newLine: TerminalLine = {
+        ...line,
+        id: crypto.randomUUID(),
+        timestamp: new Date(),
+        animated: true,
+        animationSpeed: speed || 0.03,
+      }
+      this.history.push(newLine)
+    },
+
+    /**
      * Clear terminal history
      */
     clearHistory() {

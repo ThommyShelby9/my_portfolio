@@ -21,7 +21,7 @@
 
       <!-- Output line -->
       <div v-else-if="line.type === 'output'" class="history-output">
-        <pre class="output-text">{{ line.content }}</pre>
+        <pre class="output-text" :data-line-id="line.id">{{ line.content }}</pre>
       </div>
 
       <!-- Error line -->
@@ -33,21 +33,60 @@
       <!-- System line -->
       <div v-else-if="line.type === 'system'" class="history-system">
         <span class="system-icon">●</span>
-        <pre class="system-text">{{ line.content }}</pre>
+        <pre class="system-text" :data-line-id="line.id">{{ line.content }}</pre>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch, nextTick, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
+import { useAnimations } from '@/composables/useAnimations'
 
 const store = useTerminalStore()
-const { history } = storeToRefs(store)
+const { history, reducedMotion } = storeToRefs(store)
+const animations = useAnimations()
 
 const visibleHistory = computed(() => history.value)
+const animatedIds = ref(new Set<string>())
+
+// Watch for new history entries and apply typing animation
+watch(() => history.value.length, async () => {
+  const lastLine = history.value[history.value.length - 1]
+
+  // Only animate if:
+  // 1. Line has animated flag set
+  // 2. Haven't animated this line before
+  // 3. Reduced motion is disabled
+  // 4. Line type is output or system
+  if (
+    lastLine?.animated &&
+    !animatedIds.value.has(lastLine.id) &&
+    !reducedMotion.value &&
+    (lastLine.type === 'output' || lastLine.type === 'system')
+  ) {
+    await nextTick()
+
+    const element = document.querySelector(`[data-line-id="${lastLine.id}"]`)
+    if (element) {
+      // Mark as animated
+      animatedIds.value.add(lastLine.id)
+
+      // Clear initial content and apply typing animation
+      const originalContent = lastLine.content
+      element.textContent = ''
+
+      // Use GSAP typeText animation
+      animations.typeText(
+        element as HTMLElement,
+        originalContent,
+        lastLine.animationSpeed || 0.03
+      )
+    }
+  }
+})
 </script>
 
 <style scoped>
@@ -95,8 +134,10 @@ const visibleHistory = computed(() => history.value)
 }
 
 .output-text {
-  @apply text-theme-primary whitespace-pre-wrap font-mono;
-  word-break: break-word;
+  @apply text-theme-primary font-mono;
+  white-space: pre-wrap;
+  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 /* Error line */
@@ -109,8 +150,10 @@ const visibleHistory = computed(() => history.value)
 }
 
 .error-text {
-  @apply text-error whitespace-pre-wrap font-mono;
-  word-break: break-word;
+  @apply text-error font-mono;
+  white-space: pre-wrap;
+  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 /* System line */
@@ -123,8 +166,10 @@ const visibleHistory = computed(() => history.value)
 }
 
 .system-text {
-  @apply text-theme-accent whitespace-pre-wrap font-mono;
-  word-break: break-word;
+  @apply text-theme-accent font-mono;
+  white-space: pre-wrap;
+  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 /* Accent color */

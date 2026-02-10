@@ -8,6 +8,8 @@ export interface TerminalLine {
   type: 'input' | 'output' | 'error' | 'system'
   content: string
   timestamp: Date
+  animated?: boolean
+  animationSpeed?: number
 }
 
 export interface TerminalState {

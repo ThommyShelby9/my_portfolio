@@ -22,8 +22,8 @@ const isActive = ref(false)
 let animationFrameId: number | null = null
 let autoStopTimeout: ReturnType<typeof setTimeout> | null = null
 
-// Matrix characters (Japanese katakana + numbers)
-const MATRIX_CHARS = 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヷヸヹヺ0123456789'
+// Matrix characters (Japanese katakana + numbers + symbols)
+const MATRIX_CHARS = 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヷヸヹヺ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~'
 
 // Drop configuration
 interface Drop {
@@ -32,11 +32,13 @@ interface Drop {
   speed: number
   length: number
   chars: string[]
+  brightness: number
 }
 
 let drops: Drop[] = []
 let fontSize = 16
 let columns = 0
+let glitchTimer = 0
 
 function initMatrix() {
   if (!canvasRef.value) return
@@ -45,22 +47,24 @@ function initMatrix() {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
-  fontSize = 16
+  fontSize = 14
   columns = Math.floor(canvas.width / fontSize)
 
-  // Initialize drops
+  // Initialize drops with varied properties
   drops = []
   for (let i = 0; i < columns; i++) {
+    const length = Math.floor(Math.random() * 25) + 15
     drops.push({
       x: i * fontSize,
-      y: Math.random() * -canvas.height,
-      speed: Math.random() * 3 + 2,
-      length: Math.floor(Math.random() * 20) + 10,
-      chars: []
+      y: Math.random() * -canvas.height * 1.5,
+      speed: Math.random() * 4 + 1.5,
+      length,
+      chars: [],
+      brightness: Math.random() * 0.3 + 0.7
     })
 
     // Initialize characters for this drop
-    for (let j = 0; j < drops[i].length; j++) {
+    for (let j = 0; j < length; j++) {
       drops[i].chars.push(
         MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)]
       )
@@ -79,49 +83,77 @@ function drawMatrix() {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  // Fade effect
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
+  // Stronger fade effect for more dramatic trails
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  // Draw drops
-  ctx.font = `${fontSize}px monospace`
+  // Occasional glitch effect
+  glitchTimer++
+  const isGlitching = glitchTimer % 300 === 0
 
-  drops.forEach((drop) => {
+  // Draw drops
+  ctx.font = `bold ${fontSize}px monospace`
+
+  drops.forEach((drop, dropIndex) => {
     // Draw each character in the drop
     for (let j = 0; j < drop.chars.length; j++) {
       const y = drop.y + j * fontSize
 
       // Skip if outside canvas
-      if (y < 0 || y > canvas.height) continue
+      if (y < 0 || y > canvas.height + fontSize) continue
 
-      // Calculate opacity (brightest at head)
-      const opacity = j === 0 ? 1 : 1 - (j / drop.chars.length)
+      // Calculate opacity with non-linear falloff
+      const fadeRatio = j / drop.chars.length
+      const opacity = j === 0 ? 1 : Math.pow(1 - fadeRatio, 1.5) * drop.brightness
 
-      // Head character is brightest white/green
+      // Enhanced head glow effect
       if (j === 0) {
-        ctx.fillStyle = '#fff'
+        // Outer glow
+        ctx.shadowBlur = 15
+        ctx.shadowColor = '#00ff00'
+        ctx.fillStyle = '#ffffff'
+        ctx.fillText(drop.chars[j], drop.x, y)
+
+        // Reset shadow for other chars
+        ctx.shadowBlur = 0
+      } else if (j === 1) {
+        // Second character with slight glow
+        ctx.shadowBlur = 8
+        ctx.shadowColor = '#00ff00'
+        ctx.fillStyle = `rgba(150, 255, 150, ${opacity})`
+        ctx.fillText(drop.chars[j], drop.x, y)
+        ctx.shadowBlur = 0
       } else {
-        ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`
+        // Regular trail characters
+        const green = Math.floor(155 + 100 * opacity)
+        ctx.fillStyle = `rgba(0, ${green}, 0, ${opacity})`
+        ctx.fillText(drop.chars[j], drop.x, y)
       }
 
-      ctx.fillText(drop.chars[j], drop.x, y)
+      // Glitch effect
+      if (isGlitching && dropIndex % 5 === 0) {
+        ctx.fillStyle = `rgba(255, 0, 0, ${opacity * 0.3})`
+        ctx.fillText(drop.chars[j], drop.x + (Math.random() - 0.5) * 3, y)
+      }
 
-      // Randomly change character
-      if (Math.random() > 0.95) {
+      // More frequent character changes for more dynamism
+      if (Math.random() > 0.92) {
         drop.chars[j] = MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)]
       }
     }
 
-    // Move drop down
+    // Move drop down with slight variation
     drop.y += drop.speed
 
     // Reset drop if it's fully off screen
     if (drop.y - drop.chars.length * fontSize > canvas.height) {
-      drop.y = Math.random() * -200
-      drop.speed = Math.random() * 3 + 2
-      drop.length = Math.floor(Math.random() * 20) + 10
+      const newLength = Math.floor(Math.random() * 25) + 15
+      drop.y = Math.random() * -300
+      drop.speed = Math.random() * 4 + 1.5
+      drop.length = newLength
+      drop.brightness = Math.random() * 0.3 + 0.7
       drop.chars = []
-      for (let j = 0; j < drop.length; j++) {
+      for (let j = 0; j < newLength; j++) {
         drop.chars.push(
           MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)]
         )

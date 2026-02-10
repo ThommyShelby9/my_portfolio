@@ -2,9 +2,11 @@
   <BasePanel title="projects">
     <div class="projects-grid">
       <div
-        v-for="project in projects"
+        v-for="(project, index) in projects"
         :key="project.slug"
+        :ref="(el: any) => setCardRef(el, index as number)"
         class="project-card"
+        :style="getCardStyle(index as number)"
         @click="openProject(project.slug)"
         role="button"
         tabindex="0"
@@ -42,6 +44,9 @@
             </span>
           </div>
         </div>
+
+        <!-- 3D Card Glare Effect -->
+        <div class="card-glare" :style="getGlareStyle(index as number)"></div>
       </div>
     </div>
 
@@ -55,9 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTerminalStore } from '@/stores/terminal'
+import { use3DCard } from '@/composables/use3DCard'
 import BasePanel from './BasePanel.vue'
 import { projectsData } from '@/assets/data'
 
@@ -65,6 +71,31 @@ const store = useTerminalStore()
 const { activePanelData } = storeToRefs(store)
 
 const projects = computed(() => activePanelData.value?.projects || projectsData)
+
+// 3D Card Effect - Store card3D instances instead of individual computed refs
+const cardRefs = ref<Record<number, HTMLElement | null>>({})
+const card3DInstances = ref<Record<number, any>>({})
+
+function setCardRef(el: any, index: number) {
+  if (el && typeof index === 'number') {
+    cardRefs.value[index] = el
+
+    // Only initialize use3DCard once per card to prevent infinite loops
+    if (!card3DInstances.value[index]) {
+      const cardRef = computed(() => cardRefs.value[index] || undefined)
+      card3DInstances.value[index] = use3DCard(cardRef)
+    }
+  }
+}
+
+// Helper functions to get styles
+function getCardStyle(index: number) {
+  return card3DInstances.value[index]?.cardStyle || {}
+}
+
+function getGlareStyle(index: number) {
+  return card3DInstances.value[index]?.glareStyle || {}
+}
 
 function openProject(slug: string) {
   const project = projectsData.find(p => p.slug === slug)
@@ -88,10 +119,25 @@ function truncate(text: string, length: number): string {
   @apply bg-theme-secondary border border-theme rounded-lg overflow-hidden;
   @apply cursor-pointer transition-all duration-300;
   @apply hover:border-theme-accent hover:shadow-lg;
+  @apply relative;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .project-card:hover {
   box-shadow: 0 0 20px rgba(0, 255, 247, 0.2);
+}
+
+/* 3D Card Glare Effect */
+.card-glare {
+  @apply absolute inset-0 pointer-events-none;
+  @apply rounded-lg;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .card-glare {
+  opacity: 1;
 }
 
 .project-image {
