@@ -1,6 +1,15 @@
+<script setup lang="ts">
+const { resolved } = useTheme()
+
+useHead({
+  htmlAttrs: {
+    'data-theme': resolved,
+  },
+})
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
