@@ -1,0 +1,92 @@
+{
+  "site": {
+    "name": "Rostel Panoumassi",
+    "tagline": "Lead Engineering — available for two engagements per quarter."
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "about": "Approach",
+    "brief": "Start a brief",
+    "contact": "Contact",
+    "available": "available Q3 2026"
+  },
+  "hero": {
+    "kicker": "v3.0 · cotonou, BJ",
+    "title_part_1": "I design and ship",
+    "title_part_2_em": "reliable software",
+    "title_part_3": "for teams that can't afford to break.",
+    "sub": "Lead Engineering at KPS Groupe. Available for two selected engagements per quarter — fintech, data, B2B platforms.",
+    "cta_primary": "Start a project →",
+    "cta_secondary": "Read my approach",
+    "meta": "03 case studies — 5 years — 12 products shipped"
+  },
+  "featured": {
+    "kicker": "Recent work",
+    "see_all": "See all work"
+  },
+  "approach": {
+    "kicker": "How I work"
+  },
+  "cta_block": {
+    "title": "Got a project in mind?",
+    "sub": "Describe it in 5 minutes. You'll get a personal reply within 48 business hours.",
+    "cta": "Start a brief",
+    "fallback_email": "or email me: rmissimawu{'@'}gmail.com"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "elsewhere": "Elsewhere",
+    "legal": "Legal",
+    "credit": "Made in Cotonou · {year}",
+    "easter": "$ ./terminal",
+    "links": {
+      "download_cv": "Download CV",
+      "legal_mentions": "Legal notice",
+      "privacy": "Privacy"
+    }
+  },
+  "case_study": {
+    "back_to_work": "← All work",
+    "next_study": "Next study",
+    "have_similar": "That's the project. Got a similar one in mind?",
+    "start_brief": "Start a brief",
+    "labels": {
+      "client": "Client",
+      "sector": "Sector",
+      "role": "Role",
+      "team": "Team",
+      "duration": "Duration",
+      "stack": "Stack"
+    }
+  },
+  "work_index": {
+    "title": "Work",
+    "sub": "Selected case studies. Some projects are anonymised (NDA); all numbers are real.",
+    "filter_all": "All",
+    "filter_label": "Filter by"
+  },
+  "about": {
+    "title": "About",
+    "availability_title": "Availability",
+    "cv_download": "Download CV (PDF)",
+    "linkedin": "LinkedIn"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Fastest path is to start a brief. But here are all the other channels.",
+    "email_label": "Email",
+    "linkedin_label": "LinkedIn",
+    "calendly_label": "Book a call",
+    "location": "Cotonou, Benin · UTC+1"
+  },
+  "brief": {
+    "title": "Start a brief",
+    "sub": "Four short steps. You can stop and resume — progress is saved locally.",
+    "step_label": "Step {current} / {total}",
+    "back": "← Back",
+    "next": "Continue →",
+    "submit": "Send brief →"
+  }
+}

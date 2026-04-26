@@ -1,0 +1,92 @@
+{
+  "site": {
+    "name": "Rostel Panoumassi",
+    "tagline": "Lead Engineering — disponible pour deux missions par trimestre."
+  },
+  "nav": {
+    "home": "Accueil",
+    "work": "Travaux",
+    "about": "Approche",
+    "brief": "Démarrer un brief",
+    "contact": "Contact",
+    "available": "dispo Q3 2026"
+  },
+  "hero": {
+    "kicker": "v3.0 · cotonou, BJ",
+    "title_part_1": "Je conçois et livre des produits",
+    "title_part_2_em": "logiciels fiables",
+    "title_part_3": "pour des équipes qui n'ont pas le droit à l'erreur.",
+    "sub": "Lead Engineering chez KPS Groupe. Disponible pour deux missions sélectionnées par trimestre — fintech, data, plateformes B2B.",
+    "cta_primary": "Démarrer un projet →",
+    "cta_secondary": "Lire mon approche",
+    "meta": "03 case studies — 5 années — 12 produits livrés"
+  },
+  "featured": {
+    "kicker": "Travaux récents",
+    "see_all": "Voir tous les travaux"
+  },
+  "approach": {
+    "kicker": "Comment je travaille"
+  },
+  "cta_block": {
+    "title": "Un projet en tête ?",
+    "sub": "Décris-le en 5 minutes. Tu auras une réponse personnalisée sous 48h ouvrées.",
+    "cta": "Démarrer un brief",
+    "fallback_email": "ou écris-moi : rmissimawu{'@'}gmail.com"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "elsewhere": "Ailleurs",
+    "legal": "Légal",
+    "credit": "Made in Cotonou · {year}",
+    "easter": "$ ./terminal",
+    "links": {
+      "download_cv": "Télécharger CV",
+      "legal_mentions": "Mentions",
+      "privacy": "Confidentialité"
+    }
+  },
+  "case_study": {
+    "back_to_work": "← Tous les travaux",
+    "next_study": "Étude suivante",
+    "have_similar": "Voilà le projet. Un projet similaire en tête ?",
+    "start_brief": "Démarrer un brief",
+    "labels": {
+      "client": "Client",
+      "sector": "Secteur",
+      "role": "Rôle",
+      "team": "Équipe",
+      "duration": "Durée",
+      "stack": "Stack"
+    }
+  },
+  "work_index": {
+    "title": "Travaux",
+    "sub": "Case studies sélectionnés. Certains projets sont anonymisés (NDA), tous les chiffres sont réels.",
+    "filter_all": "Tous",
+    "filter_label": "Filtrer par"
+  },
+  "about": {
+    "title": "À propos",
+    "availability_title": "Disponibilité",
+    "cv_download": "Télécharger CV (PDF)",
+    "linkedin": "LinkedIn"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Le plus rapide est de démarrer un brief. Mais voici toutes les autres voies.",
+    "email_label": "Email",
+    "linkedin_label": "LinkedIn",
+    "calendly_label": "Réserver un appel",
+    "location": "Cotonou, Bénin · UTC+1"
+  },
+  "brief": {
+    "title": "Démarrer un brief",
+    "sub": "Quatre étapes courtes. Tu peux t'arrêter et reprendre — la progression est sauvegardée localement.",
+    "step_label": "Étape {current} / {total}",
+    "back": "← Retour",
+    "next": "Continuer →",
+    "submit": "Envoyer le brief →"
+  }
+}
