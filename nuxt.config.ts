@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    '@nuxtjs/seo',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     'nuxt-security',
