@@ -14,11 +14,37 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@nuxt/content": "^3.13.0",
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxt/image": "^1.11.0",
+    "@nuxtjs/i18n": "^9.5.6",
+    "@nuxtjs/robots": "^5.7.1",
+    "@nuxtjs/seo": "^2.2.0",
+    "@nuxtjs/sitemap": "^7.6.0",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@pinia/nuxt": "^0.5.5",
+    "@vueuse/nuxt": "^11.3.0",
+    "better-sqlite3": "^12.9.0",
     "nuxt": "^3.13.0",
+    "nuxt-security": "^2.5.1",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "typescript": "^5.6.0"
+    "@playwright/test": "^1.59.1",
+    "@vitest/ui": "^4.1.5",
+    "@vue/test-utils": "^2.4.8",
+    "happy-dom": "^20.9.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild",
+      "@parcel/watcher",
+      "sharp",
+      "vue-demi"
+    ]
   }
 }
