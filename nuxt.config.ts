@@ -24,6 +24,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  components: [
+    { path: '~/components', pathPrefix: false },
+  ],
+
   typescript: {
     strict: true,
     typeCheck: false, // turned on by `pnpm typecheck`
