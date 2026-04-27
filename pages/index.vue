@@ -1,32 +1,47 @@
 <script setup lang="ts">
+const { t } = useI18n()
+const localePath = useLocalePath()
+
 useSeoMeta({
-  title: 'Rostel Panoumassi — Lead Engineering',
-  description: 'Je conçois et livre des produits logiciels fiables pour des équipes qui n\'ont pas le droit à l\'erreur.',
+  title: () => t('site.name'),
+  description: () => t('site.tagline'),
+  ogTitle: () => t('site.name'),
+  ogDescription: () => t('site.tagline'),
+  ogType: 'website',
 })
 </script>
 
 <template>
-  <section class="hero">
-    <div class="hero__inner">
-      <p class="hero__kicker">v3.0 · cotonou, BJ</p>
-      <h1 class="hero__title">
-        Je conçois et livre des produits
-        <em>logiciels fiables</em>
-        pour des équipes qui n'ont pas le droit à l'erreur.
-      </h1>
-      <p class="hero__sub">
-        Lead Engineering chez KPS Groupe. Disponible pour deux missions
-        sélectionnées par trimestre — fintech, data, plateformes B2B.
-      </p>
-      <div class="hero__actions">
-        <NuxtLink to="/brief" class="hero__cta-primary">Démarrer un projet →</NuxtLink>
-        <NuxtLink to="/about" class="hero__cta-secondary">Lire mon approche</NuxtLink>
+  <div>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__inner">
+        <p class="hero__kicker">{{ t('hero.kicker') }}</p>
+
+        <h1 id="hero-heading" class="hero__title">
+          {{ t('hero.title_part_1') }}
+          <em>{{ t('hero.title_part_2_em') }}</em>
+          {{ t('hero.title_part_3') }}
+        </h1>
+
+        <p class="hero__sub">{{ t('hero.sub') }}</p>
+
+        <div class="hero__actions">
+          <NuxtLink :to="localePath('/brief')" class="hero__cta-primary">
+            {{ t('hero.cta_primary') }}
+          </NuxtLink>
+          <NuxtLink :to="localePath('/about')" class="hero__cta-secondary">
+            {{ t('hero.cta_secondary') }}
+          </NuxtLink>
+        </div>
+
+        <p class="hero__meta">{{ t('hero.meta') }}</p>
       </div>
-      <p class="hero__meta">
-        03 case studies — 5 années — 12 produits livrés
-      </p>
-    </div>
-  </section>
+    </section>
+
+    <FeaturedWork />
+    <ApproachBlock />
+    <CtaBlock />
+  </div>
 </template>
 
 <style scoped>
@@ -78,6 +93,7 @@ useSeoMeta({
   align-items: center;
   gap: 1.5rem;
   margin-top: 2.5rem;
+  flex-wrap: wrap;
 }
 
 .hero__cta-primary {
