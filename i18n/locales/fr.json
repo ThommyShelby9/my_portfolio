@@ -48,6 +48,7 @@
     }
   },
   "case_study": {
+    "read": "→ Lire l'étude",
     "back_to_work": "← Tous les travaux",
     "next_study": "Étude suivante",
     "have_similar": "Voilà le projet. Un projet similaire en tête ?",
