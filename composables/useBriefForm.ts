@@ -5,6 +5,8 @@ type FormState = Omit<BriefInput, 'turnstileToken' | 'locale'>
 
 type FieldErrors = Record<string, string>
 
+let hasHydrated = false
+
 const defaultState: FormState = {
   projectType: 'new',
   pitch: '',
@@ -33,22 +35,24 @@ export function useBriefForm() {
   const submitError = useState<string | null>('brief-form-submit-error', () => null)
   const turnstileToken = useState<string | null>('brief-form-turnstile', () => null)
 
-  if (import.meta.client) {
-    onMounted(() => {
-      const raw = localStorage.getItem(BRIEF_LOCALSTORAGE_KEY)
-      if (raw) {
-        try {
-          const draft = JSON.parse(raw)
-          if (draft && typeof draft === 'object') {
-            state.value = { ...defaultState, ...draft.state }
-            step.value = (draft.step as BriefStep) ?? 1
-          }
-        }
-        catch {
-          // corrupted draft — ignore
-        }
+  function hydrateFromLocalStorage() {
+    if (!import.meta.client || hasHydrated) return
+    hasHydrated = true
+    const raw = localStorage.getItem(BRIEF_LOCALSTORAGE_KEY)
+    if (!raw) return
+    try {
+      const draft = JSON.parse(raw)
+      if (draft && typeof draft === 'object') {
+        state.value = { ...defaultState, ...draft.state }
+        step.value = (draft.step as BriefStep) ?? 1
       }
-    })
+    }
+    catch {
+      // corrupted draft — ignore
+    }
+  }
+
+  if (import.meta.client) {
 
     watch(
       [state, step],
@@ -92,6 +96,7 @@ export function useBriefForm() {
   function clearDraft() {
     if (import.meta.client) {
       localStorage.removeItem(BRIEF_LOCALSTORAGE_KEY)
+      hasHydrated = false
     }
   }
 
@@ -171,5 +176,6 @@ export function useBriefForm() {
     back,
     submit,
     clearDraft,
+    hydrateFromLocalStorage,
   }
 }

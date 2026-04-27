@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { TOTAL_BRIEF_STEPS } from '~/types/brief'
 
-const { step, submitting, submitError, next, back, submit } = useBriefForm()
+const { step, submitting, submitError, next, back, submit, hydrateFromLocalStorage } = useBriefForm()
+
+onMounted(() => {
+  hydrateFromLocalStorage()
+})
 </script>
 
 <template>
