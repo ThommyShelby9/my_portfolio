@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ACESFilmicToneMapping } from 'three'
+import { EffectComposer, UnrealBloom } from '@tresjs/post-processing'
 import type { PieceSpec } from '~/composables/useMaquetteState'
 
 defineProps<{ pieces: PieceSpec[] }>()
@@ -25,7 +27,7 @@ const cameraPos = computed<[number, number, number]>(() => {
 </script>
 
 <template>
-  <TresCanvas clear-color="#0a1525" :alpha="false">
+  <TresCanvas clear-color="#0a1525" :alpha="false" :tone-mapping="ACESFilmicToneMapping">
     <TresPerspectiveCamera :args="[35, 1, 0.1, 100]" :position="cameraPos" :look-at="[0, 0.5, 0]" />
     <TresAmbientLight :intensity="0.4" />
     <TresDirectionalLight :intensity="0.6" :position="[5, 8, 4]" />
@@ -38,6 +40,9 @@ const cameraPos = computed<[number, number, number]>(() => {
       :dimensions="p.dimensions"
       :revealed="p.revealed"
     />
+    <EffectComposer>
+      <UnrealBloom :strength="1.2" :radius="0.6" :threshold="0.15" />
+    </EffectComposer>
   </TresCanvas>
 </template>
 
