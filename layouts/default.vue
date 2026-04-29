@@ -1,7 +1,13 @@
+<script setup lang="ts">
+const { locale } = useI18n()
+const skipLabel = computed(() => locale.value === 'en' ? 'Skip to content' : 'Aller au contenu')
+</script>
+
 <template>
   <div class="layout">
+    <a href="#main-content" class="skip-link">{{ skipLabel }}</a>
     <SiteHeader />
-    <main class="layout__main">
+    <main id="main-content" class="layout__main" tabindex="-1">
       <slot />
     </main>
     <SiteFooter />
