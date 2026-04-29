@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const Scene = defineAsyncComponent(() => import('./maquette/Scene.vue'))
+
 defineProps<{ mode?: 'form' | 'display-only' }>()
 
 const supported = ref(false)
@@ -24,7 +26,12 @@ defineExpose({ enabled })
 
 <template>
   <div v-if="enabled" class="maquette" data-test="brief-maquette">
-    <p class="maquette__placeholder">◆ maquette 3D — scene mounts here</p>
+    <Suspense>
+      <Scene />
+      <template #fallback>
+        <p class="maquette__placeholder">◆ chargement</p>
+      </template>
+    </Suspense>
   </div>
 </template>
 
