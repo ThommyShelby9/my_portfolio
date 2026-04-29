@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     'nuxt-security',
+    '@tresjs/nuxt',
   ],
 
   css: ['~/assets/css/main.css'],
