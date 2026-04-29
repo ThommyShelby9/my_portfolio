@@ -88,6 +88,21 @@ export default defineNuxtConfig({
     defaultLocale: 'fr',
   },
 
+  sitemap: {
+    exclude: ['/brief/confirmation', '/en/brief/confirmation'],
+  },
+
+  robots: {
+    sitemap: '/sitemap.xml',
+    groups: [
+      {
+        userAgent: ['*'],
+        allow: ['/'],
+        disallow: ['/api/'],
+      },
+    ],
+  },
+
   fonts: {
     families: [
       { name: 'Fraunces', provider: 'google', weights: [400, 500, 600], styles: ['normal', 'italic'] },
