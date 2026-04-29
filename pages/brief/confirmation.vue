@@ -27,6 +27,23 @@ onMounted(() => {
   }
 })
 
+const pieces = computed(() => {
+  if (!briefSnapshot.value) return []
+  return computeMaquetteState(briefSnapshot.value as any, 5)
+})
+
+const showMaquette = ref(false)
+
+onMounted(() => {
+  if (typeof window === 'undefined') return
+  const cap = useWebGLCapability()
+  showMaquette.value
+    = cap.supported.value
+      && !cap.lowPerf.value
+      && window.innerWidth >= 768
+      && briefSnapshot.value !== null
+})
+
 const calendlyUrl = 'https://calendly.com/rostelpanoumassi'
 
 const labels = computed(() => locale.value === 'en'
@@ -59,6 +76,12 @@ const labels = computed(() => locale.value === 'en'
 <template>
   <article class="confirmation">
     <p class="confirmation__kicker">{{ labels.kicker }}</p>
+
+    <ClientOnly>
+      <div v-if="showMaquette" class="confirmation__maquette">
+        <SceneDisplayOnly :pieces="pieces" />
+      </div>
+    </ClientOnly>
 
     <h1 class="confirmation__title">{{ labels.title }}</h1>
     <p class="confirmation__body">{{ labels.body1 }}</p>
@@ -182,5 +205,13 @@ const labels = computed(() => locale.value === 'en'
 
 .confirmation__urgency a {
   color: var(--text-mute);
+}
+
+.confirmation__maquette {
+  width: 100%;
+  height: 360px;
+  margin: 0 0 3rem;
+  background: #0a1525;
+  position: relative;
 }
 </style>
