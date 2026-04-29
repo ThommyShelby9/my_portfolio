@@ -43,6 +43,16 @@ watch(() => step.value, (s) => {
   }
   requestAnimationFrame(tick)
 })
+
+const inspectorRef = ref<{ onPieceHover: (id: string, pos: [number, number, number]) => void; onPieceLeave: () => void } | null>(null)
+
+function handleHover(id: string, pos: [number, number, number]) {
+  inspectorRef.value?.onPieceHover(id, pos)
+}
+
+function handleLeave() {
+  inspectorRef.value?.onPieceLeave()
+}
 </script>
 
 <template>
@@ -51,12 +61,13 @@ watch(() => step.value, (s) => {
     <TresAmbientLight :intensity="0.4" />
     <TresDirectionalLight :intensity="0.6" :position="[5, 8, 4]" />
     <TresGridHelper :args="[10, 20, '#7ec8ff', '#7ec8ff']" :position="[0, 0, 0]" />
-    <ProjectTypePiece />
-    <ContextPiece />
-    <FramePiece />
-    <IdentityPiece />
+    <ProjectTypePiece @hover="handleHover" @leave="handleLeave" />
+    <ContextPiece @hover="handleHover" @leave="handleLeave" />
+    <FramePiece @hover="handleHover" @leave="handleLeave" />
+    <IdentityPiece @hover="handleHover" @leave="handleLeave" />
     <PitchTag />
     <Annotations />
+    <OrbitInspector v-if="step === 5" ref="inspectorRef" />
   </TresCanvas>
 </template>
 
