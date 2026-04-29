@@ -14,17 +14,19 @@ onMounted(() => {
       <BriefStep1Project v-if="step === 1" key="step-1" />
       <BriefStep2Context v-else-if="step === 2" key="step-2" />
       <BriefStep3Frame v-else-if="step === 3" key="step-3" />
-      <BriefStep4Identity v-else key="step-4" />
+      <BriefStep4Identity v-else-if="step === 4" key="step-4" />
+      <BriefStep5Review v-else key="step-5" />
     </transition>
 
-    <p v-if="submitError" class="brief-form__error" role="alert">
+    <p v-if="submitError && step !== 5" class="brief-form__error" role="alert">
       {{ submitError }}
     </p>
 
     <BriefStepNav
+      v-if="step < 5"
       :step="step"
       :can-go-back="step > 1"
-      :is-last-step="step === TOTAL_BRIEF_STEPS"
+      :is-last-step="false"
       :submitting="submitting"
       @back="back"
       @next="next"

@@ -88,6 +88,10 @@
     "step_label": "Step {current} / {total}",
     "back": "← Back",
     "next": "Continue →",
-    "submit": "Send brief →"
+    "submit": "Send brief →",
+    "step5": {
+      "title": "Review your brief",
+      "sub": "Check the recap, edit if needed, then send."
+    }
   }
 }
