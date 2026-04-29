@@ -25,7 +25,7 @@ const cameraPos = computed<[number, number, number]>(() => {
 </script>
 
 <template>
-  <TresCanvas clear-color="#0a1525" :alpha="false" window-size>
+  <TresCanvas clear-color="#0a1525" :alpha="false">
     <TresPerspectiveCamera :args="[35, 1, 0.1, 100]" :position="cameraPos" :look-at="[0, 0.5, 0]" />
     <TresAmbientLight :intensity="0.4" />
     <TresDirectionalLight :intensity="0.6" :position="[5, 8, 4]" />

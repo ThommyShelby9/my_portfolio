@@ -3,6 +3,9 @@ const Scene = defineAsyncComponent(() => import('./maquette/Scene.vue'))
 
 defineProps<{ mode?: 'form' | 'display-only' }>()
 
+const { step } = useBriefForm()
+const interactive = computed(() => step.value === 5)
+
 const supported = ref(false)
 const lowPerf = ref(false)
 const wideEnough = ref(false)
@@ -25,7 +28,7 @@ defineExpose({ enabled })
 </script>
 
 <template>
-  <div v-if="enabled" class="maquette" data-test="brief-maquette">
+  <div v-if="enabled" class="maquette" :class="{ 'maquette--interactive': interactive }" data-test="brief-maquette">
     <Suspense>
       <Scene />
       <template #fallback>
@@ -44,6 +47,10 @@ defineExpose({ enabled })
   align-items: center;
   justify-content: center;
   position: relative;
+  pointer-events: none;
+}
+.maquette--interactive {
+  pointer-events: auto;
 }
 .maquette__placeholder {
   color: #7ec8ff;

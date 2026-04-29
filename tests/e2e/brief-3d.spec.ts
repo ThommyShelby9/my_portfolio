@@ -26,8 +26,7 @@ test.describe('Brief 3D maquette', () => {
   })
 
   test('step 5 is reachable and shows recap with submit button', async ({ page }) => {
-    // use mobile viewport so the 3D canvas doesn't intercept pointer events
-    await page.setViewportSize({ width: 375, height: 800 })
+    await page.setViewportSize({ width: 1280, height: 800 })
     await page.goto('/brief')
 
     // step 1
@@ -40,9 +39,9 @@ test.describe('Brief 3D maquette', () => {
     await page.locator('text=Solo').first().click()
     await page.locator('text=Continuer →').click()
 
-    // step 3
-    await page.locator('text=Flexible').first().click()
-    await page.locator('text=Pas encore défini').first().click()
+    // step 3 — use radio-specific selectors (annotations on the canvas may match plain text)
+    await page.locator('label:has-text("Flexible")').first().click()
+    await page.locator('label:has-text("Pas encore défini")').first().click()
     await page.locator('text=Continuer →').click()
 
     // step 4
