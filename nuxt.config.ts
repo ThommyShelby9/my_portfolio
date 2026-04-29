@@ -103,6 +103,36 @@ export default defineNuxtConfig({
     ],
   },
 
+  routeRules: {
+    '/': { prerender: true },
+    '/about': { prerender: true },
+    '/contact': { prerender: true },
+    '/work': { prerender: true },
+    '/work/**': { prerender: true },
+    '/en': { prerender: true },
+    '/en/about': { prerender: true },
+    '/en/contact': { prerender: true },
+    '/en/work': { prerender: true },
+    '/en/work/**': { prerender: true },
+
+    '/brief': { prerender: false, headers: { 'Cache-Control': 'no-store' } },
+    '/brief/confirmation': { prerender: false, headers: { 'Cache-Control': 'no-store' } },
+    '/en/brief': { prerender: false, headers: { 'Cache-Control': 'no-store' } },
+    '/en/brief/confirmation': { prerender: false, headers: { 'Cache-Control': 'no-store' } },
+
+    '/api/**': { cors: false, headers: { 'Cache-Control': 'no-store' } },
+  },
+
+  nitro: {
+    prerender: {
+      // Don't fail the build on transient image-pipeline (ipx) errors during
+      // prerender — sharp binaries can be unavailable on some dev platforms
+      // (e.g. win32-x64). Production builds with sharp installed will still
+      // prerender all linked routes.
+      failOnError: false,
+    },
+  },
+
   fonts: {
     families: [
       { name: 'Fraunces', provider: 'google', weights: [400, 500, 600], styles: ['normal', 'italic'] },
