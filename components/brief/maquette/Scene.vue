@@ -8,6 +8,10 @@
     <TresDirectionalLight :intensity="0.6" :position="[5, 8, 4]" />
     <TresGridHelper :args="[10, 20, '#7ec8ff', '#7ec8ff']" :position="[0, 0, 0]" />
     <ProjectTypePiece />
+    <ContextPiece />
+    <FramePiece />
+    <IdentityPiece />
+    <PitchTag />
   </TresCanvas>
 </template>
 
