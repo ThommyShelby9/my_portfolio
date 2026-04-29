@@ -29,11 +29,11 @@
   --bg-overlay: #ffffff;
   --text: #1a1a1a;
   --text-mute: #555555;
-  --text-soft: #8a8682;
+  --text-soft: #6c6964;
   --border: #e8e3d8;
   --border-strong: #d4cdbb;
-  --accent: #0891b2;
-  --accent-soft: rgba(8, 145, 178, 0.12);
+  --accent: #0e6d85;
+  --accent-soft: rgba(14, 109, 133, 0.12);
   --available: #2a7a4a;
   --error: #c53030;
   --success: #2a7a4a;

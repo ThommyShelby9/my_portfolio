@@ -7,7 +7,7 @@ for (const route of ROUTES) {
   test(`a11y: ${route} has no critical violations`, async ({ page }) => {
     await page.goto(route)
     const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a'])
+      .withTags(['wcag2a', 'wcag2aa'])
       .analyze()
     const blocking = results.violations.filter(v => ['serious', 'critical'].includes(v.impact ?? ''))
     expect(blocking, JSON.stringify(blocking, null, 2)).toHaveLength(0)
