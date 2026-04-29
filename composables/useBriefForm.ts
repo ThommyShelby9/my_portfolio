@@ -124,6 +124,18 @@ export function useBriefForm() {
 
       const wantsCall = state.value.prefersCall
 
+      if (import.meta.client) {
+        try {
+          sessionStorage.setItem(
+            'brief-final-snapshot',
+            JSON.stringify(state.value),
+          )
+        }
+        catch {
+          /* private mode or quota — non-fatal */
+        }
+      }
+
       clearDraft()
       state.value = { ...defaultState }
       step.value = 1

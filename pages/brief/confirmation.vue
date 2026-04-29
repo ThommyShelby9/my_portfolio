@@ -14,6 +14,19 @@ useSeoMeta({
 
 definePageMeta({ layout: 'default' })
 
+const briefSnapshot = ref<Record<string, any> | null>(null)
+
+onMounted(() => {
+  if (typeof sessionStorage === 'undefined') return
+  try {
+    const raw = sessionStorage.getItem('brief-final-snapshot')
+    if (raw) briefSnapshot.value = JSON.parse(raw)
+  }
+  catch {
+    briefSnapshot.value = null
+  }
+})
+
 const calendlyUrl = 'https://calendly.com/rostelpanoumassi'
 
 const labels = computed(() => locale.value === 'en'
