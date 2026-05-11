@@ -27,8 +27,10 @@ export default <Config>{
         success: 'var(--success)',
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'Times New Roman', 'serif'],
-        body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'Inter', '-apple-system', 'sans-serif'],
+        editorial: ['"Newsreader"', 'Georgia', 'serif'],
+        sans: ['"Manrope"', 'Inter', '-apple-system', 'sans-serif'],
+        body: ['"Manrope"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       fontSize: {

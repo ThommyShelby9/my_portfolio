@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY || '',
 
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://rostelmissimawu.com',
       turnstileSiteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY || '',
       umamiWebsiteId: process.env.NUXT_PUBLIC_UMAMI_WEBSITE_ID || '',
       umamiScriptUrl: process.env.NUXT_PUBLIC_UMAMI_SCRIPT_URL || '',
@@ -73,6 +73,9 @@ export default defineNuxtConfig({
     ],
     strategy: 'prefix_except_default',
     langDir: 'locales/',
+    // Required for useLocaleHead({ addSeoAttributes }) to emit absolute
+    // hreflang alternates (e.g. https://rostelmissimawu.com/en/about).
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://rostelmissimawu.com',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
@@ -82,14 +85,21 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    name: 'Rostel Panoumassi',
-    description: 'Lead Engineering — disponible pour deux missions par trimestre.',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://rostelmissimawu.com',
+    name: 'Rostel Panoumassi — Lead Engineering',
+    description: 'Lead Engineering basé à Cotonou — je conçois et livre des produits logiciels fiables. Disponible pour deux missions par trimestre · fintech · data · plateformes B2B.',
     defaultLocale: 'fr',
   },
 
   sitemap: {
-    exclude: ['/brief/confirmation', '/en/brief/confirmation'],
+    exclude: [
+      '/brief/confirmation',
+      '/en/brief/confirmation',
+      '/terminal',
+      '/en/terminal',
+    ],
+    // Dynamic source — case studies fetched from @nuxt/content at build/runtime.
+    sources: ['/api/__sitemap__/urls'],
   },
 
   robots: {
@@ -98,7 +108,7 @@ export default defineNuxtConfig({
       {
         userAgent: ['*'],
         allow: ['/'],
-        disallow: ['/api/'],
+        disallow: ['/api/', '/terminal', '/en/terminal'],
       },
     ],
   },
@@ -135,8 +145,9 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
-      { name: 'Fraunces', provider: 'google', weights: [400, 500, 600], styles: ['normal', 'italic'] },
-      { name: 'Inter', provider: 'google', weights: [400, 500, 600, 700] },
+      { name: 'Bricolage Grotesque', provider: 'google', weights: [400, 500, 600, 700, 800] },
+      { name: 'Newsreader', provider: 'google', weights: [400, 500], styles: ['normal', 'italic'] },
+      { name: 'Manrope', provider: 'google', weights: [400, 500, 600, 700] },
       { name: 'JetBrains Mono', provider: 'google', weights: [400, 500] },
     ],
   },

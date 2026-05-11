@@ -1,21 +1,24 @@
 ---
 slug: tadagberhplus
-title: An HR platform managing 100+ companies
-kicker: Issue 02 · HR SaaS · 2023
-excerpt: Centralising multi-company HR management for a regional consulting firm.
-year: 2023
-order: 2
+title: A multi-tenant HRIS for 100+ companies
+kicker: Issue 03 · SaaS · HR · 2024–2025
+excerpt: Centralising HR for 100+ SME clients of a Benin consulting firm — payroll, leaves, social security, documents — on a happily monolithic Django.
+year: 2025
+order: 3
 featured: true
-client: HR consulting firm
-sector: SaaS / Human Resources
+client: GPRHME consulting firm (Benin)
+sector: SaaS · Human Resources
 role: Backend Lead · Architecture · Delivery
 team: 3 devs · 1 PO
-duration: 4 months
+duration: 11 months (Sept. 2024 — July 2025)
 stack:
-  - Spring Boot
-  - PostgreSQL
+  - Django 4.2
+  - MySQL
+  - Redis
+  - RabbitMQ
+  - Celery
   - Vue 3
-  - TailwindCSS
+cover: /images/tadagberhplus.png
 results:
   - value: "100+"
     label: Companies managed
@@ -23,38 +26,48 @@ results:
     label: Employees tracked
   - value: "85%"
     label: Reduction in manual data entry
-seoDescription: TadagbeRhPlus — multi-tenant SaaS platform for HR management across 100+ client companies.
+seoDescription: TadagbeRhPlus — multi-tenant HRIS Django 4 + MySQL + Celery, payroll + CNSS + leaves + documents for 100+ companies in Benin.
 ---
 
 ## The context
 
-> _To be expanded._
+GPRHME runs payroll and HR for a hundred-odd SME clients in Benin. Before TadagbeRhPlus: one Excel file per client, social-security calculations done by hand, payslips emailed as PDFs, and one consultant per file becoming the **single point of failure** of the entire portfolio.
 
-The firm handled payroll and contracts for over 100 client companies through shared Excel files and Google Drive. No aggregate visibility, no real security, and a growing legal risk.
+Management wanted one tool to take back control: one consultant handling 30 files in parallel, standardised payroll templates, and e-signature for contracts.
 
-## The ask
+## What I was asked
 
-> _To be expanded._
-
-A multi-tenant web platform where each company sees only its own data, the firm sees everything, and leave / contract workflows are automated.
+Take over a Django 2.2 platform (Python 3.6) that ran on borrowed time, modernise it without breaking production, and industrialise five critical modules: **employees, contracts, leaves, payroll, social security**.
 
 ## The approach
 
-> _To be expanded._
-
-Spring Boot for the robustness of multi-role authentication, Vue 3 for fast UI iteration, PostgreSQL with row-level security for multi-tenancy.
+1. **Audit first, code second.** First two weeks: code reading, MySQL schema, and interviews with HR consultants. I wrote an `AUDIT_COMPLET.md` listing 47 risks by criticality — that document structured the roadmap.
+2. **Progressive runtime migration.** Python 3.6 → 3.11 in four weeks, Django 2.2 → 4.2 by jumps (2.2 → 3.2 → 4.2) with non-regression tests at each jump.
+3. **Multi-tenant by URL.** Each company lives on `<companyname>/employer/` — a middleware resolves the tenant at entry, isolates querysets downstream. No separate schemas, just a `company_id` discriminator and Django managers that filter by default.
 
 ## Notable technical decisions
 
-> _To be expanded._
+- **Django 4.2 LTS + MySQL via PyMySQL.** MySQL was mandatory (10 years of business data) — Postgres migration would have cost two months for zero visible business gain.
+- **Celery 5.5 + RabbitMQ + Redis** for heavy jobs: PDF payslip generation (`pdfkit` + wkhtmltopdf), email delivery (`django-celery-email`), monthly social-security recalculation.
+- **django-celery-beat** for monthly payroll scheduling.
+- **pyHanko** for server-side e-signatures on contracts — visible signature + crypto + timestamp.
+- **django-auditlog** on all sensitive entities — each modification traced with user + JSON diff.
+- **whitenoise + django-compressor** for static serving without reverse proxy.
+- **JS worker for synchronised logout** (`easy_worker.js`) — when a consultant logs out from one tab, all others log out immediately via SharedWorker.
+- **Sentry SDK** everywhere, **custom 400/403/404/500 handlers** that speak to the consultant.
 
-- Row-level security at the DB layer rather than application-side filtering: no risk of leaks if an endpoint misses a check.
-- PDF generation (contracts, payslips) on the server through a dedicated queue — to avoid blocking synchronous requests.
+## The social-security module — the subtle one
+
+Benin's social-security agency changes calculation rules by decree nearly every year. I isolated the calculation in a `formulas` (`schedula`) layer with per-year parameters — when a decree drops, we add a line, not a function. Three regulatory updates in 11 months, zero regression.
 
 ## What worked, what didn't
 
-> _To be expanded._
+**Worked.** The unapologetic monolith. Django 4 + MySQL + Celery on a single VPS, supervisord for resilience. At 770 active employees, no microservices needed — and operational simplicity is gold when ops is also one of three devs.
 
-## The takeaway
+**Didn't.** wkhtmltopdf eventually choked on some payslips (special characters in very long names). I started migrating to WeasyPrint but template rewriting was heavy — got to 70% before mission end.
 
-> _To be expanded._
+## Take-away
+
+On a mature Django monolith, the instinct is to "modernise" — go microservices, Postgres, GraphQL. 80% of the time it's wasted effort: real gains come from **deep reading of existing code**, spotting the three or four truly blocking modules, and surgically rebuilding them.
+
+On Tadagbe, I touched 12% of the code and gained 85% user productivity. The rest, we left running.

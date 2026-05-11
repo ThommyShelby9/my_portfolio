@@ -11,7 +11,9 @@
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "test": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "favicon": "node scripts/generate-favicon.mjs",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@nuxt/content": "^3.13.0",

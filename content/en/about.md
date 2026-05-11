@@ -1,12 +1,13 @@
 ---
 title: About
-description: Lead Engineering at KPS Groupe — available for two engagements per quarter.
+description: Lead Engineering at KPS Groupe — available for two engagements per quarter, in Cotonou.
 ---
 
 ## Hi. I'm Rostel.
 
-Lead Engineering at KPS Groupe, based in Cotonou.
-I have designed and shipped twelve products since 2021, for banks, fintechs, and B2B platforms.
+**Head of Engineering & Innovation** at **KPS Groupe**, based in **Cotonou**, Benin. Since 2021, I have designed and shipped ten-odd products — fintech, HR, B2B, healthcare, marketing — for clients who can't afford things to break.
+
+My job in one sentence: *making critical systems hold, with small teams*.
 
 ## Availability
 
@@ -29,22 +30,39 @@ More projects die of indecision than of bad code. I spend the first week making 
 
 ### My default stack
 
-- **Backend**: Django, Spring Boot, Laravel depending on context
-- **Frontend**: Vue 3, Nuxt, sometimes React when the team is already on it
-- **Data**: PostgreSQL, Redis, ClickHouse for telemetry
-- **Infra**: Docker, Kubernetes on GCP/AWS, Cloudflare at the edge
-- **Tooling**: pytest, Playwright, GitHub Actions, Sentry
+- **Backend**: Django, Spring Boot, Laravel, Node/Express — picked by criticality, existing team, and data model
+- **Frontend**: Vue 3, Nuxt, sometimes React when the team's on it
+- **Mobile**: Flutter when the need is clocking-in / offline sync, otherwise PWA
+- **Data**: PostgreSQL, MySQL, MongoDB, Redis for the hot path
+- **Infra**: Docker, Kubernetes (GCP / AWS / managed VPS), Coolify for side projects, Cloudflare at the edge
+- **Async**: RabbitMQ, Celery, Bull depending on the language
+- **Tooling**: pytest, Pest, Vitest, Playwright, GitHub Actions, Sentry
 
 ## Career
 
 | Year | Company | Role |
 |------|---------|------|
-| 2024 — | KPS Groupe | Head of Engineering & Innovation |
-| 2022 — 2024 | Freelance / Independent | Backend Engineer |
-| 2021 — 2022 | _Previous role_ | Software Engineer |
+| 2025 — | **KPS Groupe** | Head of Engineering & Innovation |
+| 2024 — 2025 | **GPRHME** | Full-stack Developer (TadagbeRhPlus) |
+| 2024 | **DSMC Benin** | Full-stack Developer (payment aggregator) |
+| 2024 | **N01ZET** (freelance · Paris) | QA Test Automation (Selenium + Java) |
+| 2023 — 2024 | **LeConsultant** | Full-stack Developer |
+| 2023 — 2024 | **JSCOM-Benin** (intern) | Spring Boot + Vue.js |
 
-## Outside of code
+## Training & certifications
 
-> _Section to be expanded by Rostel — authentic angle: mentoring, reading, side project, etc._
+- **École 229** — Web & mobile development certification (Mar 2023 — Mar 2024)
+- **Mindluster** — Computer & Information Systems Security (Jan — Feb 2025)
+- **ASIN** (Benin Information Systems & Digital Agency) — Cybersecurity (Dec 2023)
+- **INJEPS** — Professional Bachelor's, Social-Educational Activity Sciences (2019 — 2022)
 
-Something human, not "passionate about challenges" bullshit. To be written before V1 production.
+## What I believe
+
+- Good software is not a stack — it is a **sequence of owned decisions**.
+- Handover matters as much as delivery. A freelancer you cannot replace is a toxic freelancer.
+- *Make it work* < *make it hold* < *make it evolve*. Most of the work is in the second tier.
+- Documentation happens *during* the code, not after. Otherwise it never happens.
+
+## Outside the code
+
+I read A Philosophy of Software Design (Ousterhout), essays on architecture, and I am curious about distributed patterns seen in Rust. I mentor two junior developers at KPS on the Friday-delivery cadence and legacy code reading.

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rostel Panoumassi">
+  <!-- Background — warm coffee ink -->
+  <rect width="64" height="64" rx="12" fill="#0c0a08"/>
+
+  <!-- Subtle inner border for depth -->
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="none" stroke="#2e2823" stroke-width="1"/>
+
+  <!-- Editorial "R" — drawn as paths to avoid font dependency -->
+  <g fill="#ede4d3">
+    <!-- Vertical bar of R -->
+    <path d="M 16 14 L 23 14 L 23 50 L 16 50 Z"/>
+    <!-- Top bowl (outer arc + inner cutout via a single path) -->
+    <path d="
+      M 23 14
+      L 36 14
+      Q 47 14 47 24
+      Q 47 33 36 34
+      L 23 34
+      L 23 28
+      L 35 28
+      Q 40 28 40 24
+      Q 40 20 35 20
+      L 23 20
+      Z
+    "/>
+    <!-- Diagonal leg -->
+    <path d="
+      M 31 32
+      L 38 32
+      L 50 50
+      L 42 50
+      Z
+    "/>
+  </g>
+
+  <!-- Accent rust dot — editorial signature in corner -->
+  <circle cx="51" cy="14" r="3.5" fill="#ff5728"/>
+</svg>

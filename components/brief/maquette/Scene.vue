@@ -72,7 +72,7 @@ function handleLeave() {
     <Annotations />
     <OrbitInspector v-if="step === 5" ref="inspectorRef" />
     <EffectComposer>
-      <UnrealBloom :strength="1.2" :radius="0.6" :threshold="0.15" />
+      <UnrealBloom :strength="0.5" :radius="0.5" :threshold="0.4" />
     </EffectComposer>
   </TresCanvas>
 </template>

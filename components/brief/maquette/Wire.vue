@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
   position: () => [0, 0, 0],
   revealed: true,
   lineWidth: 2,
-  color: '#a5d8ff',
+  color: '#7ec8ff',
 })
 
 const opacity = ref(0)
@@ -39,7 +39,7 @@ watch(() => props.revealed, (now) => {
   }
 }, { immediate: true })
 
-const lineColor = computed(() => new Color(props.color).multiplyScalar(1.6))
+const lineColor = computed(() => new Color(props.color))
 
 const groupRef = shallowRef<any>(null)
 watchEffect(() => {

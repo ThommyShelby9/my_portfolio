@@ -1,0 +1,60 @@
+# Build artifacts (regenerated inside the image)
+.nuxt
+.output
+.data
+dist
+node_modules
+
+# Git / VCS
+.git
+.github
+.gitignore
+.gitattributes
+
+# Tests / reports (not needed for `nuxt build`)
+tests
+test-results
+playwright-report
+playwright.config.ts
+vitest.config.ts
+
+# IDE / editor
+.vscode
+.idea
+.cursor
+.zed
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets — NEVER ship these in the image
+.env
+.env.*
+!.env.example
+
+# Dev-only docs and scratch
+docs
+OLD_FILES
+legacy
+*.md
+!README.md
+init.md
+new.md
+error.md
+profile.md
+projet.md
+PROGRESS.md
+PROJECT_HISTORY.md
+TESTING.md
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Claude / agent metadata
+.claude
+.superpowers
+.scheduled_tasks.lock

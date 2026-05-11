@@ -27,6 +27,9 @@ const workSchema = z.object({
     })
   ).min(1).max(3),
 
+  // Media
+  cover: z.string().optional(),
+
   // SEO
   seoTitle: z.string().optional(),
   seoDescription: z.string().optional(),

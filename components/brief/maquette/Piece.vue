@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   BoxGeometry, CylinderGeometry, SphereGeometry,
-  EdgesGeometry, Color,
+  EdgesGeometry, Color, MeshStandardMaterial, DoubleSide,
 } from 'three'
 import { Line2 } from '@tresjs/cientos'
 import type { PieceKind } from '~/composables/useMaquetteState'
@@ -66,8 +66,18 @@ const edgeSegments = computed<Array<[[number, number, number], [number, number, 
   return out
 })
 
-// HDR-ish cyan to push past bloom luminance threshold.
-const lineColor = computed(() => new Color('#a5d8ff').multiplyScalar(1.6))
+const lineColor = computed(() => new Color('#7ec8ff'))
+
+// Solid-ish blueprint fill: deep teal that catches light, sits behind the wireframe.
+const fillMaterial = computed(() => new MeshStandardMaterial({
+  color: '#0f2a44',
+  transparent: true,
+  opacity: 0.65,
+  roughness: 0.85,
+  metalness: 0.15,
+  side: DoubleSide,
+  depthWrite: false,
+}))
 
 // Group ref to drive opacity on every Line2 child via traverse.
 const groupRef = shallowRef<{ value: any } | null>(null)
@@ -77,16 +87,18 @@ watchEffect(() => {
   if (!group || typeof group.traverse !== 'function') return
   const o = opacity.value
   group.traverse((obj: any) => {
-    if (obj.material && 'opacity' in obj.material) {
-      obj.material.transparent = true
-      obj.material.opacity = o
-      obj.material.depthWrite = false
-    }
+    if (!obj.material || !('opacity' in obj.material)) return
+    obj.material.transparent = true
+    obj.material.depthWrite = false
+    // Fill stays subtler than lines so the wireframe reads on top.
+    const isFill = obj.material.type === 'MeshStandardMaterial'
+    obj.material.opacity = isFill ? o * 0.65 : o
   })
 })
 
 onUnmounted(() => {
   baseGeometry.value?.dispose()
+  fillMaterial.value?.dispose()
 })
 </script>
 
@@ -97,6 +109,7 @@ onUnmounted(() => {
     @pointer-enter="emit('hover')"
     @pointer-leave="emit('leave')"
   >
+    <TresMesh :geometry="baseGeometry" :material="fillMaterial" />
     <Line2
       v-for="(seg, i) in edgeSegments"
       :key="i"
