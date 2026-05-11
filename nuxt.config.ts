@@ -140,6 +140,25 @@ export default defineNuxtConfig({
       // (e.g. win32-x64). Production builds with sharp installed will still
       // prerender all linked routes.
       failOnError: false,
+      // Follow links from prerendered pages so we pick up /work/<slug>,
+      // /en/work/<slug>, etc. without enumerating them all by hand.
+      crawlLinks: true,
+      // Explicit seed list — guarantees the 11 case studies (FR + EN) get
+      // prerendered even if crawling misses one. Without this, missing
+      // _payload.json files break client-side SPA navigation from /work.
+      routes: [
+        '/work/freelanceclub', '/en/work/freelanceclub',
+        '/work/ubbfy', '/en/work/ubbfy',
+        '/work/tadagberhplus', '/en/work/tadagberhplus',
+        '/work/ccns', '/en/work/ccns',
+        '/work/whatspay', '/en/work/whatspay',
+        '/work/leconsultant', '/en/work/leconsultant',
+        '/work/bilalsekou', '/en/work/bilalsekou',
+        '/work/easytowork', '/en/work/easytowork',
+        '/work/planus', '/en/work/planus',
+        '/work/mariette', '/en/work/mariette',
+        '/work/zenlife', '/en/work/zenlife',
+      ],
     },
   },
 
