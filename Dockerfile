@@ -36,9 +36,14 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 # Install everything (dev included — Nuxt needs them at build).
-# Cache the pnpm store across builds via BuildKit cache mount.
-RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
-    pnpm install --frozen-lockfile
+# --shamefully-hoist flattens node_modules so optional platform-specific
+# native bindings (oxc-parser/binding-linux-x64-gnu, sharp/libvips, …) resolve
+# via a simple `require()` from within their parent package. pnpm's default
+# isolated layout breaks this for some packages on Linux containers.
+# Cache the pnpm store via BuildKit cache mount (separate id per arch to avoid
+# cross-platform binary leakage if the runner ever swaps architecture).
+RUN --mount=type=cache,id=pnpm-store-linux,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile --shamefully-hoist
 
 # Copy sources. .dockerignore strips junk.
 COPY . .
