@@ -7,7 +7,7 @@
 #  - @nuxt/content's content database is baked into .output at build time.
 # ============================================================
 
-ARG NODE_VERSION=22.11.0
+ARG NODE_VERSION=22.20.0
 
 # ----------------------------------------------------------
 #  STAGE 1 — Builder
