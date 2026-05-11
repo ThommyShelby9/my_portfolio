@@ -23,15 +23,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Activate pnpm via corepack. The version comes from the `packageManager`
-# field in package.json — keeping Docker in sync with local dev avoids
-# lockfile-format mismatches (pnpm 9 cannot read pnpm 10 lockfiles, which
-# silently breaks optional native bindings like @oxc-parser/binding-*).
-ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
-    COREPACK_ENABLE_STRICT=0 \
-    PNPM_HOME=/root/.local/share/pnpm \
+# Install pnpm directly via npm — pinned to the same version as the
+# `packageManager` field in package.json. We intentionally skip corepack
+# because corepack ≤ 0.30 (Node 22.11) ships with an expired pnpm signing
+# key and fails with "Cannot find matching keyid". Bypassing corepack is
+# faster, signature-clean, and avoids any lockfile-format mismatch.
+ENV PNPM_HOME=/root/.local/share/pnpm \
     PATH=$PNPM_HOME:$PATH
-RUN corepack enable
+RUN npm install -g pnpm@10.28.0 \
+    && pnpm --version
 
 WORKDIR /app
 
