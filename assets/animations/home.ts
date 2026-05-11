@@ -15,11 +15,15 @@ export type HomeAnimController = {
 }
 
 /**
- * Boot all home-page scroll animations.
- * Lightweight: ScrollTrigger lifecycle is scoped to the matchMedia query
- * so it auto-cleans on reduced-motion or unmount.
+ * Home-page scroll animations.
  *
- * Returns a controller with .destroy() — call onBeforeUnmount.
+ * RULE OF THUMB — never call `gsap.from({opacity: 0})` on an element that
+ * is ITSELF wrapped in `<RevealOnView>` (i.e. carries `data-reveal`). GSAP
+ * would read the CSS-declared opacity (0) as the starting point, animate
+ * "0 → 0", and leave a stuck inline `opacity: 0` that outranks the
+ * `.is-visible` class. Animating CHILDREN of a reveal-wrapped element is
+ * fine — their computed opacity is 1, GSAP animates 0 → 1, transitions
+ * compose cleanly.
  */
 export function bootHomeAnimations(): HomeAnimController {
   if (typeof window === 'undefined') return { destroy() {} }
@@ -29,7 +33,7 @@ export function bootHomeAnimations(): HomeAnimController {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // Hero title parallax
+      // Hero title parallax — translate only.
       gsap.utils.toArray<HTMLElement>('.hero__title-line').forEach((el, i) => {
         gsap.to(el, {
           yPercent: -8 * (i + 1),
@@ -43,7 +47,7 @@ export function bootHomeAnimations(): HomeAnimController {
         })
       })
 
-      // Hero panel slight rise away
+      // Hero panel parallax — translate only.
       const panel = document.querySelector('.hero__panel')
       if (panel) {
         gsap.to(panel, {
@@ -58,7 +62,7 @@ export function bootHomeAnimations(): HomeAnimController {
         })
       }
 
-      // Featured work numbers — counter style on enter
+      // Featured work numbers — child of <li>, no RevealOnView wrap. Safe.
       gsap.utils.toArray<HTMLElement>('.entry__num-val').forEach((el) => {
         gsap.from(el, {
           xPercent: -30,
@@ -73,23 +77,8 @@ export function bootHomeAnimations(): HomeAnimController {
         })
       })
 
-      // Approach schematic — dot pulse on enter
-      gsap.utils.toArray<HTMLElement>('.schematic__item').forEach((el, i) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          delay: i * 0.05,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        })
-      })
-
-      // Lab block pills — staggered pop
+      // Lab pills — children of lab__group (which IS reveal-wrapped) but the
+      // pills themselves are not, so animating them is safe.
       gsap.utils.toArray<HTMLElement>('.lab__group').forEach((group) => {
         const pills = group.querySelectorAll<HTMLElement>('.lab__pill')
         gsap.from(pills, {
@@ -106,7 +95,7 @@ export function bootHomeAnimations(): HomeAnimController {
         })
       })
 
-      // CTA title — letters shimmer on enter
+      // CTA title <em> — child of the reveal wrapper. Safe.
       const ctaTitle = document.querySelector<HTMLElement>('.cta__title em')
       if (ctaTitle) {
         gsap.fromTo(ctaTitle,
@@ -123,7 +112,7 @@ export function bootHomeAnimations(): HomeAnimController {
         )
       }
 
-      // Section heads — sliding kicker
+      // Section heads — animate ONLY the <em> spans, never the wrapper.
       gsap.utils.toArray<HTMLElement>('.featured__title, .approach__title, .lab__title').forEach((el) => {
         gsap.from(el.querySelectorAll('em'), {
           opacity: 0,
@@ -137,6 +126,9 @@ export function bootHomeAnimations(): HomeAnimController {
           },
         })
       })
+
+      // NOTE: no animation on .schematic__item — those elements are
+      // themselves reveal-wrapped, so RevealOnView handles them alone.
     })
 
     return () => mm.kill()
