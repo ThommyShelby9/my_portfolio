@@ -166,6 +166,11 @@ export function useBriefForm() {
       else if (status === 403) {
         submitError.value = data.message ?? 'Captcha invalide. Recharge la page.'
       }
+      else if (status === 502 && data.message) {
+        // Brief delivery failed (mongo + email both down) — surface the
+        // server's specific message instead of the generic fallback.
+        submitError.value = data.message
+      }
       else {
         submitError.value = 'Une erreur s\'est produite. Écris-moi à rmissimawu@gmail.com.'
       }

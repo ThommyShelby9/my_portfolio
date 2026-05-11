@@ -47,32 +47,65 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await connectMongo()
   const userAgent = getRequestHeader(event, 'user-agent') ?? null
-  const doc = await Brief.create({
-    ...brief,
-    ip,
-    userAgent,
-    turnstileVerified: true,
-  })
 
+  // Try to persist in MongoDB first. If the DB isn't configured/reachable
+  // we degrade gracefully — the email + Telegram path still runs so the
+  // submission is never silently dropped, just not archived in Mongo.
+  let briefId: string | null = null
+  let mongoFailed = false
   try {
-    await sendBriefEmail(brief)
-    await Brief.findByIdAndUpdate(doc._id, { notifiedAt: new Date() })
+    await connectMongo()
+    const doc = await Brief.create({
+      ...brief,
+      ip,
+      userAgent,
+      turnstileVerified: true,
+    })
+    briefId = String(doc._id)
   }
   catch (err) {
-    console.error('[brief] email failed', err)
-    return {
-      success: true,
-      briefId: String(doc._id),
-      warning: 'persisted_but_email_failed',
-    }
+    mongoFailed = true
+    console.error('[brief] mongo persist failed (continuing with email)', err)
   }
 
-  await notifyTelegram(brief)
+  // Email — the actual delivery channel to Rostel's inbox.
+  let emailFailed = false
+  try {
+    await sendBriefEmail(brief)
+    if (briefId) {
+      try { await Brief.findByIdAndUpdate(briefId, { notifiedAt: new Date() }) }
+      catch { /* mongo write failure here is not blocking */ }
+    }
+  }
+  catch (err) {
+    emailFailed = true
+    console.error('[brief] email send failed', err)
+  }
+
+  // Telegram is best-effort.
+  try { await notifyTelegram(brief) }
+  catch (err) { console.error('[brief] telegram notify failed', err) }
+
+  // Hard fail only if BOTH channels are dead — at that point we have no
+  // way to reach Rostel and should surface a real error to the user.
+  if (mongoFailed && emailFailed) {
+    throw createError({
+      statusCode: 502,
+      statusMessage: 'Brief could not be delivered',
+      data: {
+        message: 'Impossible d\'enregistrer ou d\'envoyer le brief. Écris-moi directement à rmissimawu@gmail.com.',
+        message_en: 'Could not save or deliver the brief. Email me directly at rmissimawu@gmail.com.',
+      },
+    })
+  }
 
   return {
     success: true,
-    briefId: String(doc._id),
+    briefId,
+    warnings: [
+      mongoFailed ? 'mongo_unavailable' : null,
+      emailFailed ? 'email_failed' : null,
+    ].filter(Boolean),
   }
 })

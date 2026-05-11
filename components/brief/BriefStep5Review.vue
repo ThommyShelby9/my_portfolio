@@ -132,8 +132,13 @@ const recap = computed(() => [
   word-break: break-word;
 }
 .step5__error {
-  font-family: theme('fontFamily.mono'); font-size: 0.8125rem;
-  color: var(--error); margin: 0;
+  font-family: theme('fontFamily.body'); font-size: 0.9375rem;
+  line-height: 1.5; color: var(--error);
+  background: color-mix(in oklab, var(--error) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--error) 30%, transparent);
+  border-left: 3px solid var(--error);
+  padding: 1rem 1.25rem; margin: 0;
+  border-radius: 4px;
 }
 .step5__actions {
   display: flex; justify-content: space-between; align-items: center;
