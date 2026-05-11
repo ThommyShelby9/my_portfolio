@@ -14,14 +14,25 @@ const props = withDefaults(defineProps<{
   type: 'button',
 })
 
-const el = ref<HTMLElement | null>(null)
+// When the template ref is bound to <NuxtLink>, Vue gives us the component
+// instance, not the raw HTMLElement. Unwrap via `$el` so the magnetic math
+// (getBoundingClientRect + style.transform) always runs on a real element.
+const elRef = ref<HTMLElement | any | null>(null)
+function getEl(): HTMLElement | null {
+  const r = elRef.value
+  if (!r) return null
+  // HTMLElement: return as-is. Component instance: walk to its root DOM node.
+  return (r instanceof HTMLElement) ? r : ((r as any).$el as HTMLElement) ?? null
+}
+
 let raf = 0
 const current = { x: 0, y: 0 }
 const target = { x: 0, y: 0 }
 
 function onMove(e: MouseEvent) {
-  if (!el.value) return
-  const rect = el.value.getBoundingClientRect()
+  const el = getEl()
+  if (!el) return
+  const rect = el.getBoundingClientRect()
   const cx = rect.left + rect.width / 2
   const cy = rect.top + rect.height / 2
   const dx = e.clientX - cx
@@ -39,8 +50,9 @@ function onMove(e: MouseEvent) {
 function tick() {
   current.x += (target.x - current.x) * 0.18
   current.y += (target.y - current.y) * 0.18
-  if (el.value) {
-    el.value.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`
+  const el = getEl()
+  if (el && el.style) {
+    el.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`
   }
   raf = requestAnimationFrame(tick)
 }
@@ -68,13 +80,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <NuxtLink v-if="props.to" ref="el" :to="props.to" :aria-label="ariaLabel">
+  <NuxtLink v-if="props.to" ref="elRef" :to="props.to" :aria-label="ariaLabel">
     <slot />
   </NuxtLink>
-  <a v-else-if="props.href" ref="el" :href="props.href" :aria-label="ariaLabel">
+  <a v-else-if="props.href" ref="elRef" :href="props.href" :aria-label="ariaLabel">
     <slot />
   </a>
-  <button v-else ref="el" :type="props.type" :aria-label="ariaLabel">
+  <button v-else ref="elRef" :type="props.type" :aria-label="ariaLabel">
     <slot />
   </button>
 </template>

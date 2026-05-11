@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { locale } = useI18n()
-const { state, errors, setField, turnstileToken } = useBriefForm()
+const { state, errors, setField } = useBriefForm()
 
 const labels = computed(() => locale.value === 'en'
   ? {
@@ -24,9 +24,6 @@ const labels = computed(() => locale.value === 'en'
       sourceOptions: ['', 'Google', 'LinkedIn', 'Recommandation', 'Autre'],
     })
 
-function onTurnstileToken(token: string) {
-  turnstileToken.value = token
-}
 </script>
 
 <template>
@@ -112,7 +109,6 @@ function onTurnstileToken(token: string) {
       />
     </BriefField>
 
-    <BriefTurnstile @token="onTurnstileToken" />
   </section>
 </template>
 

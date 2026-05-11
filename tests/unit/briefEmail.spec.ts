@@ -20,7 +20,6 @@ const sample: BriefInput = {
   website: 'https://acme.example',
   source: 'LinkedIn',
   prefersCall: true,
-  turnstileToken: 'tok',
   locale: 'fr',
 }
 

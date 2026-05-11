@@ -49,7 +49,6 @@ export const briefSchema = z.object({
   source: optionalNullableString,
   prefersCall: z.boolean().default(false),
 
-  turnstileToken: z.string().min(1, 'Captcha manquant'),
   locale: localeEnum.default('fr'),
 })
 

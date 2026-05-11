@@ -1,7 +1,6 @@
 import { Brief } from '~/models/Brief'
 import { briefSchema } from '../utils/schemas/brief'
 import { connectMongo } from '../utils/mongo'
-import { verifyTurnstile } from '../utils/turnstile'
 import { sendBriefEmail } from '../utils/mailer'
 import { notifyTelegram } from '../utils/telegram'
 import { getBriefRateLimiter } from '../utils/rate-limiter'
@@ -35,18 +34,6 @@ export default defineEventHandler(async (event) => {
   }
   const brief = parsed.data
 
-  const turnstileOk = await verifyTurnstile(brief.turnstileToken, ip)
-  if (!turnstileOk) {
-    throw createError({
-      statusCode: 403,
-      statusMessage: 'Captcha verification failed',
-      data: {
-        message: 'Vérification anti-robot échouée. Recharge la page et réessaye.',
-        message_en: 'Anti-bot verification failed. Reload the page and retry.',
-      },
-    })
-  }
-
   const userAgent = getRequestHeader(event, 'user-agent') ?? null
 
   // Try to persist in MongoDB first. If the DB isn't configured/reachable
@@ -60,7 +47,6 @@ export default defineEventHandler(async (event) => {
       ...brief,
       ip,
       userAgent,
-      turnstileVerified: true,
     })
     briefId = String(doc._id)
   }

@@ -1,7 +1,7 @@
 import type { BriefInput } from '~/types/brief'
 import { BRIEF_LOCALSTORAGE_KEY, TOTAL_BRIEF_STEPS, type BriefStep } from '~/types/brief'
 
-type FormState = Omit<BriefInput, 'turnstileToken' | 'locale'>
+type FormState = Omit<BriefInput, 'locale'>
 
 type FieldErrors = Record<string, string>
 
@@ -33,7 +33,6 @@ export function useBriefForm() {
   const errors = useState<FieldErrors>('brief-form-errors', () => ({}))
   const submitting = useState<boolean>('brief-form-submitting', () => false)
   const submitError = useState<string | null>('brief-form-submit-error', () => null)
-  const turnstileToken = useState<string | null>('brief-form-turnstile', () => null)
 
   function hydrateFromLocalStorage() {
     if (!import.meta.client || hasHydrated) return
@@ -101,11 +100,6 @@ export function useBriefForm() {
   }
 
   async function submit() {
-    if (!turnstileToken.value) {
-      submitError.value = 'Captcha non vérifié — merci de patienter quelques secondes.'
-      return false
-    }
-
     const { locale } = useI18n()
 
     submitting.value = true
@@ -117,7 +111,6 @@ export function useBriefForm() {
         method: 'POST',
         body: {
           ...state.value,
-          turnstileToken: turnstileToken.value,
           locale: locale.value,
         },
       })
@@ -187,7 +180,6 @@ export function useBriefForm() {
     errors,
     submitting,
     submitError,
-    turnstileToken,
     setField,
     next,
     back,
