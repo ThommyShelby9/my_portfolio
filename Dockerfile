@@ -23,12 +23,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Activate pnpm via corepack (pnpm version pinned by package.json packageManager
-# if set, otherwise stable). Disable signature check to avoid corepack network calls.
+# Activate pnpm via corepack. The version comes from the `packageManager`
+# field in package.json — keeping Docker in sync with local dev avoids
+# lockfile-format mismatches (pnpm 9 cannot read pnpm 10 lockfiles, which
+# silently breaks optional native bindings like @oxc-parser/binding-*).
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
+    COREPACK_ENABLE_STRICT=0 \
     PNPM_HOME=/root/.local/share/pnpm \
     PATH=$PNPM_HOME:$PATH
-RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
+RUN corepack enable
 
 WORKDIR /app
 
