@@ -31,6 +31,13 @@ legacy/terminal-spa/.vite
 # Brainstorm session artifacts
 .superpowers/
 
+# Claude scheduled task lock (runtime artifact)
+.claude/scheduled_tasks.lock
+
+# Playwright test output
+test-results/
+playwright-report/
+
 # Local env
 .env
 .env.local
