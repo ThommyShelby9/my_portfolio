@@ -89,7 +89,6 @@ const studies = await useFeaturedWork(3)
 .featured__title em {
   display: block;
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-weight: 400;
   color: var(--text-mute);
   font-size: 0.65em;

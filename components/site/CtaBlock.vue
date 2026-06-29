@@ -73,7 +73,6 @@ const localePath = useLocalePath()
   display: inline-block;
   margin: 0 0.1em;
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--accent);
 }
 
@@ -142,7 +141,6 @@ const localePath = useLocalePath()
 }
 .cta__email em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text);
   border-bottom: 1px solid var(--border-strong);
   padding-bottom: 1px;

@@ -65,7 +65,6 @@ withDefaults(defineProps<{
 .page-hero__em {
   display: block;
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--accent);
   letter-spacing: -0.02em;
   margin-top: 0.1em;

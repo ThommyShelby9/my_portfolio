@@ -183,7 +183,6 @@ const heroProps = computed(() => locale.value === 'en'
 }
 .entry__num em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-size: clamp(2.5rem, 5vw, 4rem);
   color: var(--accent);
   line-height: 0.9;

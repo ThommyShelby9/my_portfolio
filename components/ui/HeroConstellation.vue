@@ -46,7 +46,7 @@ function tick() {
 
   // Theme accent
   const styles = getComputedStyle(document.documentElement)
-  const accent = styles.getPropertyValue('--accent').trim() || '#ff5728'
+  const accent = styles.getPropertyValue('--accent').trim() || '#9b86ff'
   const ink = styles.getPropertyValue('--text').trim() || '#ede4d3'
 
   // Update + draw points

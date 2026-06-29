@@ -32,7 +32,6 @@ export async function createSpaceEngine(
 
   const uniforms = {
     uTime: { value: 0 },
-    uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
   }
 
   const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms })
@@ -42,10 +41,12 @@ export async function createSpaceEngine(
 
   const clock = new THREE.Clock()
   let raf = 0
+  let elapsed = 0
   let destroyed = false
 
   function render() {
-    uniforms.uTime.value = clock.getElapsedTime()
+    elapsed += clock.getDelta()
+    uniforms.uTime.value = elapsed
     renderer.render(scene, camera)
     raf = requestAnimationFrame(render)
   }
@@ -61,12 +62,12 @@ export async function createSpaceEngine(
       cancelAnimationFrame(raf)
       raf = 0
     }
+    clock.stop()
   }
 
   function resize() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.maxDpr))
     renderer.setSize(window.innerWidth, window.innerHeight, false)
-    uniforms.uResolution.value.set(window.innerWidth, window.innerHeight)
   }
 
   function setPaused(paused: boolean) {

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* =========================================================
-   v3.1 — Editorial atelier
-   Themes live here, switched by [data-theme]
+   v4 — Cosmic (dark only)
+   Single canonical palette; [data-theme] kept as a no-op alias
    ========================================================= */
 :root,
 [data-theme='dark'],

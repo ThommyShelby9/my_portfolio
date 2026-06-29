@@ -38,7 +38,6 @@ const trackStyle = computed(() => ({
   gap: 3rem;
   font-family: theme('fontFamily.editorial');
   font-size: clamp(2rem, 5vw, 4rem);
-  font-style: italic;
   font-weight: 400;
   color: var(--text);
   letter-spacing: -0.01em;

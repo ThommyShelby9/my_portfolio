@@ -131,7 +131,6 @@ const heroProps = computed(() => locale.value === 'en'
 }
 .legal__content em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--accent);
 }
 .legal__content strong {

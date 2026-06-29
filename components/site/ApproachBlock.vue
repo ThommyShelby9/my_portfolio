@@ -73,7 +73,6 @@ const points = computed(() => locale.value === 'en'
 .approach__title em {
   display: block;
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-mute);
   font-size: 0.65em;
   margin-top: 0.15em;
@@ -149,7 +148,6 @@ const points = computed(() => locale.value === 'en'
 }
 .schematic__num {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   line-height: 0.9;
   color: var(--text);

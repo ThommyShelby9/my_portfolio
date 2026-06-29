@@ -236,7 +236,6 @@ useHead({
   margin: 2rem 0;
   color: var(--text);
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-size: 1.25rem;
   line-height: 1.5;
   max-width: 56ch;
@@ -280,7 +279,6 @@ useHead({
 
 .cs-page__body :deep(em) {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text);
 }
 </style>

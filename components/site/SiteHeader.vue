@@ -153,7 +153,6 @@ onBeforeUnmount(() => {
 }
 .brand__name em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-mute);
 }
 

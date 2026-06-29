@@ -109,7 +109,6 @@ const heroProps = computed(() => locale.value === 'en'
 
 .contact__cta-num {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-size: 1em;
   opacity: 0.5;
 }
@@ -187,7 +186,6 @@ const heroProps = computed(() => locale.value === 'en'
 }
 .contact__row-tag {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-soft);
   font-size: 0.9em;
 }

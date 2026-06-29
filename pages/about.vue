@@ -227,7 +227,6 @@ const facts = computed(() => locale.value === 'en'
 }
 .about-portrait__caption em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-soft);
   font-size: 0.95em;
 }
@@ -304,7 +303,6 @@ const facts = computed(() => locale.value === 'en'
 }
 .about-gallery__title em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-weight: 400;
   color: var(--accent);
   margin-left: 0.25em;
@@ -448,7 +446,6 @@ const facts = computed(() => locale.value === 'en'
 
 .about-body__inner :deep(em) {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--accent);
 }
 
@@ -529,7 +526,6 @@ const facts = computed(() => locale.value === 'en'
 }
 .about-cta__title em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-weight: 400;
   color: var(--accent);
 }

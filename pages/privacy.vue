@@ -154,7 +154,6 @@ const heroProps = computed(() => locale.value === 'en'
 }
 .privacy__content em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--accent);
 }
 .privacy__content code {

@@ -111,7 +111,6 @@ const stack = computed(() => locale.value === 'en'
 .lab__title em {
   display: block;
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-mute);
   font-size: 0.62em;
   margin-top: 0.15em;
@@ -156,7 +155,6 @@ const stack = computed(() => locale.value === 'en'
 }
 .lab__group-num {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   font-size: 1.5rem;
   color: var(--accent);
   letter-spacing: 0;

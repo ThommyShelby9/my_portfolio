@@ -131,7 +131,6 @@ onBeforeUnmount(() => clearInterval(interval))
 }
 .site-footer__signature em {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   text-transform: none;
   letter-spacing: 0;
   color: var(--accent);
@@ -148,7 +147,6 @@ onBeforeUnmount(() => clearInterval(interval))
 }
 .site-footer__name .editorial {
   font-family: theme('fontFamily.editorial');
-  font-style: italic;
   color: var(--text-mute);
   margin-left: -0.05em;
 }
