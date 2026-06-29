@@ -42,6 +42,7 @@ export async function createSpaceEngine(
 
   const clock = new THREE.Clock()
   let raf = 0
+  let destroyed = false
 
   function render() {
     uniforms.uTime.value = clock.getElapsedTime()
@@ -50,10 +51,9 @@ export async function createSpaceEngine(
   }
 
   function start() {
-    if (!raf) {
-      clock.start()
-      raf = requestAnimationFrame(render)
-    }
+    if (destroyed || raf) return
+    clock.start()
+    raf = requestAnimationFrame(render)
   }
 
   function stop() {
@@ -64,6 +64,7 @@ export async function createSpaceEngine(
   }
 
   function resize() {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.maxDpr))
     renderer.setSize(window.innerWidth, window.innerHeight, false)
     uniforms.uResolution.value.set(window.innerWidth, window.innerHeight)
   }
@@ -77,6 +78,7 @@ export async function createSpaceEngine(
   start()
 
   function destroy() {
+    destroyed = true
     stop()
     window.removeEventListener('resize', resize)
     geometry.dispose()
