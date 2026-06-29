@@ -108,7 +108,9 @@ const heroProps = computed(() => locale.value === 'en'
 .contact__cta > * { position: relative; z-index: 1; }
 
 .contact__cta-num {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   font-size: 1em;
   opacity: 0.5;
 }
@@ -171,7 +173,7 @@ const heroProps = computed(() => locale.value === 'en'
 .contact__row-label {
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -185,9 +187,11 @@ const heroProps = computed(() => locale.value === 'en'
   flex-wrap: wrap;
 }
 .contact__row-tag {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.mono');
+  font-style: normal;
   color: var(--text-soft);
-  font-size: 0.9em;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
 }
 
 .contact__row-arrow {

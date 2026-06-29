@@ -36,12 +36,12 @@ const projects = [
 
 const tale = computed(() => locale.value === 'en'
   ? {
-      eyebrow: '— A short story',
+      eyebrow: '/ 01 — STORY',
       head: 'Reliable software is mostly listening.',
       body: 'I learned web and mobile development at École 229 in Cotonou, picked up cybersecurity at ASIN, and have been shipping production systems since. I lead the engineering team at KPS Groupe today — fintech, HR, B2B, healthcare, marketing. The common thread is not the stack — it is the discipline of removing what is not essential before adding what is.',
     }
   : {
-      eyebrow: '— Une histoire courte',
+      eyebrow: '/ 01 — HISTOIRE',
       head: 'Un logiciel qui tient, c\'est surtout savoir écouter.',
       body: 'J\'ai appris le développement web et mobile à l\'École 229 à Cotonou, complété par la cybersécurité avec l\'ASIN, et je livre du logiciel en production depuis. Je pilote aujourd\'hui l\'ingénierie de KPS Groupe — fintech, RH, B2B, santé, marketing. Le fil rouge n\'est pas la stack : c\'est la discipline d\'enlever ce qui n\'est pas essentiel avant d\'ajouter quoi que ce soit.',
     },
@@ -80,7 +80,7 @@ const facts = computed(() => locale.value === 'en'
           >
           <div class="about-portrait__caption">
             <span>R. Panoumassi</span>
-            <em>— Cotonou, 2026</em>
+            <span class="about-portrait__caption-loc">— Cotonou, 2026</span>
           </div>
         </div>
       </RevealOnView>
@@ -106,7 +106,7 @@ const facts = computed(() => locale.value === 'en'
           <p class="mono-tag">/ {{ locale === 'en' ? 'GALLERY — SHIPPED' : 'GALERIE — LIVRÉS' }}</p>
           <h2 class="about-gallery__title">
             {{ locale === 'en' ? 'A few' : 'Quelques' }}
-            <em class="editorial">{{ locale === 'en' ? 'pieces' : 'pièces' }}</em>
+            <span class="editorial-accent">{{ locale === 'en' ? 'pieces' : 'pièces' }}</span>
           </h2>
         </RevealOnView>
       </div>
@@ -159,10 +159,10 @@ const facts = computed(() => locale.value === 'en'
     <!-- Talk-with -->
     <section class="about-cta container-narrow">
       <RevealOnView class="about-cta__inner">
-        <p class="mono-tag">— {{ locale === 'en' ? 'NEXT' : 'SUITE' }}</p>
+        <p class="mono-tag">/ {{ locale === 'en' ? 'NEXT' : 'SUITE' }}</p>
         <h2 class="about-cta__title">
           {{ locale === 'en' ? 'Read the work, or' : 'Lis les travaux,' }}
-          <em class="editorial">{{ locale === 'en' ? 'start a brief.' : 'ou démarre un brief.' }}</em>
+          <span class="editorial-accent">{{ locale === 'en' ? 'start a brief.' : 'ou démarre un brief.' }}</span>
         </h2>
         <div class="about-cta__actions">
           <NuxtLink :to="localePath('/work')" class="about-cta__btn about-cta__btn--ghost">{{ locale === 'en' ? 'See the work' : 'Voir les travaux' }} →</NuxtLink>
@@ -225,9 +225,10 @@ const facts = computed(() => locale.value === 'en'
   align-items: baseline;
   gap: 0.4rem;
 }
-.about-portrait__caption em {
-  font-family: theme('fontFamily.editorial');
-  color: var(--text-soft);
+.about-portrait__caption-loc {
+  font-family: theme('fontFamily.mono');
+  font-style: normal;
+  color: var(--text-mute);
   font-size: 0.95em;
 }
 
@@ -281,7 +282,7 @@ const facts = computed(() => locale.value === 'en'
   font-family: theme('fontFamily.mono');
   font-size: 0.75rem;
   letter-spacing: 0.06em;
-  color: var(--text-soft);
+  color: var(--text-mute);
 }
 
 /* Gallery =================================== */
@@ -301,9 +302,10 @@ const facts = computed(() => locale.value === 'en'
   color: var(--text);
   margin: 0.75rem 0 0;
 }
-.about-gallery__title em {
-  font-family: theme('fontFamily.editorial');
-  font-weight: 400;
+.about-gallery__title .editorial-accent {
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   color: var(--accent);
   margin-left: 0.25em;
 }
@@ -445,7 +447,9 @@ const facts = computed(() => locale.value === 'en'
 }
 
 .about-body__inner :deep(em) {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -524,9 +528,10 @@ const facts = computed(() => locale.value === 'en'
   margin: 1rem 0 2.5rem;
   max-width: 20ch;
 }
-.about-cta__title em {
-  font-family: theme('fontFamily.editorial');
-  font-weight: 400;
+.about-cta__title .editorial-accent {
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   color: var(--accent);
 }
 

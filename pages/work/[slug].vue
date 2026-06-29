@@ -139,9 +139,11 @@ useHead({
 }
 
 .cs-page__back {
-  font-family: theme('fontFamily.mono');
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-mute);
   text-decoration: none;
@@ -235,14 +237,16 @@ useHead({
   padding: 0.5rem 0 0.5rem 1.5rem;
   margin: 2rem 0;
   color: var(--text);
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
+  font-style: normal;
+  font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.5;
   max-width: 56ch;
 }
 .cs-page__body :deep(blockquote em) {
   font-style: normal;
-  color: var(--text-soft);
+  color: var(--text-mute);
 }
 
 .cs-page__body :deep(code) {
@@ -278,7 +282,9 @@ useHead({
 }
 
 .cs-page__body :deep(em) {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
+  font-style: normal;
+  font-weight: 500;
   color: var(--text);
 }
 </style>

@@ -99,6 +99,15 @@ const heroProps = computed(() => locale.value === 'en'
   flex-wrap: wrap;
 }
 
+/* v4: override global .mono-tag for the filter label — upright Poppins, WCAG-safe ink */
+.work-index__bar .mono-tag {
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  color: var(--text-mute);
+}
+
 .chips {
   display: flex;
   gap: 0.4rem;
@@ -178,12 +187,14 @@ const heroProps = computed(() => locale.value === 'en'
 .entry__num span {
   font-family: theme('fontFamily.mono');
   font-size: 0.625rem;
-  letter-spacing: 0.18em;
-  color: var(--text-soft);
+  letter-spacing: 0.1em;
+  color: var(--text-mute);
 }
 .entry__num em {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
   font-size: clamp(2.5rem, 5vw, 4rem);
+  font-style: normal;
+  font-weight: 500;
   color: var(--accent);
   line-height: 0.9;
 }
@@ -191,9 +202,9 @@ const heroProps = computed(() => locale.value === 'en'
 .entry__kicker {
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-soft);
+  color: var(--text-mute);
   margin: 0;
 }
 .entry__title {
@@ -235,7 +246,7 @@ const heroProps = computed(() => locale.value === 'en'
   gap: 0.5rem;
   font-family: theme('fontFamily.mono');
   font-size: 0.75rem;
-  color: var(--text-soft);
+  color: var(--text-mute);
 }
 .entry__result em {
   font-family: theme('fontFamily.display');
@@ -249,7 +260,7 @@ const heroProps = computed(() => locale.value === 'en'
 .entry__arrow {
   font-family: theme('fontFamily.mono');
   font-size: 1.25rem;
-  color: var(--text-soft);
+  color: var(--text-mute);
   align-self: center;
   transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), color 250ms;
 }
@@ -262,6 +273,6 @@ const heroProps = computed(() => locale.value === 'en'
   padding: 4rem 0;
   text-align: center;
   font-family: theme('fontFamily.body');
-  color: var(--text-soft);
+  color: var(--text-mute);
 }
 </style>

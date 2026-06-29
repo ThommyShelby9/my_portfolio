@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 useSeoMeta({
   title: () => `${t('brief.title')} — ${t('site.name')}`,
@@ -10,8 +10,13 @@ useSeoMeta({
 <template>
   <article class="brief">
     <header class="brief__header">
-      <h1 class="brief__title">{{ t('brief.title') }}</h1>
-      <p class="brief__sub">{{ t('brief.sub') }}</p>
+      <p class="brief__kicker mono-tag">/ 05 — {{ locale === 'en' ? 'PROJECT BRIEF' : 'BRIEF PROJET' }}</p>
+      <h1 class="brief__title">
+        <SplitText :text="t('brief.title')" tag="span" :stagger="0.06" />
+      </h1>
+      <RevealOnView :delay="0.2">
+        <p class="brief__sub">{{ t('brief.sub') }}</p>
+      </RevealOnView>
     </header>
 
     <div class="brief__split">
@@ -41,11 +46,23 @@ useSeoMeta({
   margin-bottom: 4rem;
 }
 
+.brief__kicker {
+  font-family: theme('fontFamily.mono');
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin: 0;
+}
+
 .brief__title {
   font-family: theme('fontFamily.display');
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.1;
-  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.98;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
   margin: 0;
 }
 
