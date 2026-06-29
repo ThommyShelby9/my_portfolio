@@ -37,8 +37,3 @@ legacy/terminal-spa/.vite
 # Playwright test output
 test-results/
 playwright-report/
-
-# Local env
-.env
-.env.local
-.env.*.local
