@@ -9,6 +9,7 @@ const space = useSpaceStore()
 const canvas = ref<HTMLCanvasElement | null>(null)
 let engine: SpaceEngine | null = null
 let onVisibility: (() => void) | null = null
+let unmounted = false
 
 onMounted(async () => {
   const quality = resolveQuality({
@@ -23,11 +24,18 @@ onMounted(async () => {
   const { createSpaceEngine } = await import('~/space/engine')
   engine = await createSpaceEngine(canvas.value, quality)
 
+  if (unmounted) {
+    engine.destroy()
+    engine = null
+    return
+  }
+
   onVisibility = () => engine?.setPaused(document.hidden)
   document.addEventListener('visibilitychange', onVisibility)
 })
 
 onBeforeUnmount(() => {
+  unmounted = true
   if (onVisibility) document.removeEventListener('visibilitychange', onVisibility)
   engine?.destroy()
   engine = null
@@ -52,7 +60,7 @@ onBeforeUnmount(() => {
     radial-gradient(80% 70% at 20% 25%, rgba(25, 201, 140, 0.10), transparent 60%),
     radial-gradient(70% 80% at 85% 20%, rgba(122, 92, 240, 0.18), transparent 60%),
     radial-gradient(90% 90% at 60% 100%, rgba(255, 90, 170, 0.08), transparent 60%),
-    var(--bg);
+    var(--bg, #070612);
 }
 .space-bg__canvas {
   position: absolute;
