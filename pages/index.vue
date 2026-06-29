@@ -217,12 +217,12 @@ onBeforeUnmount(() => {
   letter-spacing: -0.04em;
 }
 .hero__title-line--em {
-  font-family: theme('fontFamily.editorial');
-  font-weight: 400;
-  font-style: italic;
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
   font-size: clamp(3rem, 8.5vw, 8rem);
   color: var(--accent);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
   line-height: 0.96;
 }
 .hero__title-line--sub {

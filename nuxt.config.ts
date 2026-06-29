@@ -165,7 +165,6 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Bricolage Grotesque', provider: 'google', weights: [400, 500, 600, 700, 800] },
-      { name: 'Newsreader', provider: 'google', weights: [400, 500], styles: ['normal', 'italic'] },
       { name: 'Manrope', provider: 'google', weights: [400, 500, 600, 700] },
       { name: 'JetBrains Mono', provider: 'google', weights: [400, 500] },
     ],

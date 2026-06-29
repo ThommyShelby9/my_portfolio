@@ -28,7 +28,7 @@ export default <Config>{
       },
       fontFamily: {
         display: ['"Bricolage Grotesque"', 'Inter', '-apple-system', 'sans-serif'],
-        editorial: ['"Newsreader"', 'Georgia', 'serif'],
+        editorial: ['"Bricolage Grotesque"', 'Inter', '-apple-system', 'sans-serif'],
         sans: ['"Manrope"', 'Inter', '-apple-system', 'sans-serif'],
         body: ['"Manrope"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],

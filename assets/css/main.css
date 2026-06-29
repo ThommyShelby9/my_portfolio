@@ -7,70 +7,47 @@
    Themes live here, switched by [data-theme]
    ========================================================= */
 :root,
-[data-theme='dark'] {
-  /* Surfaces */
-  --bg: #0c0a08;
-  --bg-raised: #131110;
-  --bg-overlay: #1b1815;
-  --bg-paper: #1a1612;
-  --paper-tint: rgba(237, 228, 211, 0.04);
+[data-theme='dark'],
+[data-theme='light'] {
+  /* Surfaces — cosmic ink */
+  --bg: #070612;
+  --bg-raised: #0e0c1e;
+  --bg-overlay: #151229;
+  --bg-paper: #100d22;
+  --paper-tint: rgba(201, 182, 255, 0.04);
 
   /* Ink */
-  --text: #ede4d3;
-  --text-mute: #b4a98f;
-  --text-soft: #7a6f5d;
+  --text: #e9e6f7;
+  --text-mute: #b3aed0;
+  --text-soft: #7d77a0;
 
   /* Lines */
-  --border: #211d18;
-  --border-strong: #2e2823;
-  --rule: rgba(237, 228, 211, 0.12);
+  --border: #1a1730;
+  --border-strong: #272243;
+  --rule: rgba(201, 182, 255, 0.12);
 
-  /* Accents — editorial warm */
-  --accent: #ff5728;
-  --accent-soft: rgba(255, 87, 40, 0.16);
-  --accent-warm: #f4b860;
-  --accent-cool: #6ba8b8;
-  --accent-ink: #0c0a08;
+  /* Accents — luminous violet + flux */
+  --accent: #9b86ff;
+  --accent-soft: rgba(155, 134, 255, 0.16);
+  --accent-warm: #ff5aaa;
+  --accent-cool: #19c98c;
+  --accent-ink: #070612;
+
+  /* Flux palette (used by generative bodies in Lot 2) */
+  --flux-emerald: #19c98c;
+  --flux-indigo: #7a5cf0;
+  --flux-magenta: #ff5aaa;
+  --core: #c9b6ff;
 
   /* Status */
-  --available: #7bb872;
-  --error: #ff6363;
-  --success: #7bb872;
+  --available: #19c98c;
+  --error: #ff6b8a;
+  --success: #19c98c;
 
   /* Effects */
-  --grain-opacity: 0.05;
-  --halo: radial-gradient(800px circle at var(--mx, 50%) var(--my, 30%), rgba(255, 87, 40, 0.08), transparent 60%);
+  --grain-opacity: 0.04;
+  --halo: radial-gradient(800px circle at var(--mx, 50%) var(--my, 30%), rgba(155, 134, 255, 0.10), transparent 60%);
   color-scheme: dark;
-}
-
-[data-theme='light'] {
-  --bg: #f1e9d6;
-  --bg-raised: #ebe1ca;
-  --bg-overlay: #f7f1e2;
-  --bg-paper: #ede2c8;
-  --paper-tint: rgba(26, 20, 16, 0.025);
-
-  --text: #1a1410;
-  --text-mute: #564c3f;
-  --text-soft: #7a6f5d;
-
-  --border: #d9cdb0;
-  --border-strong: #c4b594;
-  --rule: rgba(26, 20, 16, 0.12);
-
-  --accent: #c93f1e;
-  --accent-soft: rgba(201, 63, 30, 0.12);
-  --accent-warm: #b8841f;
-  --accent-cool: #2a5a6a;
-  --accent-ink: #1a1410;
-
-  --available: #2e7a3a;
-  --error: #c93f1e;
-  --success: #2e7a3a;
-
-  --grain-opacity: 0.035;
-  --halo: radial-gradient(800px circle at var(--mx, 50%) var(--my, 30%), rgba(201, 63, 30, 0.06), transparent 60%);
-  color-scheme: light;
 }
 
 /* =========================================================
@@ -279,9 +256,9 @@
    Composable utilities
    ========================================================= */
 .editorial {
-  font-family: theme('fontFamily.editorial');
-  font-weight: 400;
-  font-style: italic;
+  font-family: theme('fontFamily.display');
+  font-weight: 500;
+  font-style: normal;
 }
 
 .mono-tag {
