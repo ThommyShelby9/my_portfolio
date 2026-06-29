@@ -26,7 +26,7 @@ onBeforeUnmount(() => clearInterval(interval))
       <div class="site-footer__brand">
         <p class="site-footer__signature">
           {{ locale === 'en' ? 'Signed by hand' : 'Signé à la main' }}
-          <em class="editorial">— Cotonou {{ year }}</em>
+          <em class="site-footer__signature-place">— Cotonou {{ year }}</em>
         </p>
         <h2 class="site-footer__name">
           Rostel<span class="editorial">.Panoumassi</span>
@@ -86,7 +86,7 @@ onBeforeUnmount(() => clearInterval(interval))
       <!-- Bottom strip -->
       <div class="site-footer__bottom">
         <p class="site-footer__credit">
-          {{ locale === 'en' ? 'Built in Cotonou' : 'Fait à Cotonou' }} · {{ year }} · v3.1
+          {{ locale === 'en' ? 'Built in Cotonou' : 'Fait à Cotonou' }} · {{ year }} · v4
         </p>
         <NuxtLink :to="localePath('/terminal')" class="site-footer__easter" title="terminal">
           <span class="site-footer__easter-pre">$ </span>
@@ -122,19 +122,18 @@ onBeforeUnmount(() => clearInterval(interval))
   gap: 0.75rem;
 }
 .site-footer__signature {
-  font-family: theme('fontFamily.mono');
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: theme('fontFamily.body');
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--text-soft);
   margin: 0;
 }
-.site-footer__signature em {
-  font-family: theme('fontFamily.editorial');
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--accent);
-  margin-left: 0.5rem;
+.site-footer__signature-place {
+  font-style: normal;
+  color: var(--text-soft);
+  margin-left: 0.25rem;
 }
 .site-footer__name {
   font-family: theme('fontFamily.display');
@@ -169,7 +168,7 @@ onBeforeUnmount(() => clearInterval(interval))
 .site-footer__col h3 {
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-soft);
   margin: 0 0 1.25rem;

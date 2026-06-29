@@ -25,7 +25,6 @@ defineProps<{
         <div class="cs-hero__cover-mask img-reveal">
           <img :src="cover" :alt="title" loading="eager" class="cs-hero__cover-img" data-parallax="0.08">
         </div>
-        <span class="cs-hero__cover-tag" aria-hidden="true">— CAPTURE</span>
       </div>
     </RevealOnView>
   </header>
@@ -42,9 +41,11 @@ defineProps<{
   gap: 1rem;
 }
 .cs-hero__kicker {
-  font-family: theme('fontFamily.mono');
+  font-family: theme('fontFamily.body');
+  font-style: normal;
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 0;
@@ -95,16 +96,5 @@ defineProps<{
   height: 110%;
   object-fit: cover;
   filter: saturate(0.92) contrast(1.04);
-}
-.cs-hero__cover-tag {
-  position: absolute;
-  bottom: -8px;
-  right: 1rem;
-  background: var(--bg);
-  padding: 0.3rem 0.65rem;
-  font-family: theme('fontFamily.mono');
-  font-size: 0.625rem;
-  letter-spacing: 0.18em;
-  color: var(--text-soft);
 }
 </style>

@@ -28,12 +28,6 @@ const localePath = useLocalePath()
         </a>
       </RevealOnView>
 
-      <div class="cta__corners" aria-hidden="true">
-        <span class="cta__tick cta__tick--tl" />
-        <span class="cta__tick cta__tick--tr" />
-        <span class="cta__tick cta__tick--bl" />
-        <span class="cta__tick cta__tick--br" />
-      </div>
     </div>
   </section>
 </template>
@@ -74,6 +68,7 @@ const localePath = useLocalePath()
   margin: 0 0.1em;
   font-family: theme('fontFamily.editorial');
   color: var(--accent);
+  font-style: normal;
 }
 
 .cta__sub {
@@ -145,26 +140,11 @@ const localePath = useLocalePath()
   border-bottom: 1px solid var(--border-strong);
   padding-bottom: 1px;
   transition: color 200ms, border-color 200ms;
+  font-style: normal;
 }
 .cta__email:hover em {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
 
-/* corner ticks */
-.cta__corners {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.cta__tick {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: var(--text-soft);
-}
-.cta__tick--tl { top: -10px; left: 0; border-top: 1px solid; border-left: 1px solid; }
-.cta__tick--tr { top: -10px; right: 0; border-top: 1px solid; border-right: 1px solid; }
-.cta__tick--bl { bottom: -10px; left: 0; border-bottom: 1px solid; border-left: 1px solid; }
-.cta__tick--br { bottom: -10px; right: 0; border-bottom: 1px solid; border-right: 1px solid; }
 </style>

@@ -152,7 +152,9 @@ onBeforeUnmount(() => {
   letter-spacing: -0.005em;
 }
 .brand__name em {
-  font-family: theme('fontFamily.editorial');
+  font-family: theme('fontFamily.display');
+  font-weight: 600;
+  font-style: normal;
   color: var(--text-mute);
 }
 
@@ -335,7 +337,6 @@ onBeforeUnmount(() => {
 }
 .curtain__nav a:hover, .curtain__nav a.router-link-active {
   color: var(--accent);
-  font-style: italic;
 }
 .curtain__time {
   font-family: theme('fontFamily.mono');

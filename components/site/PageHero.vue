@@ -42,7 +42,7 @@ withDefaults(defineProps<{
   margin-bottom: 2rem;
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -65,6 +65,7 @@ withDefaults(defineProps<{
 .page-hero__em {
   display: block;
   font-family: theme('fontFamily.editorial');
+  font-style: normal;
   color: var(--accent);
   letter-spacing: -0.02em;
   margin-top: 0.1em;

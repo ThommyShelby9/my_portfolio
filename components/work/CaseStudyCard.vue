@@ -61,11 +61,13 @@ const primaryResult = computed(() => props.study.results[0])
 }
 
 .cs-card__kicker {
-  font-family: theme('fontFamily.mono');
+  font-family: theme('fontFamily.body');
+  font-style: normal;
+  font-weight: 500;
   font-size: 0.6875rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-soft);
+  color: var(--text-mute);
   margin: 0;
 }
 
@@ -112,10 +114,11 @@ const primaryResult = computed(() => props.study.results[0])
 }
 
 .cs-card__result-label {
-  font-family: theme('fontFamily.mono');
+  font-family: theme('fontFamily.body');
+  font-style: normal;
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
-  color: var(--text-soft);
+  color: var(--text-mute);
   text-transform: lowercase;
 }
 
@@ -127,14 +130,24 @@ const primaryResult = computed(() => props.study.results[0])
 }
 
 .cs-card__cta {
-  display: inline-block;
-  font-family: theme('fontFamily.mono');
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: theme('fontFamily.body');
+  font-style: normal;
+  font-size: 0.9375rem;
   color: var(--text);
   margin-top: 1.5rem;
-  border-bottom: 1px solid var(--border-strong);
-  padding-bottom: 2px;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 0.75rem;
+  text-decoration: none;
+  transition: border-color 200ms, color 200ms, padding 250ms;
+}
+
+.cs-card__cta:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  padding-left: 0.4rem;
 }
 
 .cs-card--compact {

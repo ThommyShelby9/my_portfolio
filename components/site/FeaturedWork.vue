@@ -94,6 +94,7 @@ const studies = await useFeaturedWork(3)
   font-size: 0.65em;
   margin-top: 0.15em;
   letter-spacing: -0.015em;
+  font-style: normal;
 }
 
 .featured__list {
@@ -155,7 +156,7 @@ const studies = await useFeaturedWork(3)
 }
 .entry__num-val {
   font-size: clamp(3rem, 5vw, 4.5rem);
-  font-style: italic;
+  font-style: normal;
   line-height: 0.9;
   color: var(--accent);
   margin-top: -0.1em;

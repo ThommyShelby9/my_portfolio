@@ -70,10 +70,13 @@ const rows = computed(() => [
 }
 
 .cs-meta__label {
-  color: var(--text-soft);
+  font-family: theme('fontFamily.body');
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text-mute);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
 }
 
 .cs-meta__value {

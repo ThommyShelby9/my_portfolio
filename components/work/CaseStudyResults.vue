@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <section class="cs-results" aria-label="Key results">
     <header class="cs-results__head">
-      <span class="mono-tag">— RESULTS</span>
+      <p class="cs-results__kicker">RESULTS</p>
     </header>
     <div class="cs-results__grid">
       <RevealOnView
@@ -33,6 +33,17 @@ defineProps<{
 
 .cs-results__head {
   margin-bottom: 1.5rem;
+}
+
+.cs-results__kicker {
+  font-family: theme('fontFamily.body');
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin: 0;
 }
 
 .cs-results__grid {
@@ -65,10 +76,12 @@ defineProps<{
 }
 
 .cs-results__label {
-  font-family: theme('fontFamily.mono');
+  font-family: theme('fontFamily.body');
+  font-style: normal;
+  font-weight: 400;
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
-  color: var(--text-soft);
+  color: var(--text-mute);
   text-transform: uppercase;
   margin: 0;
 }

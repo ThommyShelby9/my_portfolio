@@ -114,6 +114,7 @@ const stack = computed(() => locale.value === 'en'
   color: var(--text-mute);
   font-size: 0.62em;
   margin-top: 0.15em;
+  font-style: normal;
 }
 
 .lab__grid {
@@ -201,7 +202,7 @@ const stack = computed(() => locale.value === 'en'
   gap: 0.6rem;
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--text);
   margin: 0 0 1.25rem;
@@ -230,9 +231,9 @@ const stack = computed(() => locale.value === 'en'
 .lab__currently-list dt {
   font-family: theme('fontFamily.mono');
   font-size: 0.625rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--text-soft);
+  color: var(--text-mute);
   align-self: center;
 }
 .lab__currently-list dd {

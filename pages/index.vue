@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
 
         <div class="hero__bottom-meta">
           <span>{{ meta }}</span>
-          <span>— v3.1 ·</span>
+          <span>— v4 ·</span>
           <a :href="`mailto:rmissimawu@gmail.com`" class="hero__email" data-cursor="text" :data-cursor-label="locale === 'en' ? 'write' : 'écris'">rmissimawu@gmail.com</a>
         </div>
       </div>

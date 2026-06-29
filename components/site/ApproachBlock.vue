@@ -76,6 +76,7 @@ const points = computed(() => locale.value === 'en'
   color: var(--text-mute);
   font-size: 0.65em;
   margin-top: 0.15em;
+  font-style: normal;
 }
 
 /* Schematic */
@@ -155,7 +156,7 @@ const points = computed(() => locale.value === 'en'
 .schematic__tag {
   font-family: theme('fontFamily.mono');
   font-size: 0.6875rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.11em;
   color: var(--accent);
 }
 
