@@ -27,11 +27,12 @@ export default <Config>{
         success: 'var(--success)',
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'Inter', '-apple-system', 'sans-serif'],
-        editorial: ['"Bricolage Grotesque"', 'Inter', '-apple-system', 'sans-serif'],
-        sans: ['"Manrope"', 'Inter', '-apple-system', 'sans-serif'],
-        body: ['"Manrope"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        // v4 — Poppins everywhere (display, body, and former mono signatures)
+        display: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
+        editorial: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
+        sans: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
+        body: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
+        mono: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
       },
       fontSize: {
         // [size, { lineHeight, letterSpacing }]
