@@ -67,7 +67,6 @@ onBeforeUnmount(() => {
 
       <div class="actions">
         <LangToggle />
-        <ThemeToggle />
         <NuxtLink :to="localePath('/brief')" class="cta-pill" @click="closeNav">
           <span class="cta-pill__inner">
             <span>{{ t('nav.brief') }}</span>
