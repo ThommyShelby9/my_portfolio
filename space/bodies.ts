@@ -1,5 +1,6 @@
 export interface CaseStudyLike {
   slug: string
+  title?: string
   sector: string
   duration: string
   stack: string[]

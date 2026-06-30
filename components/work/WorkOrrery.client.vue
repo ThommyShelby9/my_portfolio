@@ -21,6 +21,7 @@ const hovered = ref<CaseStudyLike | null>(null)
 
 let handle: OrreryHandle | null = null
 let onVisibility: (() => void) | null = null
+let ro: ResizeObserver | null = null
 let unmounted = false
 
 onMounted(async () => {
@@ -31,8 +32,6 @@ onMounted(async () => {
   })
 
   if (!quality.enabled || !canvas.value) return
-
-  space.setMode('orrery')
 
   const { createOrrery } = await import('~/space/orrery')
 
@@ -58,6 +57,11 @@ onMounted(async () => {
     return
   }
 
+  space.setMode('orrery')
+
+  ro = new ResizeObserver(() => handle?.resize())
+  if (stage.value) ro.observe(stage.value)
+
   onVisibility = () => handle?.setPaused(document.hidden)
   document.addEventListener('visibilitychange', onVisibility)
 })
@@ -68,6 +72,8 @@ onBeforeUnmount(() => {
     document.removeEventListener('visibilitychange', onVisibility)
     onVisibility = null
   }
+  ro?.disconnect()
+  ro = null
   handle?.destroy()
   handle = null
   space.setMode('ambient')
@@ -80,7 +86,7 @@ onBeforeUnmount(() => {
 
     <!-- Hover label overlay — decorative, accessible content is the DOM list -->
     <div v-if="hovered" class="orrery__label" aria-hidden="true">
-      <p class="orrery__label-title">{{ (hovered as any).title ?? hovered.slug }}</p>
+      <p class="orrery__label-title">{{ hovered.title ?? hovered.slug }}</p>
       <p v-if="hovered.results?.[0]" class="orrery__label-result">
         <span class="orrery__label-value">{{ hovered.results[0].value }}</span>
         <span class="orrery__label-meta">— {{ hovered.results[0].label }}</span>
