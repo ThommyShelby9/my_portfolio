@@ -13,6 +13,15 @@ const router = useRouter()
 const localePath = useLocalePath()
 const { locale } = useI18n()
 
+// Computed once — this is a client-only component, so capability/motion are
+// known at setup. Drives both the v-if (no empty stage when disabled) and
+// the engine's DPR cap. When disabled, the page's DOM list is the experience.
+const quality = resolveQuality({
+  supported: supported.value,
+  lowPerf: lowPerf.value,
+  reduce: reduce.value,
+})
+
 const stage = ref<HTMLDivElement | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)
 
@@ -25,12 +34,6 @@ let ro: ResizeObserver | null = null
 let unmounted = false
 
 onMounted(async () => {
-  const quality = resolveQuality({
-    supported: supported.value,
-    lowPerf: lowPerf.value,
-    reduce: reduce.value,
-  })
-
   if (!quality.enabled || !canvas.value) return
 
   const { createOrrery } = await import('~/space/orrery')
@@ -81,7 +84,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="stage" class="orrery" aria-hidden="true">
+  <div v-if="quality.enabled" ref="stage" class="orrery" aria-hidden="true">
     <canvas ref="canvas" class="orrery__canvas" aria-hidden="true" style="pointer-events: auto" />
 
     <!-- Hover label overlay — decorative, accessible content is the DOM list -->
