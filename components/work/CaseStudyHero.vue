@@ -1,24 +1,36 @@
 <script setup lang="ts">
+import type { CaseStudyLike } from '~/space/bodies'
+
 defineProps<{
   kicker?: string
   title: string
   excerpt?: string | null
   cover?: string | null
+  study?: CaseStudyLike | null
 }>()
 </script>
 
 <template>
   <header class="cs-hero">
-    <div class="cs-hero__strip">
-      <p v-if="kicker" class="cs-hero__kicker">{{ kicker }}</p>
-      <span class="cs-hero__line" aria-hidden="true" />
+    <div class="cs-hero__top">
+      <div class="cs-hero__text">
+        <div class="cs-hero__strip">
+          <p v-if="kicker" class="cs-hero__kicker">{{ kicker }}</p>
+          <span class="cs-hero__line" aria-hidden="true" />
+        </div>
+        <h1 class="cs-hero__title">
+          <SplitText :text="title" tag="span" :stagger="0.05" />
+        </h1>
+        <RevealOnView v-if="excerpt" :delay="0.25">
+          <p class="cs-hero__excerpt">{{ excerpt }}</p>
+        </RevealOnView>
+      </div>
+
+      <!-- Decorative rotating planet accent — client-only, aria-hidden -->
+      <ClientOnly v-if="study">
+        <ProjectBody :study="study" />
+      </ClientOnly>
     </div>
-    <h1 class="cs-hero__title">
-      <SplitText :text="title" tag="span" :stagger="0.05" />
-    </h1>
-    <RevealOnView v-if="excerpt" :delay="0.25">
-      <p class="cs-hero__excerpt">{{ excerpt }}</p>
-    </RevealOnView>
 
     <RevealOnView v-if="cover" :delay="0.35" class="cs-hero__cover-wrap">
       <div class="cs-hero__cover">
@@ -33,6 +45,18 @@ defineProps<{
 <style scoped>
 .cs-hero {
   padding: 2rem 0 3rem;
+}
+
+/* Top row: text left, planet accent right */
+.cs-hero__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.cs-hero__text {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .cs-hero__strip {

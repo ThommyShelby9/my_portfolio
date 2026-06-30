@@ -104,6 +104,7 @@ useHead({
         :title="(study as any).title"
         :excerpt="(study as any).excerpt"
         :cover="(study as any).cover"
+        :study="(study as any)"
       />
 
       <CaseStudyMeta
