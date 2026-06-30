@@ -31,6 +31,14 @@ const heroProps = computed(() => locale.value === 'en'
   <div class="work-index">
     <PageHero v-bind="heroProps" :sub="t('work_index.sub')" />
 
+    <!-- Spatial enhancement: the orrery. Client-only; the DOM list below
+         stays the SSR/SEO/a11y/no-WebGL experience. -->
+    <ClientOnly>
+      <section class="work-index__orrery" aria-hidden="true">
+        <WorkOrrery :studies="(studies ?? []) as any" />
+      </section>
+    </ClientOnly>
+
     <div class="container-narrow work-index__bar">
       <span class="mono-tag">{{ t('work_index.filter_label') }} —</span>
       <div class="chips">
@@ -89,6 +97,10 @@ const heroProps = computed(() => locale.value === 'en'
 <style scoped>
 .work-index {
   padding-bottom: 6rem;
+}
+
+.work-index__orrery {
+  margin: 1rem 0 2rem;
 }
 
 .work-index__bar {
