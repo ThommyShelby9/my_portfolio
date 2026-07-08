@@ -87,17 +87,22 @@ onBeforeUnmount(() => {
 
     <div class="progress" :style="{ '--p': scroll }" aria-hidden="true" />
 
-    <Transition name="curtain">
-      <div v-if="navOpen" class="curtain">
-        <nav class="curtain__nav" aria-label="Mobile">
-          <NuxtLink :to="localePath('/work')" @click="closeNav">{{ t('nav.work') }}</NuxtLink>
-          <NuxtLink :to="localePath('/about')" @click="closeNav">{{ t('nav.about') }}</NuxtLink>
-          <NuxtLink :to="localePath('/contact')" @click="closeNav">{{ t('nav.contact') }}</NuxtLink>
-          <NuxtLink :to="localePath('/brief')" @click="closeNav">{{ t('nav.brief') }}</NuxtLink>
-        </nav>
-        <p class="curtain__time">{{ cotonouTime }} · COTONOU, BJ</p>
-      </div>
-    </Transition>
+    <!-- Teleported to body: the header has `backdrop-filter`, which traps
+         `position: fixed` descendants (they resolve against the header box,
+         not the viewport). Teleporting frees the curtain to cover the page. -->
+    <Teleport to="body">
+      <Transition name="curtain">
+        <div v-if="navOpen" class="curtain">
+          <nav class="curtain__nav" aria-label="Mobile">
+            <NuxtLink :to="localePath('/work')" @click="closeNav">{{ t('nav.work') }}</NuxtLink>
+            <NuxtLink :to="localePath('/about')" @click="closeNav">{{ t('nav.about') }}</NuxtLink>
+            <NuxtLink :to="localePath('/contact')" @click="closeNav">{{ t('nav.contact') }}</NuxtLink>
+            <NuxtLink :to="localePath('/brief')" @click="closeNav">{{ t('nav.brief') }}</NuxtLink>
+          </nav>
+          <p class="curtain__time">{{ cotonouTime }} · COTONOU, BJ</p>
+        </div>
+      </Transition>
+    </Teleport>
   </header>
 </template>
 

@@ -33,7 +33,10 @@ export async function createOrrery(
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, opts.maxDpr))
 
   function getCanvasSize() {
-    return { w: canvas.clientWidth || 1, h: canvas.clientHeight || 1 }
+    const r = canvas.getBoundingClientRect()
+    const w = Math.round(r.width) || canvas.clientWidth || canvas.parentElement?.clientWidth || 1
+    const h = Math.round(r.height) || canvas.clientHeight || canvas.parentElement?.clientHeight || 1
+    return { w, h }
   }
 
   const { w: initW, h: initH } = getCanvasSize()
@@ -42,8 +45,22 @@ export async function createOrrery(
   // ── Scene + Camera ────────────────────────────────────────────────────────
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(50, initW / initH, 0.1, 100)
-  camera.position.set(0, 2.5, 11)
-  camera.lookAt(0, 0, 0)
+
+  // Frame the entire system so every orbit fits the viewport, adapting to the
+  // aspect ratio. On portrait/mobile the camera pulls back further so the wide
+  // outer orbits don't fall off-screen (which made the orrery look empty).
+  const maxRadius = bodies.reduce((m, b) => Math.max(m, b.orbitRadius), 3)
+  const fitExtent = maxRadius + 0.6
+  function frameCamera(w: number, h: number) {
+    const aspect = w / h
+    camera.aspect = aspect
+    const halfV = Math.tan((camera.fov * Math.PI) / 360)
+    const dist = Math.max(fitExtent / halfV, fitExtent / (halfV * aspect))
+    camera.position.set(0, dist * 0.16, dist)
+    camera.lookAt(0, 0, 0)
+    camera.updateProjectionMatrix()
+  }
+  frameCamera(initW, initH)
 
   // ── Lighting ──────────────────────────────────────────────────────────────
   const ambient = new THREE.AmbientLight(0xffffff, 0.25)
@@ -316,8 +333,7 @@ export async function createOrrery(
     const { w, h } = getCanvasSize()
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, opts.maxDpr))
     renderer.setSize(w, h, false)
-    camera.aspect = w / h
-    camera.updateProjectionMatrix()
+    frameCamera(w, h)
   }
 
   function setPaused(p: boolean) {

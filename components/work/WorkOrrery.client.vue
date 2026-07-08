@@ -34,7 +34,12 @@ let ro: ResizeObserver | null = null
 let unmounted = false
 
 onMounted(async () => {
-  if (!quality.enabled || !canvas.value) return
+  if (!quality.enabled) return
+  // The canvas lives inside `v-if="quality.enabled"`; with the .client +
+  // ClientOnly deferral its ref isn't populated on the first onMounted tick.
+  // Wait a tick so canvas.value is bound before we init the engine.
+  await nextTick()
+  if (!canvas.value) return
 
   const { createOrrery } = await import('~/space/orrery')
 
@@ -64,6 +69,11 @@ onMounted(async () => {
 
   ro = new ResizeObserver(() => handle?.resize())
   if (stage.value) ro.observe(stage.value)
+
+  // Force a correct size once layout has settled: at creation time the canvas
+  // can still report default (300x150) dimensions, leaving the WebGL drawing
+  // buffer wrong (blurry + wrong aspect → bodies off-screen). rAF runs post-layout.
+  requestAnimationFrame(() => handle?.resize())
 
   onVisibility = () => handle?.setPaused(document.hidden)
   document.addEventListener('visibilitychange', onVisibility)
