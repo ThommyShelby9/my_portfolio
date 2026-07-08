@@ -128,7 +128,6 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr auto;
     gap: 1rem;
   }
-  .primary, .hud { display: none; }
 }
 
 /* Brand */
@@ -261,7 +260,11 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1024px) {
-  .actions { display: none; }
+  /* Placed after the base rules so it wins on source order — media queries
+     do not add specificity, so an earlier @media hide loses to a later base
+     display rule. Hiding primary + hud here (after their base rules) fixes
+     the mobile header overflow. */
+  .actions, .primary, .hud { display: none; }
 }
 
 /* Burger */

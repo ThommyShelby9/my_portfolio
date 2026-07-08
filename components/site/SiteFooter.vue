@@ -138,11 +138,12 @@ onBeforeUnmount(() => clearInterval(interval))
 .site-footer__name {
   font-family: theme('fontFamily.display');
   font-weight: 400;
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(2rem, 8vw, 8rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
   color: var(--text);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 .site-footer__name .editorial {
   font-family: theme('fontFamily.editorial');
