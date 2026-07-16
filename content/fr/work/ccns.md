@@ -1,10 +1,10 @@
 ---
 slug: ccns
 title: Un site institutionnel pour un réseau de centres de santé
-kicker: Issue 04 · Institutionnel · Santé · 2025
+kicker: Issue 05 · Institutionnel · Santé · 2025
 excerpt: Refonte complète du site CCNS — contenu, accessibilité, performance — pour la Conférence des Centres de Santé Catholiques au Bénin.
 year: 2025
-order: 4
+order: 5
 featured: true
 client: Conférence des Centres de Santé (CCNS)
 sector: Santé · Institutionnel

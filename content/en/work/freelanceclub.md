@@ -1,10 +1,10 @@
 ---
 slug: freelanceclub
 title: An end-to-end umbrella-company platform
-kicker: Issue 01 · SaaS B2B · 2025–2026
+kicker: Issue 02 · SaaS B2B · 2025–2026
 excerpt: Mission → contract → timesheet → invoice → payslip → payment. One single journey for freelancers and companies, with AI CV parsing and built-in video calls.
 year: 2026
-order: 1
+order: 2
 featured: true
 client: Freelance Club
 sector: SaaS · Umbrella company

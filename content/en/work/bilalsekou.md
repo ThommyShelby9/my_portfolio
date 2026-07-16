@@ -1,10 +1,10 @@
 ---
 slug: bilalsekou
 title: A one-page portfolio with integrated e-book sales
-kicker: Issue 07 · Nuxt · Light e-commerce · 2025
+kicker: Issue 08 · Nuxt · Light e-commerce · 2025
 excerpt: Bilal Sekou's brand site, communications strategist — with a Kkiapay payment funnel, promo codes, and sandbox/production toggle.
 year: 2025
-order: 7
+order: 8
 featured: false
 client: Sekou Bilal — Digital Marketer
 sector: Portfolio · E-book

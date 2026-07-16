@@ -1,10 +1,10 @@
 ---
 slug: mariette
 title: Un blog + portfolio modulaire pour une professionnelle indépendante
-kicker: Issue 11 · Blog · Portfolio · 2025
+kicker: Issue 12 · Blog · Portfolio · 2025
 excerpt: Next.js 15 + MongoDB + NextAuth — un éditeur Tiptap maison, des médias UploadThing, un admin protégé par OAuth Google/GitHub.
 year: 2025
-order: 11
+order: 12
 featured: false
 client: Mariette H. NOBRE
 sector: Portfolio · Blog

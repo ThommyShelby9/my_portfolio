@@ -1,10 +1,10 @@
 ---
 slug: ubbfy
 title: Une suite ERP complète avec pointage géolocalisé
-kicker: Issue 02 · ERP · Web + Mobile · 2025–2026
+kicker: Issue 03 · ERP · Web + Mobile · 2025–2026
 excerpt: Stocks, projets, RH, CRM, helpdesk, documents — plus une app Flutter de pointage géolocalisé. Une refonte multi-app à partir d'un legacy mono.
 year: 2026
-order: 2
+order: 3
 featured: true
 client: Ubbfy
 sector: ERP · SIRH · Multi-tenant

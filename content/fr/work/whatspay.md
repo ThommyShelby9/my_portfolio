@@ -1,10 +1,10 @@
 ---
 slug: whatspay
 title: Marketing d'influence via WhatsApp
-kicker: Issue 05 · MarTech · Afrique · 2025
+kicker: Issue 06 · MarTech · Afrique · 2025
 excerpt: Une plateforme où des annonceurs paient des micro-influenceurs pour relayer des liens trackés via WhatsApp. Tout l'orchestre tient sur RabbitMQ.
 year: 2025
-order: 5
+order: 6
 featured: false
 client: WhatsPay
 sector: MarTech · Influence

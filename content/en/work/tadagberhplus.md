@@ -1,10 +1,10 @@
 ---
 slug: tadagberhplus
 title: A multi-tenant HRIS for 100+ companies
-kicker: Issue 03 · SaaS · HR · 2024–2025
+kicker: Issue 04 · SaaS · HR · 2024–2025
 excerpt: Centralising HR for 100+ SME clients of a Benin consulting firm — payroll, leaves, social security, documents — on a happily monolithic Django.
 year: 2025
-order: 3
+order: 4
 featured: true
 client: GPRHME consulting firm (Benin)
 sector: SaaS · Human Resources

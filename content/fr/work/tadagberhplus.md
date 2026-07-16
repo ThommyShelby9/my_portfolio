@@ -1,10 +1,10 @@
 ---
 slug: tadagberhplus
 title: Un SIRH multi-entreprises pour 100+ structures
-kicker: Issue 03 · SaaS · Ressources humaines · 2024–2025
+kicker: Issue 04 · SaaS · Ressources humaines · 2024–2025
 excerpt: Centraliser la gestion RH multi-tenants d'un cabinet de conseil — paie, congés, CNSS, documents — sur un monolithe Django assumé.
 year: 2025
-order: 3
+order: 4
 featured: true
 client: Cabinet GPRHME (Bénin)
 sector: SaaS · Ressources humaines

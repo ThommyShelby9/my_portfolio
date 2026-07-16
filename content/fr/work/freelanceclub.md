@@ -1,10 +1,10 @@
 ---
 slug: freelanceclub
 title: Une plateforme de portage salarial end-to-end
-kicker: Issue 01 · SaaS B2B · 2025–2026
+kicker: Issue 02 · SaaS B2B · 2025–2026
 excerpt: Mission → contrat → timesheet → facture → paie → paiement. Un parcours unique pour freelances et entreprises, avec parsing CV par IA et appels vidéo intégrés.
 year: 2026
-order: 1
+order: 2
 featured: true
 client: Freelance Club
 sector: SaaS · Portage salarial

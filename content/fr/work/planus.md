@@ -1,10 +1,10 @@
 ---
 slug: planus
 title: Le site corporate d'un cabinet IT panafricain
-kicker: Issue 10 · Corporate · 2025
+kicker: Issue 11 · Corporate · 2025
 excerpt: Vitrine + back-office complet pour Planus Analytics — gestion contenu, recrutement, articles, ressources, candidatures, utilisateurs avec 2FA.
 year: 2025
-order: 10
+order: 11
 featured: false
 client: Planus Analytics
 sector: Corporate · Conseil IT

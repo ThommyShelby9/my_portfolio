@@ -1,10 +1,10 @@
 ---
 slug: leconsultant
 title: A B2B tender platform
-kicker: Issue 06 · Laravel · B2B · 2023–2024
+kicker: Issue 07 · Laravel · B2B · 2023–2024
 excerpt: Centralising Benin's public tenders, adding subscriptions, category-based alerts, and a training module.
 year: 2024
-order: 6
+order: 7
 featured: false
 client: LeConsultant
 sector: B2B · Public procurement

@@ -1,10 +1,10 @@
 ---
 slug: ccns
 title: An institutional website for a network of health centres
-kicker: Issue 04 · Institutional · Healthcare · 2025
+kicker: Issue 05 · Institutional · Healthcare · 2025
 excerpt: Full rebuild of the CCNS website — content, accessibility, performance — for the Catholic Health Centres Network of Benin.
 year: 2025
-order: 4
+order: 5
 featured: true
 client: Conférence des Centres de Santé (CCNS)
 sector: Healthcare · Institutional

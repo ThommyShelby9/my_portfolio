@@ -1,10 +1,10 @@
 ---
 slug: leconsultant
 title: Une plateforme d'appels d'offres B2B
-kicker: Issue 06 · Laravel · B2B · 2023–2024
+kicker: Issue 07 · Laravel · B2B · 2023–2024
 excerpt: Centraliser les appels d'offres publics du Bénin, ajouter des abonnements, des alertes par catégorie et un module de formations.
 year: 2024
-order: 6
+order: 7
 featured: false
 client: LeConsultant
 sector: B2B · Marchés publics

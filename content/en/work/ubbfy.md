@@ -1,10 +1,10 @@
 ---
 slug: ubbfy
 title: A full ERP suite with geolocated time clock
-kicker: Issue 02 · ERP · Web + Mobile · 2025–2026
+kicker: Issue 03 · ERP · Web + Mobile · 2025–2026
 excerpt: Inventory, projects, HR, CRM, helpdesk, documents — plus a Flutter geolocated time-clock app. A multi-app rebuild on top of a legacy monolith.
 year: 2026
-order: 2
+order: 3
 featured: true
 client: Ubbfy
 sector: ERP · HRIS · Multi-tenant

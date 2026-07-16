@@ -1,10 +1,10 @@
 ---
 slug: whatspay
 title: Influencer marketing through WhatsApp
-kicker: Issue 05 · MarTech · Africa · 2025
+kicker: Issue 06 · MarTech · Africa · 2025
 excerpt: A platform where advertisers pay micro-influencers to relay tracked links via WhatsApp. The whole orchestra rides on RabbitMQ.
 year: 2025
-order: 5
+order: 6
 featured: false
 client: WhatsPay
 sector: MarTech · Influence

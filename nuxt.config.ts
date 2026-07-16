@@ -143,10 +143,11 @@ export default defineNuxtConfig({
       // Follow links from prerendered pages so we pick up /work/<slug>,
       // /en/work/<slug>, etc. without enumerating them all by hand.
       crawlLinks: true,
-      // Explicit seed list — guarantees the 11 case studies (FR + EN) get
+      // Explicit seed list — guarantees the 12 case studies (FR + EN) get
       // prerendered even if crawling misses one. Without this, missing
       // _payload.json files break client-side SPA navigation from /work.
       routes: [
+        '/work/upgrade', '/en/work/upgrade',
         '/work/freelanceclub', '/en/work/freelanceclub',
         '/work/ubbfy', '/en/work/ubbfy',
         '/work/tadagberhplus', '/en/work/tadagberhplus',

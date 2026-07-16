@@ -17,12 +17,15 @@ export async function useFeaturedWork(limit = 3) {
   const { locale } = useI18n()
   const { data } = await useAsyncData(
     `featured-work-${locale.value}`,
-    () => queryCollection('work')
-      .where('featured', '=', true)
-      .where('path', 'LIKE', `/${locale.value}/work/%`)
-      .order('order', 'ASC')
-      .limit(limit)
-      .all(),
+    async () => {
+      const items = await queryCollection('work')
+        .where('featured', '=', true)
+        .where('path', 'LIKE', `/${locale.value}/work/%`)
+        .all()
+      // Sort + slice in JS: the collection orders `order` as text, so a SQL
+      // ORDER BY + LIMIT would pick the wrong three once an order reaches 10.
+      return selectFeatured(items as unknown as WorkLike[], limit) as typeof items
+    },
     { watch: [locale] },
   )
   return data

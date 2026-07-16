@@ -1,10 +1,10 @@
 ---
 slug: zenlife
 title: A personal wellness app
-kicker: Issue 09 · Side project · 2024
+kicker: Issue 10 · Side project · 2024
 excerpt: Track mood, finance and habits in one place — on a Laravel + Vue + MySQL stack maintained by a single person.
 year: 2024
-order: 9
+order: 10
 featured: false
 client: Personal product
 sector: Wellness · SaaS

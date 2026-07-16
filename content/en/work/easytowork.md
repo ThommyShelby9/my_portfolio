@@ -1,10 +1,10 @@
 ---
 slug: easytowork
 title: A multi-brand HR platform for KPS Group
-kicker: Issue 08 · Multi-brand · 2025
+kicker: Issue 09 · Multi-brand · 2025
 excerpt: Three brand sites (KPS Groupe, KPS Analytics, EasyToWork) sharing one Laravel email backend — training, applications, salary simulator.
 year: 2025
-order: 8
+order: 9
 featured: false
 client: KPS Group (internal)
 sector: HR · Training · Showcase

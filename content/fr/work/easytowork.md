@@ -1,10 +1,10 @@
 ---
 slug: easytowork
 title: Une plateforme RH multi-marques pour le groupe KPS
-kicker: Issue 08 · Multi-marques · 2025
+kicker: Issue 09 · Multi-marques · 2025
 excerpt: Trois sites vitrines (KPS Groupe, KPS Analytics, EasyToWork) sur un backend Laravel d'envoi d'emails — formations, postulations, simulateur de salaire.
 year: 2025
-order: 8
+order: 9
 featured: false
 client: KPS Groupe (interne)
 sector: RH · Formation · Vitrine
