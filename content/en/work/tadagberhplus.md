@@ -1,12 +1,12 @@
 ---
 slug: tadagberhplus
-title: A multi-tenant HRIS for 100+ companies
+title: A multi-tenant HRIS for an HR consulting firm
 kicker: Issue 04 · SaaS · HR · 2024–2025
-excerpt: Centralising HR for 100+ SME clients of a Benin consulting firm — payroll, leaves, social security, documents — on a happily monolithic Django.
+excerpt: Centralising multi-tenant HR for a Benin consulting firm — payroll, leaves, social security, documents — on a happily monolithic Django.
 year: 2025
 order: 4
 featured: true
-client: GPRHME consulting firm (Benin)
+client: HR consulting firm · Benin (confidential)
 sector: SaaS · Human Resources
 role: Backend Lead · Architecture · Delivery
 team: 3 devs · 1 PO
@@ -20,20 +20,20 @@ stack:
   - Vue 3
 cover: /images/tadagberhplus.png
 results:
-  - value: "100+"
-    label: Companies managed
-  - value: "770+"
-    label: Employees tracked
+  - value: "5"
+    label: Critical modules rebuilt
+  - value: "3"
+    label: CNSS regulatory updates · 0 regressions
   - value: "85%"
     label: Reduction in manual data entry
-seoDescription: TadagbeRhPlus — multi-tenant HRIS Django 4 + MySQL + Celery, payroll + CNSS + leaves + documents for 100+ companies in Benin.
+seoDescription: TadagbeRhPlus — multi-tenant HRIS Django 4 + MySQL + Celery, payroll + CNSS + leaves + documents for an HR consulting firm in Benin.
 ---
 
 ## The context
 
-GPRHME runs payroll and HR for a hundred-odd SME clients in Benin. Before TadagbeRhPlus: one Excel file per client, social-security calculations done by hand, payslips emailed as PDFs, and one consultant per file becoming the **single point of failure** of the entire portfolio.
+The firm runs payroll and HR for dozens of SME clients in Benin. Before TadagbeRhPlus: one Excel file per client, social-security calculations done by hand, payslips emailed as PDFs, and one consultant per file becoming the **single point of failure** of the entire portfolio.
 
-Management wanted one tool to take back control: one consultant handling 30 files in parallel, standardised payroll templates, and e-signature for contracts.
+Management wanted one tool to take back control: one consultant handling dozens of files in parallel, standardised payroll templates, and e-signature for contracts.
 
 ## What I was asked
 
@@ -62,7 +62,7 @@ Benin's social-security agency changes calculation rules by decree nearly every 
 
 ## What worked, what didn't
 
-**Worked.** The unapologetic monolith. Django 4 + MySQL + Celery on a single VPS, supervisord for resilience. At 770 active employees, no microservices needed — and operational simplicity is gold when ops is also one of three devs.
+**Worked.** The unapologetic monolith. Django 4 + MySQL + Celery on a single VPS, supervisord for resilience. At that scale, no microservices needed — and operational simplicity is gold when ops is also one of three devs.
 
 **Didn't.** wkhtmltopdf eventually choked on some payslips (special characters in very long names). I started migrating to WeasyPrint but template rewriting was heavy — got to 70% before mission end.
 

@@ -1,12 +1,12 @@
 ---
 slug: tadagberhplus
-title: Un SIRH multi-entreprises pour 100+ structures
+title: Un SIRH multi-entreprises pour un cabinet de conseil RH
 kicker: Issue 04 · SaaS · Ressources humaines · 2024–2025
 excerpt: Centraliser la gestion RH multi-tenants d'un cabinet de conseil — paie, congés, CNSS, documents — sur un monolithe Django assumé.
 year: 2025
 order: 4
 featured: true
-client: Cabinet GPRHME (Bénin)
+client: Cabinet de conseil RH · Bénin (confidentiel)
 sector: SaaS · Ressources humaines
 role: Backend Lead · Architecture · Livraison
 team: 3 devs · 1 PO
@@ -20,20 +20,20 @@ stack:
   - Vue 3
 cover: /images/tadagberhplus.png
 results:
-  - value: "100+"
-    label: Entreprises gérées
-  - value: "770+"
-    label: Employés tracés
+  - value: "5"
+    label: Modules critiques industrialisés
+  - value: "3"
+    label: MAJ réglementaires CNSS · 0 régression
   - value: "85 %"
     label: Réduction des saisies manuelles
-seoDescription: TadagbeRhPlus — SIRH multi-tenants Django 4 + MySQL + Celery, paie + CNSS + congés + documents pour 100+ entreprises au Bénin.
+seoDescription: TadagbeRhPlus — SIRH multi-tenants Django 4 + MySQL + Celery, paie + CNSS + congés + documents pour un cabinet de conseil RH au Bénin.
 ---
 
 ## Le contexte
 
-Le cabinet GPRHME suit la paie et les RH d'une centaine de clients PME au Bénin. Avant TadagbeRhPlus : un fichier Excel par client, des calculs CNSS faits à la main, des PDF de bulletins de paie envoyés par mail, et un consultant par dossier qui devenait le **single point of failure** du portefeuille.
+Le cabinet suit la paie et les RH de dizaines de clients PME au Bénin. Avant TadagbeRhPlus : un fichier Excel par client, des calculs CNSS faits à la main, des PDF de bulletins de paie envoyés par mail, et un consultant par dossier qui devenait le **single point of failure** du portefeuille.
 
-La direction voulait un outil unique pour reprendre la main : un consultant pouvant gérer 30 dossiers en parallèle, des templates de paie standardisés, et une signature électronique pour les contrats.
+La direction voulait un outil unique pour reprendre la main : un consultant pouvant gérer plusieurs dizaines de dossiers en parallèle, des templates de paie standardisés, et une signature électronique pour les contrats.
 
 ## Ce qu'on m'a demandé
 
@@ -63,7 +63,7 @@ La Caisse Nationale de Sécurité Sociale du Bénin a des règles de calcul qui 
 
 ## Ce qui a marché, ce qui n'a pas marché
 
-**Marché.** Le monolithe assumé. Django 4 + MySQL + Celery sur un seul VPS, supervisord pour la résilience. À 770 employés actifs, pas de besoin de microservices — et la simplicité opérationnelle vaut son pesant d'or quand l'ops, c'est aussi un des trois devs.
+**Marché.** Le monolithe assumé. Django 4 + MySQL + Celery sur un seul VPS, supervisord pour la résilience. À cette échelle, pas de besoin de microservices — et la simplicité opérationnelle vaut son pesant d'or quand l'ops, c'est aussi un des trois devs.
 
 **Pas marché.** wkhtmltopdf a fini par exploser sur certains bulletins (caractères spéciaux dans les noms à rallonge). J'ai migré progressivement vers WeasyPrint mais l'effort de réécriture des templates était lourd — on en a fait 70 % avant la fin de mission.
 
