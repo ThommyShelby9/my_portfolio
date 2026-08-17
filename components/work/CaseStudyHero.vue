@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import type { CaseStudyLike } from '~/space/bodies'
-
 defineProps<{
   kicker?: string
   title: string
   excerpt?: string | null
   cover?: string | null
-  study?: CaseStudyLike | null
 }>()
 </script>
 
@@ -25,11 +22,6 @@ defineProps<{
           <p class="cs-hero__excerpt">{{ excerpt }}</p>
         </RevealOnView>
       </div>
-
-      <!-- Decorative rotating planet accent — client-only, aria-hidden -->
-      <ClientOnly v-if="study">
-        <ProjectBody :study="study" />
-      </ClientOnly>
     </div>
 
     <RevealOnView v-if="cover" :delay="0.35" class="cs-hero__cover-wrap">

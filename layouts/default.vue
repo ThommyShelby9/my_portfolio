@@ -7,7 +7,6 @@ const skipLabel = computed(() => locale.value === 'en' ? 'Skip to content' : 'Al
   <div class="layout">
     <a href="#main-content" class="skip-link">{{ skipLabel }}</a>
 
-    <SpaceCanvas />
     <CursorAura />
 
     <SiteHeader />
