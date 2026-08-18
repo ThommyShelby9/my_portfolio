@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
   <div class="home">
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-heading">
-      <HeroConstellation />
+      <Gargantua />
 
       <div class="hero__grid container-narrow">
         <!-- top strip -->
