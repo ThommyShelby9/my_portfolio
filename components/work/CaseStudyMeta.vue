@@ -26,12 +26,12 @@ const rows = computed(() => [
         <dd class="cs-meta__value">{{ row.value }}</dd>
       </div>
     </dl>
-    <div class="cs-meta__stack">
+    <dl class="cs-meta__stack">
       <dt class="cs-meta__label">{{ t('case_study.labels.stack') }}</dt>
       <dd class="cs-meta__stack-pills">
         <span v-for="s in stack" :key="s" class="cs-meta__pill">{{ s }}</span>
       </dd>
-    </div>
+    </dl>
   </section>
 </template>
 
@@ -94,6 +94,7 @@ const rows = computed(() => [
 }
 
 .cs-meta__stack {
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
