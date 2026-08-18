@@ -28,7 +28,7 @@ export function useManifesto(opts: { eatSelector?: string } = {}) {
     ticking = false
     if (document.hidden) return
     const vh = window.innerHeight
-    const holeC = vh / 2
+    const holeC = 0.33 * vh
     let f = 0
     let nearest = 0
     let nearestDist = Infinity

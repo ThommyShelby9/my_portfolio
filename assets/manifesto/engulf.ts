@@ -5,7 +5,7 @@ export function clamp(v: number, a: number, b: number): number {
 // Ingestion progress for a scene block whose center is `distance` px from the
 // viewport center (positive = still below the hole), given viewport height `vh`.
 export function ingestT(distance: number, vh: number): number {
-  return clamp((0.15 * vh - distance) / (0.6 * vh), 0, 1)
+  return clamp((0.2 * vh - distance) / (0.3 * vh), 0, 1)
 }
 
 export interface EngulfTransform {
@@ -19,11 +19,11 @@ export interface EngulfTransform {
 export function computeEngulf(distance: number, vh: number): EngulfTransform {
   const t = ingestT(distance, vh)
   return {
-    scale: 1 - 0.92 * t,
+    scale: 1 - 0.9 * t,
     shift: -distance * t,
-    rotate: -34 * t,
-    opacity: 1 - Math.pow(t, 1.25),
-    blur: 13 * t,
+    rotate: -30 * t,
+    opacity: 1 - Math.pow(t, 1.4),
+    blur: 12 * t,
   }
 }
 

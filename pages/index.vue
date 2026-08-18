@@ -92,6 +92,14 @@ onBeforeUnmount(() => {
 
 .hero__inner {
   text-align: center;
+  margin-top: 26vh; /* thesis sits low, in the clear band under the forming hole */
+  opacity: 0;
+  animation: rise 1.1s cubic-bezier(.2, .7, .2, 1) 1.7s both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero__eyebrow {
@@ -155,6 +163,10 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .hero__scroll-arw {
     animation: none;
+  }
+  .hero__inner {
+    animation: none;
+    opacity: 1;
   }
 }
 </style>
