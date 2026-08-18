@@ -3,9 +3,10 @@ import { test, expect } from '@playwright/test'
 test.describe('Navigation smoke', () => {
   test('home loads with hero, featured, approach, CTA', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('h1')).toContainText('logiciels fiables')
+    await expect(page.locator('h1')).toContainText('Du logiciel')
+    await expect(page.locator('h1')).toContainText('qui tient.')
     await expect(page.locator('text=Travaux récents').first()).toBeVisible()
-    await expect(page.locator('text=Comment je travaille').first()).toBeVisible()
+    await expect(page.locator('text=Ce qui casse en production ne prévient jamais.').first()).toBeVisible()
     await expect(page.locator('text=Démarrer un brief').first()).toBeVisible()
   })
 
@@ -27,7 +28,7 @@ test.describe('Navigation smoke', () => {
 
   test('EN home renders English copy', async ({ page }) => {
     await page.goto('/en')
-    await expect(page.locator('h1')).toContainText('reliable software')
+    await expect(page.locator('h1')).toContainText('that holds.')
     await expect(page.locator('text=Start a brief').first()).toBeVisible()
   })
 
