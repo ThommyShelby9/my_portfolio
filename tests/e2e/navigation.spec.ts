@@ -11,7 +11,7 @@ test.describe('Navigation smoke', () => {
   })
 
   test('all primary routes return 200 in FR', async ({ page }) => {
-    const routes = ['/', '/work', '/work/banque-regionale', '/about', '/contact', '/brief']
+    const routes = ['/', '/work', '/work/upgrade', '/about', '/contact', '/brief']
     for (const r of routes) {
       const resp = await page.goto(r)
       expect(resp?.status(), `route ${r}`).toBeLessThan(400)
@@ -19,7 +19,7 @@ test.describe('Navigation smoke', () => {
   })
 
   test('all primary routes return 200 in EN', async ({ page }) => {
-    const routes = ['/en', '/en/work', '/en/work/banque-regionale', '/en/about', '/en/contact', '/en/brief']
+    const routes = ['/en', '/en/work', '/en/work/upgrade', '/en/about', '/en/contact', '/en/brief']
     for (const r of routes) {
       const resp = await page.goto(r)
       expect(resp?.status(), `route ${r}`).toBeLessThan(400)
@@ -33,9 +33,9 @@ test.describe('Navigation smoke', () => {
   })
 
   test('case study renders body markdown', async ({ page }) => {
-    await page.goto('/work/banque-regionale')
-    await expect(page.locator('h1')).toContainText('paiement')
+    await page.goto('/work/upgrade')
+    await expect(page.locator('h1')).toContainText('aimant')
     await expect(page.locator('text=Le contexte').first()).toBeVisible()
-    await expect(page.locator('text=+180 %').first()).toBeVisible()
+    await expect(page.locator('text=23 625').first()).toBeVisible()
   })
 })
