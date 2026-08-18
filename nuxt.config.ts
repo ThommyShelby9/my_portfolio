@@ -165,7 +165,9 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
-      { name: 'Poppins', provider: 'google', weights: [300, 400, 500, 600, 700] },
+      { name: 'Inter', provider: 'google', weights: [400, 500, 600, 700] },
+      { name: 'Newsreader', provider: 'google', weights: [400, 500], styles: ['normal', 'italic'] },
+      { name: 'JetBrains Mono', provider: 'google', weights: [400, 500] },
     ],
   },
 })

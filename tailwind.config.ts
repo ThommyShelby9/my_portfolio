@@ -27,12 +27,12 @@ export default <Config>{
         success: 'var(--success)',
       },
       fontFamily: {
-        // v4 — Poppins everywhere (display, body, and former mono signatures)
-        display: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
-        editorial: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
-        sans: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
-        body: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
-        mono: ['"Poppins"', 'Inter', '-apple-system', 'sans-serif'],
+        // v5 — Inter (UI/display), Newsreader (reading serif), JetBrains Mono (data)
+        display: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        editorial: ['"Newsreader"', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         // [size, { lineHeight, letterSpacing }]
