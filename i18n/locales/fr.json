@@ -21,6 +21,20 @@
     "cta_secondary": "Lire mon approche",
     "meta": "03 case studies — 5 années — 12 produits livrés"
   },
+  "manifesto": {
+    "hero_eyebrow": "Rostel Panoumassi — Lead Engineering · Cotonou, BJ",
+    "hero_title_1": "Du logiciel",
+    "hero_title_2": "qui tient.",
+    "hero_sub": "Pour les équipes qui n'ont pas le droit à l'erreur.",
+    "scroll": "Défiler",
+    "credo": {
+      "c1": { "k": "01 — Le crédo", "t": "Ce qui casse en production ne prévient jamais." },
+      "c2": { "k": "02 — La méthode", "t": "On livre chaque semaine. Ou on ne livre pas." },
+      "c3": { "k": "03 — La passation", "t": "Le code que je laisse doit tourner sans moi." },
+      "c4": { "k": "04 — L'honnêteté", "t": "Je vous dirai ce qui ne marche pas. Surtout ça." }
+    },
+    "proof_kicker": "04 — Les preuves"
+  },
   "featured": {
     "kicker": "Travaux récents",
     "see_all": "Voir tous les travaux"

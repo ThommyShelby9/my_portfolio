@@ -21,6 +21,20 @@
     "cta_secondary": "Read my approach",
     "meta": "03 case studies — 5 years — 12 products shipped"
   },
+  "manifesto": {
+    "hero_eyebrow": "Rostel Panoumassi — Lead Engineering · Cotonou, BJ",
+    "hero_title_1": "Software",
+    "hero_title_2": "that holds.",
+    "hero_sub": "For teams that cannot afford to fail.",
+    "scroll": "Scroll",
+    "credo": {
+      "c1": { "k": "01 — The creed", "t": "What breaks in production never warns you first." },
+      "c2": { "k": "02 — The method", "t": "We ship every week. Or we don't ship." },
+      "c3": { "k": "03 — The handover", "t": "The code I leave behind must run without me." },
+      "c4": { "k": "04 — The honesty", "t": "I'll tell you what doesn't work. Especially that." }
+    },
+    "proof_kicker": "04 — The proof"
+  },
   "featured": {
     "kicker": "Recent work",
     "see_all": "See all work"
