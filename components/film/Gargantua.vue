@@ -18,7 +18,6 @@
 .gz {
   position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%);
   --d: clamp(300px, 64vh, 660px); width: var(--d); height: var(--d);
-  --feed: 0;
   pointer-events: none; transition: filter 2.4s ease;
 }
 .gz > * { position: absolute; border-radius: 50%; }
@@ -40,8 +39,8 @@
 .gz-bloom {
   inset: -62%; filter: blur(54px);
   background: radial-gradient(circle, rgba(255,192,122,.26), rgba(236,120,55,.09) 42%, transparent 60%);
-  transform: scale(calc(1 + var(--feed) * 0.16));
-  opacity: calc(.9 + var(--feed) * 0.6);
+  transform: scale(calc(1 + var(--feed, 0) * 0.16));
+  opacity: calc(.9 + var(--feed, 0) * 0.6);
   animation: gz-breath 15s ease-in-out infinite;
 }
 @keyframes gz-breath { 0%,100%{ opacity:.85; transform:scale(1) } 50%{ opacity:1; transform:scale(1.05) } }
@@ -49,7 +48,7 @@
 /* ingestion flare — flashes when a section crosses the horizon */
 .gz-flare {
   inset: -16%; z-index: 2; pointer-events: none;
-  opacity: calc(var(--feed) * .9); filter: blur(10px);
+  opacity: calc(var(--feed, 0) * .9); filter: blur(10px);
   background: radial-gradient(circle, rgba(255,236,205,.5) 40%, rgba(255,180,110,.18) 55%, transparent 66%);
 }
 
@@ -98,7 +97,7 @@
 /* thin ultra-bright photon ring hugging the shadow edge; brightens when feeding */
 .gz-photon {
   inset: -1%; z-index: 5;
-  filter: blur(.5px) drop-shadow(0 0 calc(12px + var(--feed) * 26px) rgba(255,222,172,.9));
+  filter: blur(.5px) drop-shadow(0 0 calc(12px + var(--feed, 0) * 26px) rgba(255,222,172,.9));
   background: radial-gradient(circle, transparent 43%, rgba(255,249,234,.98) 45.4%,
     rgba(255,214,158,.6) 48%, transparent 51%);
 }
