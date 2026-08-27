@@ -109,5 +109,10 @@
       "title": "Review your brief",
       "sub": "Check the recap, edit if needed, then send."
     }
+  },
+  "sound": {
+    "enable": "Enable ambient sound",
+    "disable": "Mute",
+    "label": "Sound"
   }
 }

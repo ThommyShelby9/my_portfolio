@@ -9,6 +9,7 @@ const skipLabel = computed(() => locale.value === 'en' ? 'Skip to content' : 'Al
 
     <FilmAtmosphere />
     <CursorAura />
+    <SoundToggle />
 
     <SiteHeader />
     <main id="main-content" class="layout__main" tabindex="-1">

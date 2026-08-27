@@ -109,5 +109,10 @@
       "title": "Inspecte ton brief",
       "sub": "Vérifie le récap, modifie si nécessaire, puis envoie."
     }
+  },
+  "sound": {
+    "enable": "Activer l'ambiance sonore",
+    "disable": "Couper le son",
+    "label": "Son"
   }
 }
