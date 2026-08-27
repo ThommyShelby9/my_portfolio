@@ -45,6 +45,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="home">
     <GargantuaStage />
+    <ManifestoHud :progress="manifesto.progress.value" />
 
     <!-- SCENE 0 — thesis (keeps #hero-heading) -->
     <section class="hero" aria-labelledby="hero-heading">
@@ -65,7 +66,7 @@ onBeforeUnmount(() => {
     <ManifestoScene :index="1" :kicker="t('manifesto.credo.c1.k')" :title="t('manifesto.credo.c1.t')" />
     <ManifestoScene :index="2" :kicker="t('manifesto.credo.c2.k')" :title="t('manifesto.credo.c2.t')" />
     <ManifestoScene :index="3" :kicker="t('manifesto.credo.c3.k')" :title="t('manifesto.credo.c3.t')" />
-    <ManifestoScene :index="4" :kicker="t('manifesto.credo.c4.k')" :title="t('manifesto.credo.c4.t')" />
+    <ManifestoScene :index="4" :kicker="t('manifesto.credo.c4.k')" :title="t('manifesto.credo.c4.t')" :cold="true" />
 
     <!-- PROOF — the work stands still while the creed is consumed -->
     <FeaturedWork />

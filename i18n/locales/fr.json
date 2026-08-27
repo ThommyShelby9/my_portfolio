@@ -33,7 +33,8 @@
       "c3": { "k": "03 — La passation", "t": "Le code que je laisse doit tourner sans moi." },
       "c4": { "k": "04 — L'honnêteté", "t": "Je vous dirai ce qui ne marche pas. Surtout ça." }
     },
-    "proof_kicker": "04 — Les preuves"
+    "proof_kicker": "04 — Les preuves",
+    "hud_skip": "Aller aux travaux"
   },
   "featured": {
     "kicker": "Travaux récents",

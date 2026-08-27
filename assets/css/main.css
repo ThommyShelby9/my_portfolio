@@ -407,3 +407,20 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* =========================================================
+   Manifesto — warm→cold bascule
+   Toggled by useManifesto() on <body> while the honesty scene (c4) sits
+   in the reading band. The Gargantua hole itself has its own hue-rotate
+   hook in components/film/Gargantua.vue; this covers the surrounding UI.
+   ========================================================= */
+body.is-cold .scene__kicker {
+  color: var(--accent-cool);
+}
+body.is-cold .manifesto-hud__reel {
+  color: var(--accent-cool);
+}
+body.is-cold .manifesto-hud__skip:hover,
+body.is-cold .manifesto-hud__skip:focus-visible {
+  color: var(--accent-cool);
+}

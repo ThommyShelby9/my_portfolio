@@ -53,6 +53,12 @@ export function useManifesto(opts: { eatSelector?: string } = {}) {
     root().style.setProperty('--feed', f.toFixed(3))
     root().style.setProperty('--progress', p.toFixed(4))
     root().style.setProperty('--void-recede', clamp((p - 0.9) / 0.1, 0, 1).toFixed(3))
+
+    // warm→cold bascule: the nearest eat block to the hole centre drives it,
+    // only while it sits within the reading band (reuses the loop above — cheap).
+    const nearestEl = eats[nearest]
+    const isCold = !!nearestEl && nearestEl.hasAttribute('data-cold') && nearestDist < 0.42 * vh
+    document.body.classList.toggle('is-cold', isCold)
   }
 
   function onScroll() {
@@ -78,6 +84,7 @@ export function useManifesto(opts: { eatSelector?: string } = {}) {
     ticking = false
     for (const el of eats) { el.style.transform = ''; el.style.opacity = ''; el.style.filter = '' }
     eats = []
+    document.body.classList.remove('is-cold')
     root().style.removeProperty('--feed')
     root().style.removeProperty('--progress')
     root().style.removeProperty('--void-recede')

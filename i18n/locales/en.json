@@ -33,7 +33,8 @@
       "c3": { "k": "03 — The handover", "t": "The code I leave behind must run without me." },
       "c4": { "k": "04 — The honesty", "t": "I'll tell you what doesn't work. Especially that." }
     },
-    "proof_kicker": "04 — The proof"
+    "proof_kicker": "04 — The proof",
+    "hud_skip": "Skip to the work"
   },
   "featured": {
     "kicker": "Recent work",

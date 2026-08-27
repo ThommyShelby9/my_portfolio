@@ -33,3 +33,12 @@ test('reduced motion: home renders with no serious/critical a11y violations', as
   const blocking = results.violations.filter(v => ['serious', 'critical'].includes(v.impact ?? ''))
   expect(blocking, JSON.stringify(blocking, null, 2)).toHaveLength(0)
 })
+
+test('the HUD skip link is present, targets the work route, and is keyboard-focusable', async ({ page }) => {
+  await page.goto('/')
+  const skip = page.locator('.manifesto-hud__skip')
+  await expect(skip).toBeVisible()
+  await expect(skip).toHaveAttribute('href', '/work')
+  await skip.focus()
+  await expect(skip).toBeFocused()
+})
