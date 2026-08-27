@@ -93,6 +93,7 @@ useHead({
 
 <template>
   <article v-if="study" class="cs-page">
+    <CaseStudyProgress />
     <div class="cs-page__inner container-narrow">
       <NuxtLink :to="localePath('/work')" class="cs-page__back">
         <span class="cs-page__back-arrow">←</span>
@@ -170,7 +171,7 @@ useHead({
   font-size: clamp(1.5rem, 3vw, 2.125rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
-  margin: 3.5rem 0 1.25rem;
+  margin: 5rem 0 1.25rem;
   color: var(--text);
 }
 
@@ -179,25 +180,30 @@ useHead({
   font-weight: 500;
   font-size: 1.25rem;
   letter-spacing: -0.015em;
-  margin: 2.5rem 0 1rem;
+  margin: 3.25rem 0 1rem;
   color: var(--text);
 }
 
-.cs-page__body :deep(p) {
-  font-family: theme('fontFamily.body');
-  font-size: 1.0625rem;
-  line-height: 1.7;
+/* Long-form reading text — Newsreader serif (spec §3: "serif fin pour la
+   lecture longue"). Section headings above stay in the Inter grotesque as
+   crisp chapter markers; the body itself reads like an editorial dossier.
+   --text-mute on --bg is ~9:1 — still comfortably AA at the larger size. */
+.cs-page__body :deep(p),
+.cs-page__body :deep(li) {
+  font-family: theme('fontFamily.editorial');
+  font-size: 1.15rem;
+  line-height: 1.75;
+  letter-spacing: 0.003em;
   color: var(--text-mute);
+  max-width: 68ch;
+}
+
+.cs-page__body :deep(p) {
   margin: 0 0 1.25rem;
-  max-width: 64ch;
 }
 
 .cs-page__body :deep(ul),
 .cs-page__body :deep(ol) {
-  font-family: theme('fontFamily.body');
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  color: var(--text-mute);
   margin: 0 0 1.25rem;
   padding-left: 0;
   list-style: none;
@@ -234,14 +240,14 @@ useHead({
 
 .cs-page__body :deep(blockquote) {
   border-left: 2px solid var(--accent);
-  padding: 0.5rem 0 0.5rem 1.5rem;
-  margin: 2rem 0;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  margin: 2.5rem 0;
   color: var(--text);
-  font-family: theme('fontFamily.display');
-  font-style: normal;
+  font-family: theme('fontFamily.editorial');
+  font-style: italic;
   font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 1.5;
+  font-size: 1.375rem;
+  line-height: 1.6;
   max-width: 56ch;
 }
 .cs-page__body :deep(blockquote em) {

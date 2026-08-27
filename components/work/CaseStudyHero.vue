@@ -18,19 +18,12 @@ defineProps<{
         <h1 class="cs-hero__title">
           <SplitText :text="title" tag="span" :stagger="0.05" />
         </h1>
+        <span class="cs-hero__horizon" aria-hidden="true" />
         <RevealOnView v-if="excerpt" :delay="0.25">
           <p class="cs-hero__excerpt">{{ excerpt }}</p>
         </RevealOnView>
       </div>
     </div>
-
-    <RevealOnView v-if="cover" :delay="0.35" class="cs-hero__cover-wrap">
-      <div class="cs-hero__cover">
-        <div class="cs-hero__cover-mask img-reveal">
-          <img :src="cover" :alt="title" loading="eager" class="cs-hero__cover-img" data-parallax="0.08">
-        </div>
-      </div>
-    </RevealOnView>
   </header>
 </template>
 
@@ -92,25 +85,15 @@ defineProps<{
   margin: 1.5rem 0 0;
 }
 
-.cs-hero__cover-wrap {
-  margin-top: 3.5rem;
-}
-.cs-hero__cover {
-  position: relative;
-  border: 1px solid var(--border-strong);
-  padding: 0.5rem;
-  background: var(--bg-overlay);
-}
-.cs-hero__cover-mask {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 16/9;
-}
-.cs-hero__cover-img {
+/* Ghost horizon — replaces the cover screenshot. A near-invisible amber-to-
+   cool gradient rule under the title, like a distant planetary terminator
+   line. Depth without imagery; DA calls for typography carrying the page. */
+.cs-hero__horizon {
   display: block;
   width: 100%;
-  height: 110%;
-  object-fit: cover;
-  filter: saturate(0.92) contrast(1.04);
+  height: 1px;
+  margin: 2.75rem 0 0;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-cool) 60%, transparent 100%);
+  opacity: 0.07;
 }
 </style>
