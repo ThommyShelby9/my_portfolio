@@ -33,7 +33,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="cs-progress" aria-hidden="true" :style="{ '--p': progress }" />
+  <!-- Teleport to body so `position:fixed` is measured against the viewport,
+       not the page-transition root (app.vue) which is transformed during route
+       changes and would otherwise shift this bar off-screen mid-transition. -->
+  <Teleport to="body">
+    <div class="cs-progress" aria-hidden="true" :style="{ '--p': progress }" />
+  </Teleport>
 </template>
 
 <style scoped>
