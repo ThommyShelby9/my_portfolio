@@ -1,86 +1,40 @@
 {
-  "name": "rostel-portfolio-v3",
+  "name": "rostel-portfolio-v6",
   "private": true,
-  "version": "3.0.0",
+  "version": "6.0.0",
   "type": "module",
   "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck",
-    "test": "vitest",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "node ./dist/server/entry.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "favicon": "node scripts/generate-favicon.mjs",
-    "og": "node scripts/generate-og.mjs"
+    "lint:rules": "vitest run --config vitest.dist.config.ts",
+    "favicons": "node scripts/favicons.mjs"
   },
   "dependencies": {
-    "@nuxt/content": "^3.13.0",
-    "@nuxt/fonts": "^0.10.3",
-    "@nuxt/image": "^1.11.0",
-    "@nuxtjs/i18n": "^9.5.6",
-    "@nuxtjs/robots": "^5.7.1",
-    "@nuxtjs/sitemap": "^7.6.0",
-    "@nuxtjs/tailwindcss": "^6.14.0",
-    "@pinia/nuxt": "^0.5.5",
-    "@tresjs/cientos": "^5.7.0",
-    "@tresjs/nuxt": "^5.6.0",
-    "@tresjs/post-processing": "^3.7.1",
-    "@vueuse/core": "^14.2.1",
-    "@vueuse/nuxt": "^11.3.0",
-    "better-sqlite3": "^12.9.0",
-    "gsap": "^3.15.0",
-    "lru-cache": "^11.3.5",
-    "mongoose": "^9.5.0",
-    "nodemailer": "^8.0.6",
-    "nuxt": "^3.13.0",
-    "nuxt-security": "^2.5.1",
-    "three": "^0.184.0",
-    "vue": "^3.5.0",
-    "vue-router": "^4.4.0"
+    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/node": "^11.1.6",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/schibsted-grotesk": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.2",
-    "@nuxt/test-utils": "^4.0.2",
-    "@playwright/test": "^1.59.1",
-    "@types/nodemailer": "^8.0.0",
-    "@types/three": "^0.184.0",
-    "@vitest/ui": "^4.1.5",
-    "@vue/test-utils": "^2.4.8",
-    "happy-dom": "^20.9.0",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^3.4.19",
-    "typescript": "^5.6.0",
-    "vitest": "^4.1.5",
-    "zod": "^4.3.6"
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2"
   },
   "pnpm": {
-    "overrides": {
-      "@vue/devtools-api": "^7.7.9"
-    },
-    "onlyBuiltDependencies": [
-      "better-sqlite3",
-      "esbuild",
-      "@parcel/watcher",
-      "sharp",
-      "vue-demi"
-    ],
-    "supportedArchitectures": {
-      "os": [
-        "linux",
-        "win32",
-        "darwin"
-      ],
-      "cpu": [
-        "x64",
-        "arm64"
-      ],
-      "libc": [
-        "glibc",
-        "musl"
-      ]
-    }
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
   }
 }

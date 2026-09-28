@@ -1,4 +1,5 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
-  "exclude": ["legacy/**", "OLD_FILES/**", "node_modules", "dist", ".output"]
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules"]
 }
