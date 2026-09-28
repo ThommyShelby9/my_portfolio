@@ -1,0 +1,36 @@
+import type { Dict } from './en';
+
+export const fr: Dict = {
+  'meta.title': 'Rostel Panoumassi, ingénieur Senior et Lead',
+  'meta.description':
+    "Six ans à construire les backends de plateformes RH, paiement et ERP, dont les trois derniers comme tech lead. Head of Engineering chez KPS Groupe, à Cotonou. Ouvert aux postes Senior et Lead, en remote.",
+  'nav.label': 'Principale',
+  'nav.skip': 'Aller au contenu',
+  'nav.collection': 'Collection',
+  'nav.curator': 'Conservateur',
+  'nav.cv': 'CV',
+  'nav.contact': 'Contact',
+  'status.open': 'Ouvert aux postes Senior et Lead',
+  'lang.switchLabel': 'Read this site in English',
+  'home.eyebrow': 'Nocturne · une collection de logiciels en production',
+  'home.h1.before': 'Je construis les backends de plateformes ',
+  'home.h1.em': 'RH, paiement et ERP',
+  'home.h1.after': ", et je dirige l'équipe qui les livre.",
+  'home.lede.strong': 'Head of Engineering & Innovation chez KPS Groupe',
+  'home.lede.rest':
+    ', à Cotonou. Six ans à livrer du logiciel, dont les trois derniers comme tech lead. Django, Laravel, Node et Spring Boot côté serveur, Vue côté interface. Ouvert aux postes Senior et Lead, en remote depuis UTC+1.',
+  'home.cta.enter': 'Entrer dans la collection',
+  'home.cta.cv': 'Télécharger le CV (PDF)',
+  'label.title': 'Cartel',
+  'label.aria': 'Faits clés',
+  'label.experience': 'Expérience',
+  'label.experienceValue': '{years} ans, dont {lead} comme tech lead',
+  'label.post': 'Poste actuel',
+  'label.postValue': 'Head of Engineering, {employer}',
+  'label.materials': 'Matériaux',
+  'label.based': 'Basé à',
+  'label.basedValue': '{city}, {country} ({tz})',
+  'footer.privacy': 'Confidentialité',
+  'footer.terms': 'CGU',
+  'footer.built': 'Construit à la main avec Astro',
+};
