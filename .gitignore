@@ -9,3 +9,7 @@ playwright-report/
 coverage/
 .superpowers/
 .DS_Store
+
+.next/
+next-env.d.ts
+*.tsbuildinfo

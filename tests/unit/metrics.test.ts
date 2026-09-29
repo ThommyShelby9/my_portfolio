@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { extractNumbers, findUnsourcedMetrics } from '../../src/content/metrics';
+import { extractNumbers, findUnsourcedMetrics } from '../../src/lib/content/metrics';
 
 const metrics = (text: string) => extractNumbers(text).filter((n) => n.isMetric).map((n) => n.raw);
 
