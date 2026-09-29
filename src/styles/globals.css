@@ -72,3 +72,8 @@
 html[data-poster='1'], html[data-poster='1'] body { background: transparent; }
 html[data-poster='1'] body > *:not(main),
 html[data-poster='1'] main > section > *:not([data-sculpture-slot]) { visibility: hidden; }
+
+/* The live sculpture returns at Conversion on desktop; its still twin is only for everyone else. */
+@media (min-width: 1024px) {
+  html:has([data-sculpture-stage][data-trajectory='on']) [data-conversion-poster] { display: none; }
+}
