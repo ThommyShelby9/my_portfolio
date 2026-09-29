@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Rostel Panoumassi · Digital product engineering",
+    "description": "I design and ship SaaS, payment and management platforms, from architecture to production. Six years of experience, three as tech lead. Cotonou, Benin."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "skip": "Skip to content",
+    "work": "Work",
+    "expertise": "Expertise",
+    "about": "About",
+    "explorations": "Explorations",
+    "cta": "Discuss a project",
+    "switchLocale": "Lire ce site en français",
+    "home": "Home, Rostel Panoumassi"
+  },
+  "hero": {
+    "eyebrow": "Digital product engineering · Cotonou",
+    "titleBefore": "I design and ship ",
+    "titleEm": "SaaS, payment and management",
+    "titleAfter": " platforms, from architecture to production.",
+    "ledeName": "Rostel Panoumassi",
+    "ledeRest": ", product engineer and Head of Engineering at KPS Groupe. Six years of experience, three as tech lead. Ubbfy, ContractIQ, ZenLife: products in production, not mockups.",
+    "ctaWork": "See the work",
+    "ctaProject": "Discuss a project",
+    "scroll": "Scroll to discover"
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "built": "Designed and built by hand"
+  },
+  "notFound": {
+    "title": "This page does not exist.",
+    "back": "Back to the home page"
+  }
+}

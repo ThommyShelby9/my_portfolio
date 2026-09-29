@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Rostel Panoumassi · Ingénierie de produits numériques",
+    "description": "Je conçois et je livre des plateformes SaaS, de paiement et de gestion, de l’architecture à la production. Six ans d’expérience, dont trois comme tech lead. Cotonou, Bénin."
+  },
+  "nav": {
+    "label": "Navigation principale",
+    "skip": "Aller au contenu",
+    "work": "Réalisations",
+    "expertise": "Expertise",
+    "about": "À propos",
+    "explorations": "Explorations",
+    "cta": "Parler d’un projet",
+    "switchLocale": "Read this site in English",
+    "home": "Accueil, Rostel Panoumassi"
+  },
+  "hero": {
+    "eyebrow": "Ingénierie de produits numériques · Cotonou",
+    "titleBefore": "Je conçois et je livre des plateformes ",
+    "titleEm": "SaaS, de paiement et de gestion",
+    "titleAfter": ", de l’architecture à la production.",
+    "ledeName": "Rostel Panoumassi",
+    "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits en production, pas des maquettes.",
+    "ctaWork": "Voir les réalisations",
+    "ctaProject": "Parler d’un projet",
+    "scroll": "Défiler pour découvrir"
+  },
+  "footer": {
+    "privacy": "Confidentialité",
+    "terms": "CGU",
+    "built": "Conçu et développé à la main"
+  },
+  "notFound": {
+    "title": "Cette page n’existe pas.",
+    "back": "Retour à l’accueil"
+  }
+}
