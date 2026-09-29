@@ -13,7 +13,7 @@ test.describe('work pages', () => {
   test('/realisations lists the 17 realisations (3 featured rows, then cards) and no exploration', async ({ page }) => {
     await page.goto('/realisations');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Des produits livrés, du premier schéma à la production.');
-    await expect(page.getByRole('link', { name: /^Voir l’étude de cas de / })).toHaveCount(3);
+    await expect(page.getByRole('link', { name: /^Voir l’étude de cas : / })).toHaveCount(3);
     await expect(page.locator('[data-work-card]')).toHaveCount(14);
     const slugs = await caseSlugs(page, '/realisations/');
     expect(slugs).toHaveLength(17);
@@ -24,9 +24,9 @@ test.describe('work pages', () => {
 
   test('each featured case link opens its case page with the project as h1', async ({ page }) => {
     await page.goto('/realisations');
-    const ctas = page.getByRole('link', { name: /^Voir l’étude de cas de / });
+    const ctas = page.getByRole('link', { name: /^Voir l’étude de cas : / });
     const targets = await ctas.evaluateAll((els) =>
-      els.map((el) => ({ href: el.getAttribute('href') ?? '', name: (el.getAttribute('aria-label') ?? '').replace('Voir l’étude de cas de ', '') })),
+      els.map((el) => ({ href: el.getAttribute('href') ?? '', name: (el.getAttribute('aria-label') ?? '').replace('Voir l’étude de cas : ', '') })),
     );
     expect(targets.map((t) => t.name)).toEqual(['Ubbfy', 'ContractIQ', 'ZenLife']);
     for (const { href, name } of targets) {
@@ -60,10 +60,11 @@ test.describe('work pages', () => {
     const data = JSON.parse(raw ?? '{}');
     expect(data).toMatchObject({
       '@type': 'CreativeWork',
-      name: 'ContractIQ',
+      name: 'ContractIQ, étude de cas · Rostel Panoumassi',
+      about: { '@type': 'CreativeWork', name: 'ContractIQ' },
       dateCreated: '2026',
       url: 'https://rostelmissimawu.com/realisations/contractiq',
-      author: { '@type': 'Person', name: 'Rostel Panoumassi' },
+      author: { '@id': 'https://rostelmissimawu.com/#person' },
       contributor: [{ '@type': 'Person', name: 'Jérémie Zitti' }],
     });
     const og = await page.locator('meta[property="og:image"]').getAttribute('content');
@@ -71,6 +72,17 @@ test.describe('work pages', () => {
     const res = await request.get(new URL(og!).pathname + new URL(og!).search);
     expect(res.status()).toBe(200);
     expect(res.headers()['content-type']).toBe('image/png');
+  });
+
+  test('the locale switch keeps a deep page: FR to EN and back', async ({ page }) => {
+    await page.goto('/realisations/ubbfy');
+    await page.locator('header a[hreflang="en"]').click();
+    await expect(page).toHaveURL(/\/en\/work\/ubbfy$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await page.locator('header a[hreflang="fr"]').click();
+    // A 307 through /fr/... is acceptable: the final URL is the unprefixed FR one.
+    await expect(page).toHaveURL(/\/realisations\/ubbfy$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
   });
 
   test('/realisations/zenlife shows its sourced proof', async ({ page }) => {

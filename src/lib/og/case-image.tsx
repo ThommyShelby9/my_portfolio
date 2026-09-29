@@ -12,12 +12,13 @@ export async function caseOgImage(kind: ProjectKind, locale: string, slug: strin
   const project = await getProject(kind, locale, slug);
   if (!project) notFound();
   const t = await getTranslations({ locale, namespace: 'caseStudy' });
+  const x = await getTranslations({ locale, namespace: 'explorations' });
   const cover = project.images[0];
   return ogCard({
     eyebrow: project.sector,
     title: [{ text: project.title }],
     titleSize: titleSizeFor(project.title, Boolean(cover)),
-    footer: `Rostel Panoumassi · ${kind === 'exploration' ? 'Exploration' : t('caseStudy')}`,
+    footer: `Rostel Panoumassi · ${kind === 'exploration' ? (project.proposal === 'pitched' ? x('badgePitched') : x('badgeUnsolicited')) : t('caseStudy')}`,
     capture: cover?.src,
   });
 }

@@ -3,7 +3,7 @@ import type { Locale } from '@/i18n/routing';
 import type { Project, ProjectKind } from '@/lib/content/load';
 import { localizedPath } from '@/lib/i18n/localized-path';
 import { pageMetadata } from '@/lib/seo/page-metadata';
-import { OWNER, SITE_URL } from '@/lib/site';
+import { OWNER, PERSON_ID, SITE_URL } from '@/lib/site';
 
 export const CASE_HREF = { realisation: '/realisations/[slug]', exploration: '/explorations/[slug]' } as const satisfies Record<
   ProjectKind,
@@ -33,18 +33,22 @@ export function caseMetadata(p: Project, title: string): Metadata {
   };
 }
 
-/** schema.org CreativeWork for a case study, crediting co-authors as contributors. */
-export function caseJsonLd(p: Project): Record<string, unknown> {
+/**
+ * schema.org CreativeWork for the case study page itself (not for the product): the product is
+ * `about`, Rostel authors the write-up only, and co-authors of the work are contributors.
+ */
+export function caseJsonLd(p: Project, title: string): Record<string, unknown> {
   const cover = p.images[0];
   return {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
-    name: p.title,
+    name: title,
+    about: { '@type': 'CreativeWork', name: p.title, ...(p.liveUrl ? { url: p.liveUrl } : {}) },
     description: p.summary,
     dateCreated: String(p.year),
     url: caseUrl(p),
     inLanguage: p.locale,
-    author: { '@type': 'Person', name: OWNER.name, url: SITE_URL },
+    author: { '@id': PERSON_ID },
     ...(p.coauthors.length > 0 ? { contributor: p.coauthors.map((name) => ({ '@type': 'Person', name })) } : {}),
     ...(cover ? { image: new URL(cover.src, SITE_URL).toString() } : {}),
     keywords: p.stack.join(', '),

@@ -5,6 +5,13 @@ import { ExplorationBadge } from './ExplorationBadge';
 import { STATUS_KEY, caseHref, coverOf } from './labels';
 import { WorkVisual } from './WorkVisual';
 
+const NO_IMAGE_KEY = {
+  private: 'noImagesPrivate',
+  archived: 'noImagesArchived',
+  live: 'noImagesOther',
+  concept: 'noImagesOther',
+} as const satisfies Record<Project['status'], string>;
+
 type Props = { project: Project; index: number; headingLevel?: 2 | 3 };
 
 /**
@@ -22,7 +29,7 @@ export function WorkCard({ project: p, index, headingLevel = 3 }: Props) {
         image={cover}
         name={p.title}
         sector={p.sector}
-        note={t('noImages')}
+        note={t(NO_IMAGE_KEY[p.status])}
         sizes="(min-width: 1280px) 590px, (min-width: 768px) 48vw, 100vw"
       />
       <div className="mt-6 flex items-baseline justify-between gap-4 font-mono text-xs text-faint">

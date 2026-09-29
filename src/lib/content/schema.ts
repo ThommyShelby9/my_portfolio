@@ -52,6 +52,13 @@ export function frontmatterSchema(kind: ProjectKind) {
       if (d.featured !== null) {
         ctx.addIssue({ code: 'custom', path: ['featured'], message: 'exploration cannot be featured' });
       }
+      // An exploration is not client work: no live product to link, no client to name.
+      if (d.liveUrl !== undefined) {
+        ctx.addIssue({ code: 'custom', path: ['liveUrl'], message: 'exploration cannot have a liveUrl' });
+      }
+      if (d.client !== undefined) {
+        ctx.addIssue({ code: 'custom', path: ['client'], message: 'exploration cannot have a client' });
+      }
       if (d.proofs.length > 0) {
         ctx.addIssue({ code: 'custom', path: ['proofs'], message: 'exploration cannot have proofs' });
       }

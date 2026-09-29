@@ -131,7 +131,9 @@
     "prev": "Previous project",
     "next": "Next project",
     "conversionKicker": "Your project",
-    "noImages": "Private project, no public screenshots",
+    "noImagesPrivate": "Private project, no public screenshots",
+    "noImagesArchived": "Archived project, no public screenshots",
+    "noImagesOther": "No public screenshot for this project",
     "caseStudy": "Case study"
   },
   "explorations": {

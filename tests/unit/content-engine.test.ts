@@ -32,7 +32,10 @@ describe('schema', () => {
     expect(parseFrontmatter('realisation', d).success).toBe(false);
   });
   describe('proposal (explorations only)', () => {
-    const exploration = () => ({ ...demo(), status: 'concept', featured: null, proofs: [] });
+    const exploration = () => {
+      const { liveUrl: _u, ...d } = demo();
+      return { ...d, status: 'concept', featured: null, proofs: [] };
+    };
     it('defaults to unsolicited on an exploration', () => {
       const r = parseFrontmatter('exploration', exploration());
       expect(r.success && r.data.proposal).toBe('unsolicited');
@@ -40,6 +43,10 @@ describe('schema', () => {
     it('accepts pitched on an exploration', () => {
       const r = parseFrontmatter('exploration', { ...exploration(), proposal: 'pitched' });
       expect(r.success && r.data.proposal).toBe('pitched');
+    });
+    it('rejects a liveUrl or a client on an exploration', () => {
+      expect(parseFrontmatter('exploration', { ...exploration(), liveUrl: 'https://example.com' }).success).toBe(false);
+      expect(parseFrontmatter('exploration', { ...exploration(), client: 'Acme' }).success).toBe(false);
     });
     it('rejects an unknown proposal value', () => {
       expect(parseFrontmatter('exploration', { ...exploration(), proposal: 'commissioned' }).success).toBe(false);
@@ -76,6 +83,18 @@ describe('renderMarkdown', () => {
   });
 });
 
+describe('renderMarkdown links and images', () => {
+  it('treats protocol-relative links as external', () => {
+    const r = renderMarkdown('[a](//evil.example/x) [b](/ok) [c](#top)');
+    expect(r.html).toMatch(/<a href="\/\/evil.example\/x"[^>]*rel="noopener"/);
+    expect(r.html).not.toMatch(/href="\/ok"[^>]*rel=/);
+    expect(r.html).not.toMatch(/href="#top"[^>]*rel=/);
+  });
+  it('refuses a body image with a clear error', () => {
+    expect(() => renderMarkdown('![alt](/work/x/01.webp)')).toThrow(/Markdown images are not allowed/);
+  });
+});
+
 describe('loader', () => {
   it('loads the demo in both locales', async () => {
     const fr = await getProjects('realisation', 'fr', { root: FIX });
@@ -107,7 +126,20 @@ describe('content guard (real content/)', () => {
     for (const kind of ['realisation', 'exploration'] as const) {
       for (const locale of ['fr', 'en'] as const) {
         for (const p of await getProjects(kind, locale)) {
-          const text = `${p.summary} ${stripTags(p.bodyHtml)}`;
+          const text = [
+            p.title,
+            p.summary,
+            p.seoDescription,
+            p.role,
+            p.team,
+            p.sector,
+            p.client,
+            p.duration,
+            ...p.images.map((i) => i.alt),
+            stripTags(p.bodyHtml),
+          ]
+            .filter(Boolean)
+            .join(' ');
           expect(findUnsourcedMetrics(text, p.proofs), `${kind}/${locale}/${p.slug}`).toEqual([]);
         }
       }

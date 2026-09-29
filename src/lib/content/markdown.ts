@@ -36,11 +36,16 @@ export function renderMarkdown(md: string): { html: string; headings: Heading[] 
         headings.push({ id, text: token.text });
         return `<h2 id="${id}">${inner}</h2>\n`;
       },
+      // Gallery images come from the frontmatter only, so a body image is a content mistake.
+      image(token: Tokens.Image): string {
+        throw new Error(`Markdown images are not allowed (${token.href}): declare gallery images in the frontmatter.`);
+      },
       link(this: InlineParser, token: Tokens.Link) {
         const inner = this.parser.parseInline(token.tokens);
         const href = token.href;
         if (!/^(https?:|\/|#|mailto:)/i.test(href)) return inner;
-        const external = /^https?:\/\//i.test(href);
+        // `//host` is protocol-relative, hence external: only a single leading slash is internal.
+        const external = !/^(\/(?!\/)|#|mailto:)/i.test(href);
         const title = token.title ? ` title="${escapeHtml(token.title)}"` : '';
         return `<a href="${escapeHtml(href)}"${title}${external ? ' rel="noopener"' : ''}>${inner}</a>`;
       },

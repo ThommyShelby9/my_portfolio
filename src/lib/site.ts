@@ -1,4 +1,8 @@
-export const SITE_URL: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rostelmissimawu.com';
+// Normalised once: no trailing slash, so `${SITE_URL}/path` and `new URL(path, SITE_URL)` both behave.
+export const SITE_URL: string = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rostelmissimawu.com').replace(/\/+$/, '');
+
+/** Single schema.org identity of the owner, shared by every JSON-LD block on both locales. */
+export const PERSON_ID = `${SITE_URL}/#person`;
 
 export const OWNER = {
   name: 'Rostel Panoumassi',

@@ -16,14 +16,17 @@ type Props = { kind: ProjectKind; locale: Locale; slug: string };
 export async function CasePage({ kind, locale, slug }: Props) {
   const project = await getProject(kind, locale, slug);
   if (!project) notFound();
-  const [{ prev, next }, t] = await Promise.all([
+  const [{ prev, next }, t, tx] = await Promise.all([
     getNeighbours(kind, locale, slug),
     getTranslations({ locale, namespace: 'caseStudy' }),
+    getTranslations({ locale, namespace: 'explorations' }),
   ]);
+  // Same title as the page metadata.
+  const metaTitle = kind === 'exploration' ? tx('caseMetaTitle', { title: project.title }) : t('metaTitle', { title: project.title });
   const cover = project.images[0];
   return (
     <>
-      <JsonLd data={caseJsonLd(project)} />
+      <JsonLd data={caseJsonLd(project, metaTitle)} />
       <article data-case={project.slug}>
         <CaseHeader project={project} />
         {cover && (

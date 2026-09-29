@@ -56,7 +56,7 @@
     "title": "Trois produits, de l’architecture au lancement.",
     "all": "Toutes les réalisations",
     "cta": "Voir l’étude de cas",
-    "ctaFor": "Voir l’étude de cas de {name}",
+    "ctaFor": "Voir l’étude de cas : {name}",
     "coBuilt": "Co-développé avec",
     "ubbfy": {
       "what": "ERP et pointage géolocalisé",
@@ -131,7 +131,9 @@
     "prev": "Projet précédent",
     "next": "Projet suivant",
     "conversionKicker": "Votre projet",
-    "noImages": "Projet privé, sans captures publiques",
+    "noImagesPrivate": "Projet privé, sans captures publiques",
+    "noImagesArchived": "Projet archivé, sans captures publiques",
+    "noImagesOther": "Pas de capture publique pour ce projet",
     "caseStudy": "Étude de cas"
   },
   "explorations": {
