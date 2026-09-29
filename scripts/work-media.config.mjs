@@ -101,7 +101,7 @@ export const sources = {
   beninbouge: [
     { from: 'url:http://localhost:5301/article/2', waitMs: 12000, kind: 'public', alt: { fr: 'Page d’article de la proposition Bénin Bouge', en: 'Article page of the Bénin Bouge proposal' } },
     { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 1900, kind: 'public', alt: { fr: 'Grille d’actualités de la page d’accueil', en: 'News grid on the home page' } },
-    { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 3580, height: 1300, prepare: hoverBorgou, kind: 'public', alt: { fr: 'Carte interactive des départements du Bénin, Borgou en surbrillance', en: 'Interactive map of Benin departments, Borgou highlighted' } },
+    { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 3580, height: 1300, crop: { bottom: 260 }, prepare: hoverBorgou, kind: 'public', alt: { fr: 'Carte interactive des départements du Bénin, Borgou en surbrillance', en: 'Interactive map of Benin departments, Borgou highlighted' } },
   ],
   najaexperts: [
     { from: 'url:http://localhost:5302/a', waitMs: 4000, kind: 'public', alt: { fr: 'Proposition A, page d’accueil', en: 'Proposal A, home page' } },
