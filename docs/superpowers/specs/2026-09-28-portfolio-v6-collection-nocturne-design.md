@@ -2,7 +2,7 @@
 
 **Date** : 2026-09-28
 **Auteur** : Rostel Panoumassi (avec assistance Claude)
-**Statut** : direction et architecture validées en brainstorming, spec en relecture
+**Statut** : REMPLACÉE le 2026-09-29 par `2026-09-29-portfolio-v6-visionary-engineer-design.md` (archive)
 **Repo** : `O:/Projets/my_portfolio`, nouvelle branche `v6`, reconstruction complète (aucun code Nuxt conservé)
 **Maquette de référence** : `.superpowers/brainstorm/2023-1790585654/content/nocturne-home-v2.html` (accueil haute fidélité validé)
 

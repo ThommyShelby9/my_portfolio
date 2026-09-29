@@ -1,5 +1,7 @@
 # Portfolio v6, Lot 1 (Foundations) Implementation Plan
 
+> **ABANDONNÉ le 2026-09-29** : la direction a changé (voir `docs/superpowers/specs/2026-09-29-portfolio-v6-visionary-engineer-design.md`). Tasks 1 à 5 avaient été implémentées (commits 2081a9b..6c43c77) ; elles sont remplacées par le socle Next.js.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the Nuxt codebase on branch `v6` with an Astro 7 skeleton that already carries the "Collection · Nocturne" design system, bilingual routing, the home hero, the favicon set, the content schemas with the no-fake-metrics guard, an automated owner-rules checker, a health endpoint, e2e + accessibility tests and a Coolify-ready Dockerfile.
