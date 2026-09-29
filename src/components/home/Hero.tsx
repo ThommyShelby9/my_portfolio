@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { ButtonLink } from '@/components/site/ButtonLink';
 import { Reveal } from '@/components/motion/Reveal';
 
-export function Hero({ sculpture }: { sculpture?: React.ReactNode }) {
+export function Hero({ sculpture }: { sculpture?: ReactNode }) {
   const t = useTranslations('hero');
   return (
     <section className="relative mx-auto grid min-h-[92svh] max-w-[1280px] items-center gap-10 px-5 pt-[6vh] md:px-10 lg:grid-cols-[1.25fr_1fr] lg:pt-[10vh]">

@@ -41,9 +41,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 
 export const viewport = { themeColor: '#101112' };
 
-// Adds `js` before first paint so reveal styles only hide content when JS runs,
-// and force-reveals everything after 2.5 s even if the reveal code never loads.
-const EARLY_JS = `document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('reveal-done')},2500);`;
+// Adds `js` before first paint so reveal styles only hide content when JS runs.
+// The 2.5 s timer rescues the content only when the reveal code never ran
+// (it adds `reveal-ready` on hydration); otherwise reveals stay scroll-driven.
+const EARLY_JS = `document.documentElement.classList.add('js');setTimeout(function(){var c=document.documentElement.classList;if(!c.contains('reveal-ready'))c.add('reveal-done')},2500);`;
 
 export default async function LocaleLayout({ children, params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params;
