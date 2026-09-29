@@ -5,7 +5,7 @@ import { ButtonLink } from '@/components/site/ButtonLink';
 export function Hero({ sculpture }: { sculpture?: ReactNode }) {
   const t = useTranslations('hero');
   return (
-    <section className="relative mx-auto grid min-h-[92svh] max-w-[1280px] items-center gap-10 px-5 pt-[6vh] md:px-10 lg:grid-cols-[1.25fr_1fr] lg:pt-[10vh]">
+    <section className="mx-auto grid min-h-[92svh] max-w-[1280px] items-center gap-10 px-5 pt-[6vh] md:px-10 lg:grid-cols-[1.25fr_1fr] lg:pt-[10vh]">
       <div data-sculpture-slot className="order-first lg:order-last">{sculpture}</div>
       <div className="relative z-10">
         <p data-hero style={{ '--hero-i': 0 } as CSSProperties} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">

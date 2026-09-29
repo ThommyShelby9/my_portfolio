@@ -91,7 +91,7 @@ export function SculptureStage() {
       data-running={String(running)}
       aria-hidden="true"
       data-trajectory={posterMode ? 'on' : undefined}
-      className="pointer-events-none relative h-[42svh] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-1/2"
+      className="pointer-events-none relative h-[42svh] w-full lg:absolute lg:right-0 lg:top-[calc(-1*var(--header-h))] lg:h-svh lg:w-[50vw]"
     >
       {!posterMode && (
         <picture>

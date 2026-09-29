@@ -116,22 +116,10 @@ test.describe('foundations', () => {
 
   for (const path of ['/', '/en']) {
     test(`no accessibility violations on ${path}`, async ({ page }) => {
-      // axe walks a page that runs a software-rendered WebGL scene; it is slow when workers run in parallel.
-      test.setTimeout(120_000);
+      // Reduced motion gives a static page (no live WebGL, everything revealed), so axe is fast and stable.
+      await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.goto(path);
       await page.waitForTimeout(1500);
-      // Below-the-fold reveals fire on intersection: scroll through the page to trigger them all.
-      await page.evaluate(async () => {
-        for (let y = 0; y < document.body.scrollHeight; y += 400) {
-          window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 60));
-        }
-        window.scrollTo(0, document.body.scrollHeight);
-      });
-      // Contrast is computed on live styles: wait for the one-shot reveals to finish (opacity 1).
-      await page.waitForFunction(() =>
-        [...document.querySelectorAll<HTMLElement>('[data-reveal]')].every((el) => getComputedStyle(el).opacity === '1'),
-      );
       const results = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
         .analyze();

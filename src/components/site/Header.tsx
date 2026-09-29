@@ -14,7 +14,7 @@ export function Header() {
   ] as const;
   return (
     <header className="sticky top-0 z-30 bg-linear-to-b from-obsidian to-obsidian/0">
-      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-5 py-5 md:gap-10 md:px-10">
+      <div className="mx-auto flex min-h-(--header-h) max-w-[1280px] items-center gap-6 px-5 md:gap-10 md:px-10">
         <Link href="/" aria-label={t('home')} className="text-ivory no-underline">
           <Monogram />
         </Link>

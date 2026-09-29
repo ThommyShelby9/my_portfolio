@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+:root { --header-h: 88px; }
 
 @theme inline {
   --color-obsidian: #101112;
