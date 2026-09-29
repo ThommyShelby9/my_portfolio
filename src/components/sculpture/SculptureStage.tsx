@@ -1,0 +1,130 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
+import { DESKTOP_RIBBON, MOBILE_RIBBON } from './mobius';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const Sculpture = dynamic(() => import('./Sculpture'), { ssr: false });
+
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return Boolean(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+  } catch {
+    return false;
+  }
+}
+
+export function SculptureStage() {
+  const box = useRef<HTMLDivElement>(null);
+  const progress = useRef(0);
+  const tilt = useRef({ x: 0, y: 0 });
+  const [mode, setMode] = useState<'poster' | '3d'>('poster');
+  const [visible, setVisible] = useState(true);
+  // The desktop stage is `position: fixed`, so it always "intersects"; it is really gone
+  // once the scroll trajectory has faded it out.
+  const [faded, setFaded] = useState(false);
+  const [posterMode, setPosterMode] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  // Decide once on mount: 3D only with motion allowed, WebGL present, after the browser is idle.
+  useEffect(() => {
+    const isPoster = new URLSearchParams(location.search).get('sculpture') === 'poster';
+    setMobile(matchMedia('(max-width: 1023px)').matches);
+    if (isPoster) {
+      document.documentElement.dataset.poster = '1';
+      setPosterMode(true);
+      setMode('3d');
+      return;
+    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !hasWebGL()) return;
+    const start = () => setMode('3d');
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = requestIdleCallback(start, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(start, 1200);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  // Pause rendering when off screen or when the tab is hidden.
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    let onScreen = true;
+    const update = () => setVisible(onScreen && document.visibilityState === 'visible');
+    const io = new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; update(); });
+    io.observe(el);
+    document.addEventListener('visibilitychange', update);
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', update); };
+  }, []);
+
+  // Cursor tilt: desktop, fine pointer, motion allowed, not in poster mode.
+  useEffect(() => {
+    if (posterMode || !matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
+    const onMove = (e: PointerEvent) => {
+      tilt.current = { x: (e.clientY / innerHeight - 0.5) * 0.4, y: (e.clientX / innerWidth - 0.5) * 0.4 };
+    };
+    addEventListener('pointermove', onMove, { passive: true });
+    return () => removeEventListener('pointermove', onMove);
+  }, [posterMode]);
+
+  // Scroll trajectory for the hero: drift right, shrink, fade (Lot 2 extends it to later sections).
+  useGSAP(() => {
+    if (posterMode) return;
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 1024px)', () => {
+      gsap.to(box.current, {
+        xPercent: 12, scale: 0.88, opacity: 0, ease: 'none',
+        scrollTrigger: {
+          start: 0, end: () => innerHeight * 1.2, scrub: true,
+          onUpdate: (self) => {
+            progress.current = self.progress;
+            setFaded(self.progress >= 0.999);
+          },
+        },
+      });
+    });
+    return () => mm.revert();
+  }, { dependencies: [posterMode] });
+
+  const params = mobile ? MOBILE_RIBBON : DESKTOP_RIBBON;
+  const poster = mobile ? '/sculpture/mobius-mobile.webp' : '/sculpture/mobius-desktop.webp';
+  const running = mode === '3d' && visible && !faded && !posterMode;
+
+  return (
+    <div
+      ref={box}
+      data-sculpture-stage
+      data-state={mode}
+      data-running={String(running)}
+      aria-hidden="true"
+      className="pointer-events-none relative h-[42svh] w-full lg:fixed lg:right-0 lg:top-0 lg:h-svh lg:w-1/2"
+    >
+      {mode === 'poster' && (
+        // eslint-disable-next-line @next/next/no-img-element -- decorative, pre-sized poster; next/image adds nothing here
+        <img
+          src={poster}
+          alt=""
+          data-sculpture-poster
+          className="absolute inset-0 m-auto h-full w-full object-contain"
+        />
+      )}
+      {mode === '3d' && (
+        <Sculpture
+          params={params}
+          frozen={posterMode}
+          running={running || posterMode}
+          progress={progress}
+          tilt={tilt}
+          dpr={mobile ? 1.5 : 2}
+        />
+      )}
+    </div>
+  );
+}
