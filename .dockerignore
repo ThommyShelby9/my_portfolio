@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.superpowers
+docs
+tests
+test-results
+playwright-report
+coverage
+legacy
+3002
+new.md
+image*.png
+.env
+.env.*

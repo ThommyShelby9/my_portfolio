@@ -3,12 +3,14 @@ import { expect, test } from '@playwright/test';
 test.describe('sculpture', () => {
   test('mounts the 3D scene after idle on a capable desktop', async ({ page, isMobile }) => {
     test.skip(isMobile, 'desktop behaviour');
+    test.setTimeout(60_000);
     await page.goto('/');
     const stage = page.locator('[data-sculpture-stage]');
     await expect(stage).toHaveAttribute('data-state', '3d', { timeout: 8000 });
-    await expect(stage.locator('canvas')).toBeVisible();
+    // Software WebGL (headless, no GPU) blocks the main thread for seconds while compiling the first frame.
+    await expect(stage.locator('canvas')).toBeVisible({ timeout: 20000 });
     await expect(stage).toHaveAttribute('aria-hidden', 'true');
-    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 8000 });
+    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 20000 });
     await expect(page.locator('[data-sculpture-poster]')).toBeHidden();
   });
 
