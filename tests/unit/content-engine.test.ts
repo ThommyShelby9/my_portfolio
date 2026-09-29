@@ -31,6 +31,10 @@ describe('schema', () => {
     const d = { ...demo(), images: [{ src: '/x.png', alt: 'a', kind: 'public' }] };
     expect(parseFrontmatter('realisation', d).success).toBe(false);
   });
+  it('rejects an unknown key (typo)', () => {
+    const d = { ...demo(), proof: [{ text: 'x', source: 'y' }] };
+    expect(parseFrontmatter('realisation', d).success).toBe(false);
+  });
 });
 
 describe('renderMarkdown', () => {

@@ -31,7 +31,7 @@ const base = z.object({
   images: z.array(image),
   proofs: z.array(proof).default([]),
   seoDescription: z.string().min(1).max(170),
-});
+}).strict();
 
 export type Frontmatter = z.infer<typeof base>;
 
