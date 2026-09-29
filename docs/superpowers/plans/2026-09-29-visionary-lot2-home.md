@@ -374,7 +374,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]'>): Prom
   "cta": "Voir l’étude de cas",
   "coBuilt": "Co-développé avec",
   "ubbfy": { "what": "ERP et pointage géolocalisé", "role": "Lead engineer", "roleDetail": "refonte et architecture", "challenge": "Reconstruire un ERP complet autour d’une seule API, servie à trois clients : web, PWA et application Flutter.", "alt": "Ubbfy, page d’accueil et aperçu du suivi des candidats" },
-  "contractiq": { "what": "SaaS d’analyse de contrats par IA", "role": "Architecture et développement", "roleDetail": "produit B2B", "challenge": "Extraire parties, échéances et clauses à risque de contrats PDF, puis alerter avant chaque renouvellement. Gemini en moteur principal, OpenAI en secours.", "alt": "ContractIQ, tableau de bord des contrats analysés" },
+  "contractiq": { "what": "SaaS d’analyse de contrats par IA", "role": "Architecture et développement", "roleDetail": "produit B2B", "challenge": "Extraire parties, échéances et clauses à risque de contrats PDF, puis alerter avant chaque renouvellement. Gemini en moteur principal, OpenAI en secours.", "alt": "ContractIQ, analyse des risques d’un contrat par l’IA" },
   "zenlife": { "what": "Application bien-être, web et mobile", "role": "Conception et développement", "roleDetail": "seul", "challenge": "Planning, budget, messagerie et rappels réunis dans une seule application, utilisée par 1 200+ personnes actives en six mois.", "alt": "ZenLife, tableau de bord de l’application" }
 },
 "method": {
@@ -413,7 +413,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]'>): Prom
   "cta": "Read the case study",
   "coBuilt": "Co-built with",
   "ubbfy": { "what": "ERP and geolocated time clock", "role": "Lead engineer", "roleDetail": "rebuild and architecture", "challenge": "Rebuild a complete ERP around a single API serving three clients: web, PWA and a Flutter app.", "alt": "Ubbfy, home page and candidate pipeline preview" },
-  "contractiq": { "what": "AI contract analysis SaaS", "role": "Architecture and development", "roleDetail": "B2B product", "challenge": "Extract parties, deadlines and risky clauses from PDF contracts, then alert before every renewal. Gemini as the main engine, OpenAI as fallback.", "alt": "ContractIQ, dashboard of analysed contracts" },
+  "contractiq": { "what": "AI contract analysis SaaS", "role": "Architecture and development", "roleDetail": "B2B product", "challenge": "Extract parties, deadlines and risky clauses from PDF contracts, then alert before every renewal. Gemini as the main engine, OpenAI as fallback.", "alt": "ContractIQ, AI risk analysis of a contract" },
   "zenlife": { "what": "Wellness app, web and mobile", "role": "Design and development", "roleDetail": "solo", "challenge": "Planning, budget, messaging and reminders in a single app, used by 1,200+ active people within six months.", "alt": "ZenLife, app dashboard" }
 },
 "method": {
@@ -440,9 +440,9 @@ Run `pnpm test tests/unit/messages.test.ts` (parity, no em dash, FR apostrophes,
 mkdir -p src/assets/work
 git show v5-manifesto:public/images/ubbfy.png > src/assets/work/ubbfy.png
 cp .superpowers/assets/zenlife/desktop-dash.png src/assets/work/zenlife.png
-cp .superpowers/assets/contractiq/01-command-center.png src/assets/work/contractiq.png
+cp .superpowers/assets/contractiq/02b-contract-detail-risks.png src/assets/work/contractiq.png
 ```
-If `01-command-center.png` does not exist, list `.superpowers/assets/contractiq/`, read its `REPORT.md`, pick the dashboard-like capture and report the choice. Open all three with an image viewer: no browser chrome, no personal data, no error overlay.
+(Chosen by the controller: the AI risk analysis of a fictional contract, demo data only. The folder holds 12 captures for Lot 3.) Open all three with an image viewer: no browser chrome, no personal data, no error overlay.
 
 - [ ] **Step 8: Verify and commit**
 
