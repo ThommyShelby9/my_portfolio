@@ -53,7 +53,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <NextIntlClientProvider>
           <SkipLink />
           <Header />
-          <main id="main" tabIndex={-1} className="relative">{children}</main>
+          <main id="main" tabIndex={-1} className="relative focus:outline-none">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>

@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 type Props = ComponentProps<typeof Link> & { variant?: 'primary' | 'ghost'; arrow?: boolean };
 
 const base =
-  'group inline-flex items-center gap-2.5 rounded-[2px] px-5 py-3.5 text-[13.5px] font-semibold no-underline transition-colors';
+  'group inline-flex items-center gap-2.5 whitespace-nowrap rounded-[2px] px-5 py-3.5 text-[13.5px] font-semibold no-underline transition-colors';
 const variants = {
   primary: 'bg-ivory text-obsidian hover:bg-champagne',
   ghost: 'border border-[#3a3b3e] text-ivory hover:border-champagne hover:text-champagne',

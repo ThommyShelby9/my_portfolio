@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+/* Consumers: the Header row (min-h) and SculptureStage (top offset). Keep the header exactly this tall. */
 :root { --header-h: 88px; }
 
 @theme inline {
@@ -78,3 +79,8 @@ html[data-poster='1'] main > section > *:not([data-sculpture-slot]) { visibility
 @media (min-width: 1024px) {
   html:has([data-sculpture-stage][data-trajectory='on']) [data-conversion-poster] { display: none; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter { animation: page-enter 280ms ease-out both; }
+}
+@keyframes page-enter { from { opacity: 0; } to { opacity: 1; } }

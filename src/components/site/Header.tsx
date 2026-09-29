@@ -1,20 +1,24 @@
 import { useTranslations } from 'next-intl';
+import type { ComponentProps } from 'react';
 import { Link } from '@/i18n/navigation';
 import { ButtonLink } from './ButtonLink';
 import { LocaleSwitch } from './LocaleSwitch';
+import { MobileMenu } from './MobileMenu';
 import { Monogram } from './Monogram';
+
+export type NavItem = { href: ComponentProps<typeof Link>['href']; label: string };
 
 export function Header() {
   const t = useTranslations('nav');
-  const items = [
+  const items: NavItem[] = [
     { href: '/realisations', label: t('work') },
-    { href: '/realisations', label: t('expertise') },
+    { href: { pathname: '/', hash: 'expertise' }, label: t('expertise') },
     { href: '/a-propos', label: t('about') },
     { href: '/explorations', label: t('explorations') },
-  ] as const;
+  ];
   return (
-    <header className="sticky top-0 z-30 bg-linear-to-b from-obsidian to-obsidian/0">
-      <div className="mx-auto flex min-h-(--header-h) max-w-[1280px] items-center gap-6 px-5 md:gap-10 md:px-10">
+    <header className="sticky top-0 z-30 bg-obsidian/85 backdrop-blur-md">
+      <div className="relative mx-auto flex min-h-(--header-h) max-w-[1280px] items-center gap-6 px-5 md:gap-10 md:px-10">
         <Link href="/" aria-label={t('home')} className="text-ivory no-underline">
           <Monogram />
         </Link>
@@ -28,6 +32,7 @@ export function Header() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-5 md:ml-0">
+          <MobileMenu items={items} />
           <LocaleSwitch />
           <ButtonLink href="/brief" variant="primary">{t('cta')}</ButtonLink>
         </div>
