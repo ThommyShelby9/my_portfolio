@@ -20,7 +20,7 @@
     "titleEm": "SaaS, de paiement et de gestion",
     "titleAfter": ", de l’architecture à la production.",
     "ledeName": "Rostel Panoumassi",
-    "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits en production, pas des maquettes.",
+    "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits livrés, pas des maquettes.",
     "ctaWork": "Voir les réalisations",
     "ctaProject": "Parler d’un projet",
     "scroll": "Défiler pour découvrir"
@@ -33,5 +33,64 @@
   "notFound": {
     "title": "Cette page n’existe pas.",
     "back": "Retour à l’accueil"
+  },
+  "positioning": {
+    "kicker": "02 · Au-delà du développement",
+    "title": "Je ne livre pas du code. Je livre des produits qui tiennent.",
+    "vision": "Vision",
+    "visionText": "Comprendre le métier, les utilisateurs et les contraintes avant d’écrire une ligne.",
+    "architecture": "Architecture",
+    "architectureText": "Choisir les fondations : données, paiements, sécurité, montée en charge.",
+    "execution": "Exécution",
+    "executionText": "Construire, tester, mettre en production et faire évoluer avec l’équipe.",
+    "signatureA": "Les idées sont partout.",
+    "signatureB": "L’exécution est une discipline."
+  },
+  "work": {
+    "kicker": "03 · Réalisations",
+    "title": "Trois produits, de l’architecture au lancement.",
+    "all": "Toutes les réalisations",
+    "cta": "Voir l’étude de cas",
+    "coBuilt": "Co-développé avec",
+    "ubbfy": {
+      "what": "ERP et pointage géolocalisé",
+      "role": "Lead engineer",
+      "roleDetail": "refonte et architecture",
+      "challenge": "Reconstruire un ERP complet autour d’une seule API, servie à trois clients : web, PWA et application Flutter.",
+      "alt": "Ubbfy, page d’accueil et aperçu du suivi des candidats"
+    },
+    "contractiq": {
+      "what": "SaaS d’analyse de contrats par IA",
+      "role": "Architecture et développement",
+      "roleDetail": "produit B2B",
+      "challenge": "Extraire parties, échéances et clauses à risque de contrats PDF, puis alerter avant chaque renouvellement. Gemini en moteur principal, OpenAI en secours.",
+      "alt": "ContractIQ, analyse des risques d’un contrat par l’IA"
+    },
+    "zenlife": {
+      "what": "Application bien-être, web et mobile",
+      "role": "Conception et développement",
+      "roleDetail": "seul",
+      "challenge": "Planning, budget, messagerie et rappels réunis dans une seule application, utilisée par 1 200+ personnes actives en six mois.",
+      "alt": "ZenLife, tableau de bord de l’application"
+    }
+  },
+  "method": {
+    "kicker": "04 · Méthode",
+    "title": "De l’idée à la production, sans perdre le fil.",
+    "discover": "Découvrir",
+    "discoverText": "Comprendre le problème, les utilisateurs, les objectifs et les contraintes.",
+    "design": "Concevoir le système",
+    "designText": "Définir l’expérience, l’architecture, les fonctionnalités et les choix techniques.",
+    "build": "Construire et valider",
+    "buildText": "Développer, tester, recueillir les retours et améliorer le produit.",
+    "evolve": "Faire évoluer",
+    "evolveText": "Préparer la maintenance, les performances et les nouvelles fonctionnalités."
+  },
+  "conversion": {
+    "kicker": "05 · Votre projet",
+    "title": "Parlons de votre projet.",
+    "text": "Une plateforme à concevoir, un produit à reprendre ou une équipe à structurer : décrivez votre besoin en quelques minutes, je vous réponds sous 48 heures.",
+    "brief": "Décrire mon projet",
+    "email": "Écrire un email"
   }
 }

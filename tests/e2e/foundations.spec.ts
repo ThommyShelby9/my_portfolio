@@ -35,7 +35,7 @@ test.describe('foundations', () => {
     const response = await page.goto('/');
     expect(response?.status()).toBe(200);
     expect(response?.headers()['set-cookie']).toBeUndefined();
-    await expect(page).toHaveURL(/127\.0\.0\.1:3000\/$/);
+    expect(new URL(page.url()).pathname).toBe('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
     await context.close();
   });

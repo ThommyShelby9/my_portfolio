@@ -20,7 +20,7 @@
     "titleEm": "SaaS, payment and management",
     "titleAfter": " platforms, from architecture to production.",
     "ledeName": "Rostel Panoumassi",
-    "ledeRest": ", product engineer and Head of Engineering at KPS Groupe. Six years of experience, three as tech lead. Ubbfy, ContractIQ, ZenLife: products in production, not mockups.",
+    "ledeRest": ", product engineer and Head of Engineering at KPS Groupe. Six years of experience, three as tech lead. Ubbfy, ContractIQ, ZenLife: products shipped, not mockups.",
     "ctaWork": "See the work",
     "ctaProject": "Discuss a project",
     "scroll": "Scroll to discover"
@@ -33,5 +33,64 @@
   "notFound": {
     "title": "This page does not exist.",
     "back": "Back to the home page"
+  },
+  "positioning": {
+    "kicker": "02 · Beyond development",
+    "title": "I don’t just ship code. I ship products that hold up.",
+    "vision": "Vision",
+    "visionText": "Understand the business, the users and the constraints before writing a line.",
+    "architecture": "Architecture",
+    "architectureText": "Choose the foundations: data, payments, security, scale.",
+    "execution": "Execution",
+    "executionText": "Build, test, ship to production and keep improving with the team.",
+    "signatureA": "Ideas are everywhere.",
+    "signatureB": "Execution is a discipline."
+  },
+  "work": {
+    "kicker": "03 · Selected work",
+    "title": "Three products, from architecture to launch.",
+    "all": "All work",
+    "cta": "Read the case study",
+    "coBuilt": "Co-built with",
+    "ubbfy": {
+      "what": "ERP and geolocated time clock",
+      "role": "Lead engineer",
+      "roleDetail": "rebuild and architecture",
+      "challenge": "Rebuild a complete ERP around a single API serving three clients: web, PWA and a Flutter app.",
+      "alt": "Ubbfy, home page and candidate pipeline preview"
+    },
+    "contractiq": {
+      "what": "AI contract analysis SaaS",
+      "role": "Architecture and development",
+      "roleDetail": "B2B product",
+      "challenge": "Extract parties, deadlines and risky clauses from PDF contracts, then alert before every renewal. Gemini as the main engine, OpenAI as fallback.",
+      "alt": "ContractIQ, AI risk analysis of a contract"
+    },
+    "zenlife": {
+      "what": "Wellness app, web and mobile",
+      "role": "Design and development",
+      "roleDetail": "solo",
+      "challenge": "Planning, budget, messaging and reminders in a single app, used by 1,200+ active people within six months.",
+      "alt": "ZenLife, app dashboard"
+    }
+  },
+  "method": {
+    "kicker": "04 · Method",
+    "title": "From idea to production, without losing the thread.",
+    "discover": "Discover",
+    "discoverText": "Understand the problem, the users, the goals and the constraints.",
+    "design": "Design the system",
+    "designText": "Define the experience, the architecture, the features and the technical choices.",
+    "build": "Build and validate",
+    "buildText": "Develop, test, gather feedback and improve the product.",
+    "evolve": "Evolve",
+    "evolveText": "Prepare maintenance, performance and new features."
+  },
+  "conversion": {
+    "kicker": "05 · Your project",
+    "title": "Let’s talk about your project.",
+    "text": "A platform to design, a product to take over or a team to structure: describe your needs in a few minutes, I reply within 48 hours.",
+    "brief": "Describe my project",
+    "email": "Send an email"
   }
 }

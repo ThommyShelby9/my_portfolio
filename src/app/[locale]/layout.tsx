@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
 import { SkipLink } from '@/components/site/SkipLink';
-import { getPathname } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { mono, sans, serif } from '@/styles/fonts';
 import '@/styles/globals.css';
@@ -19,15 +18,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale, namespace: 'meta' });
-  const url = (l: Locale) => new URL(getPathname({ locale: l, href: '/' }), SITE).toString();
   return {
     metadataBase: new URL(SITE),
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: url(locale as Locale),
-      languages: { fr: url('fr'), en: url('en'), 'x-default': url('fr') },
-    },
     icons: {
       icon: [
         { url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
