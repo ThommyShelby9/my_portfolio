@@ -11,7 +11,13 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
   const details = useRef<HTMLDetailsElement>(null);
 
   // Close after a client-side navigation (a no-JS visitor gets a full page load anyway).
-  useEffect(() => { if (details.current) details.current.open = false; }, [pathname]);
+  // Skipped on the first run: a visitor who opens the menu before hydration must not see it snap shut.
+  const lastPath = useRef(pathname);
+  useEffect(() => {
+    if (lastPath.current === pathname) return;
+    lastPath.current = pathname;
+    if (details.current) details.current.open = false;
+  }, [pathname]);
 
   const closeOnLink = (e: MouseEvent) => {
     if ((e.target as Element).closest('a')) details.current?.removeAttribute('open');

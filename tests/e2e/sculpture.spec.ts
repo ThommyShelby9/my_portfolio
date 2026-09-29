@@ -61,10 +61,8 @@ test.describe('sculpture', () => {
     const stage = page.locator('[data-sculpture-stage]');
     await expect(stage).toHaveAttribute('data-state', '3d', { timeout: 8000 });
     await expect(stage).toHaveAttribute('data-running', 'true');
-    await page.evaluate(() => {
-      document.body.style.minHeight = '400vh';
-      scrollTo(0, innerHeight * 3);
-    });
+    await page.getByRole('heading', { name: /Trois produits/ }).scrollIntoViewIfNeeded();
+    await page.mouse.wheel(0, 300);
     await expect(stage).toHaveAttribute('data-running', 'false', { timeout: 4000 });
   });
 });
