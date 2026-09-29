@@ -1,12 +1,12 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useEffect, useRef, type MouseEvent } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import type { NavItem } from './Header';
 
-export function MobileMenu({ items }: { items: readonly NavItem[] }) {
-  const t = useTranslations('nav');
+type Props = { items: readonly NavItem[]; label: string; menuLabel: string; closeLabel: string };
+
+export function MobileMenu({ items, label, menuLabel, closeLabel }: Props) {
   const pathname = usePathname();
   const details = useRef<HTMLDetailsElement>(null);
 
@@ -30,10 +30,10 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
           <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" strokeWidth="1.4" className="group-open:hidden" />
           <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.4" className="hidden group-open:block" />
         </svg>
-        <span className="sr-only group-open:hidden">{t('menu')}</span>
-        <span className="sr-only hidden group-open:inline">{t('closeMenu')}</span>
+        <span className="sr-only group-open:hidden">{menuLabel}</span>
+        <span className="sr-only hidden group-open:inline">{closeLabel}</span>
       </summary>
-      <nav onClick={closeOnLink} aria-label={t('label')} className="absolute inset-x-0 top-full border-b border-line bg-obsidian px-5 pb-8 pt-4">
+      <nav onClick={closeOnLink} aria-label={label} className="absolute inset-x-0 top-full border-b border-line bg-obsidian px-5 pb-8 pt-4">
         <ul className="flex flex-col gap-1 text-lg">
           {items.map((item) => (
             <li key={item.label}>

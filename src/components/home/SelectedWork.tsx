@@ -42,7 +42,7 @@ export function SelectedWork() {
                     src={c.image}
                     alt={t(`${c.slug}.alt`)}
                     fill
-                    sizes="(min-width: 1024px) 58vw, 100vw"
+                    sizes={flipped ? '(min-width: 1024px) 42vw, 100vw' : '(min-width: 1024px) 58vw, 100vw'}
                     className="object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.035] motion-reduce:transition-none"
                   />
                 </div>
@@ -54,7 +54,7 @@ export function SelectedWork() {
                   <p className="mb-4 mt-3.5 max-w-[46ch] text-base leading-[1.7] text-muted">{t(`${c.slug}.challenge`)}</p>
                   {c.coBuilt && <p className="mb-5 text-[13px] text-muted">{t('coBuilt')} <strong className="font-medium text-ivory">{c.coBuilt}</strong></p>}
                   <p className="mb-6 font-mono text-xs text-faint">{c.stack}</p>
-                  <ButtonLink href={{ pathname: '/realisations/[slug]', params: { slug: c.slug } }} variant="ghost" arrow>{t('cta')}</ButtonLink>
+                  <ButtonLink href={{ pathname: '/realisations/[slug]', params: { slug: c.slug } }} variant="ghost" arrow aria-label={t('ctaFor', { name: c.name })}>{t('cta')}</ButtonLink>
                 </div>
               </Reveal>
             </li>

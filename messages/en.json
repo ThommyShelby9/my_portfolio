@@ -53,6 +53,7 @@
     "title": "Three products, from architecture to launch.",
     "all": "All work",
     "cta": "Read the case study",
+    "ctaFor": "Read the {name} case study",
     "coBuilt": "Co-built with",
     "ubbfy": {
       "what": "ERP and geolocated time clock",
@@ -72,7 +73,7 @@
       "what": "Wellness app, web and mobile",
       "role": "Design and development",
       "roleDetail": "solo",
-      "challenge": "Planning, budget, messaging and reminders in a single app, used by 1,200+ active people within six months.",
+      "challenge": "Planning, budget, messaging and reminders in a single app, used by 1,200+ active users within six months.",
       "alt": "ZenLife, app dashboard"
     }
   },

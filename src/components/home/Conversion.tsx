@@ -10,7 +10,6 @@ export function Conversion() {
       {/* Still ring for visitors without the live trajectory (no JS, reduced motion, no WebGL, mobile). */}
       <picture>
         <source media="(max-width: 1023px)" srcSet="/sculpture/mobius-mobile.webp" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/sculpture/mobius-desktop.webp"
           alt=""

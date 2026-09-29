@@ -32,8 +32,8 @@ export function Header() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-3 md:ml-0 md:gap-5">
-          <MobileMenu items={items} />
-          <LocaleSwitch />
+          <MobileMenu items={items} label={t('label')} menuLabel={t('menu')} closeLabel={t('closeMenu')} />
+          <LocaleSwitch label={t('switchLocale')} />
           <ButtonLink href="/brief" variant="primary" className="max-md:px-3.5">{t('cta')}</ButtonLink>
         </div>
       </div>

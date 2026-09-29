@@ -1,15 +1,14 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { Link, usePathname } from '@/i18n/navigation';
 
-export function LocaleSwitch() {
+export function LocaleSwitch({ label }: { label: string }) {
   const locale = useLocale();
   const other = locale === 'fr' ? 'en' : 'fr';
   const pathname = usePathname();
   const params = useParams();
-  const t = useTranslations('nav');
   return (
     <Link
       // next-intl types `href` per pathname; dynamic params come from the current route.
@@ -18,7 +17,7 @@ export function LocaleSwitch() {
       locale={other}
       hrefLang={other}
       lang={other}
-      aria-label={t('switchLocale')}
+      aria-label={label}
       className="font-mono text-xs font-medium text-muted no-underline hover:text-ivory"
     >
       {other.toUpperCase()}

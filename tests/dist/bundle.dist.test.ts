@@ -21,7 +21,10 @@ for (const page of ['fr.html', 'en.html']) {
     console.log(`${page}: ${(total / 1024).toFixed(1)} KB gzip over ${files.length} scripts`);
     expect(total, `gzip total ${Math.round(total / 1024)} KB`).toBeLessThanOrEqual(BUDGET);
     for (const [i, buf] of sources.entries()) {
-      expect(buf.toString('utf8').includes('ScrollTrigger'), files[i]).toBe(false);
+      const code = buf.toString('utf8');
+      for (const needle of ['ScrollTrigger', '_gsap', 'GreenSock']) {
+        expect(code.includes(needle), files[i] + ' contains ' + needle).toBe(false);
+      }
     }
   });
 }

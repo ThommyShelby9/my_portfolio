@@ -53,6 +53,7 @@
     "title": "Trois produits, de l’architecture au lancement.",
     "all": "Toutes les réalisations",
     "cta": "Voir l’étude de cas",
+    "ctaFor": "Voir l’étude de cas de {name}",
     "coBuilt": "Co-développé avec",
     "ubbfy": {
       "what": "ERP et pointage géolocalisé",

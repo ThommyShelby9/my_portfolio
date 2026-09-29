@@ -64,6 +64,20 @@ test.describe('home sequences', () => {
     await expect(page.locator('[data-conversion-poster]')).toBeHidden();
   });
 
+  test('ring returns to full opacity when scrolling back to the top (desktop)', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop trajectory');
+    test.setTimeout(60_000);
+    await page.goto('/');
+    const stage = page.locator('[data-sculpture-stage]');
+    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 20_000 });
+    await page.getByRole('heading', { name: 'Parlons de votre projet.' }).scrollIntoViewIfNeeded();
+    await expect(stage).toHaveAttribute('data-running', 'true', { timeout: 5000 });
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.waitForTimeout(500);
+    await expect.poll(async () => stage.evaluate((el) => getComputedStyle(el).opacity), { timeout: 10_000 }).toBe('1');
+    await expect(stage).toHaveAttribute('data-running', 'true', { timeout: 5000 });
+  });
+
   test('mobile menu opens, lists the sections and works without JS', async ({ browser }) => {
     for (const javaScriptEnabled of [true, false]) {
       const context = await browser.newContext({ viewport: { width: 360, height: 740 }, javaScriptEnabled });
@@ -74,6 +88,23 @@ test.describe('home sequences', () => {
       await context.close();
     }
   });
+
+  test('French home canonical has no /en and alternate en points to /en', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /^https:\/\/rostelmissimawu\.com\/?$/);
+    await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', /\/en$/);
+  });
+
+  for (const path of ['/', '/en']) {
+    for (const [width, height] of [[1024, 768], [1440, 900]]) {
+      test(`header is 88 px tall at ${width}x${height} on ${path}`, async ({ page, isMobile }) => {
+        test.skip(isMobile, 'desktop widths');
+        await page.setViewportSize({ width, height });
+        await page.goto(path);
+        expect(await page.locator('body > header').evaluate((el) => (el as HTMLElement).offsetHeight)).toBe(88);
+      });
+    }
+  }
 
   test('home canonical and alternates', async ({ page }) => {
     await page.goto('/en');

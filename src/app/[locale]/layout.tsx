@@ -50,7 +50,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <script dangerouslySetInnerHTML={{ __html: EARLY_JS }} />
       </head>
       <body>
-        <NextIntlClientProvider>
+        {/* No client component reads messages: skip serializing the dictionary into every page. */}
+        <NextIntlClientProvider messages={null}>
           <SkipLink />
           <Header />
           <main id="main" tabIndex={-1} className="relative focus:outline-none">{children}</main>
