@@ -4,28 +4,48 @@ import { caseJsonLd } from '@/lib/seo/case-study';
 import { homeJsonLd } from '@/lib/seo/home-jsonld';
 import { PERSON_ID, SITE_URL } from '@/lib/site';
 
+const ROSTEL = { '@type': 'Person', '@id': PERSON_ID, name: 'Rostel Panoumassi' };
+
 describe('caseJsonLd', () => {
-  it('models a contribution project as the case study, about the product, not authored by the owner', async () => {
+  it('always authors the write-up as the full Person node', async () => {
     const p = (await getProject('realisation', 'fr', 'freelanceclub'))!;
     const ld = caseJsonLd(p, 'Freelance Club, étude de cas · Rostel Panoumassi');
     expect(ld.name).toBe('Freelance Club, étude de cas · Rostel Panoumassi');
-    expect(ld.about).toMatchObject({ '@type': 'CreativeWork', name: p.title });
-    expect(ld.author).toEqual({ '@id': PERSON_ID });
-    expect(JSON.stringify(ld.about)).not.toContain('Rostel');
+    expect(ld.author).toEqual(ROSTEL);
+    expect(ld.contributor).toBeUndefined();
+    expect(ld.dateCreated).toBeUndefined();
   });
 
-  it('keeps co-authors as contributors', async () => {
+  it('a lead or solo build makes Rostel the creator of the product, with its year', async () => {
+    const p = (await getProject('realisation', 'en', 'ubbfy'))!;
+    const about = caseJsonLd(p, 't').about as Record<string, unknown>;
+    expect(about).toMatchObject({ '@type': 'CreativeWork', name: p.title, dateCreated: String(p.year) });
+    expect(about.creator).toEqual([ROSTEL]);
+    expect(about.contributor).toBeUndefined();
+  });
+
+  it('an engineering contribution makes Rostel a contributor to the product', async () => {
+    for (const locale of ['fr', 'en'] as const) {
+      const p = (await getProject('realisation', locale, 'freelanceclub'))!;
+      const about = caseJsonLd(p, 't').about as Record<string, unknown>;
+      expect(about.contributor).toEqual([ROSTEL]);
+      expect(about.creator).toBeUndefined();
+    }
+  });
+
+  it('co-authors sit next to Rostel on the product, not on the case study', async () => {
     const p = (await getProject('realisation', 'en', 'contractiq'))!;
     const ld = caseJsonLd(p, 't');
-    expect(ld.contributor).toEqual([{ '@type': 'Person', name: 'Jérémie Zitti' }]);
-    expect(ld.author).toEqual({ '@id': PERSON_ID });
+    expect((ld.about as Record<string, unknown>).creator).toEqual([ROSTEL, { '@type': 'Person', name: 'Jérémie Zitti' }]);
+    expect(ld.contributor).toBeUndefined();
+    expect(ld.author).toEqual(ROSTEL);
   });
 
-  it('an exploration has no product url in about and is authored by the single person id', async () => {
+  it('an exploration is about the brand with no Rostel role, and is authored by Rostel', async () => {
     const p = (await getProject('exploration', 'en', 'procom'))!;
     const ld = caseJsonLd(p, 'Procom, redesign proposal · Rostel Panoumassi');
-    expect(ld.about).toEqual({ '@type': 'CreativeWork', name: p.title });
-    expect(ld.author).toEqual({ '@id': PERSON_ID });
+    expect(ld.about).toEqual({ '@type': 'CreativeWork', name: p.title, dateCreated: String(p.year) });
+    expect(ld.author).toEqual(ROSTEL);
   });
 });
 

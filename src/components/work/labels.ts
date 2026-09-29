@@ -7,6 +7,14 @@ export const STATUS_KEY = {
   concept: 'statusConcept',
 } as const satisfies Record<Project['status'], string>;
 
+/** Note shown on a card without a cover, keyed by project status. */
+export const NO_IMAGE_KEY = {
+  private: 'noImagesPrivate',
+  archived: 'noImagesArchived',
+  live: 'noImagesOther',
+  concept: 'noImagesOther',
+} as const satisfies Record<Project['status'], string>;
+
 export function caseHref(p: Pick<Project, 'kind' | 'slug'>) {
   return p.kind === 'realisation'
     ? ({ pathname: '/realisations/[slug]', params: { slug: p.slug } } as const)

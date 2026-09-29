@@ -44,8 +44,8 @@ export function renderMarkdown(md: string): { html: string; headings: Heading[] 
         const inner = this.parser.parseInline(token.tokens);
         const href = token.href;
         if (!/^(https?:|\/|#|mailto:)/i.test(href)) return inner;
-        // `//host` is protocol-relative, hence external: only a single leading slash is internal.
-        const external = !/^(\/(?!\/)|#|mailto:)/i.test(href);
+        // `//host` is protocol-relative, hence external: only a single leading slash (not followed by / or \) is internal.
+        const external = !/^(\/(?![\/\\])|#|mailto:)/i.test(href);
         const title = token.title ? ` title="${escapeHtml(token.title)}"` : '';
         return `<a href="${escapeHtml(href)}"${title}${external ? ' rel="noopener"' : ''}>${inner}</a>`;
       },

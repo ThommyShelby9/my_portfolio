@@ -14,9 +14,9 @@ const at = (scale, ...rects) =>
   rects.map(([left, top, width, height]) => ({ left: Math.round(left * scale), top: Math.round(top * scale), width: Math.round(width * scale), height: Math.round(height * scale) }))
 const V5 = 1860 / 1600 // v5 captures are ~1864 px wide, ~1860 after the 4 px right crop
 
-const site = (url, file, fr, en, redact, liveRedact) => [
+const site = (url, file, fr, en, redact, liveRedact, liveCrop) => [
   { from: v5(file), crop: { right: 4 }, redact, kind: 'public', alt: { fr, en } },
-  { from: `url:${url}`, redact: liveRedact, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
+  { from: `url:${url}`, crop: liveCrop, redact: liveRedact, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
 ]
 
 // The login page shows a stale "session expired" notice on a fresh visit: hide it.
@@ -63,13 +63,12 @@ export const sources = {
     { from: 'url:https://ccnsbenin.vercel.app', optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
   ],
   leconsultant: [
-    { from: v5('leconsultant.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Le Consultant', en: 'Le Consultant website' } },
+    { from: v5('leconsultant.png'), crop: { right: 4 }, redact: at(V5, [255, 483, 400, 58]), kind: 'public', alt: { fr: 'Site Le Consultant', en: 'Le Consultant website' } },
   ], // live capture dropped: invalid TLS certificate
   easytowork: [
     {
       from: v5('easytowork.png'),
-      crop: { right: 4 },
-      redact: at(V5, [281, 502, 230, 60], [549, 502, 230, 60], [817, 502, 230, 60], [1085, 502, 230, 60]), // 100+ / 150+ / 500+ / 98% band
+      crop: { right: 4, bottom: 519 }, // stop above the 100+ / 150+ / 500+ / 98% band (keeps the top 420 output px)
       kind: 'public',
       alt: { fr: 'Site Easy To Work', en: 'Easy To Work website' },
     },
@@ -79,8 +78,9 @@ export const sources = {
   planus: [
     { from: v5('planus.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Planus Analytics', en: 'Planus Analytics website' } },
   ], // live capture dropped: cookie banner covers content
-  whatspay: site('https://whatspay.africa', 'whatspay.png', 'Site WhatsPay', 'WhatsPay website', at(V5, [268, 156, 280, 44]), at(1.8, [596, 498, 428, 50])), // "+1 000 diffuseurs actifs" pill; live: "12 000 personnes" in the advertiser card
-  upgrade: site('https://upgrade-afrique.com', 'upgrade.png', 'Site Upgrade Afrique', 'Upgrade Afrique website'),
+  whatspay: site('https://whatspay.africa', 'whatspay.png', 'Site WhatsPay', 'WhatsPay website', at(V5, [268, 156, 280, 44], [1097, 241, 135, 20], [1110, 430, 46, 11], [1182, 430, 40, 11], [1199, 503, 28, 12]), at(1.8, [596, 498, 428, 50])), // "+1 000 diffuseurs actifs" pill; phone mock: name, gains, completion rate, mission amount; live: "12 000 personnes" in the advertiser card
+  // "+10 pays d’intervention" badge over the hero photo; live: same badge, and the empty lower part of the page is cropped (1800 px capture, keep the top 690 of 1000 output px).
+  upgrade: site('https://upgrade-afrique.com', 'upgrade.png', 'Site Upgrade Afrique', 'Upgrade Afrique website', at(1, [592, 526, 148, 86]), at(1.8, [800, 532, 172, 96]), { bottom: 558 }),
   freelanceclub: [
     {
       from: v5('freelanceclub.png'),
@@ -125,8 +125,9 @@ export const sources = {
     { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 3580, height: 1300, crop: { bottom: 260 }, prepare: hoverBorgou, kind: 'public', alt: { fr: 'Carte interactive des départements du Bénin, Borgou en surbrillance', en: 'Interactive map of Benin departments, Borgou highlighted' } },
   ],
   najaexperts: [
-    { from: 'url:http://localhost:5302/a', waitMs: 4000, kind: 'public', alt: { fr: 'Proposition A, page d’accueil', en: 'Proposal A, home page' } },
-    { from: 'url:http://localhost:5302/b', waitMs: 4000, kind: 'public', alt: { fr: 'Proposition B, page d’accueil', en: 'Proposal B, home page' } },
-    { from: 'url:http://localhost:5302/c', waitMs: 4000, kind: 'public', alt: { fr: 'Proposition C, page d’accueil', en: 'Proposal C, home page' } },
+    // crop.top 70 (35 CSS px at 2x) removes the demo banner, which carries an em dash.
+    { from: 'url:http://localhost:5302/a', waitMs: 4000, crop: { top: 70 }, kind: 'public', alt: { fr: 'Proposition A, page d’accueil', en: 'Proposal A, home page' } },
+    { from: 'url:http://localhost:5302/b', waitMs: 4000, crop: { top: 70 }, kind: 'public', alt: { fr: 'Proposition B, page d’accueil', en: 'Proposal B, home page' } },
+    { from: 'url:http://localhost:5302/c', waitMs: 4000, crop: { top: 70 }, kind: 'public', alt: { fr: 'Proposition C, page d’accueil', en: 'Proposal C, home page' } },
   ],
 }

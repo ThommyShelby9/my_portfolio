@@ -61,11 +61,17 @@ test.describe('work pages', () => {
     expect(data).toMatchObject({
       '@type': 'CreativeWork',
       name: 'ContractIQ, étude de cas · Rostel Panoumassi',
-      about: { '@type': 'CreativeWork', name: 'ContractIQ' },
-      dateCreated: '2026',
+      about: {
+        '@type': 'CreativeWork',
+        name: 'ContractIQ',
+        dateCreated: '2026',
+        creator: [
+          { '@type': 'Person', '@id': 'https://rostelmissimawu.com/#person', name: 'Rostel Panoumassi' },
+          { '@type': 'Person', name: 'Jérémie Zitti' },
+        ],
+      },
       url: 'https://rostelmissimawu.com/realisations/contractiq',
-      author: { '@id': 'https://rostelmissimawu.com/#person' },
-      contributor: [{ '@type': 'Person', name: 'Jérémie Zitti' }],
+      author: { '@type': 'Person', '@id': 'https://rostelmissimawu.com/#person', name: 'Rostel Panoumassi' },
     });
     const og = await page.locator('meta[property="og:image"]').getAttribute('content');
     expect(og).toContain('/realisations/contractiq/opengraph-image');

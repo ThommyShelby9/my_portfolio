@@ -90,6 +90,10 @@ describe('renderMarkdown links and images', () => {
     expect(r.html).not.toMatch(/href="\/ok"[^>]*rel=/);
     expect(r.html).not.toMatch(/href="#top"[^>]*rel=/);
   });
+  it('treats a backslash after the leading slash as external', () => {
+    const r = renderMarkdown('[a](/\\host)');
+    expect(r.html).toMatch(/rel="noopener"/);
+  });
   it('refuses a body image with a clear error', () => {
     expect(() => renderMarkdown('![alt](/work/x/01.webp)')).toThrow(/Markdown images are not allowed/);
   });

@@ -2,15 +2,8 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import type { Project } from '@/lib/content/load';
 import { ExplorationBadge } from './ExplorationBadge';
-import { STATUS_KEY, caseHref, coverOf } from './labels';
+import { NO_IMAGE_KEY, STATUS_KEY, caseHref, coverOf } from './labels';
 import { WorkVisual } from './WorkVisual';
-
-const NO_IMAGE_KEY = {
-  private: 'noImagesPrivate',
-  archived: 'noImagesArchived',
-  live: 'noImagesOther',
-  concept: 'noImagesOther',
-} as const satisfies Record<Project['status'], string>;
 
 type Props = { project: Project; index: number; headingLevel?: 2 | 3 };
 

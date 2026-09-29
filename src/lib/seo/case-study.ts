@@ -33,23 +33,43 @@ export function caseMetadata(p: Project, title: string): Metadata {
   };
 }
 
+const CONTRIBUTION_ROLE = /^(contribution|engineering contribution)/i;
+
+/** A contribution to someone else's product is `contributor`; a lead, solo or architecture role is `creator`. */
+export function ownerRelation(role: string): 'creator' | 'contributor' {
+  return CONTRIBUTION_ROLE.test(role.trim()) ? 'contributor' : 'creator';
+}
+
 /**
- * schema.org CreativeWork for the case study page itself (not for the product): the product is
- * `about`, Rostel authors the write-up only, and co-authors of the work are contributors.
+ * schema.org CreativeWork for the case study page itself (not for the product). Rostel authors the
+ * write-up; the product is `about`, carrying the product roles (Rostel and co-authors) and its year.
+ * An exploration is a proposal for someone else's site: `about` is that brand, without any Rostel role.
  */
 export function caseJsonLd(p: Project, title: string): Record<string, unknown> {
   const cover = p.images[0];
+  const self = { '@type': 'Person', '@id': PERSON_ID, name: OWNER.name };
+  const coauthors = p.coauthors.map((name) => ({ '@type': 'Person', name }));
+  const roles =
+    p.kind === 'exploration'
+      ? {}
+      : ownerRelation(p.role) === 'creator'
+        ? { creator: [self, ...coauthors] }
+        : { contributor: [self, ...coauthors] };
   return {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: title,
-    about: { '@type': 'CreativeWork', name: p.title, ...(p.liveUrl ? { url: p.liveUrl } : {}) },
+    about: {
+      '@type': 'CreativeWork',
+      name: p.title,
+      ...(p.liveUrl ? { url: p.liveUrl } : {}),
+      dateCreated: String(p.year),
+      ...roles,
+    },
     description: p.summary,
-    dateCreated: String(p.year),
     url: caseUrl(p),
     inLanguage: p.locale,
-    author: { '@id': PERSON_ID },
-    ...(p.coauthors.length > 0 ? { contributor: p.coauthors.map((name) => ({ '@type': 'Person', name })) } : {}),
+    author: self,
     ...(cover ? { image: new URL(cover.src, SITE_URL).toString() } : {}),
     keywords: p.stack.join(', '),
   };

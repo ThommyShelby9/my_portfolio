@@ -255,7 +255,7 @@
     "slug": "easytowork",
     "file": "/work/easytowork/01.webp",
     "width": 1600,
-    "height": 867,
+    "height": 420,
     "kind": "public",
     "source": "git:v5-manifesto:public/images/easytowork.png",
     "alt": {
@@ -314,7 +314,7 @@
   {
     "slug": "upgrade",
     "file": "/work/upgrade/01.webp",
-    "width": 1308,
+    "width": 1304,
     "height": 694,
     "kind": "public",
     "source": "git:v5-manifesto:public/images/upgrade.png",
@@ -327,7 +327,7 @@
     "slug": "upgrade",
     "file": "/work/upgrade/02.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 690,
     "kind": "public",
     "source": "url:https://upgrade-afrique.com",
     "alt": {
@@ -531,7 +531,7 @@
     "slug": "najaexperts",
     "file": "/work/najaexperts/01.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 961,
     "kind": "public",
     "source": "url:http://localhost:5302/a",
     "alt": {
@@ -543,7 +543,7 @@
     "slug": "najaexperts",
     "file": "/work/najaexperts/02.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 961,
     "kind": "public",
     "source": "url:http://localhost:5302/b",
     "alt": {
@@ -555,7 +555,7 @@
     "slug": "najaexperts",
     "file": "/work/najaexperts/03.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 961,
     "kind": "public",
     "source": "url:http://localhost:5302/c",
     "alt": {
