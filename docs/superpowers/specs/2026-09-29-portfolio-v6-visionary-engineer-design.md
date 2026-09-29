@@ -83,7 +83,7 @@ Thème sombre uniquement.
 
 ### 3.5 Mouvement
 
-- Titres et blocs : apparition **une seule fois** à l'entrée dans l'écran (opacité + translation ≤ 18 px, ~0.9 s), décalage court entre éléments d'un même bloc.
+- Titres et blocs : apparition **une seule fois** à l'entrée dans l'écran (opacité + translation ≤ 18 px, ~0.9 s), décalage court entre éléments d'un même bloc. **Décision du 2026-09-29** : le hero apparaît en **CSS pur** au chargement (aucune dépendance au JavaScript, titre visible immédiatement pour le LCP) ; les blocs plus bas utilisent un **IntersectionObserver** natif qui pose un attribut déclenchant une transition CSS. GSAP n'est plus utilisé pour les apparitions.
 - Images de projets : dévoilement par masque à l'entrée, zoom lent au survol (≤ 1.04).
 - Liens : changement de contraste au survol. Boutons : léger déplacement du texte ou de la flèche au survol.
 - Transitions entre pages : fondu court (≤ 300 ms).
@@ -157,7 +157,7 @@ Français à la racine, anglais sous `/en` (slugs traduits). Sélecteur de langu
 - Composant `Sculpture` chargé par `next/dynamic` (`ssr: false`), monté après `requestIdleCallback` (repli `setTimeout`). Détection WebGL avant montage ; sinon image fixe.
 - **Image fixe** `public/sculpture/mobius-{desktop,mobile}.webp` produite par `pnpm sculpture:poster` (Playwright capture la scène en mode figé).
 - `dpr` plafonné (2 sur ordinateur, 1.5 sur mobile), rendu suspendu quand la sculpture est hors écran ou l'onglet masqué.
-- **GSAP + ScrollTrigger** via `@gsap/react` (`useGSAP`) pour les apparitions et la trajectoire de la sculpture ; `gsap.matchMedia()` pour couper toute animation sous mouvement réduit.
+- **GSAP + ScrollTrigger** via `@gsap/react` (`useGSAP`) **uniquement pour la trajectoire de la sculpture**, chargé **avec le chunk de la sculpture** (jamais dans le JavaScript initial) ; `gsap.matchMedia()` coupe la trajectoire sous mouvement réduit. Les apparitions de texte n'utilisent pas GSAP (§3.5).
 
 ### 5.3 Contenu
 
@@ -214,7 +214,7 @@ Bénin Bouge (refonte non sollicitée du média beninbouge.com, carte interactiv
 
 ## 7. Qualité
 
-- **Performance** : le titre du hero est l'élément LCP (< 2.5 s en 4G simulée) ; la scène 3D ne bloque ni le premier rendu ni l'interaction ; JavaScript initial hors scène 3D ≤ 120 Ko gzip ; Lighthouse ≥ 90 en performance et ≥ 95 en accessibilité, bonnes pratiques et SEO sur l'accueil et une étude de cas.
+- **Performance** : le titre du hero est l'élément LCP (< 2.5 s en 4G simulée) ; la scène 3D ne bloque ni le premier rendu ni l'interaction ; JavaScript initial hors scène 3D ≤ 160 Ko gzip (révisé le 2026-09-29 : le socle Next + React + next-intl pèse à lui seul ~135 Ko ; GSAP est sorti du JavaScript initial) ; Lighthouse ≥ 90 en performance et ≥ 95 en accessibilité, bonnes pratiques et SEO sur l'accueil et une étude de cas.
 - **Accessibilité** : WCAG 2.2 AA. Lien d'évitement, focus visible (contour champagne), navigation clavier complète, `alt` partout, la sculpture est décorative (`aria-hidden`), formulaires avec erreurs annoncées.
 - **Sans JavaScript** : contenu entièrement lisible, image fixe à la place de la sculpture, formulaires fonctionnels.
 - **Mouvement réduit** : aucune animation, image fixe.
