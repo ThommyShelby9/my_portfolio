@@ -19,6 +19,12 @@ describe('checkOwnerRules', () => {
     expect(rules([{ path: 'a.html', content: page('<script>const a = "—"</script>') }])).toEqual([]);
   });
 
+  it('flags em dash written as an HTML entity', () => {
+    for (const entity of ['&mdash;', '&MDASH;', '&#8212;', '&#x2014;', '&#X2014;']) {
+      expect(rules([{ path: 'a.html', content: page(`<p>Lead ${entity} engineer</p>`) }]), entity).toEqual(['em-dash']);
+    }
+  });
+
   it('flags emoji used in the page', () => {
     expect(rules([{ path: 'a.html', content: page('<span>\u{1F4C1} Projects</span>') }])).toEqual(['emoji']);
   });

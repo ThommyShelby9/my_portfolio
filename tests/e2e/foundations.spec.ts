@@ -34,16 +34,45 @@ test.describe('foundations', () => {
     const page = await context.newPage();
     const response = await page.goto('/');
     expect(response?.status()).toBe(200);
+    expect(response?.headers()['set-cookie']).toBeUndefined();
     await expect(page).toHaveURL(/127\.0\.0\.1:3000\/$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
     await context.close();
   });
 
-  test('unknown locale segments return a 404', async ({ request }) => {
+  test('the English home sets no cookie', async ({ request }) => {
+    const res = await request.get('/en');
+    expect(res.status()).toBe(200);
+    expect(res.headers()['set-cookie']).toBeUndefined();
+  });
+
+  test('unknown paths return the localized 404', async ({ request }) => {
     for (const path of ['/de', '/xx/whatever']) {
       const res = await request.get(path);
       expect(res.status(), path).toBe(404);
+      expect(await res.text(), path).toContain('Cette page n’existe pas.');
     }
+  });
+
+  test('buttons keep a square 2 px radius', async ({ page }) => {
+    for (const path of ['/', '/en']) {
+      await page.goto(path);
+      const radii = await page.locator('[data-button]').evaluateAll((els) =>
+        els.map((el) => getComputedStyle(el).borderTopLeftRadius),
+      );
+      expect(radii.length, path).toBeGreaterThan(0);
+      for (const r of radii) expect(parseFloat(r), path).toBeLessThanOrEqual(2);
+    }
+  });
+
+  test('under reduced motion the hero title is visible and untransformed at once', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const style = await page.getByRole('heading', { level: 1 }).evaluate((el) => {
+      const cs = getComputedStyle(el);
+      return { opacity: cs.opacity, transform: cs.transform };
+    });
+    expect(style).toEqual({ opacity: '1', transform: 'none' });
   });
 
   test('favicons and manifest are served', async ({ request }) => {

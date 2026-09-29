@@ -87,7 +87,7 @@ export function checkOwnerRules(files: SourceFile[]): Violation[] {
   for (const file of files) {
     if (file.path.endsWith('.html')) {
       const text = visibleText(file.content);
-      const dash = text.indexOf('—');
+      const dash = text.search(/—|&mdash;|&#0*8212;|&#x0*2014;/i);
       if (dash !== -1) add('em-dash', file.path, excerpt(text, dash));
 
       for (const m of text.matchAll(/\p{Extended_Pictographic}/gu)) {

@@ -24,6 +24,15 @@ test.describe('sculpture', () => {
     await expect(page.locator('[data-sculpture-poster]')).toBeVisible();
   });
 
+  test('under reduced motion the stage is not fixed on desktop', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop behaviour');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const position = await page.locator('[data-sculpture-stage]').evaluate((el) => getComputedStyle(el).position);
+    expect(position).not.toBe('fixed');
+  });
+
   test('falls back to the poster when WebGL is unavailable, without errors', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));

@@ -86,6 +86,8 @@ export function SculptureStage() {
     if (posterMode) return;
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference) and (min-width: 1024px)', () => {
+      const stage = box.current;
+      stage?.setAttribute('data-trajectory', 'on');
       gsap.to(box.current, {
         xPercent: 12, scale: 0.88, opacity: 0, ease: 'none',
         scrollTrigger: {
@@ -96,6 +98,11 @@ export function SculptureStage() {
           },
         },
       });
+      return () => {
+        stage?.removeAttribute('data-trajectory');
+        setFaded(false);
+        progress.current = 0;
+      };
     });
     return () => mm.revert();
   }, { dependencies: [posterMode] });
@@ -111,12 +118,13 @@ export function SculptureStage() {
       data-ready={String(ready)}
       data-running={String(running)}
       aria-hidden="true"
-      className="pointer-events-none relative h-[42svh] w-full lg:fixed lg:right-0 lg:top-0 lg:h-svh lg:w-1/2"
+      data-trajectory={posterMode ? 'on' : undefined}
+      className="pointer-events-none relative h-[42svh] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-1/2"
     >
       {!posterMode && (
         <picture>
           <source media="(max-width: 1023px)" srcSet="/sculpture/mobius-mobile.webp" />
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative, pre-sized poster; next/image adds nothing here */}
+          {/* Raw <img>: decorative, pre-sized poster inside a <picture>; next/image cannot art-direct it. */}
           <img
             src="/sculpture/mobius-desktop.webp"
             alt=""

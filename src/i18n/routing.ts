@@ -6,6 +6,8 @@ export const routing = defineRouting({
   localePrefix: 'as-needed',
   // Shared links must stay stable: never redirect "/" based on the browser language.
   localeDetection: false,
+  // The site promises no cookies: do not let next-intl set NEXT_LOCALE.
+  localeCookie: false,
   pathnames: {
     '/': '/',
     '/realisations': { fr: '/realisations', en: '/work' },

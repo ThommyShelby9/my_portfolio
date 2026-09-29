@@ -46,6 +46,12 @@
   }
 }
 
+/* With the desktop scroll trajectory running, the stage is pinned to the right half of the viewport.
+   Otherwise (no JS, reduced motion, below 1024px) it stays inside the hero. */
+@media (min-width: 1024px) {
+  [data-sculpture-stage][data-trajectory='on'] { position: fixed; top: 0; right: 0; height: 100svh; width: 50vw; }
+}
+
 /* Poster capture mode (?sculpture=poster): page transparent, only the stage visible. */
 html[data-poster='1'], html[data-poster='1'] body { background: transparent; }
 html[data-poster='1'] body > *:not(main),

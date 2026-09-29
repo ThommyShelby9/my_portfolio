@@ -15,10 +15,10 @@
 | Lot | Scope |
 |---|---|
 | **1** | Next.js scaffold, i18n routing, design system, layout, favicon, hero, Möbius sculpture + poster, reveals, owner-rules check, health, e2e/axe, Dockerfile (this file) |
-| 2 | Rest of the home: Positioning (3 pillars + signature), Selected work cards, Method, Conversion; full sculpture trajectory (fade at Work, reappear before Conversion) |
-| 3 | Content: MDX loader + Zod schema + metric guard over real content; `/realisations`, `/realisations/[slug]`, `/explorations`; images; OG images; JSON-LD |
+| 2 | Rest of the home: Positioning (3 pillars + signature), Selected work cards, Method, Conversion; full sculpture trajectory (fade at Work, reappear before Conversion); header mobile menu (no nav below md today), `pageMetadata(locale, href)` helper for per-page canonical/hreflang, page transitions ≤ 300 ms (spec §3.5) |
+| 3 | Content: MDX loader + Zod schema + metric guard over real content; `/realisations`, `/realisations/[slug]`, `/explorations`; images; OG images; JSON-LD; `sitemap.ts` + `robots.ts` (spec §5.5) |
 | 4 | Conversion: `/brief` + `/brief/merci`, `/contact` (Server Actions, Firestore, SMTP, rate limit, honeypot), `/api/hit` stats, `/confidentialite`, `/cgu` |
-| 5 | `/a-propos`, `/cv` + PDF, `/terminal`, 404, required-pages owner rule, Lighthouse budget, full e2e sweep, README, Coolify cut-over |
+| 5 | `/a-propos`, `/cv` + PDF, `/terminal`, 404, required-pages owner rule, Lighthouse budget, full e2e sweep, README, Coolify cut-over; gate `?sculpture=poster` behind an env flag before cut-over |
 
 ## Global Constraints
 

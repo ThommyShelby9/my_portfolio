@@ -12,7 +12,7 @@ const variants = {
 
 export function ButtonLink({ variant = 'primary', arrow = false, className = '', children, ...rest }: Props) {
   return (
-    <Link {...rest} className={`${base} ${variants[variant]} ${className}`}>
+    <Link {...rest} data-button className={`${base} ${variants[variant]} ${className}`}>
       {children}
       {arrow && (
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"
