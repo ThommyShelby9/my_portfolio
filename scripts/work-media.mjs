@@ -2,6 +2,15 @@
 // Usage: node scripts/work-media.mjs [slug ...]   (no slug = all)
 // Reads scripts/work-media.config.mjs, writes public/work/<slug>/NN.webp
 // and scripts/work-media.manifest.json.
+//
+// Files are numbered by position in the config (a failed source never shifts
+// the others). A failed source makes the run exit 1 unless it has
+// `optional: true` (then it is skipped with a warning and leaves a gap).
+//
+// Local sources need their dev servers running before the run:
+//   beninbouge  -> http://localhost:5301  (O:/Projets/beninbouge: npx vite --port 5301)
+//   najaexperts -> http://localhost:5302  (O:/Projets/najaynexperts/studio: npx next dev -p 5302)
+//   procom      -> http://localhost:5303  (O:/Projets/procom: npx next dev -p 5303)
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, isAbsolute, join, resolve } from 'node:path'
@@ -20,7 +29,7 @@ const pad = (n) => String(n).padStart(2, '0')
 
 async function capture(browser, src) {
   const ctx = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
+    viewport: { width: 1440, height: src.height ?? 900 },
     deviceScaleFactor: 2,
     locale: src.locale ?? 'fr-FR',
     reducedMotion: 'reduce',
@@ -71,6 +80,7 @@ if (only.length && existsSync(manifestPath)) {
   manifest = JSON.parse(readFileSync(manifestPath, 'utf8')).filter((m) => !only.includes(m.slug))
 }
 
+let failed = false
 for (const [slug, list] of Object.entries(sources)) {
   if (only.length && !only.includes(slug)) continue
   const dir = join(outRoot, slug)
@@ -79,11 +89,18 @@ for (const [slug, list] of Object.entries(sources)) {
   mkdirSync(dir, { recursive: true })
   let n = 0
   for (const src of list) {
+    n += 1
     let buf
     try {
       buf = src.from.startsWith('url:') ? await capture(browser, src) : load(src)
     } catch (e) {
-      console.error(`SKIP ${slug} ${src.from}: ${e.message.split('\n')[0]}`)
+      const msg = `${slug} #${n} ${src.from}: ${e.message.split('\n')[0]}`
+      if (src.optional) {
+        console.warn(`SKIP (optional) ${msg}`)
+        continue
+      }
+      console.error(`FAIL ${msg}`)
+      failed = true
       continue
     }
     let img = sharp(buf)
@@ -95,7 +112,6 @@ for (const [slug, list] of Object.entries(sources)) {
     const height = meta.height - top - (c.bottom ?? 0)
     if (src.crop) img = img.extract({ left, top, width, height })
     img = img.resize({ width: Math.min(width, MAX_WIDTH), withoutEnlargement: true })
-    n += 1
     const file = `${pad(n)}.webp`
     const info = await img.webp({ quality: 80 }).toFile(join(dir, file))
     manifest.push({
@@ -116,3 +132,7 @@ const order = Object.keys(sources)
 manifest.sort((a, b) => order.indexOf(a.slug) - order.indexOf(b.slug) || a.file.localeCompare(b.file))
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n')
 console.log(`manifest: ${manifest.length} images`)
+if (failed) {
+  console.error('Some non-optional sources failed: see FAIL lines above.')
+  process.exit(1)
+}

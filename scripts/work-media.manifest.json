@@ -444,6 +444,18 @@
     }
   },
   {
+    "slug": "lecentre",
+    "file": "/work/lecentre/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://lecentre.kheios.com/#/collection",
+    "alt": {
+      "fr": "Page collection de la proposition Le Centre",
+      "en": "Collection page of the Le Centre proposal"
+    }
+  },
+  {
     "slug": "procom",
     "file": "/work/procom/01.webp",
     "width": 1600,
@@ -507,12 +519,12 @@
     "slug": "beninbouge",
     "file": "/work/beninbouge/03.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 1444,
     "kind": "public",
     "source": "url:http://localhost:5301/",
     "alt": {
-      "fr": "Carte interactive des départements du Bénin",
-      "en": "Interactive map of Benin departments"
+      "fr": "Carte interactive des départements du Bénin, Borgou en surbrillance",
+      "en": "Interactive map of Benin departments, Borgou highlighted"
     }
   },
   {

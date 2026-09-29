@@ -1,7 +1,7 @@
 // Ordered image sources per slug. The first entry is the cover.
 // from: 'git:<ref>:<path>' | 'file:<path>' | 'gh:<owner/repo>:<path>' | 'url:<https://...>'
 // crop: px removed from each side. kind: 'public' (live/public visual) | 'interior' (internal or mock data).
-// url sources also accept: waitMs, scrollY, prepare(page).
+// url sources also accept: height (viewport, default 900), optional, waitMs, scrollY, prepare(page).
 const v5 = (f) => `git:v5-manifesto:public/images/${f}`
 const cq = (f) => `file:.superpowers/assets/contractiq/${f}`
 const zl = (f) => `file:.superpowers/assets/zenlife/${f}`
@@ -9,7 +9,7 @@ const mc = (f) => `gh:ThommyShelby9/moncarnet:public/decouvrir/${f}`
 
 const site = (url, file, fr, en) => [
   { from: v5(file), crop: { right: 4 }, kind: 'public', alt: { fr, en } },
-  { from: `url:${url}`, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
+  { from: `url:${url}`, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
 ]
 
 // The login page shows a stale "session expired" notice on a fresh visit: hide it.
@@ -20,10 +20,17 @@ const hideSessionNotice = (page) =>
     }
   })
 
+// Bénin Bouge map: hide the sticky header so it does not cut the heading, then highlight Borgou.
+const hoverBorgou = async (page) => {
+  await page.addStyleTag({ content: 'header, nav { visibility: hidden !important }' })
+  await page.locator('svg path[aria-label="Borgou"]').hover({ force: true, timeout: 8000 })
+  await page.waitForTimeout(1200)
+}
+
 export const sources = {
   ubbfy: [
     { from: v5('ubbfy.png'), crop: { right: 4 }, kind: 'interior', alt: { fr: 'Tableau de bord de la plateforme Ubbfy', en: 'Ubbfy platform dashboard' } },
-    { from: 'url:https://app.ubbfy.com', prepare: hideSessionNotice, kind: 'public', alt: { fr: 'Page de connexion d’Ubbfy', en: 'Ubbfy sign-in page' } },
+    { from: 'url:https://app.ubbfy.com', prepare: hideSessionNotice, optional: true, kind: 'public', alt: { fr: 'Page de connexion d’Ubbfy', en: 'Ubbfy sign-in page' } },
   ],
   contractiq: [
     { from: cq('02b-contract-detail-risks.png'), kind: 'interior', alt: { fr: 'Fiche contrat avec les risques détectés par l’IA', en: 'Contract detail with AI-detected risks' } },
@@ -46,7 +53,7 @@ export const sources = {
   tadagberhplus: site('https://tadagberhplus.com', 'tadagberhplus.png', 'Site vitrine d’un cabinet de conseil RH, Bénin', 'Showcase site of an HR consulting firm, Benin'),
   ccns: [
     { from: v5('ccns.png'), crop: { top: 120, right: 20 }, kind: 'public', alt: { fr: 'Site de la CCNS', en: 'CCNS website' } },
-    { from: 'url:https://ccnsbenin.vercel.app', kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
+    { from: 'url:https://ccnsbenin.vercel.app', optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
   ],
   leconsultant: [
     { from: v5('leconsultant.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Le Consultant', en: 'Le Consultant website' } },
@@ -80,6 +87,7 @@ export const sources = {
   // Explorations (unsolicited redesign proposals)
   lecentre: [
     { from: 'url:https://lecentre.kheios.com', kind: 'public', alt: { fr: 'Page d’accueil de la proposition Le Centre', en: 'Le Centre proposal home page' } },
+    { from: 'url:https://lecentre.kheios.com/#/collection', waitMs: 4000, optional: true, kind: 'public', alt: { fr: 'Page collection de la proposition Le Centre', en: 'Collection page of the Le Centre proposal' } },
   ],
   // procom.agency is a parked GoDaddy page: captured from the local project (port 5303).
   // Stat-heavy sections and the Bénin Bouge section are skipped (no metrics reused).
@@ -93,7 +101,7 @@ export const sources = {
   beninbouge: [
     { from: 'url:http://localhost:5301/article/2', waitMs: 12000, kind: 'public', alt: { fr: 'Page d’article de la proposition Bénin Bouge', en: 'Article page of the Bénin Bouge proposal' } },
     { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 1900, kind: 'public', alt: { fr: 'Grille d’actualités de la page d’accueil', en: 'News grid on the home page' } },
-    { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 3350, prepare: (page) => page.locator('svg path[aria-label="Borgou"]').hover().then(() => page.waitForTimeout(1200)), kind: 'public', alt: { fr: 'Carte interactive des départements du Bénin', en: 'Interactive map of Benin departments' } },
+    { from: 'url:http://localhost:5301/', waitMs: 12000, scrollY: 3580, height: 1300, prepare: hoverBorgou, kind: 'public', alt: { fr: 'Carte interactive des départements du Bénin, Borgou en surbrillance', en: 'Interactive map of Benin departments, Borgou highlighted' } },
   ],
   najaexperts: [
     { from: 'url:http://localhost:5302/a', waitMs: 4000, kind: 'public', alt: { fr: 'Proposition A, page d’accueil', en: 'Proposal A, home page' } },
