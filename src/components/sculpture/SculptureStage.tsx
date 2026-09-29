@@ -1,15 +1,11 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SculptureBoundary } from './SculptureBoundary';
 import { DESKTOP_RIBBON, MOBILE_RIBBON } from './mobius';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
+const Trajectory = dynamic(() => import('./SculptureTrajectory'), { ssr: false, loading: () => null });
 const Sculpture = dynamic(() => import('./Sculpture'), { ssr: false, loading: () => null });
 
 function hasWebGL(): boolean {
@@ -81,31 +77,7 @@ export function SculptureStage() {
     return () => removeEventListener('pointermove', onMove);
   }, [posterMode]);
 
-  // Scroll trajectory for the hero: drift right, shrink, fade (Lot 2 extends it to later sections).
-  useGSAP(() => {
-    if (posterMode) return;
-    const mm = gsap.matchMedia();
-    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 1024px)', () => {
-      const stage = box.current;
-      stage?.setAttribute('data-trajectory', 'on');
-      gsap.to(box.current, {
-        xPercent: 12, scale: 0.88, opacity: 0, ease: 'none',
-        scrollTrigger: {
-          start: 0, end: () => innerHeight * 1.2, scrub: true,
-          onUpdate: (self) => {
-            progress.current = self.progress;
-            setFaded(self.progress >= 0.999);
-          },
-        },
-      });
-      return () => {
-        stage?.removeAttribute('data-trajectory');
-        setFaded(false);
-        progress.current = 0;
-      };
-    });
-    return () => mm.revert();
-  }, { dependencies: [posterMode] });
+  const onFadedChange = useCallback((f: boolean) => setFaded(f), []);
 
   const params = mobile ? MOBILE_RIBBON : DESKTOP_RIBBON;
   const running = mode === '3d' && visible && !faded && !posterMode;
@@ -132,6 +104,9 @@ export function SculptureStage() {
             className={`absolute inset-0 m-auto h-full w-full object-contain transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${ready ? 'invisible opacity-0' : ''}`}
           />
         </picture>
+      )}
+      {mode === '3d' && !posterMode && (
+        <Trajectory stage={box} progress={progress} onFadedChange={onFadedChange} />
       )}
       {mode === '3d' && (
         <SculptureBoundary onError={fallback}>

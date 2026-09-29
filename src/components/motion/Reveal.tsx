@@ -1,60 +1,41 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef, type ReactNode } from 'react';
+import { createElement, useEffect, useRef, type ReactNode } from 'react';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+type Props = { children: ReactNode; className?: string; as?: 'div' | 'section' | 'ul' };
 
-export function Reveal({ children, className }: { children: ReactNode; className?: string }) {
-  const root = useRef<HTMLDivElement>(null);
+/**
+ * Reveal-once for below-the-fold content. CSS owns the motion: items are hidden only while
+ * `html.js` is present, motion is allowed and the layout's safety timer has not fired
+ * (see globals.css). This component only flags items as they enter the viewport.
+ */
+export function Reveal({ children, className, as = 'div' }: Props) {
+  const root = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const items = gsap.utils.toArray<HTMLElement>('[data-reveal]', root.current);
-      const html = document.documentElement;
-      const markRevealed = (el: HTMLElement) => el.setAttribute('data-revealed', '');
-      if (html.classList.contains('reveal-done')) {
-        // Safety net already showed everything: do not animate late.
-        items.forEach(markRevealed);
-        return;
-      }
-      html.classList.add('reveal-ready');
-      const mm = gsap.matchMedia();
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Before the trigger fires, CSS keeps items hidden (no inline styles written).
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: 'top 85%', once: true },
-        });
-        items.forEach((el, i) => {
-          tl.fromTo(
-            el,
-            { opacity: 0, y: 18 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.9,
-              ease: 'power3.out',
-              immediateRender: false,
-              clearProps: 'transform',
-              onStart: () => markRevealed(el),
-            },
-            i * 0.09,
-          );
-        });
-      });
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        items.forEach(markRevealed);
-      });
-      return () => mm.revert();
-    },
-    { scope: root },
-  );
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    document.documentElement.classList.add('reveal-ready');
+    const items = Array.from(el.querySelectorAll<HTMLElement>('[data-reveal]'));
+    items.forEach((item, i) => item.style.setProperty('--reveal-i', String(i % 6)));
+    const show = (item: Element) => item.setAttribute('data-revealed', '');
+    if (
+      document.documentElement.classList.contains('reveal-done') ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
+    ) {
+      items.forEach(show);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { show(entry.target); io.unobserve(entry.target); }
+      }),
+      { rootMargin: '0px 0px -12% 0px' },
+    );
+    items.forEach((item) => io.observe(item));
+    return () => io.disconnect();
+  }, []);
 
-  return (
-    <div ref={root} className={className}>
-      {children}
-    </div>
-  );
+  return createElement(as, { ref: root, className }, children);
 }
