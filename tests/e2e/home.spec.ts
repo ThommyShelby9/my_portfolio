@@ -9,8 +9,8 @@ test.describe('home sequences', () => {
     await expect(headings.nth(1)).toContainText('Trois produits');
     await expect(headings.nth(2)).toContainText('De l’idée à la production');
     await expect(headings.nth(3)).toContainText('Parlons de votre projet');
-    await expect(page.getByText('Co-développé avec').first()).toBeVisible();
-    await expect(page.getByText(/sous 48 heures/).first()).toBeVisible();
+    await expect(page.locator('#realisations-accueil').getByText('Co-développé avec')).toBeVisible();
+    await expect(page.locator('#projet').getByText(/sous 48 heures/)).toBeVisible();
     await expect(page.getByText(/des produits livrés, pas des maquettes/)).toBeVisible();
   });
 
@@ -18,8 +18,9 @@ test.describe('home sequences', () => {
     await page.goto('/en');
     await expect(page.getByRole('heading', { name: /ship products that hold up/ })).toBeVisible();
     await expect(page.getByRole('heading', { name: /Three products/ })).toBeVisible();
-    await expect(page.getByText('Co-built with').first()).toBeVisible();
-    await expect(page.getByText(/within 48 hours/).first()).toBeVisible();
+    await expect(page.locator('#realisations-accueil').getByText('Co-built with')).toBeVisible();
+    await expect(page.locator('#projet').getByText(/within 48 hours/)).toBeVisible();
+    await expect(page.locator('main')).not.toContainText(/Parlons de votre projet|Réalisations|sous 48 heures|Co-développé/);
   });
 
   test('below-fold text appears when scrolled into view', async ({ page }) => {
@@ -67,7 +68,7 @@ test.describe('home sequences', () => {
     for (const javaScriptEnabled of [true, false]) {
       const context = await browser.newContext({ viewport: { width: 360, height: 740 }, javaScriptEnabled });
       const page = await context.newPage();
-      await page.goto('/');
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
       await page.locator('[data-mobile-menu] summary').click();
       await expect(page.locator('[data-mobile-menu] nav').getByRole('link', { name: 'Réalisations' })).toBeVisible();
       await context.close();
@@ -89,4 +90,21 @@ test.describe('home sequences', () => {
       expect(results.violations).toEqual([]);
     });
   }
+});
+
+test('mobile menu closes after a hash link and after client navigation', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 360, height: 740 } });
+  const page = await context.newPage();
+  await page.goto('/');
+  const menu = page.locator('[data-mobile-menu]');
+  await menu.locator('summary').click();
+  await expect(menu).toHaveAttribute('open', '');
+  await menu.getByRole('link', { name: 'Expertise' }).click();
+  await expect(menu).not.toHaveAttribute('open', '');
+  await menu.locator('summary').click();
+  await expect(menu).toHaveAttribute('open', '');
+  await menu.getByRole('link', { name: 'Réalisations' }).click();
+  await expect(page).toHaveURL(/\/realisations$/, { timeout: 15_000 });
+  await expect(page.locator('[data-mobile-menu]')).not.toHaveAttribute('open', '');
+  await context.close();
 });
