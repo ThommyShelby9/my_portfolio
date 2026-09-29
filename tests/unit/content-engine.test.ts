@@ -31,6 +31,25 @@ describe('schema', () => {
     const d = { ...demo(), images: [{ src: '/x.png', alt: 'a', kind: 'public' }] };
     expect(parseFrontmatter('realisation', d).success).toBe(false);
   });
+  describe('proposal (explorations only)', () => {
+    const exploration = () => ({ ...demo(), status: 'concept', featured: null, proofs: [] });
+    it('defaults to unsolicited on an exploration', () => {
+      const r = parseFrontmatter('exploration', exploration());
+      expect(r.success && r.data.proposal).toBe('unsolicited');
+    });
+    it('accepts pitched on an exploration', () => {
+      const r = parseFrontmatter('exploration', { ...exploration(), proposal: 'pitched' });
+      expect(r.success && r.data.proposal).toBe('pitched');
+    });
+    it('rejects an unknown proposal value', () => {
+      expect(parseFrontmatter('exploration', { ...exploration(), proposal: 'commissioned' }).success).toBe(false);
+    });
+    it('is forbidden on a realisation and absent by default', () => {
+      expect(parseFrontmatter('realisation', { ...demo(), proposal: 'unsolicited' }).success).toBe(false);
+      const r = parseFrontmatter('realisation', demo());
+      expect(r.success && r.data.proposal).toBeUndefined();
+    });
+  });
   it('rejects an unknown key (typo)', () => {
     const d = { ...demo(), proof: [{ text: 'x', source: 'y' }] };
     expect(parseFrontmatter('realisation', d).success).toBe(false);

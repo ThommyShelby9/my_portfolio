@@ -4,6 +4,10 @@ export type ProjectKind = 'realisation' | 'exploration';
 
 export const STATUSES = ['live', 'archived', 'private', 'concept'] as const;
 
+/** How an exploration reached its subject: made on Rostel's own initiative, or also presented to the client. */
+export const PROPOSALS = ['unsolicited', 'pitched'] as const;
+export type Proposal = (typeof PROPOSALS)[number];
+
 const image = z.object({
   src: z.string().regex(/^\/work\/[a-z0-9-]+\/\d{2}\.webp$/, 'image src must be /work/<slug>/NN.webp'),
   alt: z.string().min(1),
@@ -30,6 +34,7 @@ const base = z.object({
   sector: z.string().min(1).optional(),
   images: z.array(image),
   proofs: z.array(proof).default([]),
+  proposal: z.enum(PROPOSALS).optional(),
   seoDescription: z.string().min(1).max(170),
 }).strict();
 
@@ -50,8 +55,10 @@ export function frontmatterSchema(kind: ProjectKind) {
       if (d.proofs.length > 0) {
         ctx.addIssue({ code: 'custom', path: ['proofs'], message: 'exploration cannot have proofs' });
       }
+    } else if (d.proposal !== undefined) {
+      ctx.addIssue({ code: 'custom', path: ['proposal'], message: 'proposal is only allowed on explorations' });
     }
-  });
+  }).transform((d) => (kind === 'exploration' ? { ...d, proposal: d.proposal ?? ('unsolicited' as const) } : d));
 }
 
 export function parseFrontmatter(kind: ProjectKind, data: unknown) {

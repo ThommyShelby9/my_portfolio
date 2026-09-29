@@ -16,7 +16,14 @@ describe('proxy matcher', () => {
   });
 
   it('skips api, internals and files with an extension', () => {
-    for (const path of ['/favicon.ico', '/api/health', '/_next/static/x.js', '/sculpture/mobius-desktop.webp']) {
+    for (const path of [
+      '/favicon.ico',
+      '/api/health',
+      '/_next/static/x.js',
+      '/sculpture/mobius-desktop.webp',
+      '/fr/opengraph-image',
+      '/en/realisations/contractiq/opengraph-image',
+    ]) {
       expect(matcher.test(path), path).toBe(false);
     }
   });

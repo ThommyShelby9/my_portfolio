@@ -15,6 +15,7 @@ images:
   - { src: /work/najaexperts/02.webp, alt: "Proposal B, home page", kind: public }
   - { src: /work/najaexperts/03.webp, alt: "Proposal C, home page", kind: public }
 proofs: []
+proposal: pitched
 seoDescription: "Redesign proposal for Najayna Experts, a real estate agency in Abidjan: a detailed audit of the current site and three visual directions."
 ---
 

@@ -31,6 +31,8 @@ export type LoadOptions = { root?: string; publicRoot?: string };
 const FOLDER: Record<ProjectKind, string> = { realisation: 'realisations', exploration: 'explorations' };
 const LOCALES: Locale[] = ['fr', 'en'];
 
+// Content is read at build time only (every page is prerendered, dynamicParams = false):
+// the ignore hints keep Turbopack from tracing the whole project into the server output.
 const defaultRoot = () => path.join(process.cwd(), 'content');
 const defaultPublic = () => path.join(process.cwd(), 'public');
 
@@ -43,8 +45,8 @@ function slugsIn(dir: string): string[] {
 }
 
 export function getAllSlugs(kind: ProjectKind, opts: LoadOptions = {}): string[] {
-  const dir = path.join(opts.root ?? defaultRoot(), FOLDER[kind]);
-  const perLocale = LOCALES.map((l) => ({ l, slugs: slugsIn(path.join(dir, l)) }));
+  const dir = path.join(/*turbopackIgnore: true*/ opts.root ?? defaultRoot(), FOLDER[kind]);
+  const perLocale = LOCALES.map((l) => ({ l, slugs: slugsIn(path.join(/*turbopackIgnore: true*/ dir, l)) }));
   const all = [...new Set(perLocale.flatMap((x) => x.slugs))].sort();
   for (const slug of all) {
     for (const { l, slugs } of perLocale) {
@@ -56,7 +58,7 @@ export function getAllSlugs(kind: ProjectKind, opts: LoadOptions = {}): string[]
 
 async function loadOne(kind: ProjectKind, locale: Locale, slug: string, opts: LoadOptions): Promise<Project> {
   const root = opts.root ?? defaultRoot();
-  const file = path.join(root, FOLDER[kind], locale, `${slug}.md`);
+  const file = path.join(/*turbopackIgnore: true*/ root, FOLDER[kind], locale, `${slug}.md`);
   if (!existsSync(file)) throw new Error(`content: missing ${locale} file for ${kind} "${slug}" (${file})`);
   const { data, content } = matter(readFileSync(file, 'utf8'));
   const parsed = parseFrontmatter(kind, data);
@@ -67,8 +69,8 @@ async function loadOne(kind: ProjectKind, locale: Locale, slug: string, opts: Lo
   const pub = opts.publicRoot ?? defaultPublic();
   const images: ProjectImage[] = [];
   for (const img of parsed.data.images) {
-    const abs = path.join(pub, img.src);
-    if (!existsSync(abs)) throw new Error(`content: image ${img.src} not found in public/ (${file})`);
+    const abs = path.join(/*turbopackIgnore: true*/ pub, img.src);
+    if (!existsSync(/*turbopackIgnore: true*/ abs)) throw new Error(`content: image ${img.src} not found in public/ (${file})`);
     const meta = await sharp(abs).metadata();
     if (!meta.width || !meta.height) throw new Error(`content: cannot read dimensions of ${img.src}`);
     images.push({ ...img, width: meta.width, height: meta.height });

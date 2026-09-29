@@ -34,7 +34,10 @@
   },
   "notFound": {
     "title": "This page does not exist.",
-    "back": "Back to the home page"
+    "back": "Back to the home page",
+    "kicker": "Error 404",
+    "text": "The link may be old, or the address may contain a typo.",
+    "work": "See the work"
   },
   "positioning": {
     "kicker": "02 · Beyond development",
@@ -95,5 +98,57 @@
     "text": "A platform to design, a product to take over or a team to structure: describe your needs in a few minutes, I reply within 48 hours.",
     "brief": "Describe my project",
     "email": "Send an email"
+  },
+  "workIndex": {
+    "metaTitle": "Work · Rostel Panoumassi",
+    "metaDescription": "The products I designed and shipped: ERP, B2B SaaS, mobile payments, HR, health. For each one, my role, the team, the stack and the technical decisions.",
+    "kicker": "Work",
+    "title": "Products shipped, from the first schema to production.",
+    "lede": "ERP, SaaS, mobile payments, HR, health: for every project, my exact role, the team, the stack and the decisions that mattered.",
+    "count": "{count} projects · {from} to {to}",
+    "othersKicker": "More work",
+    "othersTitle": "From HR platforms to mobile payments, the rest of the shipped work.",
+    "explorationsText": "Redesign proposals made on my own initiative, shown for what they are.",
+    "explorationsLink": "See the explorations"
+  },
+  "caseStudy": {
+    "metaTitle": "{title}, case study · Rostel Panoumassi",
+    "back": "All work",
+    "role": "Role",
+    "team": "Team",
+    "client": "Client",
+    "year": "Year",
+    "stack": "Stack",
+    "status": "Status",
+    "statusLive": "Live",
+    "statusArchived": "Archived",
+    "statusPrivate": "Private",
+    "statusConcept": "Prototype",
+    "visit": "Visit the site",
+    "gallery": "Gallery",
+    "result": "Outcome",
+    "nav": "More case studies",
+    "prev": "Previous project",
+    "next": "Next project",
+    "conversionKicker": "Your project",
+    "noImages": "Private project, no public screenshots",
+    "caseStudy": "Case study"
+  },
+  "explorations": {
+    "metaTitle": "Explorations · Rostel Panoumassi",
+    "metaDescription": "Redesign proposals made on my own initiative for existing websites: an audit, a visual direction and a working prototype.",
+    "kicker": "Explorations",
+    "title": "Redesign proposals, shown for what they are.",
+    "lede": "Studies made on my own initiative for existing websites: an audit, a visual direction, a working prototype. They are not shipped client work, and each one says so.",
+    "count": "{count} studies · {year}",
+    "badgeUnsolicited": "Unsolicited redesign proposal",
+    "badgePitched": "Redesign proposal presented to the client",
+    "back": "All explorations",
+    "nav": "More explorations",
+    "prev": "Previous exploration",
+    "next": "Next exploration",
+    "workText": "Products designed and shipped for clients are in the work section.",
+    "workLink": "See the work",
+    "caseMetaTitle": "{title}, redesign proposal · Rostel Panoumassi"
   }
 }

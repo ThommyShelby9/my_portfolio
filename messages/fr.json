@@ -34,7 +34,10 @@
   },
   "notFound": {
     "title": "Cette page n’existe pas.",
-    "back": "Retour à l’accueil"
+    "back": "Retour à l’accueil",
+    "kicker": "Erreur 404",
+    "text": "Le lien est peut-être ancien, ou l’adresse contient une faute de frappe.",
+    "work": "Voir les réalisations"
   },
   "positioning": {
     "kicker": "02 · Au-delà du développement",
@@ -95,5 +98,57 @@
     "text": "Une plateforme à concevoir, un produit à reprendre ou une équipe à structurer : décrivez votre besoin en quelques minutes, je vous réponds sous 48 heures.",
     "brief": "Décrire mon projet",
     "email": "Écrire un email"
+  },
+  "workIndex": {
+    "metaTitle": "Réalisations · Rostel Panoumassi",
+    "metaDescription": "Les produits que j’ai conçus et livrés : ERP, SaaS B2B, paiement mobile, RH, santé. Pour chacun, mon rôle, l’équipe, la stack et les décisions techniques.",
+    "kicker": "Réalisations",
+    "title": "Des produits livrés, du premier schéma à la production.",
+    "lede": "ERP, SaaS, paiement mobile, RH, santé : pour chaque projet, mon rôle exact, l’équipe, la stack et les décisions qui ont compté.",
+    "count": "{count} projets · de {from} à {to}",
+    "othersKicker": "Autres réalisations",
+    "othersTitle": "Du SIRH au paiement mobile, les autres projets livrés.",
+    "explorationsText": "Des propositions de refonte menées de ma propre initiative, présentées comme telles.",
+    "explorationsLink": "Voir les explorations"
+  },
+  "caseStudy": {
+    "metaTitle": "{title}, étude de cas · Rostel Panoumassi",
+    "back": "Toutes les réalisations",
+    "role": "Rôle",
+    "team": "Équipe",
+    "client": "Client",
+    "year": "Année",
+    "stack": "Stack",
+    "status": "Statut",
+    "statusLive": "En ligne",
+    "statusArchived": "Archivé",
+    "statusPrivate": "Privé",
+    "statusConcept": "Prototype",
+    "visit": "Voir le site",
+    "gallery": "Galerie",
+    "result": "Résultat",
+    "nav": "Autres études de cas",
+    "prev": "Projet précédent",
+    "next": "Projet suivant",
+    "conversionKicker": "Votre projet",
+    "noImages": "Projet privé, sans captures publiques",
+    "caseStudy": "Étude de cas"
+  },
+  "explorations": {
+    "metaTitle": "Explorations · Rostel Panoumassi",
+    "metaDescription": "Des propositions de refonte menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne.",
+    "kicker": "Explorations",
+    "title": "Des propositions de refonte, présentées pour ce qu’elles sont.",
+    "lede": "Des études menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne. Ce ne sont pas des réalisations livrées, et chacune le dit.",
+    "count": "{count} études · {year}",
+    "badgeUnsolicited": "Proposition de refonte non commandée",
+    "badgePitched": "Proposition de refonte présentée au client",
+    "back": "Toutes les explorations",
+    "nav": "Autres explorations",
+    "prev": "Exploration précédente",
+    "next": "Exploration suivante",
+    "workText": "Les projets conçus et livrés pour des clients sont dans les réalisations.",
+    "workLink": "Voir les réalisations",
+    "caseMetaTitle": "{title}, proposition de refonte · Rostel Panoumassi"
   }
 }

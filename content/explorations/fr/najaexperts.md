@@ -15,6 +15,7 @@ images:
   - { src: /work/najaexperts/02.webp, alt: "Proposition B, page d’accueil", kind: public }
   - { src: /work/najaexperts/03.webp, alt: "Proposition C, page d’accueil", kind: public }
 proofs: []
+proposal: pitched
 seoDescription: "Proposition de refonte pour Najayna Experts, agence immobilière à Abidjan : audit détaillé du site actuel et trois directions visuelles."
 ---
 

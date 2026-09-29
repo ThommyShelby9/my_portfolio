@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { Reveal } from '@/components/motion/Reveal';
 import { ButtonLink, buttonClassName } from '@/components/site/ButtonLink';
 
-export function Conversion() {
+export function Conversion({ kicker }: { kicker?: string } = {}) {
   const t = useTranslations('conversion');
   const sig = useTranslations('positioning');
   return (
@@ -19,7 +19,7 @@ export function Conversion() {
         />
       </picture>
       <Reveal className="relative mx-auto max-w-[1280px] px-5 md:px-10">
-        <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{t('kicker')}</p>
+        <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{kicker ?? t('kicker')}</p>
         <h2 data-reveal className="mt-3.5 max-w-[12ch] font-serif text-[clamp(46px,6vw,88px)] font-medium leading-[1.02]">{t('title')}</h2>
         <p data-reveal className="mb-8 mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{t('text')}</p>
         <div className="flex flex-wrap gap-3.5">
