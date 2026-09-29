@@ -120,6 +120,14 @@ test.describe('foundations', () => {
       test.setTimeout(120_000);
       await page.goto(path);
       await page.waitForTimeout(1500);
+      // Below-the-fold reveals fire on intersection: scroll through the page to trigger them all.
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 400) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+        window.scrollTo(0, document.body.scrollHeight);
+      });
       // Contrast is computed on live styles: wait for the one-shot reveals to finish (opacity 1).
       await page.waitForFunction(() =>
         [...document.querySelectorAll<HTMLElement>('[data-reveal]')].every((el) => getComputedStyle(el).opacity === '1'),
@@ -136,7 +144,8 @@ test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
 
   test('home is readable and shows the poster', async ({ page }) => {
-    await page.goto('/');
+    // domcontentloaded: the lazy work images go through the image optimizer, which can be slow while WebGL tests hog the CPU.
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.locator('[data-sculpture-poster]')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Voir les réalisations' })).toBeVisible();

@@ -10,9 +10,13 @@ const variants = {
   ghost: 'border border-[#3a3b3e] text-ivory hover:border-champagne hover:text-champagne',
 };
 
+export function buttonClassName(variant: 'primary' | 'ghost'): string {
+  return `${base} ${variants[variant]}`;
+}
+
 export function ButtonLink({ variant = 'primary', arrow = false, className = '', children, ...rest }: Props) {
   return (
-    <Link {...rest} data-button className={`${base} ${variants[variant]} ${className}`}>
+    <Link {...rest} data-button className={`${buttonClassName(variant)} ${className}`}>
       {children}
       {arrow && (
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"
