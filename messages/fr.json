@@ -162,5 +162,121 @@
     "pitchTooLong": "Ce résumé est trop long : 1000 caractères au maximum.",
     "messageTooShort": "Votre message est trop court : au moins 10 caractères.",
     "messageTooLong": "Votre message est trop long : 3000 caractères au maximum."
+  },
+  "forms": {
+    "required": "obligatoire",
+    "pending": "Envoi en cours",
+    "summaryTitle": "Quelques réponses sont à revoir.",
+    "summaryText": "Vos réponses sont conservées. Suivez les liens pour corriger chaque champ.",
+    "honeypot": "Laissez ce champ vide",
+    "rateLimited": "Plusieurs envois viennent d’être faits depuis votre connexion. Réessayez dans une heure, ou écrivez-moi directement à <email>rmissimawu@gmail.com</email>.",
+    "failed": "L’envoi n’a pas abouti, vos réponses sont toujours là. Écrivez-moi directement à <email>rmissimawu@gmail.com</email>, je vous réponds sous 48 heures.",
+    "privacy": "Vos réponses servent uniquement à vous répondre. <link>Politique de confidentialité</link>"
+  },
+  "brief": {
+    "metaTitle": "Brief projet · Rostel Panoumassi",
+    "metaDescription": "Décrivez votre projet en quelques minutes : besoin, contexte, échéance et budget. Je vous réponds sous 48 heures.",
+    "kicker": "Brief projet",
+    "title": "Décrivez votre projet.",
+    "lede": "Quelques minutes suffisent. Je vous réponds sous 48 heures.",
+    "meta": "4 parties · 8 champs obligatoires",
+    "formLabel": "Brief projet",
+    "sections": {
+      "project": {
+        "legend": "01 · Le projet",
+        "text": "Ce que vous voulez construire ou faire évoluer."
+      },
+      "context": {
+        "legend": "02 · Le contexte",
+        "text": "Où en est le produit, et qui travaille déjà dessus."
+      },
+      "frame": {
+        "legend": "03 · Le cadre",
+        "text": "Une indication suffit, ce n’est pas un engagement."
+      },
+      "you": {
+        "legend": "04 · Vous",
+        "text": "Pour vous répondre, et pour rien d’autre."
+      }
+    },
+    "projectType": {
+      "label": "Type de besoin",
+      "new": "Un nouveau produit",
+      "revamp": "La refonte d’un produit",
+      "audit": "Un audit technique",
+      "spot": "Une mission ponctuelle",
+      "unsure": "Je ne sais pas encore"
+    },
+    "pitch": {
+      "label": "Votre projet en quelques lignes",
+      "hint": "Le problème à résoudre, pour qui, et ce qui existe déjà. De 10 à 1000 caractères."
+    },
+    "currentState": {
+      "label": "Où en est le projet ?",
+      "idea": "Une idée",
+      "design": "Des maquettes ou un cahier des charges",
+      "inProgressBlocked": "En développement, mais bloqué",
+      "mvpInProd": "Une première version en production",
+      "existingRevamp": "Un produit existant à refondre",
+      "auditOnly": "Un produit à auditer"
+    },
+    "teamSize": {
+      "label": "Taille de votre équipe",
+      "solo": "Une personne",
+      "small": "2 à 5 personnes",
+      "medium": "6 à 15 personnes",
+      "large": "Plus de 15 personnes"
+    },
+    "resources": {
+      "label": "Déjà dans l’équipe",
+      "hasTechTeam": "Des développeurs",
+      "hasDesigner": "Un designer",
+      "hasProductOwner": "Un product owner"
+    },
+    "notes": {
+      "label": "Précisions utiles",
+      "hint": "Stack en place, contraintes, liens vers l’existant."
+    },
+    "deadline": {
+      "label": "Échéance souhaitée",
+      "lt1m": "Moins d’un mois",
+      "m1to3": "1 à 3 mois",
+      "m3to6": "3 à 6 mois",
+      "flexible": "Flexible"
+    },
+    "budget": {
+      "label": "Budget envisagé",
+      "hint": "En euros. Une fourchette suffit.",
+      "lt5k": "Moins de 5 000 €",
+      "k5to15": "5 000 à 15 000 €",
+      "k15to40": "15 000 à 40 000 €",
+      "k40to100": "40 000 à 100 000 €",
+      "k100plus": "Plus de 100 000 €",
+      "unknown": "Pas encore défini"
+    },
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": {
+      "label": "Adresse e-mail",
+      "hint": "Ma réponse arrivera ici."
+    },
+    "company": "Entreprise",
+    "website": {
+      "label": "Site web",
+      "placeholder": "https://"
+    },
+    "source": "Comment m’avez-vous connu ?",
+    "firstContact": "Premier échange",
+    "prefersCall": "Je préfère commencer par un appel",
+    "submit": "Envoyer le brief",
+    "thanks": {
+      "metaTitle": "Brief envoyé · Rostel Panoumassi",
+      "metaDescription": "Votre brief est bien arrivé. Je vous réponds sous 48 heures.",
+      "kicker": "Brief envoyé",
+      "title": "Merci, votre brief est bien arrivé.",
+      "text": "Je vous réponds sous 48 heures, à l’adresse que vous avez indiquée.",
+      "home": "Retour à l’accueil",
+      "work": "Voir les réalisations"
+    }
   }
 }

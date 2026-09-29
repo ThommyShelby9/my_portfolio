@@ -11,6 +11,8 @@
   --color-faint: #8a8c90;
   --color-graphite: #55575b;
   --color-line: #26272a;
+  /* Form control boundaries (inputs, chips): 3.3:1 on obsidian and 3.2:1 on obsidian-2 (WCAG 1.4.11). Never text. */
+  --color-edge: #65676b;
 
   --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
   --font-sans: var(--font-manrope), system-ui, -apple-system, 'Segoe UI', sans-serif;

@@ -162,5 +162,121 @@
     "pitchTooLong": "This summary is too long: 1000 characters at most.",
     "messageTooShort": "Your message is too short: at least 10 characters.",
     "messageTooLong": "Your message is too long: 3000 characters at most."
+  },
+  "forms": {
+    "required": "required",
+    "pending": "Sending",
+    "summaryTitle": "A few answers need another look.",
+    "summaryText": "Your answers are kept. Follow the links to fix each field.",
+    "honeypot": "Leave this field empty",
+    "rateLimited": "Several submissions were just sent from your connection. Try again in an hour, or write to me directly at <email>rmissimawu@gmail.com</email>.",
+    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <email>rmissimawu@gmail.com</email>, I reply within 48 hours.",
+    "privacy": "Your answers are only used to reply to you. <link>Privacy policy</link>"
+  },
+  "brief": {
+    "metaTitle": "Project brief · Rostel Panoumassi",
+    "metaDescription": "Describe your project in a few minutes: need, context, timeline and budget. I reply within 48 hours.",
+    "kicker": "Project brief",
+    "title": "Tell me about your project.",
+    "lede": "A few minutes is enough. I reply within 48 hours.",
+    "meta": "4 parts · 8 required fields",
+    "formLabel": "Project brief",
+    "sections": {
+      "project": {
+        "legend": "01 · The project",
+        "text": "What you want to build or improve."
+      },
+      "context": {
+        "legend": "02 · The context",
+        "text": "Where the product stands, and who already works on it."
+      },
+      "frame": {
+        "legend": "03 · The frame",
+        "text": "A rough idea is enough, it is not a commitment."
+      },
+      "you": {
+        "legend": "04 · You",
+        "text": "To reply to you, and for nothing else."
+      }
+    },
+    "projectType": {
+      "label": "Type of need",
+      "new": "A new product",
+      "revamp": "A product redesign",
+      "audit": "A technical audit",
+      "spot": "A one-off engagement",
+      "unsure": "Not sure yet"
+    },
+    "pitch": {
+      "label": "Your project in a few lines",
+      "hint": "The problem to solve, for whom, and what already exists. 10 to 1000 characters."
+    },
+    "currentState": {
+      "label": "Where does the project stand?",
+      "idea": "An idea",
+      "design": "Mockups or a specification",
+      "inProgressBlocked": "In development, but stuck",
+      "mvpInProd": "A first version in production",
+      "existingRevamp": "An existing product to rebuild",
+      "auditOnly": "A product to audit"
+    },
+    "teamSize": {
+      "label": "Size of your team",
+      "solo": "One person",
+      "small": "2 to 5 people",
+      "medium": "6 to 15 people",
+      "large": "More than 15 people"
+    },
+    "resources": {
+      "label": "Already on the team",
+      "hasTechTeam": "Developers",
+      "hasDesigner": "A designer",
+      "hasProductOwner": "A product owner"
+    },
+    "notes": {
+      "label": "Useful details",
+      "hint": "Current stack, constraints, links to what exists."
+    },
+    "deadline": {
+      "label": "Desired timeline",
+      "lt1m": "Under a month",
+      "m1to3": "1 to 3 months",
+      "m3to6": "3 to 6 months",
+      "flexible": "Flexible"
+    },
+    "budget": {
+      "label": "Expected budget",
+      "hint": "In euros. A range is enough.",
+      "lt5k": "Under €5,000",
+      "k5to15": "€5,000 to €15,000",
+      "k15to40": "€15,000 to €40,000",
+      "k40to100": "€40,000 to €100,000",
+      "k100plus": "Over €100,000",
+      "unknown": "Not defined yet"
+    },
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": {
+      "label": "Email address",
+      "hint": "My reply will arrive here."
+    },
+    "company": "Company",
+    "website": {
+      "label": "Website",
+      "placeholder": "https://"
+    },
+    "source": "How did you hear about me?",
+    "firstContact": "First conversation",
+    "prefersCall": "I would rather start with a call",
+    "submit": "Send the brief",
+    "thanks": {
+      "metaTitle": "Brief sent · Rostel Panoumassi",
+      "metaDescription": "Your brief arrived. I reply within 48 hours.",
+      "kicker": "Brief sent",
+      "title": "Thank you, your brief arrived.",
+      "text": "I reply within 48 hours, at the address you gave.",
+      "home": "Back to the home page",
+      "work": "See the work"
+    }
   }
 }
