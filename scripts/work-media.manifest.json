@@ -444,6 +444,42 @@
     }
   },
   {
+    "slug": "procom",
+    "file": "/work/procom/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Accueil de la proposition Procom, le flux d’influence",
+      "en": "Procom proposal home, the influence flow"
+    }
+  },
+  {
+    "slug": "procom",
+    "file": "/work/procom/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Section « Sept forces, un seul flux »",
+      "en": "Section “Seven forces, one flow”"
+    }
+  },
+  {
+    "slug": "procom",
+    "file": "/work/procom/03.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Section méthode : stratégie, narration, propagation, mesure",
+      "en": "Method section: strategy, narrative, propagation, measurement"
+    }
+  },
+  {
     "slug": "beninbouge",
     "file": "/work/beninbouge/01.webp",
     "width": 1600,

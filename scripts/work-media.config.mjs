@@ -81,8 +81,13 @@ export const sources = {
   lecentre: [
     { from: 'url:https://lecentre.kheios.com', kind: 'public', alt: { fr: 'Page d’accueil de la proposition Le Centre', en: 'Le Centre proposal home page' } },
   ],
-  // procom.agency is a parked GoDaddy page: no capture.
-  procom: [],
+  // procom.agency is a parked GoDaddy page: captured from the local project (port 5303).
+  // Stat-heavy sections and the Bénin Bouge section are skipped (no metrics reused).
+  procom: [
+    { from: 'url:http://localhost:5303/', waitMs: 8000, kind: 'public', alt: { fr: 'Accueil de la proposition Procom, le flux d’influence', en: 'Procom proposal home, the influence flow' } },
+    { from: 'url:http://localhost:5303/', waitMs: 8000, scrollY: 2700, kind: 'public', alt: { fr: 'Section « Sept forces, un seul flux »', en: 'Section “Seven forces, one flow”' } },
+    { from: 'url:http://localhost:5303/', waitMs: 8000, scrollY: 6100, kind: 'public', alt: { fr: 'Section méthode : stratégie, narration, propagation, mesure', en: 'Method section: strategy, narrative, propagation, measurement' } },
+  ],
   // Local dev servers (ports 5301 / 5302). The Bénin Bouge home hero and the
   // stock map are never captured: scroll past them.
   beninbouge: [
