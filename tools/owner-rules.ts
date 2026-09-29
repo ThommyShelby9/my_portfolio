@@ -32,6 +32,10 @@ function hexToRgb(hex: string): [number, number, number] | null {
   return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)) as [number, number, number];
 }
 
+function isPurpleHsl(h: number, s: number, l: number): boolean {
+  return h >= 250 && h <= 320 && s >= 0.25 && l >= 0.15 && l <= 0.9;
+}
+
 function isPurple([r, g, b]: [number, number, number]): boolean {
   const [rn, gn, bn] = [r / 255, g / 255, b / 255];
   const max = Math.max(rn, gn, bn);
@@ -45,22 +49,30 @@ function isPurple([r, g, b]: [number, number, number]): boolean {
   else if (max === gn) h = (bn - rn) / d + 2;
   else h = (rn - gn) / d + 4;
   h = (h * 60 + 360) % 360;
-  return h >= 250 && h <= 320 && s >= 0.25 && l >= 0.15 && l <= 0.9;
+  return isPurpleHsl(h, s, l);
 }
 
-function colorsIn(css: string): [number, number, number][] {
-  const out: [number, number, number][] = [];
-  for (const m of css.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
+/** True when a gradient argument list contains a purple stop (hex, rgb, hsl, oklch or a named purple token). */
+function hasPurpleStop(args: string): boolean {
+  for (const m of args.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
     const rgb = hexToRgb(m[0]);
-    if (rgb) out.push(rgb);
+    if (rgb && isPurple(rgb)) return true;
   }
-  for (const m of css.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/gi)) {
-    out.push([Number(m[1]), Number(m[2]), Number(m[3])]);
+  for (const m of args.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/gi)) {
+    if (isPurple([Number(m[1]), Number(m[2]), Number(m[3])])) return true;
   }
-  return out;
+  for (const m of args.matchAll(/hsla?\(\s*(-?[\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/gi)) {
+    if (isPurpleHsl(((Number(m[1]) % 360) + 360) % 360, Number(m[2]) / 100, Number(m[3]) / 100)) return true;
+  }
+  for (const m of args.matchAll(/oklch\(\s*[\d.]+%?\s+([\d.]+)\s+(-?[\d.]+)(?:deg)?/gi)) {
+    const h = ((Number(m[2]) % 360) + 360) % 360;
+    if (Number(m[1]) >= 0.08 && h >= 270 && h <= 330) return true;
+  }
+  return /var\(\s*--color-(?:purple|violet|fuchsia)-/i.test(args);
 }
 
 function isPillRadius(value: string): boolean {
+  if (/infinity|var\(\s*--radius-full|9999/i.test(value)) return true;
   for (const m of value.matchAll(/(\d+(?:\.\d+)?)(px|rem|em)/g)) {
     const n = Number(m[1]);
     if ((m[2] === 'px' && n >= 100) || (m[2] !== 'px' && n >= 6)) return true;
@@ -96,7 +108,7 @@ export function checkOwnerRules(files: SourceFile[]): Violation[] {
     const css = cssOf(file);
     if (!css) continue;
 
-    for (const m of css.matchAll(/border-radius\s*:\s*([^;}"]+)/gi)) {
+    for (const m of css.matchAll(/border(?:-[a-z]+){0,2}-radius\s*:\s*([^;}"]+)/gi)) {
       if (isPillRadius(m[1])) {
         add('pill', file.path, m[0].trim());
         break;
@@ -104,7 +116,7 @@ export function checkOwnerRules(files: SourceFile[]): Violation[] {
     }
 
     for (const m of css.matchAll(/(?:linear|radial|conic)-gradient\(([^;{}]*)\)/gi)) {
-      if (colorsIn(m[1]).some(isPurple)) {
+      if (hasPurpleStop(m[1])) {
         add('purple-gradient', file.path, m[0].slice(0, 80));
         break;
       }

@@ -11,7 +11,8 @@ export default defineConfig({
   webServer: {
     command: 'pnpm build && node .next/standalone/server.js',
     url: `http://127.0.0.1:${PORT}/api/health`,
-    reuseExistingServer: !process.env.CI,
+    // Opt-in only: a stale dev server on port 3000 must never be reused silently.
+    reuseExistingServer: process.env.PW_REUSE === '1',
     timeout: 240_000,
     // 0.0.0.0: binding to 127.0.0.1 makes the standalone server redirect to itself in a loop.
     env: { PORT: String(PORT), HOSTNAME: '0.0.0.0' },

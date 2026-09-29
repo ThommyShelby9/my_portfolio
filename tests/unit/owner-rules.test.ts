@@ -29,10 +29,22 @@ describe('checkOwnerRules', () => {
     expect(rules([{ path: 'a.html', content: page('<a style="border-radius:100px">x</a>') }])).toEqual(['pill']);
   });
 
-  it('flags purple gradients in any colour notation', () => {
+  it('flags pill radii written as infinity, tokens, longhands', () => {
+    expect(rules([{ path: 'a.css', content: '.a{border-radius:calc(infinity * 1px)}' }])).toEqual(['pill']);
+    expect(rules([{ path: 'a.css', content: '.a{border-radius:var(--radius-full)}' }])).toEqual(['pill']);
+    expect(rules([{ path: 'a.css', content: '.a{border-top-left-radius:9999px}' }])).toEqual(['pill']);
+    expect(rules([{ path: 'a.css', content: '.a{border-radius:50%}' }])).toEqual([]);
+    expect(rules([{ path: 'a.css', content: '.a{border-radius:2px}' }])).toEqual([]);
+  });
+
+  it('flags purple gradients in hex, rgb, hsl, oklch and named purple tokens', () => {
     expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(90deg,#7c3aed,#db2777)}' }])).toEqual(['purple-gradient']);
     expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(rgb(139, 92, 246), #000)}' }])).toEqual(['purple-gradient']);
     expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(#e3bd74,#0e0d0c)}' }])).toEqual([]);
+    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(hsl(270 80% 60%), #000)}' }])).toEqual(['purple-gradient']);
+    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.55 0.25 295), #000)}' }])).toEqual(['purple-gradient']);
+    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(var(--color-violet-500), transparent)}' }])).toEqual(['purple-gradient']);
+    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.8 0.08 85), #000)}' }])).toEqual([]);
   });
 
   it('flags AI or builder tags', () => {
