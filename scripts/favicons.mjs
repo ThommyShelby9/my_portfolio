@@ -9,7 +9,7 @@ const svg = await readFile(SRC);
 const png = (size, { pad = 0 } = {}) =>
   sharp(svg, { density: 384 })
     .resize(size - pad * 2, size - pad * 2)
-    .extend({ top: pad, bottom: pad, left: pad, right: pad, background: '#0e0d0c' })
+    .extend({ top: pad, bottom: pad, left: pad, right: pad, background: '#101112' })
     .png()
     .toBuffer();
 

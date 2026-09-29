@@ -1,20 +1,66 @@
+import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
+import { Footer } from '@/components/site/Footer';
+import { Header } from '@/components/site/Header';
+import { SkipLink } from '@/components/site/SkipLink';
+import { getPathname } from '@/i18n/navigation';
+import { routing, type Locale } from '@/i18n/routing';
+import { mono, sans, serif } from '@/styles/fonts';
+import '@/styles/globals.css';
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rostelmissimawu.com';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale as Locale, namespace: 'meta' });
+  const url = (l: Locale) => new URL(getPathname({ locale: l, href: '/' }), SITE).toString();
+  return {
+    metadataBase: new URL(SITE),
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: url(locale as Locale),
+      languages: { fr: url('fr'), en: url('en'), 'x-default': url('fr') },
+    },
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: '48x48' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      apple: '/apple-touch-icon.png',
+    },
+    manifest: '/site.webmanifest',
+  };
+}
+
+export const viewport = { themeColor: '#101112' };
+
+// Adds `js` before first paint so reveal styles only hide content when JS runs,
+// and force-reveals everything after 2.5 s even if the reveal code never loads.
+const EARLY_JS = `document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('reveal-done')},2500);`;
 
 export default async function LocaleLayout({ children, params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: EARLY_JS }} />
+      </head>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <SkipLink />
+          <Header />
+          <main id="main" tabIndex={-1} className="relative">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
