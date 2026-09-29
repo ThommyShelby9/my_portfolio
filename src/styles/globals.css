@@ -36,3 +36,12 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Reveal-once: content is only hidden when JS is present, motion is allowed,
+   and the safety timer (layout) has not fired yet. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.reveal-done) [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
