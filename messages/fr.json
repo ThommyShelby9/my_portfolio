@@ -278,5 +278,39 @@
       "home": "Retour à l’accueil",
       "work": "Voir les réalisations"
     }
+  },
+  "contact": {
+    "metaTitle": "Contact · Rostel Panoumassi",
+    "metaDescription": "Écrire à Rostel Panoumassi, ingénieur produit à Cotonou : e-mail, LinkedIn, GitHub, ou un message court depuis cette page.",
+    "kicker": "Contact",
+    "title": "Écrire directement.",
+    "lede": "Une question, une mise en relation, un échange sur un produit : un message court suffit. Je vous réponds sous 48 heures.",
+    "channels": "Me joindre",
+    "email": "E-mail",
+    "elsewhere": "Ailleurs",
+    "location": "Basé à",
+    "locationValue": "Cotonou, Bénin · UTC+1",
+    "briefText": "Pour un projet, le brief est plus rapide.",
+    "briefLink": "Décrire mon projet",
+    "formTitle": "Un message court",
+    "name": "Nom",
+    "emailField": {
+      "label": "Adresse e-mail",
+      "hint": "Ma réponse arrivera ici."
+    },
+    "message": {
+      "label": "Votre message",
+      "hint": "De 10 à 3000 caractères."
+    },
+    "submit": "Envoyer le message",
+    "thanks": {
+      "metaTitle": "Message envoyé · Rostel Panoumassi",
+      "metaDescription": "Votre message est bien arrivé. Je vous réponds sous 48 heures.",
+      "kicker": "Message envoyé",
+      "title": "Merci, votre message est bien arrivé.",
+      "text": "Je vous réponds sous 48 heures, à l’adresse que vous avez indiquée.",
+      "home": "Retour à l’accueil",
+      "work": "Voir les réalisations"
+    }
   }
 }

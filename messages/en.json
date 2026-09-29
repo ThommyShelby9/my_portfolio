@@ -278,5 +278,39 @@
       "home": "Back to the home page",
       "work": "See the work"
     }
+  },
+  "contact": {
+    "metaTitle": "Contact · Rostel Panoumassi",
+    "metaDescription": "Write to Rostel Panoumassi, product engineer in Cotonou: email, LinkedIn, GitHub, or a short message from this page.",
+    "kicker": "Contact",
+    "title": "Write directly.",
+    "lede": "A question, an introduction, a conversation about a product: a short message is enough. I reply within 48 hours.",
+    "channels": "Reach me",
+    "email": "Email",
+    "elsewhere": "Elsewhere",
+    "location": "Based in",
+    "locationValue": "Cotonou, Benin · UTC+1",
+    "briefText": "For a project, the brief is faster.",
+    "briefLink": "Describe my project",
+    "formTitle": "A short message",
+    "name": "Name",
+    "emailField": {
+      "label": "Email address",
+      "hint": "My reply will arrive here."
+    },
+    "message": {
+      "label": "Your message",
+      "hint": "10 to 3000 characters."
+    },
+    "submit": "Send the message",
+    "thanks": {
+      "metaTitle": "Message sent · Rostel Panoumassi",
+      "metaDescription": "Your message arrived. I reply within 48 hours.",
+      "kicker": "Message sent",
+      "title": "Thank you, your message arrived.",
+      "text": "I reply within 48 hours, at the address you gave.",
+      "home": "Back to the home page",
+      "work": "See the work"
+    }
   }
 }

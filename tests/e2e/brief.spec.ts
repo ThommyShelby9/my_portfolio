@@ -56,6 +56,8 @@ test.describe('brief', () => {
   });
 
   test('a delivery failure shows the direct email in a live region and keeps the answers', async ({ page }) => {
+    // Own client IP so the in-memory rate limiter never mixes this test with others.
+    await page.setExtraHTTPHeaders({ 'x-real-ip': `198.51.100.${test.info().parallelIndex + 10}` });
     await page.goto('/en/brief');
     await fillValid(page);
     await page.getByRole('button', { name: 'Send the brief' }).click();

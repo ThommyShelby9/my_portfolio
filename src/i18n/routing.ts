@@ -18,6 +18,7 @@ export const routing = defineRouting({
     '/brief': '/brief',
     '/brief/merci': { fr: '/brief/merci', en: '/brief/thanks' },
     '/contact': '/contact',
+    '/contact/merci': { fr: '/contact/merci', en: '/contact/thanks' },
     '/cv': '/cv',
     '/confidentialite': { fr: '/confidentialite', en: '/privacy' },
     '/cgu': { fr: '/cgu', en: '/terms' },
