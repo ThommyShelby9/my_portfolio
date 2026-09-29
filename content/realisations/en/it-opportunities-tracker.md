@@ -1,6 +1,6 @@
 ---
 title: IT-Opportunities-Tracker
-summary: "An IT market intelligence platform: automated collection of contract offers, a data warehouse, a dashboard and matching against consultant profiles."
+summary: "An IT market intelligence platform: automated collection of contract offers, a data warehouse and a dashboard, with consultant matching planned."
 year: 2025
 role: "Engineering contribution"
 coauthors: []

@@ -38,7 +38,6 @@ The idea behind this proposal fits in one sentence: Procom does not just do comm
 - **A story in acts, not a grid.** The page reads top to bottom like a narrative, each section setting up the next. Scrolling becomes the storytelling.
 - **Motion in service of reading.** GSAP drives the reveals and Lenis smooths the scroll. Scrolling is never hijacked: visitors move at their own pace.
 - **Motion preferences respected.** When the system asks for reduced motion, scroll smoothing is turned off, the orbital mark stays still, and the stylesheets neutralise transitions.
-- **Nothing made up in what this portfolio shows.** The figures inside the proposal are sample values: none of them is repeated here.
 
 ## Outcome
 

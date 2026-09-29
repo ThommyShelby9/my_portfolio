@@ -23,7 +23,7 @@ seoDescription: "WhatsPay, WhatsApp influencer marketing: Laravel 12, RabbitMQ, 
 
 In West Africa, WhatsApp is not one channel among many: it is where much of the commercial content actually travels. WhatsPay turns that into a product. An advertiser creates a campaign, sharers post it in their statuses and groups, and each of them is paid for the clicks they bring in.
 
-Three requirements pulled against each other: keeping money safe in both directions (advertiser deposits, sharer payouts), counting every click without collecting personal data, and sending many messages at once, which a Laravel app cannot absorb synchronously. My part: architecture and back end.
+Three requirements pulled against each other: keeping money safe in both directions (advertiser deposits, sharer payouts), counting every click without cookies or fingerprinting, and sending many messages at once, which a Laravel app cannot absorb synchronously. My part: architecture and back end.
 
 ## Key features
 

@@ -40,7 +40,7 @@ The audience is professionals in Benin, mostly on mobile, on patchy networks. He
 
 - **Three executables, each with a reason to exist.** A pnpm and Turborepo monorepo: `web` for the site and the test, the only public surface; `admin` for the back office, a separate app so its code never lands in the public bundle; `worker` for the follow-up scheduler, because a Next.js route handler is short-lived and cannot host a scheduler. The shared base is a handful of packages: typed Mongoose models, Zod-validated configuration, email templates.
 - **A generic quiz.** Nothing is hard-coded as “English”: a quiz is a reusable entity with its own levels and recommendation. Barely more expensive to build, and reusable for another campaign without a rewrite.
-- **Atomic claiming of sends.** The worker claims each email with a single operation that moves it from “pending” to “in progress”. Without it, two overlapping runs send the same email twice to the same lead, the kind of bug you only see once, at the client’s.
+- **Atomic claiming of sends.** The worker claims each email with a single operation that moves it from “pending” to “in progress”. Without it, two overlapping runs send the same email twice to the same lead, the kind of bug that only shows up in front of the client.
 - **No secret in the browser, checked.** The Conversions API token was searched for in a build seeded with a decoy token: it appears in none of the files sent to the browser.
 
 ## Outcome

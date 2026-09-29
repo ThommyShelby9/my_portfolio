@@ -42,4 +42,4 @@ LeConsultant veut être le point d’entrée unique : un flux d’appels d’off
 
 ## Résultat
 
-La plateforme a servi ses abonnés avec des paiements réels en Mobile Money. Une limite est restée documentée comme dette : le rapprochement entre offres et abonnés repose sur des expressions régulières appliquées au titre et à la description, qui ratent les variantes d’écriture d’un même organisme. La piste retenue pour une version suivante était un index de recherche dédié ; elle n’a pas été réalisée pendant ma mission. Le domaine leconsultant.bj n’affiche plus l’application au moment de la publication de cette page.
+La plateforme a servi ses abonnés avec des paiements réels en Mobile Money. Une limite est restée documentée comme dette : le rapprochement entre offres et abonnés repose sur des expressions régulières appliquées au titre et à la description, qui ratent les variantes d’écriture d’un même organisme. La piste retenue pour une version suivante était un index de recherche dédié ; elle n’a pas été réalisée pendant ma mission. La plateforme n’est plus en ligne ; elle est présentée par ses captures.

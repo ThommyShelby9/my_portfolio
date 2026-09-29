@@ -12,6 +12,7 @@ featured: null
 order: 2
 images:
   - { src: /work/lecentre/01.webp, alt: "Le Centre proposal home page", kind: public }
+  - { src: /work/lecentre/02.webp, alt: "Collection page of the Le Centre proposal", kind: public }
 proofs: []
 seoDescription: "Unsolicited redesign proposal for the Espace Culturel Le Centre: an audit of the current site, a unified calendar, an indexable collection, Vue 3 and WebGL."
 ---

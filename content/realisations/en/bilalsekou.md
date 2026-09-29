@@ -42,4 +42,4 @@ No Stripe: his customers pay with Mobile Money, and Kkiapay is the regional stan
 
 ## Outcome
 
-The site shipped in four weeks. How the effort split says it all: one day on design, three on the checkout. On a project that looks small, the real complexity lives in the payment mechanics.
+The site shipped in four weeks. How the effort split says it all: one day on design, three days on the checkout. On a project that looks small, the real complexity lives in the payment mechanics.

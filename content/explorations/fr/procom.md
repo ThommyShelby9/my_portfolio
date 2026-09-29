@@ -38,7 +38,6 @@ L’idée de cette proposition tient en une phrase : Procom ne fait pas seulemen
 - **Un récit en actes plutôt qu’une grille.** La page se lit de haut en bas comme une histoire, chaque section préparant la suivante. Le défilement devient la narration.
 - **Le mouvement au service de la lecture.** GSAP orchestre les apparitions, Lenis lisse le défilement. Le défilement n’est jamais détourné : on avance à son rythme.
 - **Les préférences de mouvement respectées.** Quand le système demande moins d’animation, le lissage du défilement est coupé, la marque orbitale reste immobile, et les feuilles de style neutralisent les transitions.
-- **Rien d’inventé dans ce que montre ce portfolio.** Les chiffres présents dans la proposition sont des valeurs d’exemple : aucun n’est repris ici.
 
 ## Résultat
 

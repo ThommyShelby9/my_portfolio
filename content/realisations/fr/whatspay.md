@@ -23,7 +23,7 @@ seoDescription: "WhatsPay, marketing d’influence sur WhatsApp : Laravel 12, Ra
 
 En Afrique de l’Ouest, WhatsApp n’est pas un canal parmi d’autres : c’est là que circule une grande partie du contenu commercial. WhatsPay formalise cette réalité. Un annonceur crée une campagne, des diffuseurs la relaient dans leurs statuts et leurs groupes, et chacun est rémunéré selon les clics qu’il a générés.
 
-Trois exigences se tiraient la corde : sécuriser l’argent dans les deux sens (dépôts des annonceurs, retraits des diffuseurs), compter chaque clic sans collecter de données personnelles, et tenir la diffusion simultanée de nombreux messages, qu’une application Laravel ne peut pas absorber de façon synchrone. Mon rôle : l’architecture et le back-end.
+Trois exigences tiraient dans des sens opposés : sécuriser l’argent dans les deux sens (dépôts des annonceurs, retraits des diffuseurs), compter chaque clic sans cookie ni empreinte du navigateur, et tenir la diffusion simultanée de nombreux messages, qu’une application Laravel ne peut pas absorber de façon synchrone. Mon rôle : l’architecture et le back-end.
 
 ## Fonctionnalités clés
 

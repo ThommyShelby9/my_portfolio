@@ -2,7 +2,7 @@
 title: ContractIQ
 summary: "Un SaaS B2B qui lit les contrats avec l’IA, en extrait les risques et les échéances, et prévient avant chaque renouvellement. Co-développé avec Jérémie Zitti."
 year: 2026
-role: "Co-auteur, ingénierie full-stack"
+role: "Architecture et développement"
 coauthors: [Jérémie Zitti]
 client: "Produit indépendant"
 sector: "SaaS B2B, gestion des contrats"

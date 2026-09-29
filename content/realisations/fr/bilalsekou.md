@@ -42,4 +42,4 @@ Pas de Stripe : sa clientèle paie en Mobile Money, et Kkiapay est la norme dans
 
 ## Résultat
 
-Le site a été livré en quatre semaines. La répartition de l’effort dit l’essentiel : une journée sur le design, trois sur le tunnel d’achat. Sur un projet qui a l’air petit, la vraie complexité est dans la mécanique de paiement.
+Le site a été livré en quatre semaines. La répartition de l’effort dit l’essentiel : une journée sur le design, trois jours sur le tunnel d’achat. Sur un projet qui a l’air petit, la vraie complexité est dans la mécanique de paiement.

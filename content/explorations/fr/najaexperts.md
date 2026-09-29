@@ -15,10 +15,10 @@ images:
   - { src: /work/najaexperts/02.webp, alt: "Proposition B, page d’accueil", kind: public }
   - { src: /work/najaexperts/03.webp, alt: "Proposition C, page d’accueil", kind: public }
 proofs: []
-seoDescription: "Proposition de refonte non commandée pour Najayna Experts, agence immobilière à Abidjan : audit détaillé du site actuel et trois directions visuelles."
+seoDescription: "Proposition de refonte pour Najayna Experts, agence immobilière à Abidjan : audit détaillé du site actuel et trois directions visuelles."
 ---
 
-Proposition de refonte non commandée, réalisée pour montrer ce que Najayna Experts pourrait devenir.
+Proposition de refonte, réalisée à l’initiative de Rostel puis présentée à l’agence.
 
 ## Les enjeux
 
@@ -43,4 +43,4 @@ Le [site actuel](https://najaynaexperts.ci) ne leur permet pas de décider. Avan
 
 ## Résultat
 
-Un audit prêt à être envoyé à l’agence et une application Next.js qui sert les trois propositions côte à côte. Le travail montre une méthode autant qu’un visuel : constater, prouver, puis proposer.
+L’audit et les trois directions ont été remis à l’agence, servis côte à côte par une application Next.js. L’agence a retenu la direction C, l’acier brossé. Le travail montre une méthode autant qu’un visuel : constater, prouver, puis proposer.

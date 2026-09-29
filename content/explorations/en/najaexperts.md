@@ -15,10 +15,10 @@ images:
   - { src: /work/najaexperts/02.webp, alt: "Proposal B, home page", kind: public }
   - { src: /work/najaexperts/03.webp, alt: "Proposal C, home page", kind: public }
 proofs: []
-seoDescription: "Unsolicited redesign proposal for Najayna Experts, a real estate agency in Abidjan: a detailed audit of the current site and three visual directions."
+seoDescription: "Redesign proposal for Najayna Experts, a real estate agency in Abidjan: a detailed audit of the current site and three visual directions."
 ---
 
-Unsolicited redesign proposal, made to show what Najayna Experts could become.
+Redesign proposal, started on Rostel’s own initiative and then presented to the agency.
 
 ## The challenge
 
@@ -43,4 +43,4 @@ The [current site](https://najaynaexperts.ci) does not let them decide. Before d
 
 ## Outcome
 
-An audit ready to send to the agency, and a Next.js app that serves the three proposals side by side. The work shows a method as much as a look: observe, prove, then propose.
+The audit and the three directions were delivered to the agency, served side by side by a Next.js app. The agency chose direction C, brushed steel. The work shows a method as much as a look: observe, prove, then propose.

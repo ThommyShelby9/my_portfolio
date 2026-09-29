@@ -35,8 +35,8 @@ Mariette wanted a blog she owns, not a page on someone else’s publishing platf
 - **Next.js App Router, all the way.** Server rendering for search, client components only where there is interaction. Public content arrives complete in the HTML.
 - **MongoDB for a simple domain.** Articles, tags, comments, users: a document model is enough, without the overhead of a relational database.
 - **Rewriting the editor’s image extension.** The first version used Tiptap’s default image extension: drag and drop failed in some cases and resizing did not exist. I wrote a dedicated extension that accepts drag and drop, paste and the button, uploads in the background behind a skeleton, and supports handle-based resizing. Two weeks of work, and it is what makes the admin genuinely usable.
-- **Pinning NextAuth.** NextAuth v5 was still in beta and every minor update broke something. I pinned a stable version and added authentication diagnostic scripts for production.
+- **Pinning NextAuth.** NextAuth v5 was still in beta and every minor update broke something. I pinned one specific beta version of NextAuth v5 and added authentication diagnostic scripts for production.
 
 ## Outcome
 
-The site shipped in five weeks. It is no longer online at the time this page is published. The lesson: on a personal blog, the editor is the part readers never see and the one that decides whether anything gets written. That is where the time went.
+The site shipped in five weeks. It is no longer online; it is shown through its screenshots. The lesson: on a personal blog, the editor is the part readers never see and the one that decides whether anything gets written. That is where the time went.

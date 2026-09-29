@@ -12,6 +12,7 @@ featured: null
 order: 2
 images:
   - { src: /work/lecentre/01.webp, alt: "Page d’accueil de la proposition Le Centre", kind: public }
+  - { src: /work/lecentre/02.webp, alt: "Page collection de la proposition Le Centre", kind: public }
 proofs: []
 seoDescription: "Proposition de refonte non commandée pour l’Espace Culturel Le Centre : audit du site actuel, agenda unifié, collection indexable, Vue 3 et WebGL."
 ---

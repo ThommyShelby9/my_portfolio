@@ -13,7 +13,7 @@ order: 1
 images:
   - { src: /work/beninbouge/01.webp, alt: "Page d’article de la proposition Bénin Bouge", kind: public }
   - { src: /work/beninbouge/02.webp, alt: "Grille d’actualités de la page d’accueil", kind: public }
-  - { src: /work/beninbouge/03.webp, alt: "Carte interactive des départements du Bénin", kind: public }
+  - { src: /work/beninbouge/03.webp, alt: "Carte interactive des départements du Bénin, Borgou en surbrillance", kind: public }
 proofs: []
 seoDescription: "Proposition de refonte non commandée du média Bénin Bouge : Vue 3, prérendu statique par page, carte interactive des départements, animations GSAP."
 ---

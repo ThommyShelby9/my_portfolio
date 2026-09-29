@@ -49,4 +49,4 @@ It is my own product: I designed, built and deployed it alone, API included.
 
 ## Outcome
 
-ZenLife passed 1,200 active users in its first six months. The zenlife.kheios.com domain no longer answers at the time this page is published, so the app is shown here through its screenshots.
+ZenLife reached more than 1,200 active users within six months. The app is no longer online; it is shown through its screenshots.

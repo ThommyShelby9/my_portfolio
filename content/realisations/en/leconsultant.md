@@ -42,4 +42,4 @@ LeConsultant aims to be the single entry point: one feed of tenders (reference, 
 
 ## Outcome
 
-The platform served its subscribers with real Mobile Money payments. One limit stayed on record as known debt: matching tenders to subscribers relies on regular expressions over the title and description, which miss the different ways the same body gets spelled. The plan for a later version was a dedicated search index; it was not built during my assignment. The leconsultant.bj domain no longer shows the application at the time this page is published.
+The platform served its subscribers with real Mobile Money payments. One limit stayed on record as known debt: matching tenders to subscribers relies on regular expressions over the title and description, which miss the different ways the same body gets spelled. The plan for a later version was a dedicated search index; it was not built during my assignment. The platform is no longer online; it is shown through its screenshots.

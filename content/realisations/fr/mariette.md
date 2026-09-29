@@ -35,8 +35,8 @@ Mariette voulait un blog qui lui appartienne, pas une page sur une plateforme de
 - **L’App Router de Next.js, sans compromis.** Rendu serveur pour le référencement, composants client uniquement là où il y a de l’interaction. Le contenu public arrive complet dans le HTML.
 - **MongoDB pour un domaine simple.** Articles, étiquettes, commentaires, utilisateurs : un modèle documentaire suffit, sans la charge d’une base relationnelle.
 - **Réécrire l’extension d’image de l’éditeur.** La première version reprenait l’extension d’image par défaut de Tiptap : le glisser-déposer ne marchait pas dans tous les cas et le redimensionnement n’existait pas. J’ai écrit une extension dédiée qui accepte le glisser-déposer, le collage et le bouton, envoie l’image en arrière-plan en affichant un squelette, et permet le redimensionnement par poignées. Deux semaines de travail, mais c’est ce qui rend l’administration réellement utilisable.
-- **Figer la version de NextAuth.** NextAuth v5 était encore en bêta et chaque mise à jour mineure cassait quelque chose. J’ai épinglé une version stable et ajouté des scripts de diagnostic de l’authentification pour la production.
+- **Figer la version de NextAuth.** NextAuth v5 était encore en bêta et chaque mise à jour mineure cassait quelque chose. J’ai figé une version bêta précise de NextAuth v5 et ajouté des scripts de diagnostic de l’authentification pour la production.
 
 ## Résultat
 
-Le site a été livré en cinq semaines. Il n’est plus en ligne au moment de la publication de cette page. La leçon : pour un blog personnel, l’éditeur est la partie la moins visible du public et celle qui décide si l’on écrit vraiment. C’est là que le temps a été investi.
+Le site a été livré en cinq semaines. Il n’est plus en ligne ; il est présenté par ses captures. La leçon : pour un blog personnel, l’éditeur est la partie la moins visible du public et celle qui décide si l’on écrit vraiment. C’est là que le temps a été investi.

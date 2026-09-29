@@ -1,6 +1,6 @@
 ---
 title: IT-Opportunities-Tracker
-summary: "Une plateforme de veille du marché IT : collecte automatisée d’offres de missions, entrepôt de données, tableau de bord et rapprochement avec les profils de consultants."
+summary: "Une plateforme de veille du marché IT : collecte automatisée d’offres de missions, entrepôt de données et tableau de bord, avec un rapprochement des profils de consultants prévu."
 year: 2025
 role: "Contribution à l’ingénierie"
 coauthors: []

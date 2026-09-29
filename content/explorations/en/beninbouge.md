@@ -13,7 +13,7 @@ order: 1
 images:
   - { src: /work/beninbouge/01.webp, alt: "Article page of the Bénin Bouge proposal", kind: public }
   - { src: /work/beninbouge/02.webp, alt: "News grid on the home page", kind: public }
-  - { src: /work/beninbouge/03.webp, alt: "Interactive map of Benin departments", kind: public }
+  - { src: /work/beninbouge/03.webp, alt: "Interactive map of Benin departments, Borgou highlighted", kind: public }
 proofs: []
 seoDescription: "Unsolicited redesign proposal for the Bénin Bouge media outlet: Vue 3, per-page static prerendering, interactive department map, GSAP motion."
 ---

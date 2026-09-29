@@ -6,7 +6,6 @@ duration: "2 jours"
 role: "Conception et développement, en solo"
 team: "Solo"
 coauthors: []
-client: "Challenge e-Santé Bénin"
 sector: "Santé numérique, santé maternelle et infantile"
 stack: [Next.js 16, React 19, PostgreSQL, Drizzle ORM, Zod, Tailwind CSS 4, Vitest, PWA]
 status: live

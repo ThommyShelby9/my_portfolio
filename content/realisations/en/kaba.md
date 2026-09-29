@@ -5,7 +5,7 @@ year: 2026
 role: "Solo design and development"
 team: "Solo"
 coauthors: []
-client: "Personal product"
+client: "Orisum Groupe"
 sector: "Online fundraising, mobile payments"
 stack: [Vue 3, TypeScript, Vite, Pinia, Express 5, MongoDB, Mongoose, FedaPay, Firebase, Cloudinary, Joi, Jest]
 status: private

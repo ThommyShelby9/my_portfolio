@@ -49,4 +49,4 @@ C’est mon produit : je l’ai conçu, développé et déployé seul, API compr
 
 ## Résultat
 
-ZenLife a dépassé 1 200 utilisateurs actifs au cours de ses six premiers mois. Le domaine zenlife.kheios.com ne répond plus au moment où cette page est publiée : l’application est présentée ici par ses captures.
+ZenLife a atteint plus de 1 200 utilisateurs actifs en six mois. L’application n’est plus en ligne ; elle est présentée par ses captures.
