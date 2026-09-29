@@ -152,5 +152,15 @@
     "workText": "Products designed and shipped for clients are in the work section.",
     "workLink": "See the work",
     "caseMetaTitle": "{title}, redesign proposal · Rostel Panoumassi"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "tooLong": "This field is too long.",
+    "invalidEmail": "Invalid email address.",
+    "invalidUrl": "Invalid web address. Start with http:// or https://.",
+    "pitchTooShort": "Tell me a bit more: at least 10 characters.",
+    "pitchTooLong": "This summary is too long: 1000 characters at most.",
+    "messageTooShort": "Your message is too short: at least 10 characters.",
+    "messageTooLong": "Your message is too long: 3000 characters at most."
   }
 }

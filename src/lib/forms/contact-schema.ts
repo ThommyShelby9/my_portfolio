@@ -12,4 +12,7 @@ export const contactSchema = z.object({
   locale: localeEnum,
 });
 
+/** Known form field names, used as the echo allow-list for parseForm. */
+export const contactFields = Object.keys(contactSchema.shape);
+
 export type ContactInput = z.output<typeof contactSchema>;

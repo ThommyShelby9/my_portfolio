@@ -35,4 +35,7 @@ export const briefSchema = z.object({
   locale: localeEnum,
 });
 
+/** Known form field names, used as the echo allow-list for parseForm. */
+export const briefFields = Object.keys(briefSchema.shape);
+
 export type BriefInput = z.output<typeof briefSchema>;

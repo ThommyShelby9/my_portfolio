@@ -152,5 +152,15 @@
     "workText": "Les projets conçus et livrés pour des clients sont dans les réalisations.",
     "workLink": "Voir les réalisations",
     "caseMetaTitle": "{title}, proposition de refonte · Rostel Panoumassi"
+  },
+  "errors": {
+    "required": "Ce champ est requis.",
+    "tooLong": "Ce champ est trop long.",
+    "invalidEmail": "Adresse e-mail invalide.",
+    "invalidUrl": "Adresse web invalide. Commencez par http:// ou https://.",
+    "pitchTooShort": "Dites-m’en un peu plus : au moins 10 caractères.",
+    "pitchTooLong": "Ce résumé est trop long : 1000 caractères au maximum.",
+    "messageTooShort": "Votre message est trop court : au moins 10 caractères.",
+    "messageTooLong": "Votre message est trop long : 3000 caractères au maximum."
   }
 }

@@ -18,6 +18,8 @@ function initApp(): App | null {
       projectId: process.env.FIREBASE_PROJECT_ID || json.project_id,
     });
   } catch {
+    // Fixed message only: never log the value or any part of it.
+    console.warn('FIREBASE_SERVICE_ACCOUNT could not be decoded; Firestore is disabled.');
     return null;
   }
 }

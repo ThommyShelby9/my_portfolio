@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { briefSchema } from '@/lib/forms/brief-schema';
-import { contactSchema } from '@/lib/forms/contact-schema';
+import { contactFields, contactSchema } from '@/lib/forms/contact-schema';
 import { parseForm } from '@/lib/forms/parse-form';
 
 function fd(o: Record<string, string>) {
@@ -124,5 +124,18 @@ describe('contactSchema', () => {
     const r = parseForm(contactSchema, fd({ ...valid, message: 'x' }));
     expect(!r.ok && r.values.message).toBe('x');
     expect(!r.ok && r.values.name).toBe('Ada');
+  });
+});
+
+describe('parseForm echo allow-list', () => {
+  it('never echoes the honeypot or $ACTION_* keys when a list is given', () => {
+    const r = parseForm(
+      contactSchema,
+      fd({ name: 'A', email: 'bad', message: 'x', locale: 'fr', nickname: 'bot', $ACTION_ID_abc: '1' }),
+      contactFields,
+    );
+    expect(r.ok).toBe(false);
+    if (r.ok) return;
+    expect(r.values).toEqual({ name: 'A', email: 'bad', message: 'x', locale: 'fr' });
   });
 });
