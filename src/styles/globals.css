@@ -171,4 +171,30 @@ html[data-poster='1'] .page-enter { animation: none; }
     color: var(--color-ivory);
   }
   .case-prose-lede { font-size: 19px; line-height: 1.65; color: var(--color-ivory); }
+
+  /* Legal pages: the same prose, with its h2 sections kept inline and numbered like the table of contents. */
+  .legal-prose { counter-reset: legal-h2; }
+  .legal-prose > h2 {
+    counter-increment: legal-h2;
+    margin-top: 1.5em;
+    padding-top: 1.1em;
+    border-top: 1px solid var(--color-line);
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 2.6vw, 36px);
+    font-weight: 500;
+    line-height: 1.12;
+    color: var(--color-ivory);
+  }
+  .legal-prose > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  .legal-prose > h2::before {
+    content: counter(legal-h2, decimal-leading-zero);
+    content: counter(legal-h2, decimal-leading-zero) / '';
+    display: block;
+    margin-bottom: 1.1em;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1;
+    color: var(--color-champagne);
+  }
+  .legal-prose > h2 + * { margin-top: 0.9em; }
 }

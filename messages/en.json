@@ -312,5 +312,20 @@
       "home": "Back to the home page",
       "work": "See the work"
     }
+  },
+  "legal": {
+    "kicker": "Legal",
+    "updated": "Last updated: <time>{date}</time>",
+    "toc": "Contents",
+    "privacy": {
+      "metaTitle": "Privacy policy · Rostel Panoumassi",
+      "metaDescription": "The data this site collects, why, where it is kept and how to exercise your rights. No cookies, no trackers.",
+      "title": "Privacy policy"
+    },
+    "terms": {
+      "metaTitle": "Terms of use · Rostel Panoumassi",
+      "metaDescription": "Site publisher, intellectual property of the content, client work and explorations, liability and governing law.",
+      "title": "Terms of use"
+    }
   }
 }

@@ -312,5 +312,20 @@
       "home": "Retour à l’accueil",
       "work": "Voir les réalisations"
     }
+  },
+  "legal": {
+    "kicker": "Informations légales",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "toc": "Sommaire",
+    "privacy": {
+      "metaTitle": "Politique de confidentialité · Rostel Panoumassi",
+      "metaDescription": "Les données que ce site collecte, pourquoi, où elles sont conservées et comment exercer vos droits. Aucun cookie, aucun traceur.",
+      "title": "Politique de confidentialité"
+    },
+    "terms": {
+      "metaTitle": "Conditions générales d’utilisation · Rostel Panoumassi",
+      "metaDescription": "Éditeur du site, propriété intellectuelle des contenus, réalisations clients et explorations, responsabilité et droit applicable.",
+      "title": "Conditions générales d’utilisation"
+    }
   }
 }

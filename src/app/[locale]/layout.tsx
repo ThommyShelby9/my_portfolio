@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
+import { HitBeacon } from '@/components/site/HitBeacon';
 import { SkipLink } from '@/components/site/SkipLink';
 import { SITE_URL } from '@/lib/site';
 import { routing, type Locale } from '@/i18n/routing';
@@ -56,6 +57,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
           <Header />
           <main id="main" tabIndex={-1} className="relative focus:outline-none">{children}</main>
           <Footer />
+          <HitBeacon />
         </NextIntlClientProvider>
       </body>
     </html>
