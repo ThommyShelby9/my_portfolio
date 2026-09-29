@@ -255,7 +255,7 @@
     "slug": "easytowork",
     "file": "/work/easytowork/01.webp",
     "width": 1600,
-    "height": 865,
+    "height": 867,
     "kind": "public",
     "source": "git:v5-manifesto:public/images/easytowork.png",
     "alt": {
@@ -267,7 +267,7 @@
     "slug": "easytowork",
     "file": "/work/easytowork/02.webp",
     "width": 1600,
-    "height": 1000,
+    "height": 828,
     "kind": "public",
     "source": "url:https://easytowork.fr",
     "alt": {
@@ -291,7 +291,7 @@
     "slug": "whatspay",
     "file": "/work/whatspay/01.webp",
     "width": 1600,
-    "height": 864,
+    "height": 866,
     "kind": "public",
     "source": "git:v5-manifesto:public/images/whatspay.png",
     "alt": {

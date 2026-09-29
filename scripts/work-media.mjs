@@ -53,6 +53,46 @@ async function capture(browser, src) {
   }
 }
 
+/**
+ * Erase rectangles (client marketing figures we must not republish). Coordinates are pixels of the
+ * cropped source. Each rectangle is filled with a Coons patch built from the colours of the four
+ * strips just outside it, so gradients and card backgrounds continue across the gap and nothing
+ * readable is left. Each rectangle needs a RING px margin inside the image.
+ */
+const RING = 4
+async function redact(img, rects) {
+  const { data, info } = await img.removeAlpha().raw().toBuffer({ resolveWithObject: true })
+  const { width: W, height: H, channels: C } = info
+  const px = (x, y) => Array.from({ length: C }, (_, k) => data[(y * W + x) * C + k])
+  const mean = (pts) => Array.from({ length: C }, (_, k) => pts.reduce((a, p) => a + p[k], 0) / pts.length)
+  for (const { left: l, top: t, width: w, height: h } of rects) {
+    if (l < RING || t < RING || l + w + RING > W || t + h + RING > H) throw new Error(`redact rect ${l},${t},${w},${h} needs a ${RING}px margin inside ${W}x${H}`)
+    const L = [], R = [], T = [], B = []
+    for (let y = 0; y < h; y++) {
+      L.push(mean(Array.from({ length: RING }, (_, i) => px(l - 1 - i, t + y))))
+      R.push(mean(Array.from({ length: RING }, (_, i) => px(l + w + i, t + y))))
+    }
+    for (let x = 0; x < w; x++) {
+      T.push(mean(Array.from({ length: RING }, (_, i) => px(l + x, t - 1 - i))))
+      B.push(mean(Array.from({ length: RING }, (_, i) => px(l + x, t + h + i))))
+    }
+    const tl = px(l - 1, t - 1), tr = px(l + w, t - 1), bl = px(l - 1, t + h), br = px(l + w, t + h)
+    for (let y = 0; y < h; y++) {
+      const v = (y + 0.5) / h
+      for (let x = 0; x < w; x++) {
+        const u = (x + 0.5) / w
+        for (let k = 0; k < C; k++) {
+          const horiz = (1 - u) * L[y][k] + u * R[y][k]
+          const vert = (1 - v) * T[x][k] + v * B[x][k]
+          const corners = (1 - u) * (1 - v) * tl[k] + u * (1 - v) * tr[k] + (1 - u) * v * bl[k] + u * v * br[k]
+          data[((t + y) * W + l + x) * C + k] = Math.max(0, Math.min(255, Math.round(horiz + vert - corners)))
+        }
+      }
+    }
+  }
+  return sharp(data, { raw: { width: W, height: H, channels: C } })
+}
+
 function load(src) {
   const f = src.from
   if (f.startsWith('git:')) {
@@ -111,6 +151,7 @@ for (const [slug, list] of Object.entries(sources)) {
     const width = meta.width - left - (c.right ?? 0)
     const height = meta.height - top - (c.bottom ?? 0)
     if (src.crop) img = img.extract({ left, top, width, height })
+    if (src.redact?.length) img = await redact(img, src.redact)
     img = img.resize({ width: Math.min(width, MAX_WIDTH), withoutEnlargement: true })
     const file = `${pad(n)}.webp`
     const info = await img.webp({ quality: 80 }).toFile(join(dir, file))

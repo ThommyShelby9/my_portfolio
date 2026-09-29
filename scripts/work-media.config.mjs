@@ -1,15 +1,22 @@
 // Ordered image sources per slug. The first entry is the cover.
 // from: 'git:<ref>:<path>' | 'file:<path>' | 'gh:<owner/repo>:<path>' | 'url:<https://...>'
 // crop: px removed from each side. kind: 'public' (live/public visual) | 'interior' (internal or mock data).
+// redact: rectangles {left,top,width,height} in pixels of the cropped source, erased and filled from their
+//   surroundings (removes client marketing figures we must not republish). Write them with `at()`.
 // url sources also accept: height (viewport, default 900), optional, waitMs, scrollY, prepare(page).
 const v5 = (f) => `git:v5-manifesto:public/images/${f}`
 const cq = (f) => `file:.superpowers/assets/contractiq/${f}`
 const zl = (f) => `file:.superpowers/assets/zenlife/${f}`
 const mc = (f) => `gh:ThommyShelby9/moncarnet:public/decouvrir/${f}`
 
-const site = (url, file, fr, en) => [
-  { from: v5(file), crop: { right: 4 }, kind: 'public', alt: { fr, en } },
-  { from: `url:${url}`, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
+// Rectangles read on the 1600 px wide output, converted to source pixels: at(scale, [left, top, width, height], ...).
+const at = (scale, ...rects) =>
+  rects.map(([left, top, width, height]) => ({ left: Math.round(left * scale), top: Math.round(top * scale), width: Math.round(width * scale), height: Math.round(height * scale) }))
+const V5 = 1860 / 1600 // v5 captures are ~1864 px wide, ~1860 after the 4 px right crop
+
+const site = (url, file, fr, en, redact, liveRedact) => [
+  { from: v5(file), crop: { right: 4 }, redact, kind: 'public', alt: { fr, en } },
+  { from: `url:${url}`, redact: liveRedact, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
 ]
 
 // The login page shows a stale "session expired" notice on a fresh visit: hide it.
@@ -58,14 +65,28 @@ export const sources = {
   leconsultant: [
     { from: v5('leconsultant.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Le Consultant', en: 'Le Consultant website' } },
   ], // live capture dropped: invalid TLS certificate
-  easytowork: site('https://easytowork.fr', 'easytowork.png', 'Site Easy To Work', 'Easy To Work website'),
+  easytowork: [
+    {
+      from: v5('easytowork.png'),
+      crop: { right: 4 },
+      redact: at(V5, [281, 502, 230, 60], [549, 502, 230, 60], [817, 502, 230, 60], [1085, 502, 230, 60]), // 100+ / 150+ / 500+ / 98% band
+      kind: 'public',
+      alt: { fr: 'Site Easy To Work', en: 'Easy To Work website' },
+    },
+    // The live page repeats the figures below the fold: keep only the top 828 px of the 1000 px capture.
+    { from: 'url:https://easytowork.fr', crop: { bottom: 310 }, optional: true, kind: 'public', alt: { fr: 'Page d’accueil en ligne', en: 'Live home page' } },
+  ],
   planus: [
     { from: v5('planus.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Planus Analytics', en: 'Planus Analytics website' } },
   ], // live capture dropped: cookie banner covers content
-  whatspay: site('https://whatspay.africa', 'whatspay.png', 'Site WhatsPay', 'WhatsPay website'),
+  whatspay: site('https://whatspay.africa', 'whatspay.png', 'Site WhatsPay', 'WhatsPay website', at(V5, [268, 156, 280, 44]), at(1.8, [596, 498, 428, 50])), // "+1 000 diffuseurs actifs" pill; live: "12 000 personnes" in the advertiser card
   upgrade: site('https://upgrade-afrique.com', 'upgrade.png', 'Site Upgrade Afrique', 'Upgrade Afrique website'),
   freelanceclub: [
-    { from: v5('freelanceclub.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Site Freelance Club', en: 'Freelance Club website' } },
+    {
+      from: v5('freelanceclub.png'),
+      crop: { right: 4 },
+      redact: at(V5, [156, 227, 188, 42], [154, 626, 634, 96]), // "+1000 freelances actifs" pill and the 1000+ / 500+ / 98% cards
+      kind: 'public', alt: { fr: 'Site Freelance Club', en: 'Freelance Club website' } },
   ], // live capture dropped: broken hero wrapping at 1440
   bilalsekou: [
     { from: v5('bilal_portfolio.png'), crop: { right: 4 }, kind: 'public', alt: { fr: 'Portfolio de Bilal Sékou', en: 'Bilal Sékou’s portfolio' } },
