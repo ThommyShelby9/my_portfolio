@@ -4,17 +4,20 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { SculptureBoundary } from './SculptureBoundary';
 import { DESKTOP_RIBBON, MOBILE_RIBBON } from './mobius';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const Sculpture = dynamic(() => import('./Sculpture'), { ssr: false });
+const Sculpture = dynamic(() => import('./Sculpture'), { ssr: false, loading: () => null });
 
 function hasWebGL(): boolean {
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+    const gl = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
+    return Boolean(gl);
   } catch {
     return false;
   }
@@ -31,6 +34,10 @@ export function SculptureStage() {
   const [faded, setFaded] = useState(false);
   const [posterMode, setPosterMode] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [ready, setReady] = useState(false);
+  const onReady = useCallback(() => setReady(true), []);
+  // Any 3D failure (chunk, renderer creation, lost context) goes back to the poster.
+  const fallback = useCallback(() => { setReady(false); setMode('poster'); }, []);
 
   // Decide once on mount: 3D only with motion allowed, WebGL present, after the browser is idle.
   useEffect(() => {
@@ -94,7 +101,6 @@ export function SculptureStage() {
   }, { dependencies: [posterMode] });
 
   const params = mobile ? MOBILE_RIBBON : DESKTOP_RIBBON;
-  const poster = mobile ? '/sculpture/mobius-mobile.webp' : '/sculpture/mobius-desktop.webp';
   const running = mode === '3d' && visible && !faded && !posterMode;
 
   return (
@@ -102,28 +108,36 @@ export function SculptureStage() {
       ref={box}
       data-sculpture-stage
       data-state={mode}
+      data-ready={String(ready)}
       data-running={String(running)}
       aria-hidden="true"
       className="pointer-events-none relative h-[42svh] w-full lg:fixed lg:right-0 lg:top-0 lg:h-svh lg:w-1/2"
     >
-      {mode === 'poster' && (
-        // eslint-disable-next-line @next/next/no-img-element -- decorative, pre-sized poster; next/image adds nothing here
-        <img
-          src={poster}
-          alt=""
-          data-sculpture-poster
-          className="absolute inset-0 m-auto h-full w-full object-contain"
-        />
+      {!posterMode && (
+        <picture>
+          <source media="(max-width: 1023px)" srcSet="/sculpture/mobius-mobile.webp" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- decorative, pre-sized poster; next/image adds nothing here */}
+          <img
+            src="/sculpture/mobius-desktop.webp"
+            alt=""
+            data-sculpture-poster
+            className={`absolute inset-0 m-auto h-full w-full object-contain transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${ready ? 'invisible opacity-0' : ''}`}
+          />
+        </picture>
       )}
       {mode === '3d' && (
-        <Sculpture
-          params={params}
-          frozen={posterMode}
-          running={running || posterMode}
-          progress={progress}
-          tilt={tilt}
-          dpr={mobile ? 1.5 : 2}
-        />
+        <SculptureBoundary onError={fallback}>
+          <Sculpture
+            params={params}
+            frozen={posterMode}
+            running={running || posterMode}
+            progress={progress}
+            tilt={tilt}
+            dpr={mobile ? 1.5 : 2}
+            onReady={onReady}
+            onLost={fallback}
+          />
+        </SculptureBoundary>
       )}
     </div>
   );

@@ -8,6 +8,8 @@ test.describe('sculpture', () => {
     await expect(stage).toHaveAttribute('data-state', '3d', { timeout: 8000 });
     await expect(stage.locator('canvas')).toBeVisible();
     await expect(stage).toHaveAttribute('aria-hidden', 'true');
+    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 8000 });
+    await expect(page.locator('[data-sculpture-poster]')).toBeHidden();
   });
 
   test('shows the poster under reduced motion, with no canvas', async ({ page }) => {
@@ -36,7 +38,9 @@ test.describe('sculpture', () => {
     await page.goto('/');
     await page.waitForTimeout(3000);
     await expect(page.locator('[data-sculpture-stage]')).toHaveAttribute('data-state', 'poster');
-    await expect(page.locator('[data-sculpture-poster]')).toBeVisible();
+    const poster = page.locator('[data-sculpture-poster]');
+    await expect(poster).toBeVisible();
+    expect(await poster.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
     expect(errors).toEqual([]);
   });
 
@@ -45,6 +49,7 @@ test.describe('sculpture', () => {
     await page.goto('/');
     const stage = page.locator('[data-sculpture-stage]');
     await expect(stage).toHaveAttribute('data-state', '3d', { timeout: 8000 });
+    await expect(stage).toHaveAttribute('data-running', 'true');
     await page.evaluate(() => {
       document.body.style.minHeight = '400vh';
       scrollTo(0, innerHeight * 3);
