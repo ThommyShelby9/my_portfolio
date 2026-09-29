@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { routing, Locale } from '@/i18n/routing';
 import { localizedPath } from '@/lib/i18n/localized-path';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rostelmissimawu.com';
+import { SITE_URL } from '@/lib/site';
 
 type Args = {
   locale: Locale;
@@ -13,7 +13,7 @@ type Args = {
 };
 
 export function pageMetadata({ locale, href, params, title, description }: Args): Metadata {
-  const abs = (l: Locale) => new URL(localizedPath(href, l, params), SITE).toString();
+  const abs = (l: Locale) => new URL(localizedPath(href, l, params), SITE_URL).toString();
   return {
     title,
     description,

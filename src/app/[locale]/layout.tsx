@@ -5,11 +5,11 @@ import { notFound } from 'next/navigation';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
 import { SkipLink } from '@/components/site/SkipLink';
+import { SITE_URL } from '@/lib/site';
 import { routing, type Locale } from '@/i18n/routing';
 import { mono, sans, serif } from '@/styles/fonts';
 import '@/styles/globals.css';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rostelmissimawu.com';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale, namespace: 'meta' });
   return {
-    metadataBase: new URL(SITE),
+    metadataBase: new URL(SITE_URL),
     title: t('title'),
     description: t('description'),
     icons: {

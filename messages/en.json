@@ -53,7 +53,7 @@
     "title": "Three products, from architecture to launch.",
     "all": "All work",
     "cta": "Read the case study",
-    "ctaFor": "Read the {name} case study",
+    "ctaFor": "Read the case study: {name}",
     "coBuilt": "Co-built with",
     "ubbfy": {
       "what": "ERP and geolocated time clock",
