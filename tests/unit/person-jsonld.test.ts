@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { homeJsonLd } from '@/lib/seo/home-jsonld';
-import { aboutJsonLd, personNode } from '@/lib/seo/person';
+import { aboutJsonLd, cvJsonLd, personNode } from '@/lib/seo/person';
 import { PERSON_ID, SITE_URL } from '@/lib/site';
 
 type Node = Record<string, unknown>;
@@ -62,4 +62,19 @@ describe('aboutJsonLd', () => {
   it('never contains an em dash', () => {
     for (const locale of ['fr', 'en'] as const) expect(JSON.stringify(aboutJsonLd(locale, 'x'))).not.toContain('—');
   });
+});
+
+describe('cvJsonLd', () => {
+  for (const [locale, path] of [
+    ['fr', '/cv'],
+    ['en', '/en/cv'],
+  ] as const) {
+    it(`is a ProfilePage about the same Person as the About page (${locale})`, () => {
+      const [page, person] = graph(cvJsonLd(locale, 'CV'));
+      expect(page['@type']).toBe('ProfilePage');
+      expect(page['@id']).toBe(`${SITE_URL}${path}#page`);
+      expect(page.mainEntity).toEqual({ '@id': PERSON_ID });
+      expect(person).toEqual(graph(aboutJsonLd(locale, 'About'))[1]);
+    });
+  }
 });

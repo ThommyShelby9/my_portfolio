@@ -8,6 +8,7 @@ const PAGES = [
     home: '/',
     pdf: '/cv/rostel-panoumassi-cv.pdf',
     download: 'Télécharger le PDF',
+    note: 'Postes documentés depuis 2023. Les années précédentes : projets et formation.',
     headings: ['Profil', 'Expérience', 'Projets choisis', 'Contact', 'Compétences', 'Formation'],
     metrics: ['−85 % de saisie manuelle', '3 mises à jour réglementaires CNSS sans aucune régression', '1 200+ utilisateurs actifs en six mois', '+240 % de trafic organique en six mois', 'Score SEO Lighthouse de 100'],
   },
@@ -16,13 +17,14 @@ const PAGES = [
     home: '/en',
     pdf: '/cv/rostel-panoumassi-cv-en.pdf',
     download: 'Download the PDF',
+    note: 'Roles documented since 2023. The years before: projects and training.',
     headings: ['Profile', 'Experience', 'Selected projects', 'Contact', 'Skills', 'Education'],
     metrics: ['−85% manual data entry', '3 CNSS regulatory updates with no regressions', '1,200+ active users in six months', '+240% organic traffic in six months', 'Lighthouse SEO score of 100'],
   },
 ] as const;
 
 test.describe('cv page', () => {
-  for (const { path, pdf, download, headings, metrics } of PAGES) {
+  for (const { path, pdf, download, note, headings, metrics } of PAGES) {
     test(`${path} renders the CV from the shared data`, async ({ page }) => {
       await page.goto(path);
       await expect(page.getByRole('heading', { level: 1 })).toHaveText('Rostel Panoumassi');
@@ -40,6 +42,15 @@ test.describe('cv page', () => {
       expect(html).not.toContain('—');
       const link = page.getByRole('link', { name: download });
       await expect(link).toHaveAttribute('href', pdf);
+      // The listed roles start in 2023: the note under Experience says why the six years are more.
+      await expect(page.locator('.cv-career-note')).toHaveText(note);
+      // The LinkedIn URL is one unbroken line.
+      const linkedin = page.locator('[data-cv] a[href*="linkedin.com"]');
+      await expect(linkedin).toHaveCSS('white-space', 'nowrap');
+      // ProfilePage about the shared Person node, like the About page.
+      const ld = JSON.parse((await page.locator('script[type="application/ld+json"]').first().textContent()) ?? '{}');
+      const types = (ld['@graph'] as { '@type': string }[]).map((n) => n['@type']);
+      expect(types).toEqual(['ProfilePage', 'Person']);
     });
 
     test(`${path} links to its PDF, which is served as a PDF`, async ({ request }) => {

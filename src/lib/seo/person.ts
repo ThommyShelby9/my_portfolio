@@ -42,9 +42,11 @@ export function personNode(locale: Locale): Record<string, unknown> {
   };
 }
 
-/** schema.org ProfilePage for /a-propos: the page is about the shared Person node. */
-export function aboutJsonLd(locale: Locale, name: string): Record<string, unknown> {
-  const url = new URL(localizedPath('/a-propos', locale), SITE_URL).toString();
+type ProfileHref = '/a-propos' | '/cv';
+
+/** schema.org ProfilePage (About, CV): the page is about the shared Person node. */
+export function profilePageJsonLd(locale: Locale, href: ProfileHref, name: string): Record<string, unknown> {
+  const url = new URL(localizedPath(href, locale), SITE_URL).toString();
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -59,4 +61,14 @@ export function aboutJsonLd(locale: Locale, name: string): Record<string, unknow
       personNode(locale),
     ],
   };
+}
+
+/** schema.org ProfilePage for /a-propos. */
+export function aboutJsonLd(locale: Locale, name: string): Record<string, unknown> {
+  return profilePageJsonLd(locale, '/a-propos', name);
+}
+
+/** schema.org ProfilePage for /cv, about the same Person node as the About page. */
+export function cvJsonLd(locale: Locale, name: string): Record<string, unknown> {
+  return profilePageJsonLd(locale, '/cv', name);
 }

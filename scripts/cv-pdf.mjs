@@ -6,8 +6,12 @@
 //   pnpm cv:pdf                 (build, then print)
 //   pnpm cv:pdf --skip-build    (reuse the current .next/standalone build)
 // Run `pnpm build` again afterwards if the standalone folder must serve the new PDFs.
+// It also writes public/cv/cv-inputs.sha256: the hash of the CV inputs each PDF was printed from
+// (stamped by the page as data-cv-inputs). tests/unit/cv-pdf.test.ts recomputes it, so a CV data or
+// copy change without a new print fails the unit tests.
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import net from 'node:net';
 import { chromium } from '@playwright/test';
 import { countPdfPages } from './pdf-pages.mjs';
@@ -17,6 +21,7 @@ const TARGETS = [
   { path: '/en/cv', file: 'public/cv/rostel-panoumassi-cv-en.pdf' },
 ];
 const RESERVED = new Set([3000, 3111]);
+const HASH_FILE = 'public/cv/cv-inputs.sha256';
 
 function portIsFree(port) {
   return new Promise((resolve) => {
@@ -80,8 +85,12 @@ try {
     // Printing is not a visit: drop the page counter beacon.
     await page.route('**/api/hit', (route) => route.abort());
     mkdirSync('public/cv', { recursive: true });
-    for (const { path, file } of TARGETS) {
-      await page.goto(`${base}${path}`, { waitUntil: 'networkidle' });
+    const hashes = [];
+    for (const { path: route, file } of TARGETS) {
+      await page.goto(`${base}${route}`, { waitUntil: 'networkidle' });
+      const hash = await page.getAttribute('[data-cv]', 'data-cv-inputs');
+      if (!hash || !/^[0-9a-f]{64}$/.test(hash)) throw new Error(`cv-pdf: ${route} carries no data-cv-inputs hash`);
+      hashes.push(`${hash}  ${path.basename(file)}`);
       await page.evaluate(() => document.fonts.ready);
       await page.pdf({ path: file, format: 'A4', printBackground: true });
       const pages = countPdfPages(readFileSync(file));
@@ -91,6 +100,8 @@ try {
         failed = true;
       }
     }
+    writeFileSync(HASH_FILE, `${hashes.join('\n')}\n`);
+    console.log(`cv-pdf: ${HASH_FILE}`);
   } finally {
     await browser.close();
   }

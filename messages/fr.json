@@ -291,7 +291,7 @@
     "email": "E-mail",
     "elsewhere": "Ailleurs",
     "location": "Basé à",
-    "locationValue": "Cotonou, Bénin · UTC+1",
+    "locationValue": "Cotonou, Bénin · UTC+1",
     "briefText": "Pour un projet, le brief est plus rapide.",
     "briefLink": "Décrire mon projet",
     "formTitle": "Un message court",
@@ -324,7 +324,7 @@
     "facts": {
       "label": "En bref",
       "based": "Basé à",
-      "basedValue": "Cotonou, Bénin · UTC+1",
+      "basedValue": "Cotonou, Bénin · UTC+1",
       "elsewhere": "Ailleurs",
       "cv": "CV"
     },
@@ -380,7 +380,7 @@
     "email": "E-mail",
     "site": "Site",
     "based": "Basé à",
-    "basedValue": "Cotonou, Bénin · UTC+1",
+    "basedValue": "Cotonou, Bénin · UTC+1",
     "profile": "Profil",
     "experience": "Expérience",
     "projects": "Projets choisis",

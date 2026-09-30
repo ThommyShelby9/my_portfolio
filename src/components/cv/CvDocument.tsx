@@ -3,6 +3,7 @@ import { PeriodTime } from '@/components/about/PeriodTime';
 import { buttonClassName } from '@/components/site/ButtonLink';
 import type { Locale } from '@/i18n/routing';
 import { localizedPath } from '@/lib/i18n/localized-path';
+import type { CvProject } from '@/lib/profile/cv-inputs';
 import {
   CV_PDF,
   EDUCATION,
@@ -16,7 +17,6 @@ import {
 } from '@/lib/profile/cv-data';
 import { OWNER, SITE_URL } from '@/lib/site';
 
-export type CvProject = { slug: string; title: string; role: string; year: number; summary: string; metrics: string[] };
 
 /** "https://www.linkedin.com/in/x" -> "linkedin.com/in/x": links are printed as readable text. */
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -26,12 +26,12 @@ const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
  * (src/styles/cv.css) turns it into a white A4 page with no site chrome. Every fact comes from
  * cv-data, the About lede and the case studies' owner-confirmed proofs.
  */
-export async function CvDocument({ locale, projects }: { locale: Locale; projects: CvProject[] }) {
+export async function CvDocument({ locale, projects, inputsHash }: { locale: Locale; projects: CvProject[]; inputsHash: string }) {
   const [t, about] = await Promise.all([getTranslations({ locale, namespace: 'cv' }), getTranslations({ locale, namespace: 'about' })]);
   const role = currentRole();
   const site = new URL(localizedPath('/', locale), SITE_URL).toString();
   return (
-    <article data-cv className="cv">
+    <article data-cv data-cv-inputs={inputsHash} className="cv">
       <header className="cv-head">
         <div>
           <p className="cv-kicker">{t('kicker')}</p>
@@ -58,6 +58,7 @@ export async function CvDocument({ locale, projects }: { locale: Locale; project
 
           <section aria-labelledby="cv-experience" data-area="experience" className="cv-section">
             <h2 id="cv-experience" className="cv-h2">{t('experience')}</h2>
+            <p className="cv-career-note">{about('career.note')}</p>
             <ol className="cv-list">
               {ROLES.map((r) => {
                 const kind = roleKindLabel(r, locale);
@@ -83,10 +84,10 @@ export async function CvDocument({ locale, projects }: { locale: Locale; project
 
         </div>
 
-        <aside className="cv-side">
+        <div className="cv-side">
           <section aria-labelledby="cv-contact" data-area="contact" className="cv-section">
             <h2 id="cv-contact" className="cv-h2">{t('contact')}</h2>
-            <dl className="cv-dl">
+            <dl className="cv-dl cv-contact">
               <div>
                 <dt>{t('email')}</dt>
                 <dd>
@@ -146,7 +147,7 @@ export async function CvDocument({ locale, projects }: { locale: Locale; project
               ))}
             </ol>
           </section>
-        </aside>
+        </div>
       </div>
 
       <section aria-labelledby="cv-projects" data-area="projects" className="cv-section cv-projects">

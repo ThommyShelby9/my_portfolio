@@ -82,6 +82,8 @@
   text-transform: uppercase;
   color: var(--cv-accent);
 }
+/* Under the Experience heading: the listed roles start in 2023, the six years started earlier. */
+.cv-career-note { margin-top: 16px; max-width: 64ch; font-size: 14.5px; line-height: 1.6; color: var(--cv-muted); }
 .cv-lede { margin-top: 22px; max-width: 64ch; font-size: 17px; line-height: 1.7; color: var(--cv-muted); }
 
 .cv-list > li { padding-block: 24px; border-bottom: 1px solid var(--cv-rule); }
@@ -134,6 +136,8 @@
   color: var(--cv-faint);
 }
 .cv-dl dd { margin-top: 6px; font-size: 14.5px; }
+/* A contact link never breaks (the LinkedIn slug has a hyphen). */
+.cv-contact a { white-space: nowrap; }
 .cv-skills { display: grid; gap: 18px; margin-top: 22px; }
 .cv-skills .cv-desc { margin-top: 4px; font-size: 14.5px; }
 
@@ -176,24 +180,26 @@
   }
   .cv-body, .cv-main, .cv-side { display: contents; }
   .cv-head { grid-area: head; }
-  [data-area='contact'] { grid-area: contact; align-self: end; padding-bottom: 4.5mm; }
-  [data-area='profile'] { grid-area: profile; }
-  [data-area='experience'] { grid-area: experience; }
-  [data-area='skills'] { grid-area: skills; }
-  [data-area='education'] { grid-area: education; }
-  [data-area='projects'] { grid-area: projects; }
+  /* Wider than its track, growing leftwards into the header's free space: the LinkedIn URL stays on one line. */
+  .cv [data-area='contact'] { grid-area: contact; align-self: end; justify-self: end; width: 84mm; padding-bottom: 4.5mm; }
+  .cv [data-area='profile'] { grid-area: profile; }
+  .cv [data-area='experience'] { grid-area: experience; }
+  .cv [data-area='skills'] { grid-area: skills; }
+  .cv [data-area='education'] { grid-area: education; }
+  .cv [data-area='projects'] { grid-area: projects; }
   .cv .cv-section { margin-top: 3.5mm; }
-  [data-area='contact'] .cv-h2 { display: none; }
+  .cv [data-area='contact'] .cv-h2 { display: none; }
 
   .cv-head { display: block; padding-bottom: 4.5mm; border-bottom: 0; }
-  [data-area='profile'] { margin-top: 0 !important; border-top: 0.6pt solid var(--cv-rule); padding-top: 3.5mm; }
-  [data-area='profile'] .cv-h2 { display: none; }
+  .cv [data-area='profile'] { margin-top: 0 !important; border-top: 0.6pt solid var(--cv-rule); padding-top: 3.5mm; }
+  .cv [data-area='profile'] .cv-h2 { display: none; }
   .cv-kicker { display: none; }
   .cv-name { margin-top: 0; font-size: 25pt; line-height: 1; }
   .cv-title { margin-top: 1.8mm; font-size: 13pt; }
   .cv-role { margin-top: 0.8mm; font-size: 9pt; }
 
   .cv-h2 { padding-bottom: 1.4mm; border-bottom-width: 0.6pt; font-size: 6.8pt; letter-spacing: 0.18em; }
+  .cv-career-note { margin-top: 1.2mm; max-width: none; font-size: 7.6pt; line-height: 1.35; }
   .cv-lede { margin-top: 0; max-width: none; font-size: 9pt; line-height: 1.5; color: var(--cv-ink); }
 
   .cv-list > li { padding-block: 1.7mm; border-bottom-width: 0.4pt; break-inside: avoid; }
@@ -213,8 +219,8 @@
   .cv-link .cv-soft { display: none; }
 
   .cv-dl { gap: 0.9mm; margin-top: 0; }
-  .cv-dl > div { display: grid; grid-template-columns: 16mm minmax(0, 1fr); align-items: baseline; }
-  .cv-dl dt { font-size: 6pt; }
+  .cv-dl > div { display: grid; grid-template-columns: 18mm minmax(0, 1fr); align-items: baseline; }
+  .cv-dl dt { font-size: 7pt; }
   .cv-dl dd { margin-top: 0; font-size: 8.2pt; }
   .cv-skills { gap: 1.6mm; margin-top: 2mm; }
   .cv-skills > li { display: grid; grid-template-columns: 17mm minmax(0, 1fr); column-gap: 2mm; align-items: baseline; }

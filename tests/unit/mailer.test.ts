@@ -58,7 +58,8 @@ describe('server modules without env', () => {
     await expect(import('@/lib/server/mailer')).resolves.toBeDefined();
     const { getDb } = await import('@/lib/server/firestore');
     expect(getDb()).toBeNull();
-  });
+    // The first import of firebase-admin and nodemailer can take several seconds on a cold, slow disk.
+  }, 30_000);
 
   it('warns once with a fixed message on a corrupt service account, without the value', async () => {
     vi.resetModules();
