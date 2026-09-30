@@ -12,6 +12,15 @@ function initialScripts(page: string): string[] {
     .map((m) => join('.next', m[1].replace(/^\/_next/, '')));
 }
 
+// The terminal (src/components/terminal) loads on demand on /terminal: no page ships it up front.
+it('keeps the terminal shell out of every page’s initial JS', () => {
+  for (const page of ['fr.html', 'en.html', 'fr/a-propos.html', 'en/a-propos.html', 'fr/terminal.html', 'en/terminal.html']) {
+    for (const file of initialScripts(page)) {
+      expect(readFileSync(file, 'utf8').includes('rostel@cotonou:~$'), `${page}: ${file}`).toBe(false);
+    }
+  }
+});
+
 for (const page of ['fr.html', 'en.html']) {
   it(`${page}: initial JS stays within ${BUDGET / 1024} KB gzip and ships no GSAP`, () => {
     const files = initialScripts(page);

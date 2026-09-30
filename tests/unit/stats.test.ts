@@ -29,10 +29,10 @@ describe('encodeKey', () => {
 
 describe('knownPath', () => {
   it('keeps every localized route and every case study and exploration, in both locales', () => {
-    for (const p of ['/', '/en', '/realisations', '/en/work', '/explorations', '/en/explorations', '/a-propos', '/en/about', '/brief', '/en/brief', '/brief/merci', '/en/brief/thanks', '/contact', '/en/contact/thanks', '/cv', '/en/cv', '/confidentialite', '/en/privacy', '/cgu', '/en/terms', '/realisations/ubbfy', '/en/work/ubbfy', '/explorations/procom', '/en/explorations/procom']) {
+    for (const p of ['/', '/en', '/realisations', '/en/work', '/explorations', '/en/explorations', '/a-propos', '/en/about', '/brief', '/en/brief', '/brief/merci', '/en/brief/thanks', '/contact', '/en/contact/thanks', '/cv', '/en/cv', '/confidentialite', '/en/privacy', '/cgu', '/en/terms', '/terminal', '/en/terminal', '/realisations/ubbfy', '/en/work/ubbfy', '/explorations/procom', '/en/explorations/procom']) {
       expect(knownPath(p), p).toBe(p);
     }
-    expect(knownPaths()).toHaveLength(2 * (11 + knownSlugs.realisations.length + knownSlugs.explorations.length));
+    expect(knownPaths()).toHaveLength(2 * (12 + knownSlugs.realisations.length + knownSlugs.explorations.length));
   });
   it('ignores a trailing slash and rejects anything else', () => {
     expect(knownPath('/en/work/')).toBe('/en/work');

@@ -22,6 +22,7 @@ export const routing = defineRouting({
     '/cv': '/cv',
     '/confidentialite': { fr: '/confidentialite', en: '/privacy' },
     '/cgu': { fr: '/cgu', en: '/terms' },
+    '/terminal': '/terminal',
   },
 });
 

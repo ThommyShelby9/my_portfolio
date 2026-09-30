@@ -67,11 +67,11 @@ describe('sitemap coverage guard', () => {
     expect(new Set(NOINDEX_OR_LATER).size).toBe(NOINDEX_OR_LATER.length);
   });
 
-  it('keeps the thank-you pages out of the sitemap', () => {
+  it('keeps the thank-you pages and the terminal out of the sitemap', () => {
     const urls = buildSitemapEntries({ realisations: [], explorations: [] }).map((e) => e.url);
-    for (const path of ['/brief/merci', '/en/brief/thanks', '/contact/merci', '/en/contact/thanks']) {
+    for (const path of ['/brief/merci', '/en/brief/thanks', '/contact/merci', '/en/contact/thanks', '/terminal', '/en/terminal']) {
       expect(urls).not.toContain(`https://rostelmissimawu.com${path}`);
     }
-    expect(NOINDEX_OR_LATER).toEqual(expect.arrayContaining(['/brief/merci', '/contact/merci']));
+    expect(NOINDEX_OR_LATER).toEqual(expect.arrayContaining(['/brief/merci', '/contact/merci', '/terminal']));
   });
 });

@@ -387,5 +387,57 @@
     "caseStudy": "Case study",
     "skills": "Skills",
     "education": "Education"
+  },
+  "terminal": {
+    "metaTitle": "Terminal",
+    "metaDescription": "Rostel Panoumassi’s site from the command line: work, explorations, CV and contact, from the keyboard.",
+    "title": "The site, from the command line.",
+    "back": "Back to the site",
+    "label": "Terminal command",
+    "output": "Terminal output",
+    "keys": "Enter runs. Tab completes commands and slugs. Up and down arrows: history. Shift+Tab leaves the field.",
+    "fallback": {
+      "text": "The terminal needs JavaScript. The same destinations, as links:",
+      "work": "Work",
+      "explorations": "Explorations",
+      "brief": "Send a brief",
+      "contact": "Contact",
+      "cv": "CV as a PDF",
+      "home": "Home"
+    },
+    "out": {
+      "welcome": "Rostel Panoumassi, product engineer. Type help to see the commands.",
+      "helpTitle": "Available commands:",
+      "helpKeys": "Tab completes, up and down arrows for history.",
+      "help": {
+        "help": "show this help",
+        "whoami": "who I am",
+        "ls": "list the work",
+        "open": "open a case study or an exploration",
+        "explorations": "list the explorations",
+        "brief": "open the project brief form",
+        "contact": "open the contact page",
+        "cv": "open the CV as a PDF",
+        "lang": "switch the site to French or English",
+        "clear": "clear the screen",
+        "exit": "back to the home page"
+      },
+      "whoami": {
+        "identity": "{name}, product engineer",
+        "role": "{role} at {employer}",
+        "experience": "Six years of experience, three as tech lead",
+        "location": "Cotonou, Benin · UTC+1"
+      },
+      "ls": "{count} projects. Type open <slug> to read one.",
+      "explorations": "{count} explorations: studies made on my own initiative, not delivered work. Type open <slug> to read one.",
+      "opening": "opening {path}…",
+      "openUsage": "usage: open <slug>. Type ls or explorations for the list.",
+      "openUnknown": "open: {slug}: not found. Type ls or explorations for the list.",
+      "langUsage": "usage: lang fr|en",
+      "langSame": "The site is already in English.",
+      "langSwitch": "switching to French…",
+      "unknown": "command not found: {cmd}. Type help.",
+      "exit": "logout"
+    }
   }
 }

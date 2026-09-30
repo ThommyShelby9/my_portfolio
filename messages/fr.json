@@ -387,5 +387,57 @@
     "caseStudy": "Étude de cas",
     "skills": "Compétences",
     "education": "Formation"
+  },
+  "terminal": {
+    "metaTitle": "Terminal",
+    "metaDescription": "Le site de Rostel Panoumassi en ligne de commande : réalisations, explorations, CV et contact, au clavier.",
+    "title": "Le site, en ligne de commande.",
+    "back": "Retour au site",
+    "label": "Commande du terminal",
+    "output": "Sortie du terminal",
+    "keys": "Entrée exécute. Tab complète les commandes et les slugs. Flèches haut et bas : l’historique. Maj+Tab quitte le champ.",
+    "fallback": {
+      "text": "Le terminal a besoin de JavaScript. Les mêmes destinations, en liens :",
+      "work": "Réalisations",
+      "explorations": "Explorations",
+      "brief": "Envoyer un brief",
+      "contact": "Contact",
+      "cv": "CV en PDF",
+      "home": "Accueil"
+    },
+    "out": {
+      "welcome": "Rostel Panoumassi, ingénieur produit. Tapez help pour voir les commandes.",
+      "helpTitle": "Commandes disponibles :",
+      "helpKeys": "Tab complète, flèches haut et bas pour l’historique.",
+      "help": {
+        "help": "affiche cette aide",
+        "whoami": "qui je suis",
+        "ls": "liste les réalisations",
+        "open": "ouvre une réalisation ou une exploration",
+        "explorations": "liste les explorations",
+        "brief": "ouvre le formulaire de brief projet",
+        "contact": "ouvre la page contact",
+        "cv": "ouvre le CV en PDF",
+        "lang": "passe le site en français ou en anglais",
+        "clear": "efface l’écran",
+        "exit": "retour à l’accueil"
+      },
+      "whoami": {
+        "identity": "{name}, ingénieur produit",
+        "role": "{role} chez {employer}",
+        "experience": "Six ans d’expérience, dont trois comme tech lead",
+        "location": "Cotonou, Bénin · UTC+1"
+      },
+      "ls": "{count} réalisations. Tapez open <slug> pour en lire une.",
+      "explorations": "{count} explorations : des études menées de ma propre initiative, pas des réalisations livrées. Tapez open <slug> pour en lire une.",
+      "opening": "ouverture de {path}…",
+      "openUsage": "usage : open <slug>. Tapez ls ou explorations pour la liste.",
+      "openUnknown": "open : {slug} : introuvable. Tapez ls ou explorations pour la liste.",
+      "langUsage": "usage : lang fr|en",
+      "langSame": "Le site est déjà en français.",
+      "langSwitch": "passage en anglais…",
+      "unknown": "commande introuvable : {cmd}. Tapez help.",
+      "exit": "déconnexion"
+    }
   }
 }
