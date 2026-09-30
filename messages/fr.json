@@ -22,7 +22,7 @@
     "titleEm": "SaaS, de paiement et de gestion",
     "titleAfter": ", de l’architecture à la production.",
     "ledeName": "Rostel Panoumassi",
-    "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits livrés, pas des maquettes.",
+    "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits livrés, pas des maquettes.",
     "ctaWork": "Voir les réalisations",
     "ctaProject": "Parler d’un projet",
     "scroll": "Défiler pour découvrir"
@@ -45,7 +45,7 @@
     "vision": "Vision",
     "visionText": "Comprendre le métier, les utilisateurs et les contraintes avant d’écrire une ligne.",
     "architecture": "Architecture",
-    "architectureText": "Choisir les fondations : données, paiements, sécurité, montée en charge.",
+    "architectureText": "Choisir les fondations : données, paiements, sécurité, montée en charge.",
     "execution": "Exécution",
     "executionText": "Construire, tester, mettre en production et faire évoluer avec l’équipe.",
     "signatureA": "Les idées sont partout.",
@@ -56,13 +56,13 @@
     "title": "Trois produits, de l’architecture au lancement.",
     "all": "Toutes les réalisations",
     "cta": "Voir l’étude de cas",
-    "ctaFor": "Voir l’étude de cas : {name}",
+    "ctaFor": "Voir l’étude de cas : {name}",
     "coBuilt": "Co-développé avec",
     "ubbfy": {
       "what": "ERP et pointage géolocalisé",
       "role": "Lead engineer",
       "roleDetail": "refonte et architecture",
-      "challenge": "Reconstruire un ERP complet autour d’une seule API, servie à trois clients : web, PWA et application Flutter.",
+      "challenge": "Reconstruire un ERP complet autour d’une seule API, servie à trois clients : web, PWA et application Flutter.",
       "alt": "Ubbfy, page d’accueil et aperçu du suivi des candidats"
     },
     "contractiq": {
@@ -95,16 +95,16 @@
   "conversion": {
     "kicker": "05 · Votre projet",
     "title": "Parlons de votre projet.",
-    "text": "Une plateforme à concevoir, un produit à reprendre ou une équipe à structurer : décrivez votre besoin en quelques minutes, je vous réponds sous 48 heures.",
+    "text": "Une plateforme à concevoir, un produit à reprendre ou une équipe à structurer : décrivez votre besoin en quelques minutes, je vous réponds sous 48 heures.",
     "brief": "Décrire mon projet",
     "email": "Écrire un email"
   },
   "workIndex": {
     "metaTitle": "Réalisations · Rostel Panoumassi",
-    "metaDescription": "Les produits que j’ai conçus et livrés : ERP, SaaS B2B, paiement mobile, RH, santé. Pour chacun, mon rôle, l’équipe, la stack et les décisions techniques.",
+    "metaDescription": "Les produits que j’ai conçus et livrés : ERP, SaaS B2B, paiement mobile, RH, santé. Pour chacun, mon rôle, l’équipe, la stack et les décisions techniques.",
     "kicker": "Réalisations",
     "title": "Des produits livrés, du premier schéma à la production.",
-    "lede": "ERP, SaaS, paiement mobile, RH, santé : pour chaque projet, mon rôle exact, l’équipe, la stack et les décisions qui ont compté.",
+    "lede": "ERP, SaaS, paiement mobile, RH, santé : pour chaque projet, mon rôle exact, l’équipe, la stack et les décisions qui ont compté.",
     "count": "{count} projets · de {from} à {to}",
     "othersKicker": "Autres réalisations",
     "othersTitle": "Du SIRH au paiement mobile, les autres projets livrés.",
@@ -138,10 +138,10 @@
   },
   "explorations": {
     "metaTitle": "Explorations · Rostel Panoumassi",
-    "metaDescription": "Des propositions de refonte menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne.",
+    "metaDescription": "Des propositions de refonte menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne.",
     "kicker": "Explorations",
     "title": "Des propositions de refonte, présentées pour ce qu’elles sont.",
-    "lede": "Des études menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne. Ce ne sont pas des réalisations livrées, et chacune le dit.",
+    "lede": "Des études menées de ma propre initiative sur des sites existants : un audit, une direction visuelle, un prototype qui fonctionne. Ce ne sont pas des réalisations livrées, et chacune le dit.",
     "count": "{count} études · {year}",
     "badgeUnsolicited": "Proposition de refonte non commandée",
     "badgePitched": "Proposition de refonte présentée au client",
@@ -158,10 +158,10 @@
     "tooLong": "Ce champ est trop long.",
     "invalidEmail": "Adresse e-mail invalide.",
     "invalidUrl": "Adresse web invalide. Commencez par http:// ou https://.",
-    "pitchTooShort": "Dites-m’en un peu plus : au moins 10 caractères.",
-    "pitchTooLong": "Ce résumé est trop long : 1 000 caractères au maximum.",
-    "messageTooShort": "Votre message est trop court : au moins 10 caractères.",
-    "messageTooLong": "Votre message est trop long : 3 000 caractères au maximum."
+    "pitchTooShort": "Dites-m’en un peu plus : au moins 10 caractères.",
+    "pitchTooLong": "Ce résumé est trop long : 1 000 caractères au maximum.",
+    "messageTooShort": "Votre message est trop court : au moins 10 caractères.",
+    "messageTooLong": "Votre message est trop long : 3 000 caractères au maximum."
   },
   "forms": {
     "required": "obligatoire",
@@ -176,7 +176,7 @@
   },
   "brief": {
     "metaTitle": "Brief projet · Rostel Panoumassi",
-    "metaDescription": "Décrivez votre projet en quelques minutes : besoin, contexte, échéance et budget. Je vous réponds sous 48 heures.",
+    "metaDescription": "Décrivez votre projet en quelques minutes : besoin, contexte, échéance et budget. Je vous réponds sous 48 heures.",
     "kicker": "Brief projet",
     "title": "Décrivez votre projet.",
     "lede": "Quelques minutes suffisent. Je vous réponds sous 48 heures.",
@@ -213,7 +213,7 @@
       "hint": "Le problème à résoudre, pour qui, et ce qui existe déjà. De 10 à 1 000 caractères."
     },
     "currentState": {
-      "label": "Où en est le projet ?",
+      "label": "Où en est le projet ?",
       "idea": "Une idée",
       "design": "Des maquettes ou un cahier des charges",
       "inProgressBlocked": "En développement, mais bloqué",
@@ -266,7 +266,7 @@
       "label": "Site web",
       "placeholder": "https://"
     },
-    "source": "Comment m’avez-vous connu ?",
+    "source": "Comment m’avez-vous connu ?",
     "firstContact": "Premier échange",
     "prefersCall": "Je préfère commencer par un appel",
     "submit": "Envoyer le brief",
@@ -282,10 +282,10 @@
   },
   "contact": {
     "metaTitle": "Contact · Rostel Panoumassi",
-    "metaDescription": "Écrire à Rostel Panoumassi, ingénieur produit à Cotonou : e-mail, LinkedIn, GitHub, ou un message court depuis cette page.",
+    "metaDescription": "Écrire à Rostel Panoumassi, ingénieur produit à Cotonou : e-mail, LinkedIn, GitHub, ou un message court depuis cette page.",
     "kicker": "Contact",
     "title": "Écrire directement.",
-    "lede": "Une question, une mise en relation, un échange sur un produit : un message court suffit. Je vous réponds sous 48 heures.",
+    "lede": "Une question, une mise en relation, un échange sur un produit : un message court suffit. Je vous réponds sous 48 heures.",
     "channels": "Me joindre",
     "email": "E-mail",
     "elsewhere": "Ailleurs",
@@ -316,10 +316,10 @@
   },
   "about": {
     "metaTitle": "À propos · Rostel Panoumassi",
-    "metaDescription": "Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe à Cotonou : six ans d’expérience, dont trois comme tech lead. Parcours, méthode, compétences et formation.",
+    "metaDescription": "Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe à Cotonou : six ans d’expérience, dont trois comme tech lead. Parcours, méthode, compétences et formation.",
     "kicker": "À propos",
     "title": "Ingénieur produit, tech lead, formateur.",
-    "lede": "Je suis Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe, à Cotonou. Six ans d’expérience, dont trois comme tech lead : je conçois des plateformes, je tranche les choix d’architecture et je forme les équipes qui les font vivre.",
+    "lede": "Je suis Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe, à Cotonou. Six ans d’expérience, dont trois comme tech lead : je conçois des plateformes, je tranche les choix d’architecture et je forme les équipes qui les font vivre.",
     "facts": {
       "label": "En bref",
       "based": "Basé à",
@@ -337,9 +337,9 @@
       "frame": "Cadrer",
       "frameText": "Avant la première ligne de code, poser avec le métier le problème, les utilisateurs, les contraintes et ce qui ne sera pas fait.",
       "decide": "Décider par écrit",
-      "decideText": "Chaque choix d’architecture est écrit : le contexte, les options écartées, la décision. L’équipe sait pourquoi, pas seulement quoi.",
+      "decideText": "Chaque choix d’architecture est écrit : le contexte, les options écartées, la décision. L’équipe sait pourquoi, pas seulement quoi.",
       "deliver": "Livrer en rythme",
-      "deliverText": "Des cycles courts, des livraisons régulières et une intégration continue : les pratiques Agile et DevOps que je mets en place chez KPS Groupe.",
+      "deliverText": "Des cycles courts, des livraisons régulières et une intégration continue : les pratiques Agile et DevOps que je mets en place chez KPS Groupe.",
       "coach": "Transmettre",
       "coachText": "J’encadre et je forme les développeurs. Ma licence en andragogie, la formation des adultes, m’a appris à partir de ce que chacun sait déjà et à vérifier ce qui est acquis."
     },
@@ -354,7 +354,7 @@
   },
   "legal": {
     "kicker": "Informations légales",
-    "updated": "Dernière mise à jour : <time>{date}</time>",
+    "updated": "Dernière mise à jour : <time>{date}</time>",
     "toc": "Sommaire",
     "privacy": {
       "metaTitle": "Politique de confidentialité · Rostel Panoumassi",

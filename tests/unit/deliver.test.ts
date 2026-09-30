@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { FieldValue, Timestamp } from 'firebase-admin/firestore';
-import { deliver, NotConfiguredError, RETENTION_MONTHS, submissionDoc, type DeliverDeps } from '@/lib/server/deliver';
+import { deliver, NotConfiguredError, SAVE_TIMEOUT_MS, RETENTION_MONTHS, submissionDoc, type DeliverDeps } from '@/lib/server/deliver';
 import { buildSubmissionEmail } from '@/lib/server/submission-email';
 
 function deps(over: Partial<DeliverDeps> = {}) {
@@ -26,7 +26,25 @@ const boom = (msg: string) => async () => {
   throw new Error(msg);
 };
 
+afterEach(() => vi.useRealTimers());
+
 describe('deliver', () => {
+  it('a Firestore save that hangs past the timeout counts as failed and falls through to email', async () => {
+    vi.useFakeTimers();
+    const d = deps({ save: vi.fn(() => new Promise<string>(() => {})) });
+    const pending = deliver(input, d);
+    await vi.advanceTimersByTimeAsync(SAVE_TIMEOUT_MS);
+    expect(await pending).toEqual({ status: 'ok', stored: false, mailed: 'sent' });
+    expect(d.log.error).toHaveBeenCalledTimes(1);
+    expect(d.mail).toHaveBeenCalledTimes(1);
+  });
+
+  it('clears the timer once the save is done', async () => {
+    vi.useFakeTimers();
+    await deliver(input, deps());
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
   it('honeypot: fake success, nothing called', async () => {
     const d = deps();
     expect(await deliver({ ...input, honeypot: 'bot' }, d)).toEqual({ status: 'ok', stored: false, mailed: 'skipped' });

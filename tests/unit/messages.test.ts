@@ -39,6 +39,12 @@ describe('messages', () => {
     }
   });
 
+  it('put a no-break space, never a regular one, before : ; ? ! in French', () => {
+    for (const [key, value] of Object.entries(flatFr)) {
+      expect(/ [:;?!]/.test(value), key).toBe(false);
+    }
+  });
+
   it('state the owner facts in the hero', () => {
     expect(flatFr['hero.ledeRest']).toContain('Six ans d’expérience, dont trois comme tech lead');
     expect(flatEn['hero.ledeRest']).toContain('Six years of experience, three as tech lead');

@@ -1,6 +1,6 @@
 ---
 title: Le Centre
-summary: "Une proposition de refonte pour un lieu culturel béninois, appuyée sur un audit mesuré du site actuel : un agenda unifié, une collection lisible et un site léger sur mobile."
+summary: "Une proposition de refonte pour un lieu culturel béninois, appuyée sur un audit mesuré du site actuel : un agenda unifié, une collection lisible et un site léger sur mobile."
 year: 2026
 role: "Audit, conception et développement, en solo"
 team: "Solo"
@@ -14,7 +14,7 @@ images:
   - { src: /work/lecentre/01.webp, alt: "Page d’accueil de la proposition Le Centre", kind: public }
   - { src: /work/lecentre/02.webp, alt: "Page collection de la proposition Le Centre", kind: public }
 proofs: []
-seoDescription: "Proposition de refonte non commandée pour l’Espace Culturel Le Centre : audit du site actuel, agenda unifié, collection indexable, Vue 3 et WebGL."
+seoDescription: "Proposition de refonte non commandée pour l’Espace Culturel Le Centre : audit du site actuel, agenda unifié, collection indexable, Vue 3 et WebGL."
 ---
 
 Proposition de refonte non commandée, réalisée pour montrer ce que Le Centre pourrait devenir.
@@ -29,15 +29,15 @@ La maquette reprend le contenu réel du site actuel (textes, notices, programmat
 
 ## Fonctionnalités clés
 
-- **Un agenda unifié** : les neuf rubriques deviennent des filtres sur un seul flux, groupé par mois, avec les événements à venir et passés. Une résidence de plusieurs semaines est signalée « En cours » au lieu d’être traitée comme un rendez-vous daté.
-- **Une page par récade**, avec le nom en fon comme titre, la traduction française et une fiche structurée : origine, matériaux, atelier, dimensions, datation.
+- **Un agenda unifié** : les neuf rubriques deviennent des filtres sur un seul flux, groupé par mois, avec les événements à venir et passés. Une résidence de plusieurs semaines est signalée « En cours » au lieu d’être traitée comme un rendez-vous daté.
+- **Une page par récade**, avec le nom en fon comme titre, la traduction française et une fiche structurée : origine, matériaux, atelier, dimensions, datation.
 - **Une traversée du musée** en cinq stations, dans laquelle les photographies se dissolvent l’une dans l’autre.
 - **Un logo animé** et des transitions entre les pages, désactivés quand l’utilisateur demande moins de mouvement.
 
 ## Contraintes et décisions
 
 - **Les mêmes photographies, au bon poids.** Chaque image est recompressée et redimensionnée à sa taille d’affichage réelle, chargée en différé, avec ses dimensions déclarées pour éviter les sauts de mise en page. Seule l’image principale est chargée en priorité.
-- **Pas de bibliothèque d’animation.** Un observateur d’intersection partagé et quelques animations CSS font ce qu’une bibliothèque ferait pour un poids bien supérieur. L’état par défaut est visible : si le JavaScript ne s’exécute pas, rien ne disparaît.
+- **Pas de bibliothèque d’animation.** Un observateur d’intersection partagé et quelques animations CSS font ce qu’une bibliothèque ferait pour un poids bien supérieur. L’état par défaut est visible : si le JavaScript ne s’exécute pas, rien ne disparaît.
 - **Du WebGL écrit à la main pour la traversée.** Un seul shader de fragment gère la dissolution entre deux photographies, le liseré de transition, la lumière et le grain. Le module n’est téléchargé qu’au moment où l’on entre dans le musée, pour ne rien coûter aux autres visiteurs.
 - **La collection comme contenu.** Sortir les notices de la visionneuse les rend indexables, lisibles par un lecteur d’écran et partageables, pièce par pièce.
 

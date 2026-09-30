@@ -13,7 +13,7 @@ test.describe('work pages', () => {
   test('/realisations lists the 17 realisations (3 featured rows, then cards) and no exploration', async ({ page }) => {
     await page.goto('/realisations');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Des produits livrés, du premier schéma à la production.');
-    await expect(page.getByRole('link', { name: /^Voir l’étude de cas : / })).toHaveCount(3);
+    await expect(page.getByRole('link', { name: /^Voir l’étude de cas\s: / })).toHaveCount(3);
     await expect(page.locator('[data-work-card]')).toHaveCount(14);
     const slugs = await caseSlugs(page, '/realisations/');
     expect(slugs).toHaveLength(17);
@@ -24,9 +24,9 @@ test.describe('work pages', () => {
 
   test('each featured case link opens its case page with the project as h1', async ({ page }) => {
     await page.goto('/realisations');
-    const ctas = page.getByRole('link', { name: /^Voir l’étude de cas : / });
+    const ctas = page.getByRole('link', { name: /^Voir l’étude de cas\s: / });
     const targets = await ctas.evaluateAll((els) =>
-      els.map((el) => ({ href: el.getAttribute('href') ?? '', name: (el.getAttribute('aria-label') ?? '').replace('Voir l’étude de cas : ', '') })),
+      els.map((el) => ({ href: el.getAttribute('href') ?? '', name: (el.getAttribute('aria-label') ?? '').replace('Voir l’étude de cas\u00a0: ', '') })),
     );
     expect(targets.map((t) => t.name)).toEqual(['Ubbfy', 'ContractIQ', 'ZenLife']);
     for (const { href, name } of targets) {

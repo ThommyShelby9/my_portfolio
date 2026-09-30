@@ -6,13 +6,13 @@ Les présentes conditions encadrent l’utilisation de ce site. En le consultant
 
 ## Éditeur
 
-Le site est édité par Rostel Panoumassi, ingénieur produit, Cotonou, Bénin, qui en est aussi le directeur de la publication. Contact : [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).
+Le site est édité par Rostel Panoumassi, ingénieur produit, Cotonou, Bénin, qui en est aussi le directeur de la publication. Contact : [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).
 
 Il est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi.
 
 ## Objet du site
 
-Le site présente le travail de Rostel Panoumassi : réalisations pour des clients, explorations, méthode et moyens de le contacter. Il permet d’envoyer un brief projet ou un message. Il est gratuit et ne propose aucune vente en ligne.
+Le site présente le travail de Rostel Panoumassi : réalisations pour des clients, explorations, méthode et moyens de le contacter. Il permet d’envoyer un brief projet ou un message. Il est gratuit et ne propose aucune vente en ligne.
 
 ## Propriété intellectuelle
 
@@ -22,13 +22,13 @@ Les textes, la mise en page, les éléments graphiques et le code du site appart
 
 **Explorations.** Les explorations sont des propositions non sollicitées, ou présentées dans le cadre d’une démarche commerciale, qui imaginent ce que pourrait devenir un produit existant. Elles ne sont ni commandées ni approuvées par les marques concernées et n’engagent que leur auteur. Les marques citées appartiennent à leurs titulaires.
 
-Si vous êtes titulaire de droits sur un élément présenté et souhaitez qu’il soit modifié ou retiré, écrivez à [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com) : la demande sera traitée rapidement.
+Si vous êtes titulaire de droits sur un élément présenté et souhaitez qu’il soit modifié ou retiré, écrivez à [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com) : la demande sera traitée rapidement.
 
 ## Disponibilité et responsabilité
 
 Le site est fourni tel quel. Rostel Panoumassi s’efforce de le garder accessible et exact, sans pouvoir garantir une disponibilité continue ni l’absence d’erreur. Il peut le modifier, le suspendre ou l’interrompre à tout moment, notamment pour maintenance.
 
-Les informations publiées sont données à titre indicatif et ne constituent pas une offre contractuelle : toute collaboration fait l’objet d’un accord écrit distinct.
+Les informations publiées sont données à titre indicatif et ne constituent pas une offre contractuelle : toute collaboration fait l’objet d’un accord écrit distinct.
 
 ## Liens externes
 
@@ -44,4 +44,4 @@ Les présentes conditions sont régies par le droit béninois. En cas de litige,
 
 ## Contact
 
-Pour toute question sur ces conditions : [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).
+Pour toute question sur ces conditions : [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).

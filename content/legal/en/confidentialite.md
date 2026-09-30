@@ -2,7 +2,7 @@
 updated: "2026-09-30"
 ---
 
-This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. The only personal data it collects is what you choose to send; visits are only counted, anonymously. This page explains what data, why, where it is kept and how to exercise your rights.
+This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. Apart from the server’s technical logs described below, the only personal data it collects is what you choose to send; visits are only counted, anonymously. This page explains what data, why, where it is kept and how to exercise your rights.
 
 ## Data controller
 

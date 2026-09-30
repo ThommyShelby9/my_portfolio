@@ -33,6 +33,7 @@ describe('sendMail', () => {
     expect(await sendMail(input)).toBe('sent');
     expect(createTransport.mock.calls[0][0]).toMatchObject({
       secure: true,
+      requireTLS: false,
       connectionTimeout: 10_000,
       greetingTimeout: 10_000,
       socketTimeout: 15_000,
@@ -45,7 +46,7 @@ describe('sendMail', () => {
     vi.stubEnv('SMTP_PASS', 'p');
     vi.stubEnv('SMTP_PORT', '');
     await sendMail(input);
-    expect(createTransport.mock.calls[0][0]).toMatchObject({ secure: false, port: 587 });
+    expect(createTransport.mock.calls[0][0]).toMatchObject({ secure: false, requireTLS: true, port: 587 });
   });
 });
 

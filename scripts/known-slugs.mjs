@@ -1,6 +1,6 @@
 // Writes src/lib/server/known-slugs.json, the case-study and exploration slugs, at build time.
 // The visit counter builds its allow-list of pages from it, so the server never reads content/
-// at request time. tests/unit/known-paths.test.ts fails when the file drifts from content/.
+// at request time. tests/unit/stats.test.ts fails when the file drifts from content/.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const OUT = 'src/lib/server/known-slugs.json';

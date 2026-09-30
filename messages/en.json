@@ -171,7 +171,7 @@
     "summaryGeneric": "One answer could not be processed. Check the form, then send it again.",
     "honeypot": "Leave this field empty",
     "rateLimited": "Several submissions were just sent from your connection. Try again in an hour, or write to me directly at <mail>{email}</mail>.",
-    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <mail>{email}</mail>, I reply within 48 hours.",
+    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <mail>{email}</mail>. I reply within 48 hours.",
     "privacy": "Your answers are only used to reply to you. <link>Privacy policy</link>"
   },
   "brief": {

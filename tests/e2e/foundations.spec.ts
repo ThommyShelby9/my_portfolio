@@ -84,7 +84,7 @@ test.describe('foundations', () => {
   test('health endpoint answers', async ({ request }) => {
     const res = await request.get('/api/health');
     expect(res.status()).toBe(200);
-    expect(await res.json()).toEqual({ ok: true });
+    expect(await res.json()).toEqual({ ok: true, emulator: true });
   });
 
   test('no horizontal overflow on a 360 px phone', async ({ page }) => {

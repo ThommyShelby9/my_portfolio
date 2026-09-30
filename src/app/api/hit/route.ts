@@ -1,3 +1,4 @@
+import { hitCap } from '@/lib/server/daily-cap';
 import { clientIp } from '@/lib/server/client-ip';
 import { getDb } from '@/lib/server/firestore';
 import { hitLimiter } from '@/lib/server/rate-limit';
@@ -61,13 +62,16 @@ export async function POST(request: Request): Promise<Response> {
 
     const db = getDb();
     if (!db) return done();
+    // Global ceiling per day: beyond it, nothing is written.
+    if (!hitCap.take()) return done();
     const date = dayKey();
     const host = typeof ref === 'string' ? refHost(ref, headers.get('host')) : null;
     await recordHit(
       {
         path: knownPath(path) ?? OTHER,
         ref: host && capRef(host, date),
-        country: countryCode(headers.get('cf-ipcountry')),
+        // Like cf-connecting-ip, cf-ipcountry is client-controlled unless Cloudflare really is in front.
+        country: process.env.TRUST_CF_CONNECTING_IP === '1' ? countryCode(headers.get('cf-ipcountry')) : null,
         date,
       },
       db,

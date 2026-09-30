@@ -14,6 +14,17 @@ export class NotConfiguredError extends Error {
   }
 }
 
+/** Milliseconds the Firestore save may take before it counts as failed and the email takes over. */
+export const SAVE_TIMEOUT_MS = 8000;
+
+function withTimeout<T>(work: Promise<T>, ms: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout>;
+  const late = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error('Firestore save timed out')), ms);
+  });
+  return Promise.race([work, late]).finally(() => clearTimeout(timer));
+}
+
 export interface DeliverDeps {
   save(sub: Submission): Promise<string>;
   mail(sub: Submission): Promise<'sent' | 'skipped'>;
@@ -74,7 +85,7 @@ export async function deliver(
 
   let stored = false;
   try {
-    await deps.save(sub);
+    await withTimeout(deps.save(sub), SAVE_TIMEOUT_MS);
     stored = true;
   } catch (err) {
     if (err instanceof NotConfiguredError) deps.log.warn('[deliver] Firestore not configured, falling back to email');

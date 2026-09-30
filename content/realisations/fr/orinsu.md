@@ -11,18 +11,18 @@ featured: null
 order: 5
 images: []
 proofs: []
-seoDescription: "Orinsu : réservations, cartes d’accès et validation par QR code pour événements, restaurants et tourisme. API Express 5 et MongoDB, Vue 3, React Native."
+seoDescription: "Orinsu : réservations, cartes d’accès et validation par QR code pour événements, restaurants et tourisme. API Express 5 et MongoDB, Vue 3, React Native."
 ---
 
 ## Les enjeux
 
-Orinsu réunit trois univers qui vendent tous un accès : des événements, des restaurants et des offres touristiques. Le client réserve, paie et reçoit un billet, une commande ou une carte ; sur place, une équipe doit vérifier ce droit d’accès rapidement, y compris quand le réseau est faible.
+Orinsu réunit trois univers qui vendent tous un accès : des événements, des restaurants et des offres touristiques. Le client réserve, paie et reçoit un billet, une commande ou une carte ; sur place, une équipe doit vérifier ce droit d’accès rapidement, y compris quand le réseau est faible.
 
 Autour de ce cœur gravitent des promoteurs, qui publient leurs offres et souscrivent à un abonnement, et des équipes de validation rattachées à chaque lieu.
 
 ## Fonctionnalités clés
 
-- **Le catalogue** : événements, restaurants, offres touristiques.
+- **Le catalogue** : événements, restaurants, offres touristiques.
 - **Les réservations et les cartes** d’accès, avec abonnements.
 - **Les paiements** par carte bancaire (Stripe) et par Mobile Money.
 - **L’espace promoteur**, avec son propre abonnement.

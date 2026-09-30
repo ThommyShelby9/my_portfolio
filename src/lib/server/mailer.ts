@@ -19,6 +19,7 @@ export async function sendMail(input: MailInput): Promise<'sent' | 'skipped'> {
     host: SMTP_HOST,
     port,
     secure: port === 465,
+    requireTLS: port !== 465,
     connectionTimeout: 10_000,
     greetingTimeout: 10_000,
     socketTimeout: 15_000,

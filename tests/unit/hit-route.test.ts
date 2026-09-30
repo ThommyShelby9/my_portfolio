@@ -1,8 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // The route with a fake database: recordHit is observed, everything else is the real code.
-const { recordHit } = vi.hoisted(() => ({ recordHit: vi.fn() }));
+const { recordHit, capBox } = vi.hoisted(() => ({ recordHit: vi.fn(), capBox: { max: 1_000_000, cap: null as null | { take(now?: Date): boolean } } }));
 vi.mock('@/lib/server/firestore', () => ({ getDb: () => ({ fake: 'db' }) }));
+vi.mock('@/lib/server/daily-cap', async (importOriginal) => {
+  const real = await importOriginal<typeof import('@/lib/server/daily-cap')>();
+  return { ...real, hitCap: { take: (now?: Date) => (capBox.cap ??= real.createDailyCap(capBox.max)).take(now) } };
+});
 vi.mock('@/lib/server/stats', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@/lib/server/stats')>()),
   recordHit,
@@ -24,24 +28,47 @@ const hit = (body: unknown, extra: Record<string, string> = {}) =>
   POST(new Request('http://localhost:3100/api/hit', { method: 'POST', body: JSON.stringify(body), headers: headers(extra) }));
 
 beforeEach(() => {
+  capBox.cap = null;
+  capBox.max = 1_000_000;
   recordHit.mockReset();
   recordHit.mockResolvedValue(undefined);
   vi.useFakeTimers({ toFake: ['Date'] });
   vi.setSystemTime(new Date('2026-09-30T12:00:00Z'));
 });
 afterEach(() => {
+  vi.unstubAllEnvs();
   vi.useRealTimers();
   vi.restoreAllMocks();
 });
 
 describe('POST /api/hit', () => {
+  it('records at most the daily cap, then answers 204 without writing, and starts again the next day', async () => {
+    capBox.max = 3;
+    vi.setSystemTime(new Date('2026-11-01T12:00:00Z'));
+    for (let i = 0; i < 3; i++) await hit({ path: '/' });
+    expect(recordHit).toHaveBeenCalledTimes(3);
+    const res = await hit({ path: '/' });
+    expect(res.status).toBe(204);
+    expect(recordHit).toHaveBeenCalledTimes(3);
+    vi.setSystemTime(new Date('2026-11-02T12:00:00Z'));
+    await hit({ path: '/' });
+    expect(recordHit).toHaveBeenCalledTimes(4);
+  });
+
   it('records the normalised path, the ref host, the country and the Porto-Novo date', async () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '1');
     const res = await hit({ path: '/en/work/', ref: 'https://www.google.com/search?q=rostel' }, { 'cf-ipcountry': 'BJ' });
     expect(res.status).toBe(204);
     expect(await res.text()).toBe('');
     expect(res.headers.get('cache-control')).toBe('no-store');
     expect(recordHit).toHaveBeenCalledTimes(1);
     expect(recordHit).toHaveBeenCalledWith({ path: '/en/work', ref: 'google_com', country: 'BJ', date: '2026-09-30' }, { fake: 'db' });
+  });
+
+  it('ignores cf-ipcountry unless the Cloudflare trust switch is on', async () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '');
+    await hit({ path: '/' }, { 'cf-ipcountry': 'BJ' });
+    expect(recordHit.mock.calls[0][0].country).toBeNull();
   });
 
   it('counts an unknown path under other', async () => {
