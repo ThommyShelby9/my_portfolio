@@ -11,12 +11,12 @@ test.describe('seo', () => {
   test('every sitemap URL returns 200 with a single canonical equal to itself', async ({ request }) => {
     const xml = await (await request.get('/sitemap.xml')).text();
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    // 7 static pages (home, work, explorations, brief, contact, privacy, terms), 17 cases, 4 explorations.
-    expect(locs.length).toBeGreaterThanOrEqual(2 * (7 + 17 + 4));
+    // 8 static pages (home, work, explorations, about, brief, contact, privacy, terms), 17 cases, 4 explorations.
+    expect(locs.length).toBeGreaterThanOrEqual(2 * (8 + 17 + 4));
     expect(new Set(locs).size).toBe(locs.length);
     const paths = locs.map((loc) => new URL(loc).pathname);
     expect(paths).toEqual(expect.arrayContaining([
-      '/brief', '/en/brief', '/contact', '/en/contact', '/confidentialite', '/en/privacy', '/cgu', '/en/terms',
+      '/a-propos', '/en/about', '/brief', '/en/brief', '/contact', '/en/contact', '/confidentialite', '/en/privacy', '/cgu', '/en/terms',
     ]));
     for (const noindex of ['/brief/merci', '/en/brief/thanks', '/contact/merci', '/en/contact/thanks']) {
       expect(paths).not.toContain(noindex);

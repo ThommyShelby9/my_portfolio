@@ -6,14 +6,14 @@ import { SITE_URL } from '@/lib/site';
 type Href = keyof typeof routing.pathnames;
 
 /** Static pages in the sitemap. */
-export const STATIC_HREFS: Href[] = ['/', '/realisations', '/explorations', '/brief', '/contact', '/confidentialite', '/cgu'];
+export const STATIC_HREFS: Href[] = ['/', '/realisations', '/explorations', '/a-propos', '/brief', '/contact', '/confidentialite', '/cgu'];
 
 /**
  * Routes of `routing.pathnames` kept out of the sitemap: noindex pages (the thank-you pages) and pages
  * of a later lot (Lot 5 moves the indexable ones into STATIC_HREFS). Typed as routing keys, so a stale
  * entry does not compile, and tests/unit/sitemap-entries.test.ts fails on any route in neither list.
  */
-export const NOINDEX_OR_LATER: Href[] = ['/a-propos', '/cv', '/brief/merci', '/contact/merci'];
+export const NOINDEX_OR_LATER: Href[] = ['/cv', '/brief/merci', '/contact/merci'];
 
 type Input = { realisations: string[]; explorations: string[]; lastModified?: Date };
 

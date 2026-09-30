@@ -314,6 +314,44 @@
       "work": "See the work"
     }
   },
+  "about": {
+    "metaTitle": "About · Rostel Panoumassi",
+    "metaDescription": "Rostel Panoumassi, Head of Engineering & Innovation at KPS Groupe in Cotonou: six years of experience, three as tech lead. Career, method, skills and education.",
+    "kicker": "About",
+    "title": "Product engineer, tech lead, trainer.",
+    "lede": "I’m Rostel Panoumassi, Head of Engineering & Innovation at KPS Groupe, in Cotonou. Six years of experience, three as tech lead: I design platforms, settle the architecture choices and train the teams that keep them running.",
+    "facts": {
+      "label": "In short",
+      "based": "Based in",
+      "basedValue": "Cotonou, Benin · UTC+1",
+      "elsewhere": "Elsewhere"
+    },
+    "career": {
+      "kicker": "01 · Career",
+      "title": "From full-stack developer to head of engineering.",
+      "current": "Current role"
+    },
+    "method": {
+      "kicker": "02 · How I work",
+      "title": "A team that knows what it builds, and why.",
+      "frame": "Frame",
+      "frameText": "Before the first line of code, pin down with the business the problem, the users, the constraints and what will not be built.",
+      "decide": "Decide in writing",
+      "decideText": "Every architecture choice is written down: the context, the options set aside, the decision. The team knows why, not just what.",
+      "deliver": "Deliver on a rhythm",
+      "deliverText": "Short cycles, regular releases and continuous integration: the Agile and DevOps practices I put in place at KPS Groupe.",
+      "coach": "Pass it on",
+      "coachText": "I lead and train developers. My degree in andragogy, the practice of adult education, taught me to start from what each person already knows and to check what has truly been learned."
+    },
+    "skills": {
+      "kicker": "03 · What I work with",
+      "title": "A broad stack, chosen project by project."
+    },
+    "education": {
+      "kicker": "04 · Education",
+      "title": "Trained in code, and in teaching."
+    }
+  },
   "legal": {
     "kicker": "Legal",
     "updated": "Last updated: <time>{date}</time>",

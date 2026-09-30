@@ -314,6 +314,44 @@
       "work": "Voir les réalisations"
     }
   },
+  "about": {
+    "metaTitle": "À propos · Rostel Panoumassi",
+    "metaDescription": "Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe à Cotonou : six ans d’expérience, dont trois comme tech lead. Parcours, méthode, compétences et formation.",
+    "kicker": "À propos",
+    "title": "Ingénieur produit, tech lead, formateur.",
+    "lede": "Je suis Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe, à Cotonou. Six ans d’expérience, dont trois comme tech lead : je conçois des plateformes, je tranche les choix d’architecture et je forme les équipes qui les font vivre.",
+    "facts": {
+      "label": "En bref",
+      "based": "Basé à",
+      "basedValue": "Cotonou, Bénin · UTC+1",
+      "elsewhere": "Ailleurs"
+    },
+    "career": {
+      "kicker": "01 · Parcours",
+      "title": "De développeur full-stack à responsable de l’ingénierie.",
+      "current": "Poste actuel"
+    },
+    "method": {
+      "kicker": "02 · Comment je travaille",
+      "title": "Une équipe qui sait ce qu’elle construit, et pourquoi.",
+      "frame": "Cadrer",
+      "frameText": "Avant la première ligne de code, poser avec le métier le problème, les utilisateurs, les contraintes et ce qui ne sera pas fait.",
+      "decide": "Décider par écrit",
+      "decideText": "Chaque choix d’architecture est écrit : le contexte, les options écartées, la décision. L’équipe sait pourquoi, pas seulement quoi.",
+      "deliver": "Livrer en rythme",
+      "deliverText": "Des cycles courts, des livraisons régulières et une intégration continue : les pratiques Agile et DevOps que je mets en place chez KPS Groupe.",
+      "coach": "Transmettre",
+      "coachText": "J’encadre et je forme les développeurs. Ma licence en andragogie, la formation des adultes, m’a appris à partir de ce que chacun sait déjà et à vérifier ce qui est acquis."
+    },
+    "skills": {
+      "kicker": "03 · Ce que je maîtrise",
+      "title": "Une pile large, choisie projet par projet."
+    },
+    "education": {
+      "kicker": "04 · Formation",
+      "title": "Formé au code, et à la transmission."
+    }
+  },
   "legal": {
     "kicker": "Informations légales",
     "updated": "Dernière mise à jour : <time>{date}</time>",
