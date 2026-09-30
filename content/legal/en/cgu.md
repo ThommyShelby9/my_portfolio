@@ -8,7 +8,7 @@ These terms govern the use of this site. By browsing it, you accept them.
 
 The site is published by Rostel Panoumassi, product engineer, Cotonou, Benin, who is also its publication director. Contact: [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).
 
-It is hosted on a private server administered by Rostel Panoumassi.
+It is hosted on a private server rented from a professional hosting provider and administered by Rostel Panoumassi.
 
 ## Purpose of the site
 

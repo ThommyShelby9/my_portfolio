@@ -12,14 +12,22 @@ export function HitBeacon() {
   const pathname = usePathname();
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') return;
-    try {
-      if ((document.visibilityState as string) === 'prerender' || typeof navigator.sendBeacon !== 'function') return;
-      const ref = firstHit ? document.referrer : '';
-      firstHit = false;
-      navigator.sendBeacon('/api/hit', JSON.stringify({ path: location.pathname, ref }));
-    } catch {
-      // Counting is best effort: never disturb the page.
+    const send = () => {
+      try {
+        if (typeof navigator.sendBeacon !== 'function') return;
+        const ref = firstHit ? document.referrer : '';
+        firstHit = false;
+        navigator.sendBeacon('/api/hit', JSON.stringify({ path: location.pathname, ref }));
+      } catch {
+        // Counting is best effort: never disturb the page.
+      }
+    };
+    // A prerendered page is only a view once the visitor activates it.
+    if ((document as { prerendering?: boolean }).prerendering) {
+      document.addEventListener('prerenderingchange', send, { once: true });
+      return () => document.removeEventListener('prerenderingchange', send);
     }
+    send();
   }, [pathname]);
   return null;
 }

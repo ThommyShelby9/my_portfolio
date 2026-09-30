@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/prepare-standalone.mjs",
+    "build": "node scripts/known-slugs.mjs && next build && node scripts/prepare-standalone.mjs",
     "start": "node .next/standalone/server.js",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -56,3 +56,6 @@ export function createRateLimiter(opts: {
 }
 
 export const formLimiter = createRateLimiter({ limit: 5, windowMs: 3_600_000 });
+
+/** Visit counter: at most 60 hits per minute per IP; beyond that, hits are silently not counted. */
+export const hitLimiter = createRateLimiter({ limit: 60, windowMs: 60_000 });

@@ -2,7 +2,7 @@
 updated: "2026-09-30"
 ---
 
-This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. It collects very little data, and only what you choose to send. This page explains what, why, where it is kept and how to exercise your rights.
+This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. The only personal data it collects is what you choose to send; visits are only counted, anonymously. This page explains what data, why, where it is kept and how to exercise your rights.
 
 ## Data controller
 
@@ -33,20 +33,22 @@ The legal basis is taking pre-contractual steps at your request (a brief or a qu
 
 ## Protection against abuse
 
-To limit automated submissions, the server accepts at most 5 submissions per hour from the same connection. To do so it uses your IP address, in memory only and only for that check: it is never saved or shared. A hidden field also traps bots that fill in every field.
+To limit abuse, the server accepts at most 5 form submissions per hour from the same connection, and the visit counter at most 60 page views per minute. For both checks, the application uses your IP address in memory only, for the time of the check: it never saves it. Only the server’s technical logs may contain it (see below). A hidden field also traps bots that fill in every field.
 
 ## Recipients and hosting
 
-Only Rostel Panoumassi has access to your answers. They are kept in two places:
+Only Rostel Panoumassi reads your answers. They are hosted by the following providers:
 
-- in a Google Cloud Firestore database (Firebase project), hosted by Google in the United States (nam5 multi-region location). Google covers this transfer outside Benin and the European Union with the standard contractual clauses included in its data processing terms;
-- in Rostel Panoumassi’s mailbox, which receives a copy of each submission through an email delivery provider (SMTP).
+- a Google Cloud Firestore database (Firebase project), hosted by Google in the United States (nam5 multi-region location). This transfer is covered by the European Commission’s standard contractual clauses, incorporated into Google Cloud’s data processing terms;
+- Rostel Panoumassi’s Gmail mailbox (Google, United States), which receives a copy of each submission through an email delivery provider.
 
-The site itself is hosted on a private server administered by Rostel Panoumassi.
+The site is hosted on a private server rented from a professional hosting provider and administered by Rostel Panoumassi. Like any web server, it keeps technical logs: the IP address and the requested page are kept there for a limited period, for security and diagnosis.
 
 ## Retention
 
-Your answers are kept for 24 months after our last exchange, then deleted. You can ask for them to be deleted sooner at any time.
+Your answers are kept for at most 24 months after our last exchange, then deleted. In the database, each submission is erased automatically 24 months after it was received; the mailbox is reviewed manually to delete older exchanges.
+
+If a collaboration follows, the related exchanges are kept longer, for as long as contractual and accounting obligations require. You can ask for your data to be deleted at any time.
 
 ## Cookies and audience measurement
 
@@ -54,12 +56,12 @@ The site sets no cookie and uses no advertising tracker or third-party analytics
 
 To know which pages are read, the site keeps a simple, anonymous daily count. For each page view it saves only:
 
-- the page address (for example /en/work);
+- the page address, when it is a page of the site (for example /en/work); any other address is counted as “other”;
 - the name of the site you came from, when it is another site (for example google.com);
-- the country, only when the network provides it;
+- the country, only if the network infrastructure in front of the site provides it, which is not the case today;
 - the day’s total of page views.
 
-No IP address, no identifier and no information that could recognise you from one visit to the next is saved. These figures are stored in the same Firestore database.
+The counter saves no IP address, no identifier and no information that could recognise you from one visit to the next. These figures are stored in the same Firestore database.
 
 ## Security
 

@@ -1,0 +1,8 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "stats_daily", "fieldPath": "paths", "indexes": [] },
+    { "collectionGroup": "stats_daily", "fieldPath": "refs", "indexes": [] },
+    { "collectionGroup": "stats_daily", "fieldPath": "countries", "indexes": [] }
+  ]
+}

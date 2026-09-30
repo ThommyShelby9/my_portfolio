@@ -69,6 +69,11 @@ describe('renderMarkdown', () => {
     expect(r.html).toContain('<h2 id="mon-titre-e">');
     expect(r.headings).toEqual([{ id: 'mon-titre-e', text: 'Mon titre é' }]);
   });
+  it('gives the table of contents plain text, without inline markdown', () => {
+    const r = renderMarkdown('## Vos **droits** et le `RGPD`, [détails](https://example.com) _ici_ &amp; R&D\n');
+    expect(r.headings).toEqual([{ id: 'vos-droits-et-le-rgpd-details-ici-r-d', text: 'Vos droits et le RGPD, détails ici & R&D' }]);
+    expect(r.html).toContain('<strong>droits</strong>');
+  });
   it('escapes raw html', () => {
     const r = renderMarkdown('hello <script>alert(1)</script>\n\n<div>x</div>');
     expect(r.html).not.toContain('<script>');

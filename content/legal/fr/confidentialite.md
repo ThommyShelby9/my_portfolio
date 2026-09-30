@@ -2,7 +2,7 @@
 updated: "2026-09-30"
 ---
 
-Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. Il collecte très peu de données, et uniquement celles que vous choisissez d’envoyer. Cette page explique lesquelles, pourquoi, où elles sont conservées et comment exercer vos droits.
+Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. Les seules données personnelles qu’il recueille sont celles que vous choisissez de lui envoyer ; les visites, elles, sont seulement comptées, de façon anonyme. Cette page explique quelles données, pourquoi, où elles sont conservées et comment exercer vos droits.
 
 ## Responsable du traitement
 
@@ -33,20 +33,22 @@ La base légale est l’exécution de mesures précontractuelles prises à votre
 
 ## Protection contre les abus
 
-Pour limiter les envois automatisés, le serveur accepte au plus 5 envois par heure depuis une même connexion. Il utilise pour cela votre adresse IP, uniquement en mémoire et le temps de ce contrôle : elle n’est jamais enregistrée ni transmise. Un champ invisible piège aussi les robots qui remplissent tous les champs.
+Pour limiter les abus, le serveur accepte au plus 5 envois de formulaire par heure depuis une même connexion, et le compteur de visites au plus 60 pages vues par minute. Pour ces deux contrôles, l’application utilise votre adresse IP uniquement en mémoire, le temps du contrôle : elle ne l’enregistre jamais. Seuls les journaux techniques du serveur peuvent la contenir (voir ci-dessous). Un champ invisible piège aussi les robots qui remplissent tous les champs.
 
 ## Destinataires et hébergement
 
-Seul Rostel Panoumassi a accès à vos réponses. Elles sont conservées à deux endroits :
+Seul Rostel Panoumassi consulte vos réponses. Elles sont hébergées par les prestataires suivants :
 
-- dans une base de données Google Cloud Firestore (projet Firebase), hébergée par Google aux États-Unis (emplacement multirégional nam5). Google encadre ce transfert hors du Bénin et de l’Union européenne par les clauses contractuelles types prévues dans ses conditions de traitement des données ;
-- dans la boîte e-mail de Rostel Panoumassi, qui reçoit une copie de chaque envoi par l’intermédiaire d’un prestataire d’envoi d’e-mails (SMTP).
+- une base de données Google Cloud Firestore (projet Firebase), hébergée par Google aux États-Unis (emplacement multirégional nam5). Ce transfert est encadré par les clauses contractuelles types de la Commission européenne intégrées aux conditions de traitement des données de Google Cloud ;
+- la boîte Gmail de Rostel Panoumassi (Google, États-Unis), qui reçoit une copie de chaque envoi par l’intermédiaire d’un prestataire d’envoi d’e-mails.
 
-Le site lui-même est hébergé sur un serveur privé administré par Rostel Panoumassi.
+Le site est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi. Comme tout serveur web, il tient des journaux techniques : l’adresse IP et la page demandée y sont conservées pour une durée limitée, à des fins de sécurité et de diagnostic.
 
 ## Durée de conservation
 
-Vos réponses sont conservées 24 mois après notre dernier échange, puis supprimées. Vous pouvez demander leur suppression plus tôt à tout moment.
+Vos réponses sont conservées au plus 24 mois après notre dernier échange, puis supprimées. Dans la base de données, chaque envoi est effacé automatiquement 24 mois après sa réception ; la boîte e-mail est revue manuellement pour supprimer les échanges plus anciens.
+
+Si une collaboration s’ensuit, les échanges qui s’y rapportent sont conservés plus longtemps, le temps nécessaire aux obligations contractuelles et comptables. Vous pouvez à tout moment demander la suppression de vos données.
 
 ## Cookies et mesure d’audience
 
@@ -54,12 +56,12 @@ Le site ne dépose aucun cookie et n’utilise aucun traceur publicitaire ni out
 
 Pour savoir quelles pages sont lues, le site tient un simple compteur quotidien et anonyme. Pour chaque page vue, il enregistre uniquement :
 
-- l’adresse de la page (par exemple /realisations) ;
+- l’adresse de la page, si c’est une page du site (par exemple /realisations) ; toute autre adresse est comptée sous « autre » ;
 - le nom du site d’où vous venez, s’il s’agit d’un autre site (par exemple google.com) ;
-- le pays, seulement lorsque le réseau le fournit ;
+- le pays, seulement si l’infrastructure réseau placée devant le site le fournit, ce qui n’est pas le cas aujourd’hui ;
 - le total de pages vues de la journée.
 
-Aucune adresse IP, aucun identifiant et aucune information permettant de vous reconnaître d’une visite à l’autre ne sont enregistrés. Ces chiffres sont stockés dans la même base Firestore.
+Le compteur n’enregistre ni adresse IP, ni identifiant, ni aucune information permettant de vous reconnaître d’une visite à l’autre. Ces chiffres sont stockés dans la même base Firestore.
 
 ## Sécurité
 

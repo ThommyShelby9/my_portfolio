@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { deliver, NotConfiguredError, type DeliverDeps } from '@/lib/server/deliver';
+import { FieldValue, Timestamp } from 'firebase-admin/firestore';
+import { deliver, NotConfiguredError, RETENTION_MONTHS, submissionDoc, type DeliverDeps } from '@/lib/server/deliver';
 import { buildSubmissionEmail } from '@/lib/server/submission-email';
 
 function deps(over: Partial<DeliverDeps> = {}) {
@@ -123,5 +124,18 @@ describe('buildSubmissionEmail', () => {
     expect(m.subject).toBe('[Brief] new · Ada Bcc: x L');
     expect(m.text).toContain('hasTechTeam');
     expect(m.replyTo).toBe('a@b.co');
+  });
+});
+
+describe('submissionDoc', () => {
+  it('stores type, locale, payload, a server createdAt and expireAt 24 months later, nothing else', () => {
+    const now = new Date('2026-09-30T10:15:00Z');
+    const doc = submissionDoc({ type: 'contact', locale: 'fr', payload: { name: 'A', email: 'a@b.co', message: 'hi', extra: undefined } }, now);
+    expect(Object.keys(doc).sort()).toEqual(['createdAt', 'expireAt', 'locale', 'payload', 'type']);
+    expect(doc.payload).toEqual({ name: 'A', email: 'a@b.co', message: 'hi' });
+    expect(doc.createdAt).toEqual(FieldValue.serverTimestamp());
+    expect(doc.expireAt).toBeInstanceOf(Timestamp);
+    expect(doc.expireAt.toDate().toISOString()).toBe('2028-09-30T10:15:00.000Z');
+    expect(RETENTION_MONTHS).toBe(24);
   });
 });

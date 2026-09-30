@@ -1,5 +1,5 @@
 import 'server-only';
-import { FieldValue } from 'firebase-admin/firestore';
+import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getDb } from './firestore';
 import { sendMail } from './mailer';
 import { formLimiter, type RateLimiter } from './rate-limit';
@@ -32,17 +32,27 @@ export interface DeliverResult {
   mailed: 'sent' | 'skipped' | 'failed';
 }
 
+/** Months a submission is kept. A Firestore TTL policy on `expireAt` deletes it afterwards. */
+export const RETENTION_MONTHS = 24;
+
+/** The stored document: no IP, no user agent; `expireAt` is `createdAt` plus the retention period. */
+export function submissionDoc(sub: Submission, now: Date = new Date()) {
+  const expire = new Date(now);
+  expire.setUTCMonth(expire.getUTCMonth() + RETENTION_MONTHS);
+  return {
+    type: sub.type,
+    locale: sub.locale,
+    // Firestore rejects undefined values.
+    payload: JSON.parse(JSON.stringify(sub.payload)),
+    createdAt: FieldValue.serverTimestamp(),
+    expireAt: Timestamp.fromDate(expire),
+  };
+}
+
 async function defaultSave(sub: Submission): Promise<string> {
   const db = getDb();
   if (!db) throw new NotConfiguredError();
-  // Firestore rejects undefined values.
-  const payload = JSON.parse(JSON.stringify(sub.payload));
-  const ref = await db.collection('submissions').add({
-    type: sub.type,
-    locale: sub.locale,
-    payload,
-    createdAt: FieldValue.serverTimestamp(),
-  });
+  const ref = await db.collection('submissions').add(submissionDoc(sub));
   return ref.id;
 }
 

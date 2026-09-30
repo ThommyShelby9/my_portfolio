@@ -1,26 +1,79 @@
 import 'server-only';
 import { FieldValue, type Firestore } from 'firebase-admin/firestore';
+import { routing } from '@/i18n/routing';
+import { localizedPath } from '@/lib/i18n/localized-path';
+import slugs from './known-slugs.json';
 
 /**
  * Cookieless visit counter. One document per day, `stats_daily/{YYYY-MM-DD}`:
  * `{ total, paths: { <key>: n }, refs: { <host>: n }, countries: { <CC>: n } }`.
- * No IP, no user agent, no identifier is ever stored.
+ * No IP, no user agent, no identifier is ever stored. Keys are bounded: unknown pages and
+ * referrers beyond the daily cap are counted under `other`.
  */
+
+/** The shared key for pages outside the allow-list and for referrers beyond the daily cap. */
+export const OTHER = 'other';
 
 const MAX_KEY = 120;
 
 /**
  * A path (or host) as a Firestore map key that is also usable in a dotted field path:
  * `/` becomes `~`, `.` becomes `_`, anything else outside `[A-Za-z0-9_~%-]` becomes `_`,
- * capped at 120 characters.
+ * capped at 120 characters. Firestore reserves `__.*__` names, so a leading or trailing run
+ * of underscores is shortened to one.
  */
 export function encodeKey(value: string): string {
   return value
     .replace(/\//g, '~')
     .replace(/\./g, '_')
     .replace(/[^A-Za-z0-9_~%-]/g, '_')
-    .slice(0, MAX_KEY);
+    .slice(0, MAX_KEY)
+    .replace(/^_{2,}/, '_')
+    .replace(/_{2,}$/, '_');
 }
+
+type Href = keyof typeof routing.pathnames;
+
+// Every public page in both locales: the static routes, then each case study and exploration.
+// The slugs come from known-slugs.json, written from content/ at build time (scripts/known-slugs.mjs),
+// so nothing reads content/ at request time.
+const KNOWN_PATHS: ReadonlySet<string> = new Set(
+  routing.locales.flatMap((locale) => [
+    ...(Object.keys(routing.pathnames) as Href[]).filter((href) => !href.includes('[')).map((href) => localizedPath(href, locale)),
+    ...slugs.realisations.map((slug) => localizedPath('/realisations/[slug]', locale, { slug })),
+    ...slugs.explorations.map((slug) => localizedPath('/explorations/[slug]', locale, { slug })),
+  ]),
+);
+
+/** Every page path the counter keeps under its own key. */
+export const knownPaths = (): string[] => [...KNOWN_PATHS];
+
+/** The page path when it is a known page of the site (a trailing slash is ignored), else null. */
+export function knownPath(path: string): string | null {
+  const p = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  return KNOWN_PATHS.has(p) ? p : null;
+}
+
+/**
+ * Bounds the referrer keys of a day: the first `max` distinct hosts of a day keep their own key,
+ * later ones are counted under `other`. In memory only, reset each day (and on restart).
+ */
+export function createRefCap(max = 200): (host: string, date: string) => string {
+  let day = '';
+  const hosts = new Set<string>();
+  return (host, date) => {
+    if (date !== day) {
+      day = date;
+      hosts.clear();
+    }
+    if (hosts.has(host)) return host;
+    if (hosts.size >= max) return OTHER;
+    hosts.add(host);
+    return host;
+  };
+}
+
+export const capRef = createRefCap();
 
 // Crawlers, link unfurlers, monitoring, headless browsers and plain HTTP clients.
 const BOT =
@@ -77,6 +130,7 @@ export function isSameOrigin(headers: Headers): boolean {
   return hosts.includes(originHost);
 }
 
+/** `path` is a known page path or `other`; `ref` an encoded host (or `other`) from `refHost` and `capRef`. */
 export type Hit = { path: string; ref: string | null; country: string | null; date: string };
 
 /**

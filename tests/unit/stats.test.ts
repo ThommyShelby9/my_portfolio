@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { countryCode, dayKey, encodeKey, isBot, isSameOrigin, recordHit, refHost } from '@/lib/server/stats';
+import { countryCode, createRefCap, dayKey, encodeKey, isBot, isSameOrigin, knownPath, knownPaths, OTHER, recordHit, refHost } from '@/lib/server/stats';
+import { getAllSlugs } from '@/lib/content/load';
+import knownSlugs from '@/lib/server/known-slugs.json';
 import { POST } from '@/app/api/hit/route';
 
 describe('encodeKey', () => {
@@ -12,6 +14,45 @@ describe('encodeKey', () => {
     expect(encodeKey('/a b[c]*`d`')).toBe('~a_b_c___d_');
     expect(encodeKey('/%C3%A9')).toBe('~%C3%A9');
     expect(encodeKey(`/${'x'.repeat(300)}`)).toHaveLength(120);
+  });
+  it('never produces a name Firestore reserves (__x__)', () => {
+    expect(encodeKey('__x__')).toBe('_x_');
+    expect(encodeKey('____x____')).toBe('_x_');
+    expect(encodeKey('__x')).toBe('_x');
+    expect(encodeKey('x__')).toBe('x_');
+    expect(encodeKey('a__b')).toBe('a__b');
+    expect(refHost('https://__x__.com/', 'rostelmissimawu.com')).toBe('_x___com');
+    expect(refHost('https://x.com__/', 'rostelmissimawu.com')).toBe('x_com_');
+    expect(encodeKey(`/${'a'.repeat(118)}__x`)).not.toMatch(/__$/);
+  });
+});
+
+describe('knownPath', () => {
+  it('keeps every localized route and every case study and exploration, in both locales', () => {
+    for (const p of ['/', '/en', '/realisations', '/en/work', '/explorations', '/en/explorations', '/a-propos', '/en/about', '/brief', '/en/brief', '/brief/merci', '/en/brief/thanks', '/contact', '/en/contact/thanks', '/cv', '/en/cv', '/confidentialite', '/en/privacy', '/cgu', '/en/terms', '/realisations/ubbfy', '/en/work/ubbfy', '/explorations/procom', '/en/explorations/procom']) {
+      expect(knownPath(p), p).toBe(p);
+    }
+    expect(knownPaths()).toHaveLength(2 * (11 + knownSlugs.realisations.length + knownSlugs.explorations.length));
+  });
+  it('ignores a trailing slash and rejects anything else', () => {
+    expect(knownPath('/en/work/')).toBe('/en/work');
+    expect(knownPath('/en/')).toBe('/en');
+    for (const p of ['/nope', '/realisations/nope', '/en/realisations', '/work', '/realisations/[slug]', '/Realisations', '/wp-admin', '/fr/brief']) {
+      expect(knownPath(p), p).toBeNull();
+    }
+  });
+  it('is built from the slugs in content/ (run scripts/known-slugs.mjs, or pnpm build, after adding a page)', () => {
+    expect(knownSlugs).toEqual({ realisations: getAllSlugs('realisation'), explorations: getAllSlugs('exploration') });
+  });
+});
+
+describe('createRefCap', () => {
+  it('keeps the first 200 hosts of a day, counts the rest under other, and resets the next day', () => {
+    const cap = createRefCap(200);
+    for (let i = 0; i < 200; i++) expect(cap(`h${i}_com`, '2026-09-30')).toBe(`h${i}_com`);
+    expect(cap('late_com', '2026-09-30')).toBe(OTHER);
+    expect(cap('h7_com', '2026-09-30')).toBe('h7_com');
+    expect(cap('late_com', '2026-10-01')).toBe('late_com');
   });
 });
 

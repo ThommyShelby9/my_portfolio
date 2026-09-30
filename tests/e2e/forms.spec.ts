@@ -62,9 +62,14 @@ test.describe('forms on the Firestore emulator', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Merci, votre brief est bien arrivé.');
     const docs = await submissionsWith(token);
     expect(docs).toHaveLength(1);
-    const { type, locale, payload, createdAt, ...rest } = docs[0].data;
+    const { type, locale, payload, createdAt, expireAt, ...rest } = docs[0].data;
     expect({ type, locale }).toEqual({ type: 'brief', locale: 'fr' });
     expect(typeof createdAt).toBe('string');
+    // Retention: the TTL field is 24 months after the creation (the server clock, within a minute).
+    const created = new Date(createdAt as string);
+    const expected = new Date(created);
+    expected.setUTCMonth(expected.getUTCMonth() + 24);
+    expect(Math.abs(new Date(expireAt as string).getTime() - expected.getTime())).toBeLessThan(60_000);
     expect(rest).toEqual({}); // no IP, no user agent
     expect(payload).toEqual({
       projectType: 'revamp',
@@ -136,26 +141,33 @@ test.describe('forms on the Firestore emulator', () => {
     expect(await submissionsWith(token)).toHaveLength(5);
   });
 
-  test('/api/hit from the page increments today’s counters', async ({ browser, baseURL }, testInfo) => {
-    // isBot() drops HeadlessChrome: this context looks like a regular desktop browser.
-    const context = await browser.newContext({ userAgent: DESKTOP_UA, baseURL });
+  test('/api/hit counts known pages under their path and anything else under other', async ({ browser, baseURL }, testInfo) => {
+    // isBot() drops HeadlessChrome: this context looks like a regular desktop browser. Its own IP keeps
+    // the per-IP throttle (60 hits a minute) apart from the page views of the rest of the suite.
+    const context = await browser.newContext({ userAgent: DESKTOP_UA, baseURL, extraHTTPHeaders: { 'x-real-ip': ownIp() } });
     const page = await context.newPage();
     const day = statsDay();
-    const path = `/e2e-${testInfo.project.name}-${uniqueToken('hit')}`;
-    const key = path.replace(/\//g, '~');
-    const before = Number((await getDoc(`stats_daily/${day}`))?.data.total ?? 0);
+    type Stats = { total?: number; paths?: Record<string, number>; refs?: Record<string, number> };
+    const read = async () => ((await getDoc(`stats_daily/${day}`))?.data ?? {}) as Stats;
+    const unknown = `/e2e-${testInfo.project.name}-${uniqueToken('hit')}`;
+    const before = await read();
 
     await page.goto('/');
-    await page.evaluate(async (p) => {
-      await fetch('/api/hit', { method: 'POST', body: JSON.stringify({ path: p, ref: 'https://www.google.com/search' }) });
-    }, path);
+    await page.evaluate(async (paths) => {
+      for (const p of paths) {
+        await fetch('/api/hit', { method: 'POST', body: JSON.stringify({ path: p, ref: 'https://www.google.com/search' }) });
+      }
+    }, ['/en/terms/', unknown]);
 
-    await expect.poll(async () => ((await getDoc(`stats_daily/${day}`))?.data.paths as Record<string, number> | undefined)?.[key]).toBe(1);
-    const stats = (await getDoc(`stats_daily/${day}`))!.data as { total: number; paths: Record<string, number>; refs?: Record<string, number> };
-    expect(stats.total).toBeGreaterThan(before);
+    // A known page keeps its own key (the trailing slash is ignored); an unknown one goes to `other`.
+    await expect.poll(async () => (await read()).paths?.['~en~terms'] ?? 0).toBeGreaterThan(before.paths?.['~en~terms'] ?? 0);
+    await expect.poll(async () => (await read()).paths?.other ?? 0).toBeGreaterThan(before.paths?.other ?? 0);
+    const stats = await read();
+    expect(stats.paths?.[unknown.replace(/\//g, '~')]).toBeUndefined();
+    expect(stats.total ?? 0).toBeGreaterThan(before.total ?? 0);
     expect(stats.refs?.google_com ?? 0).toBeGreaterThanOrEqual(1);
     // The beacon mounted in the layout counted the home page too.
-    await expect.poll(async () => ((await getDoc(`stats_daily/${day}`))?.data.paths as Record<string, number>)['~'] ?? 0).toBeGreaterThanOrEqual(1);
+    await expect.poll(async () => (await read()).paths?.['~'] ?? 0).toBeGreaterThanOrEqual(1);
     await context.close();
   });
 });
