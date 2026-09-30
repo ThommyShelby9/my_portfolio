@@ -323,21 +323,22 @@
     "facts": {
       "label": "In short",
       "based": "Based in",
-      "basedValue": "Cotonou, Benin · UTC+1",
+      "basedValue": "Cotonou, Benin · UTC+1",
       "elsewhere": "Elsewhere"
     },
     "career": {
       "kicker": "01 · Career",
-      "title": "From full-stack developer to head of engineering.",
+      "title": "Platforms shipped, teams led.",
+      "note": "Roles documented since 2023. The years before: projects and training.",
       "current": "Current role"
     },
     "method": {
       "kicker": "02 · How I work",
       "title": "A team that knows what it builds, and why.",
       "frame": "Frame",
-      "frameText": "Before the first line of code, pin down with the business the problem, the users, the constraints and what will not be built.",
+      "frameText": "Before the first line of code, pin down with the business the problem, the users, the constraints and the scope of the first release.",
       "decide": "Decide in writing",
-      "decideText": "Every architecture choice is written down: the context, the options set aside, the decision. The team knows why, not just what.",
+      "decideText": "Key architecture choices are documented: the context, the options, the decision.",
       "deliver": "Deliver on a rhythm",
       "deliverText": "Short cycles, regular releases and continuous integration: the Agile and DevOps practices I put in place at KPS Groupe.",
       "coach": "Pass it on",

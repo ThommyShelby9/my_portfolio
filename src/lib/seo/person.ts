@@ -4,8 +4,8 @@ import { EDUCATION, LANGUAGES, PORTRAIT, SKILL_GROUPS, currentRole, term } from 
 import { OWNER, PERSON_ID, SITE_URL } from '@/lib/site';
 
 const DESCRIPTION: Record<Locale, string> = {
-  fr: `Ingénieur logiciel : ${OWNER.yearsExperience} ans d’expérience, dont ${OWNER.yearsLead} ans comme tech lead.`,
-  en: `Software engineer with ${OWNER.yearsExperience} years of experience, ${OWNER.yearsLead} of them as tech lead.`,
+  fr: `Ingénieur produit : ${OWNER.yearsExperience} ans d’expérience, dont ${OWNER.yearsLead} ans comme tech lead.`,
+  en: `Product engineer with ${OWNER.yearsExperience} years of experience, ${OWNER.yearsLead} of them as tech lead.`,
 };
 
 /** Credentials earned through a programme (not a short course): the schools he is an alumnus of. */

@@ -3,12 +3,12 @@ import { expect, test } from '@playwright/test';
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 const PAGES = [
-  { path: '/a-propos', h1: 'Ingénieur produit, tech lead, formateur.', sections: ['01 · Parcours', '02 · Comment je travaille', '03 · Ce que je maîtrise', '04 · Formation'], other: /Parcours|Formation|aujourd’hui/ },
-  { path: '/en/about', h1: 'Product engineer, tech lead, trainer.', sections: ['01 · Career', '02 · How I work', '03 · What I work with', '04 · Education'], other: /Career|Education|present/ },
+  { path: '/a-propos', note: 'Postes documentés depuis 2023.', h1: 'Ingénieur produit, tech lead, formateur.', sections: ['01 · Parcours', '02 · Comment je travaille', '03 · Avec quoi je travaille', '04 · Formation'], other: /Parcours|Formation|aujourd’hui/ },
+  { path: '/en/about', note: 'Roles documented since 2023.', h1: 'Product engineer, tech lead, trainer.', sections: ['01 · Career', '02 · How I work', '03 · What I work with', '04 · Education'], other: /Career|Education|present/ },
 ] as const;
 
 test.describe('about page', () => {
-  for (const { path, h1, sections } of PAGES) {
+  for (const { path, h1, sections, note } of PAGES) {
     test(`${path} renders the hero, the portrait and every section`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.goto(path);
@@ -16,10 +16,25 @@ test.describe('about page', () => {
       const portrait = page.locator('img[data-portrait]');
       await expect(portrait).toBeVisible();
       await expect(portrait).toHaveAttribute('alt', /^Rostel Panoumassi, portrait/);
-      expect(await portrait.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0 && img.naturalWidth <= 654)).toBe(true);
+      expect(await portrait.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0 && img.naturalWidth <= 523 && Math.abs(img.naturalHeight / img.naturalWidth - 1.25) < 0.005)).toBe(true);
       for (const kicker of sections) await expect(page.getByText(kicker, { exact: true })).toBeVisible();
-      await expect(page.locator('#parcours + ol > li')).toHaveCount(6);
+      await expect(page.locator('#parcours ~ ol > li')).toHaveCount(6);
       await expect(page.locator('#formation + ol > li')).toHaveCount(4);
+      await expect(page.getByText(note)).toBeVisible();
+      // Every row names its subject before its dates, and the dates are machine-readable.
+      for (const list of ['#parcours ~ ol > li', '#formation + ol > li']) {
+        const rows = await page.locator(list).evaluateAll((lis) =>
+          lis.map((li) => {
+            const h3 = li.querySelector('h3');
+            const time = li.querySelector('time');
+            return !!h3 && !!time && !!(h3.compareDocumentPosition(time) & Node.DOCUMENT_POSITION_FOLLOWING) && /^\d{4}-\d{2}$/.test(time.dateTime);
+          }),
+        );
+        expect(rows.length, list).toBeGreaterThan(0);
+        expect(rows.every(Boolean), list).toBe(true);
+      }
+      const headings = await page.locator('#formation + ol h3').allTextContents();
+      expect(new Set(headings).size).toBe(headings.length);
       await expect(page.locator('#projet')).toBeVisible();
       expect(await page.content()).not.toContain('—');
     });

@@ -4,7 +4,7 @@ import type { Locale } from '@/i18n/routing';
 import { SKILL_GROUPS, term } from '@/lib/profile/cv-data';
 import { SectionHead } from './SectionHead';
 
-/** Ce que je maîtrise: the skill groups of cv-data, one column each on wide screens. */
+/** Avec quoi je travaille: the skill groups of cv-data, one column each on wide screens. */
 export async function Skills({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: 'about.skills' });
   return (

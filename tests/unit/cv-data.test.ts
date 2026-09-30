@@ -1,3 +1,5 @@
+import path from 'node:path';
+import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import { routing } from '@/i18n/routing';
 import {
@@ -6,8 +8,13 @@ import {
   PORTRAIT,
   ROLES,
   SKILL_GROUPS,
+  CV_PROJECT_SLUGS,
   currentRole,
+  educationHeading,
   formatPeriod,
+  periodParts,
+  roleKindLabel,
+  selectCvProjects,
   term,
   type Period,
 } from '@/lib/profile/cv-data';
@@ -31,10 +38,10 @@ function localized(value: unknown, path = ''): [string, Record<string, unknown>]
 
 const DATA = { ROLES, EDUCATION, SKILL_GROUPS, LANGUAGES, PORTRAIT };
 
-/** Most recent first: ongoing first, then later end, then later start. */
+/** Newest start first; a tie puts the later end (ongoing last of all) first. */
 function newerFirst(a: Period, b: Period): number {
   const end = (p: Period) => p.end ?? '9999-12';
-  return end(b).localeCompare(end(a)) || b.start.localeCompare(a.start);
+  return b.start.localeCompare(a.start) || end(b).localeCompare(end(a));
 }
 
 describe('cv-data', () => {
@@ -60,9 +67,9 @@ describe('cv-data', () => {
     }
   });
 
-  it('lists the documented roles and credentials, most recent first', () => {
-    expect(ROLES.map((r) => r.id)).toEqual(['kps', 'gprhme', 'leconsultant', 'n01zet', 'dsmc', 'jscom']);
-    expect(EDUCATION.map((e) => e.id)).toEqual(['mindluster', 'ecole229', 'asin', 'injeps']);
+  it('lists the documented roles and credentials, newest start first', () => {
+    expect(ROLES.map((r) => r.id)).toEqual(['kps', 'gprhme', 'n01zet', 'dsmc', 'jscom', 'leconsultant']);
+    expect(EDUCATION.map((e) => e.id)).toEqual(['mindluster', 'asin', 'ecole229', 'injeps']);
     for (const list of [ROLES, EDUCATION]) {
       const periods = list.map((e) => e.period);
       expect([...periods].sort(newerFirst)).toEqual(periods);
@@ -83,10 +90,43 @@ describe('cv-data', () => {
   });
 
   it('formats periods with an en dash, in each language', () => {
-    expect(formatPeriod({ start: '2025-07', end: null }, 'fr')).toBe('Juil. 2025 – aujourd’hui');
+    expect(formatPeriod({ start: '2025-07', end: null }, 'fr')).toBe('juil. 2025 – aujourd’hui');
     expect(formatPeriod({ start: '2025-07', end: null }, 'en')).toBe('Jul 2025 – present');
-    expect(formatPeriod({ start: '2024-09', end: '2025-07' }, 'fr')).toBe('Sept. 2024 – Juil. 2025');
+    expect(formatPeriod({ start: '2024-09', end: '2025-07' }, 'fr')).toBe('sept. 2024 – juil. 2025');
     expect(formatPeriod({ start: '2023-12', end: '2023-12' }, 'en')).toBe('Dec 2023');
+    expect(formatPeriod({ start: '2019-10', end: '2022-08' }, 'fr')).toBe('oct. 2019 – août 2022');
+  });
+
+  it('splits periods into <time> bounds, "aujourd’hui" staying plain text', () => {
+    expect(periodParts({ start: '2025-07', end: null }, 'fr')).toEqual([{ label: 'juil. 2025', dateTime: '2025-07' }, { label: 'aujourd’hui' }]);
+    expect(periodParts({ start: '2024-09', end: '2025-07' }, 'en')).toEqual([
+      { label: 'Sep 2024', dateTime: '2024-09' },
+      { label: 'Jul 2025', dateTime: '2025-07' },
+    ]);
+    expect(periodParts({ start: '2023-12', end: '2023-12' }, 'fr')).toEqual([{ label: 'déc. 2023', dateTime: '2023-12' }]);
+  });
+
+  it('shows a role kind only when the title does not already say it', () => {
+    const byId = (id: string) => ROLES.find((r) => r.id === id)!;
+    expect(roleKindLabel(byId('kps'), 'fr')).toBeNull();
+    expect(roleKindLabel(byId('n01zet'), 'fr')).toBe('Mission freelance');
+    expect(roleKindLabel(byId('n01zet'), 'en')).toBe('Freelance mission');
+    expect(roleKindLabel(byId('jscom'), 'fr')).toBeNull(); // "Stage professionnel" already says "Stage"
+    expect(roleKindLabel(byId('jscom'), 'en')).toBeNull(); // "Professional internship"
+    expect(roleKindLabel({ ...byId('jscom'), title: { fr: 'Développeur', en: 'Developer' } }, 'fr')).toBe('Stage');
+  });
+
+  it('gives every credential a distinct heading: credential and institution', () => {
+    for (const locale of routing.locales) {
+      const headings = EDUCATION.map((e) => educationHeading(e, locale));
+      expect(new Set(headings).size, locale).toBe(headings.length);
+    }
+    expect(EDUCATION.map((e) => educationHeading(e, 'fr'))).toEqual([
+      'Certificat · Mindluster',
+      'Attestation · ASIN',
+      'Certification · École 229',
+      'Licence professionnelle · INJEPS',
+    ]);
   });
 
   it('follows the owner writing rules: no em dash, typographic apostrophe in French', () => {
@@ -100,9 +140,39 @@ describe('cv-data', () => {
     expect(injeps.field.fr).toContain('andragogie');
   });
 
-  it('serves the portrait at its native size or below, never upscaled', () => {
-    for (const s of PORTRAIT.sources) expect(s.width).toBeLessThanOrEqual(654);
-    expect(PORTRAIT.width).toBe(654);
+  it('serves the portrait as true 4:5 crops of the 654 px source, never upscaled', async () => {
+    expect(PORTRAIT.sources.map((s) => [s.width, s.height])).toEqual([
+      [400, 500],
+      [523, 654],
+    ]);
+    expect(PORTRAIT.src).toBe(PORTRAIT.sources.at(-1)!.src);
+    expect([PORTRAIT.width, PORTRAIT.height]).toEqual([523, 654]);
+    for (const s of PORTRAIT.sources) {
+      const meta = await sharp(path.join(process.cwd(), 'public', s.src)).metadata();
+      expect([meta.format, meta.width, meta.height], s.src).toEqual(['webp', s.width, s.height]);
+      expect(meta.height! / meta.width!, s.src).toBeCloseTo(5 / 4, 2);
+      expect(meta.height, s.src).toBeLessThanOrEqual(654); // the source is 654 px tall
+    }
     for (const locale of routing.locales) expect(PORTRAIT.alt[locale]).toContain('Rostel Panoumassi');
+  });
+
+  it('selects four flagship projects for the CV, with owner-confirmed figures only', () => {
+    const proof = (text: string, source: string) => ({ text, source });
+    const projects = [
+      { slug: 'ccns', proofs: [proof('+240 %', 'confirmé par Rostel (spec)'), proof('SEO 100', 'confirmé par Rostel (spec)')] },
+      { slug: 'ubbfy', proofs: [proof('20 applications', 'compté dans le dépôt ubbfy')] },
+      { slug: 'zenlife', proofs: [proof('1 200+', 'confirmé par Rostel le 2026-09-28')] },
+      { slug: 'tadagberhplus', proofs: [] },
+      { slug: 'other', proofs: [proof('x', 'confirmé par Rostel')] },
+    ];
+    const selected = selectCvProjects(projects);
+    expect(CV_PROJECT_SLUGS).toEqual(['ubbfy', 'tadagberhplus', 'zenlife', 'ccns']);
+    expect(selected.map((p) => [p.slug, p.metrics])).toEqual([
+      ['ubbfy', []],
+      ['tadagberhplus', []],
+      ['zenlife', ['1 200+']],
+      ['ccns', ['+240 %', 'SEO 100']],
+    ]);
+    expect(() => selectCvProjects(projects.slice(1))).toThrow(/ccns/);
   });
 });

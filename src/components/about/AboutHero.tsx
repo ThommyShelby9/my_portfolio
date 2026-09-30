@@ -44,18 +44,18 @@ export async function AboutHero({ locale }: { locale: Locale }) {
 
       <figure data-hero style={hero(2)} className="m-0 w-full max-w-[400px] lg:max-w-[440px] lg:justify-self-end">
         <div className="border border-line bg-obsidian-2 p-2.5">
-          {/* Two real exports of the 654 px source (never upscaled); the frame crops it to 4:5 without touching the face. */}
+          {/* Two 4:5 exports of the 654 px source, shown at their own ratio. `sizes` is the rendered width (frame minus its 10 px mat and 1 px border), so each candidate is only ever scaled down at 1x. */}
           <img
             data-portrait
             src={PORTRAIT.src}
             srcSet={PORTRAIT.sources.map((s) => `${s.src} ${s.width}w`).join(', ')}
-            sizes="(min-width: 1024px) 420px, (min-width: 440px) 380px, calc(100vw - 60px)"
+            sizes="(min-width: 1024px) 418px, (min-width: 440px) 378px, calc(100vw - 62px)"
             width={PORTRAIT.width}
             height={PORTRAIT.height}
             alt={PORTRAIT.alt[locale]}
             fetchPriority="high"
             decoding="async"
-            className="block aspect-[4/5] h-auto w-full object-cover object-[50%_30%] [filter:grayscale(0.1)]"
+            className="block h-auto w-full [filter:grayscale(0.1)]"
           />
         </div>
       </figure>

@@ -323,29 +323,30 @@
     "facts": {
       "label": "En bref",
       "based": "Basé à",
-      "basedValue": "Cotonou, Bénin · UTC+1",
+      "basedValue": "Cotonou, Bénin · UTC+1",
       "elsewhere": "Ailleurs"
     },
     "career": {
       "kicker": "01 · Parcours",
-      "title": "De développeur full-stack à responsable de l’ingénierie.",
+      "title": "Des plateformes livrées, des équipes encadrées.",
+      "note": "Postes documentés depuis 2023. Les années précédentes : projets et formation.",
       "current": "Poste actuel"
     },
     "method": {
       "kicker": "02 · Comment je travaille",
       "title": "Une équipe qui sait ce qu’elle construit, et pourquoi.",
       "frame": "Cadrer",
-      "frameText": "Avant la première ligne de code, poser avec le métier le problème, les utilisateurs, les contraintes et ce qui ne sera pas fait.",
+      "frameText": "Avant la première ligne de code, poser avec le métier le problème, les utilisateurs, les contraintes et le périmètre de la première version.",
       "decide": "Décider par écrit",
-      "decideText": "Chaque choix d’architecture est écrit : le contexte, les options écartées, la décision. L’équipe sait pourquoi, pas seulement quoi.",
+      "decideText": "Les choix d’architecture structurants sont documentés : le contexte, les options, la décision.",
       "deliver": "Livrer en rythme",
       "deliverText": "Des cycles courts, des livraisons régulières et une intégration continue : les pratiques Agile et DevOps que je mets en place chez KPS Groupe.",
       "coach": "Transmettre",
       "coachText": "J’encadre et je forme les développeurs. Ma licence en andragogie, la formation des adultes, m’a appris à partir de ce que chacun sait déjà et à vérifier ce qui est acquis."
     },
     "skills": {
-      "kicker": "03 · Ce que je maîtrise",
-      "title": "Une pile large, choisie projet par projet."
+      "kicker": "03 · Avec quoi je travaille",
+      "title": "Une stack large, choisie projet par projet."
     },
     "education": {
       "kicker": "04 · Formation",

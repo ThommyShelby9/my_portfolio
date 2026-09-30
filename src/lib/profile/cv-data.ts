@@ -33,7 +33,10 @@ export type CredentialKind = 'degree' | 'certification' | 'certificate' | 'attes
 
 export type Education = {
   id: string;
+  /** Full name, as in the source. */
   institution: string;
+  /** Short name used in headings when the full one is long. */
+  short?: string;
   credential: Localized;
   kind: CredentialKind;
   field: Localized;
@@ -49,7 +52,7 @@ export type Language = { code: string; name: Localized; level: Localized };
 
 const COTONOU: Localized = { fr: 'Cotonou, Bénin', en: 'Cotonou, Benin' };
 
-/** Most recent first: ongoing roles, then by end month, then by start month. */
+/** Newest start first (a tie puts the later end first): the order of the timeline and the CV. */
 export const ROLES: Role[] = [
   {
     id: 'kps',
@@ -72,18 +75,6 @@ export const ROLES: Role[] = [
     summary: {
       fr: 'Réalisation puis refonte de TadagbeRhPlus, plateforme de gestion des ressources humaines, et conception des plateformes connexes INTER-NAT et HIPEJUS.',
       en: 'Built and then rebuilt TadagbeRhPlus, a human resources management platform, and designed the related INTER-NAT and HIPEJUS platforms.',
-    },
-  },
-  {
-    id: 'leconsultant',
-    organisation: 'LeConsultant',
-    title: { fr: 'Développeur full-stack', en: 'Full-stack developer' },
-    kind: 'employment',
-    period: { start: '2023-08', end: '2024-12' },
-    location: COTONOU,
-    summary: {
-      fr: 'Conception et amélioration continue de la plateforme d’annonces d’appels d’offres LeConsultant.',
-      en: 'Designed and kept improving LeConsultant, a platform for publishing calls for tenders.',
     },
   },
   {
@@ -122,9 +113,21 @@ export const ROLES: Role[] = [
       en: 'A stock management platform in Spring Boot (Java) and Vue.js.',
     },
   },
+  {
+    id: 'leconsultant',
+    organisation: 'LeConsultant',
+    title: { fr: 'Développeur full-stack', en: 'Full-stack developer' },
+    kind: 'employment',
+    period: { start: '2023-08', end: '2024-12' },
+    location: COTONOU,
+    summary: {
+      fr: 'Conception et amélioration continue de la plateforme d’annonces d’appels d’offres LeConsultant.',
+      en: 'Designed and kept improving LeConsultant, a platform for publishing calls for tenders.',
+    },
+  },
 ];
 
-/** Most recent first, same order as ROLES. */
+/** Newest start first, like ROLES. */
 export const EDUCATION: Education[] = [
   {
     id: 'mindluster',
@@ -135,6 +138,15 @@ export const EDUCATION: Education[] = [
     period: { start: '2025-01', end: '2025-02' },
   },
   {
+    id: 'asin',
+    institution: 'Agence des Systèmes d’Information et du Numérique',
+    short: 'ASIN',
+    credential: { fr: 'Attestation', en: 'Attestation' },
+    kind: 'attestation',
+    field: { fr: 'Sécurité des systèmes d’information', en: 'Information systems security' },
+    period: { start: '2023-12', end: '2023-12' },
+  },
+  {
     id: 'ecole229',
     institution: 'École 229',
     credential: { fr: 'Certification', en: 'Certification' },
@@ -143,21 +155,13 @@ export const EDUCATION: Education[] = [
     period: { start: '2023-03', end: '2024-03' },
   },
   {
-    id: 'asin',
-    institution: 'Agence des Systèmes d’Information et du Numérique (ASIN)',
-    credential: { fr: 'Attestation', en: 'Attestation' },
-    kind: 'attestation',
-    field: { fr: 'Sécurité des systèmes d’information', en: 'Information systems security' },
-    period: { start: '2023-12', end: '2023-12' },
-  },
-  {
     id: 'injeps',
     institution: 'INJEPS',
     credential: { fr: 'Licence professionnelle', en: 'Professional bachelor’s degree' },
     kind: 'degree',
     field: {
       fr: 'Sciences et techniques des activités socio-éducatives (STASE), option andragogie',
-      en: 'Socio-educational activities (STASE), andragogy (adult education) track',
+      en: 'Science and techniques of socio-educational activities (STASE), andragogy track',
     },
     period: { start: '2019-10', end: '2022-08' },
   },
@@ -167,12 +171,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
   {
     id: 'backend',
     label: { fr: 'Backend', en: 'Backend' },
-    items: ['Django', 'Laravel', 'Spring Boot', 'Node.js / NestJS', 'Express'],
+    items: ['Java', 'Spring Boot', 'Django', 'Laravel', 'Node.js', 'NestJS', 'Express'],
   },
   {
     id: 'frontend',
     label: { fr: 'Frontend', en: 'Frontend' },
-    items: ['Vue.js', 'Nuxt', 'Next.js / React', 'TypeScript'],
+    items: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript'],
   },
   {
     id: 'mobile',
@@ -199,9 +203,9 @@ export const SKILL_GROUPS: SkillGroup[] = [
     label: { fr: 'Qualité & sécurité', en: 'Quality & security' },
     items: [
       { fr: 'Tests automatisés', en: 'Automated testing' },
-      'Selenium / Java',
+      'Selenium',
       'Playwright',
-      { fr: 'Cybersécurité (certifications)', en: 'Cybersecurity (certifications)' },
+      { fr: 'Cybersécurité', en: 'Cybersecurity' },
     ],
   },
 ];
@@ -211,14 +215,17 @@ export const LANGUAGES: Language[] = [{ code: 'fr', name: { fr: 'Français', en:
 
 export const LINKS = { email: OWNER.email, linkedin: OWNER.linkedin, github: OWNER.github } as const;
 
-/** The real portrait (654 px square source, never upscaled), exported as WebP by width. */
+/**
+ * The real portrait: 4:5 crops of the 654 px square source (full height, centred, never upscaled),
+ * exported as WebP. The page shows them at their own ratio, so nothing is cropped again in CSS.
+ */
 export const PORTRAIT = {
   sources: [
-    { src: '/about/portrait-400.webp', width: 400 },
-    { src: '/about/portrait-654.webp', width: 654 },
+    { src: '/about/portrait-4x5-400.webp', width: 400, height: 500 },
+    { src: '/about/portrait-4x5-523.webp', width: 523, height: 654 },
   ],
-  src: '/about/portrait-654.webp',
-  width: 654,
+  src: '/about/portrait-4x5-523.webp',
+  width: 523,
   height: 654,
   alt: {
     fr: `${OWNER.name}, portrait : lunettes, col roulé gris, veste bleu marine et écharpe bleu et blanc.`,
@@ -230,6 +237,21 @@ export const ROLE_KIND_LABEL: Record<Exclude<RoleKind, 'employment'>, Localized>
   freelance: { fr: 'Mission freelance', en: 'Freelance mission' },
   internship: { fr: 'Stage', en: 'Internship' },
 };
+
+/**
+ * The kind of a role ("Mission freelance", "Stage") when it adds something: null for employment,
+ * and null when the title already says it ("Stage professionnel" is not followed by "· Stage").
+ */
+export function roleKindLabel(role: Role, locale: Locale): string | null {
+  if (role.kind === 'employment') return null;
+  const label = ROLE_KIND_LABEL[role.kind][locale];
+  return role.title[locale].toLowerCase().includes(label.toLowerCase()) ? null : label;
+}
+
+/** Heading of a credential: what it is and who issued it, distinct for every entry. */
+export function educationHeading(e: Education, locale: Locale): string {
+  return `${e.credential[locale]} · ${e.short ?? e.institution}`;
+}
 
 export function term(t: Term, locale: Locale): string {
   return typeof t === 'string' ? t : t[locale];
@@ -243,7 +265,7 @@ export function currentRole(): Role {
 }
 
 const MONTHS: Localized<string[]> = {
-  fr: ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+  fr: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
   en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 };
 const PRESENT: Localized = { fr: 'aujourd’hui', en: 'present' };
@@ -253,8 +275,37 @@ export function formatMonth(ym: YearMonth, locale: Locale): string {
   return `${MONTHS[locale][Number(month) - 1]} ${year}`;
 }
 
-/** "Juil. 2025 – aujourd’hui", "Sept. 2024 – Juil. 2025", or a single month. En dash, never an em dash. */
+/** A period split for markup: each bound is a <time> (`dateTime` set) except "aujourd’hui". */
+export type PeriodPart = { label: string; dateTime?: YearMonth };
+
+export function periodParts({ start, end }: Period, locale: Locale): PeriodPart[] {
+  const first: PeriodPart = { label: formatMonth(start, locale), dateTime: start };
+  if (end === start) return [first];
+  return [first, end === null ? { label: PRESENT[locale] } : { label: formatMonth(end, locale), dateTime: end }];
+}
+
+/** "juil. 2025 – aujourd’hui", "sept. 2024 – juil. 2025", or a single month. En dash, never an em dash. */
 export function formatPeriod({ start, end }: Period, locale: Locale): string {
   if (end === start) return formatMonth(start, locale);
   return `${formatMonth(start, locale)} – ${end === null ? PRESENT[locale] : formatMonth(end, locale)}`;
+}
+
+/**
+ * The CV's short selection of flagship work, by case-study slug, in display order. Ubbfy shows no
+ * figure: its only proof is a count from the repository, not a result the owner confirmed.
+ */
+export const CV_PROJECT_SLUGS = ['ubbfy', 'tadagberhplus', 'zenlife', 'ccns'] as const;
+
+/** Proofs whose source is the owner's confirmation: the only figures a CV may state. */
+const CONFIRMED = /^confirmé par Rostel\b/;
+
+type ProjectLike = { slug: string; proofs: readonly { text: string; source: string }[] };
+
+/** The selected projects in CV order, each with its owner-confirmed figures only. */
+export function selectCvProjects<P extends ProjectLike>(projects: readonly P[]): (P & { metrics: string[] })[] {
+  return CV_PROJECT_SLUGS.map((slug) => {
+    const project = projects.find((p) => p.slug === slug);
+    if (!project) throw new Error(`cv-data: no case study "${slug}"`);
+    return { ...project, metrics: project.proofs.filter((p) => CONFIRMED.test(p.source)).map((p) => p.text) };
+  });
 }

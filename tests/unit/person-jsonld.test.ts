@@ -17,8 +17,21 @@ describe('personNode', () => {
     expect(personNode('en').knowsAbout).toEqual(expect.arrayContaining(['Automated testing']));
     expect(fr.sameAs).toEqual(['https://www.linkedin.com/in/rostelpanoumassi-6b6608335', 'https://github.com/ThommyShelby9']);
     expect((fr.hasCredential as Node[]).length).toBe(4);
-    expect(fr.image).toBe(`${SITE_URL}/about/portrait-654.webp`);
+    expect(fr.image).toBe(`${SITE_URL}/about/portrait-4x5-523.webp`);
     expect(fr.knowsLanguage).toEqual(['fr']);
+  });
+
+  it('describes a product engineer, like the About h1', () => {
+    expect(personNode('fr').description).toBe('Ingénieur produit\u00a0: 6 ans d’expérience, dont 3 ans comme tech lead.');
+    expect(personNode('en').description).toBe('Product engineer with 6 years of experience, 3 of them as tech lead.');
+  });
+
+  it('lists atomic topics: no "a / b" pairs, no "(certifications)"', () => {
+    for (const locale of ['fr', 'en'] as const) {
+      const topics = personNode(locale).knowsAbout as string[];
+      for (const topic of topics) expect(topic, topic).not.toMatch(/\s\/\s|\(certifications\)/);
+      expect(topics).toEqual(expect.arrayContaining(['Node.js', 'NestJS', 'Next.js', 'React', 'Selenium', 'Java']));
+    }
   });
 
   it('is the very node the home page emits (one builder)', () => {
