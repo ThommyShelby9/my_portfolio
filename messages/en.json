@@ -159,18 +159,19 @@
     "invalidEmail": "Invalid email address.",
     "invalidUrl": "Invalid web address. Start with http:// or https://.",
     "pitchTooShort": "Tell me a bit more: at least 10 characters.",
-    "pitchTooLong": "This summary is too long: 1000 characters at most.",
+    "pitchTooLong": "This summary is too long: 1,000 characters at most.",
     "messageTooShort": "Your message is too short: at least 10 characters.",
-    "messageTooLong": "Your message is too long: 3000 characters at most."
+    "messageTooLong": "Your message is too long: 3,000 characters at most."
   },
   "forms": {
     "required": "required",
     "pending": "Sending",
     "summaryTitle": "A few answers need another look.",
     "summaryText": "Your answers are kept. Follow the links to fix each field.",
+    "summaryGeneric": "One answer could not be processed. Check the form, then send it again.",
     "honeypot": "Leave this field empty",
-    "rateLimited": "Several submissions were just sent from your connection. Try again in an hour, or write to me directly at <email>rmissimawu@gmail.com</email>.",
-    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <email>rmissimawu@gmail.com</email>, I reply within 48 hours.",
+    "rateLimited": "Several submissions were just sent from your connection. Try again in an hour, or write to me directly at <mail>{email}</mail>.",
+    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <mail>{email}</mail>, I reply within 48 hours.",
     "privacy": "Your answers are only used to reply to you. <link>Privacy policy</link>"
   },
   "brief": {
@@ -209,7 +210,7 @@
     },
     "pitch": {
       "label": "Your project in a few lines",
-      "hint": "The problem to solve, for whom, and what already exists. 10 to 1000 characters."
+      "hint": "The problem to solve, for whom, and what already exists. 10 to 1,000 characters."
     },
     "currentState": {
       "label": "Where does the project stand?",
@@ -300,7 +301,7 @@
     },
     "message": {
       "label": "Your message",
-      "hint": "10 to 3000 characters."
+      "hint": "10 to 3,000 characters."
     },
     "submit": "Send the message",
     "thanks": {

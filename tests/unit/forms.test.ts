@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { briefSchema } from '@/lib/forms/brief-schema';
 import { contactFields, contactSchema } from '@/lib/forms/contact-schema';
+import { HONEYPOT_FIELD } from '@/lib/forms/honeypot';
 import { parseForm } from '@/lib/forms/parse-form';
 
 function fd(o: Record<string, string>) {
@@ -91,7 +92,7 @@ describe('briefSchema', () => {
   });
 
   it('echoes submitted values on failure', () => {
-    const r = parseForm(briefSchema, fd({ ...validBrief, email: 'bad', nickname: '' }));
+    const r = parseForm(briefSchema, fd({ ...validBrief, email: 'bad', hp_extra: '' }));
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.values.email).toBe('bad');
@@ -131,11 +132,47 @@ describe('parseForm echo allow-list', () => {
   it('never echoes the honeypot or $ACTION_* keys when a list is given', () => {
     const r = parseForm(
       contactSchema,
-      fd({ name: 'A', email: 'bad', message: 'x', locale: 'fr', nickname: 'bot', $ACTION_ID_abc: '1' }),
+      fd({ name: 'A', email: 'bad', message: 'x', locale: 'fr', hp_extra: 'bot', $ACTION_ID_abc: '1' }),
       contactFields,
     );
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.values).toEqual({ name: 'A', email: 'bad', message: 'x', locale: 'fr' });
+  });
+});
+
+describe('parseForm line breaks', () => {
+  // A textarea counts a line break as one character for maxLength but submits it as CRLF.
+  const lines = (count: number, width: number) => Array.from({ length: count }, () => 'x'.repeat(width)).join('\r\n');
+
+  it('normalises CRLF and lone CR to LF before the length checks', () => {
+    const pitch = lines(100, 9); // 900 x + 99 breaks: 999 as typed, 1098 as submitted
+    expect(pitch.length).toBeGreaterThan(1000);
+    const brief = parseForm(briefSchema, fd({ ...validBrief, pitch, notes: lines(200, 9) }));
+    expect(brief.ok).toBe(true);
+    if (!brief.ok) return;
+    expect(brief.data.pitch).toHaveLength(999);
+    expect(brief.data.pitch).not.toContain('\r');
+    expect(brief.data.notes).toHaveLength(1999);
+
+    const message = lines(300, 9); // 2999 as typed
+    const contact = parseForm(contactSchema, fd({ name: 'Ada', email: 'ada@example.com', message, locale: 'fr' }));
+    expect(contact.ok && contact.data.message).toBe(message.replace(/\r\n/g, '\n'));
+    const cr = parseForm(contactSchema, fd({ name: 'Ada', email: 'ada@example.com', message: 'Line one\rline two', locale: 'fr' }));
+    expect(cr.ok && cr.data.message).toBe('Line one\nline two');
+  });
+
+  it('still rejects a text over the limit once normalised', () => {
+    const r = parseForm(briefSchema, fd({ ...validBrief, pitch: lines(101, 9) })); // 909 + 100 = 1009
+    expect(!r.ok && r.fieldErrors.pitch).toEqual(['errors.pitchTooLong']);
+  });
+});
+
+describe('honeypot field', () => {
+  it('is not an autocomplete token and is stripped from the parsed data', () => {
+    expect(HONEYPOT_FIELD).toBe('hp_extra');
+    const r = parseForm(contactSchema, fd({ name: 'Ada', email: 'ada@example.com', message: 'Hello, a question.', locale: 'fr', [HONEYPOT_FIELD]: 'bot' }));
+    expect(r.ok).toBe(true);
+    expect(r.ok && HONEYPOT_FIELD in r.data).toBe(false);
   });
 });

@@ -65,7 +65,8 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
       <div className="min-w-0 lg:border-l lg:border-line lg:pl-16">
         <ContactForm
           locale={locale}
-          permalink={`${localizedPath('/contact', locale)}#contact-form`}
+          // No fragment: a URL fragment makes browsers skip the summary's autofocus after a no-JS submit.
+          permalink={localizedPath('/contact', locale)}
           labels={{
             ...shared,
             title: t('formTitle'),

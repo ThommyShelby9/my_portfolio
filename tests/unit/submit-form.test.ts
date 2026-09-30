@@ -29,7 +29,7 @@ describe('submitForm', () => {
   });
 
   it('returns field errors and echoes allow-listed values only, without delivering', async () => {
-    const state = await run(form({ name: '', email: 'nope', message: 'hi', locale: 'fr', nickname: 'bot', $ACTION_ID_x: '' }));
+    const state = await run(form({ name: '', email: 'nope', message: 'hi', locale: 'fr', hp_extra: 'bot', $ACTION_ID_x: '' }));
     expect(state.status).toBe('invalid');
     expect(Object.keys(state.fieldErrors).sort()).toEqual(['email', 'message', 'name']);
     expect(state.values).toEqual({ name: '', email: 'nope', message: 'hi', locale: 'fr' });
@@ -38,7 +38,7 @@ describe('submitForm', () => {
 
   it('delivers the payload without the locale, with the proxy IP and the honeypot, then redirects to the localized thank-you page', async () => {
     deliver.mockResolvedValue({ status: 'ok', stored: true, mailed: 'skipped' });
-    await expect(run(form({ ...valid, nickname: '' }))).rejects.toThrow('NEXT_REDIRECT');
+    await expect(run(form({ ...valid, hp_extra: '' }))).rejects.toThrow('NEXT_REDIRECT');
     expect(deliver).toHaveBeenCalledWith({
       type: 'contact',
       locale: 'en',
@@ -51,7 +51,7 @@ describe('submitForm', () => {
 
   it('passes a filled honeypot through so deliver can fake the success', async () => {
     deliver.mockResolvedValue({ status: 'ok', stored: false, mailed: 'skipped' });
-    await expect(run(form({ ...valid, locale: 'fr', nickname: 'spam' }))).rejects.toThrow('NEXT_REDIRECT');
+    await expect(run(form({ ...valid, locale: 'fr', hp_extra: 'spam' }))).rejects.toThrow('NEXT_REDIRECT');
     expect(deliver.mock.calls[0][0].honeypot).toBe('spam');
     expect(redirect).toHaveBeenCalledWith('/brief/merci');
   });
@@ -59,7 +59,7 @@ describe('submitForm', () => {
   for (const status of ['rate-limited', 'failed'] as const) {
     it(`returns the ${status} state and keeps the values`, async () => {
       deliver.mockResolvedValue({ status, stored: false, mailed: 'failed' });
-      const state = await run(form({ ...valid, nickname: '' }));
+      const state = await run(form({ ...valid, hp_extra: '' }));
       expect(state).toEqual({ status, fieldErrors: {}, values: valid });
       expect(redirect).not.toHaveBeenCalled();
     });

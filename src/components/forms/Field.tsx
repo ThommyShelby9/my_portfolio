@@ -70,7 +70,7 @@ export function Field({ id, name, label, required, hint, error, defaultValue, ty
     className: `${controlBase} ${error ? 'border-champagne' : 'border-edge'}`,
   } as const;
   return (
-    <div>
+    <div id={`${id}-field`} className="scroll-mt-6">
       <label htmlFor={id} className={labelClass}>
         <FieldLabel required={required}>{label}</FieldLabel>
       </label>

@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation';
 import type { z } from 'zod';
 import type { routing } from '@/i18n/routing';
 import type { FormState } from '@/lib/forms/form-state';
-import { parseForm } from '@/lib/forms/parse-form';
+import { HONEYPOT_FIELD } from '@/lib/forms/honeypot';
+import { normalizeNewlines, parseForm } from '@/lib/forms/parse-form';
 import { localizedPath } from '@/lib/i18n/localized-path';
 import { clientIp } from './client-ip';
 import { deliver } from './deliver';
@@ -22,7 +23,7 @@ type Options<S extends z.ZodType<{ locale: 'fr' | 'en' }>> = {
 function echo(formData: FormData, fields: readonly string[]): Record<string, string> {
   const values: Record<string, string> = {};
   for (const [key, value] of formData.entries()) {
-    if (typeof value === 'string' && fields.includes(key)) values[key] = value;
+    if (typeof value === 'string' && fields.includes(key)) values[key] = normalizeNewlines(value);
   }
   return values;
 }
@@ -39,7 +40,7 @@ export async function submitForm<S extends z.ZodType<{ locale: 'fr' | 'en' }>>({
   if (!parsed.ok) return { status: 'invalid', fieldErrors: parsed.fieldErrors, values: parsed.values };
 
   const { locale, ...payload } = parsed.data as z.output<S> & Record<string, unknown>;
-  const honeypot = formData.get('nickname');
+  const honeypot = formData.get(HONEYPOT_FIELD);
   const result = await deliver({
     type,
     locale,

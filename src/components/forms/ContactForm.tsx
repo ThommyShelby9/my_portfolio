@@ -4,7 +4,8 @@ import { useActionState, type ReactNode } from 'react';
 import { submitContact } from '@/app/[locale]/contact/actions';
 import { initialFormState } from '@/lib/forms/form-state';
 import { Field } from './Field';
-import { FormFeedback, Honeypot, errorText, type FeedbackLabels } from './FormParts';
+import { FormFeedback, type FeedbackLabels } from './FormFeedback';
+import { Honeypot, errorText } from './FormParts';
 import { SubmitButton } from './SubmitButton';
 
 type Text = { label: string; hint: string };
@@ -35,7 +36,7 @@ export function ContactForm({ locale, permalink, labels: L }: { locale: string; 
   ];
   const items = targets
     .filter(([name]) => state.fieldErrors[name])
-    .map(([name, label]) => ({ id: `contact-${name}`, label, message: err(name) ?? '' }));
+    .map(([name, label]) => ({ name, id: `contact-${name}`, anchor: `contact-${name}-field`, label, message: err(name) ?? '' }));
 
   return (
     <form id="contact-form" action={formAction} noValidate aria-labelledby="contact-form-title" className="relative min-w-0">
@@ -52,7 +53,7 @@ export function ContactForm({ locale, permalink, labels: L }: { locale: string; 
         <Field id="contact-message" name="message" label={L.message.label} hint={L.message.hint} required={L.required}
           rows={7} maxLength={3000} defaultValue={v.message} error={err('message')} />
       </div>
-      <Honeypot id="contact-nickname" label={L.honeypot} />
+      <Honeypot id="contact-hp-extra" label={L.honeypot} />
       <div className="mt-10 flex flex-col items-start gap-6 border-t border-line pt-10">
         <SubmitButton label={L.submit} pendingLabel={L.pending} />
         <p className="max-w-[52ch] text-[13.5px] leading-[1.6] text-faint">{L.privacy}</p>

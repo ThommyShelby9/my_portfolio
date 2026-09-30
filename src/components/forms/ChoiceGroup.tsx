@@ -10,7 +10,7 @@ export type Choice = {
 };
 
 type Props = {
-  /** Prefix of the option ids: `${id}-0` is the target of the error summary link. */
+  /** Prefix of the ids: the fieldset is `${id}-field` (error summary link target), `${id}-0` the first option (focused). */
   id: string;
   type: 'radio' | 'checkbox';
   legend: string;
@@ -30,7 +30,7 @@ export function ChoiceGroup({ id, type, legend, choices, required, hint, error }
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [errorId, hintId].filter(Boolean).join(' ') || undefined;
   return (
-    <fieldset aria-describedby={describedBy} className="min-w-0">
+    <fieldset id={`${id}-field`} aria-describedby={describedBy} className="min-w-0 scroll-mt-6">
       <legend className={labelClass}>
         <FieldLabel required={required}>{legend}</FieldLabel>
       </legend>

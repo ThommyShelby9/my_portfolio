@@ -1,8 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-// Light checks for the contact page; the delivery path with the Firestore emulator lives in forms.spec.ts.
-// This server has no Firebase and no SMTP env, so a valid message ends in the "failed" state.
+// Page, accessibility and validation checks for the contact page. Submissions that reach delivery
+// (stored documents, honeypot, rate limit) are covered by forms.spec.ts on the Firestore emulator.
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
@@ -40,18 +40,13 @@ test.describe('contact', () => {
     await expect(page.locator('#contact-message')).toHaveValue('Bonjour');
   });
 
-  test('a delivery failure shows the direct email in a live region', async ({ page }) => {
-    // Own client IP so the in-memory rate limiter never mixes this test with others.
-    await page.setExtraHTTPHeaders({ 'x-real-ip': `198.51.100.${test.info().parallelIndex + 20}` });
+  test('the honeypot is hidden, out of the tab order and not an autofill target', async ({ page }) => {
     await page.goto('/contact');
-    await page.fill('#contact-name', 'Ada Lovelace');
-    await page.fill('#contact-email', 'ada@example.com');
-    await page.fill('#contact-message', 'Une question sur un produit existant.');
-    await page.getByRole('button', { name: 'Envoyer le message' }).click();
-    const notice = page.locator('[aria-live="polite"]');
-    await expect(notice).toContainText('L’envoi n’a pas abouti');
-    await expect(notice.getByRole('link', { name: 'rmissimawu@gmail.com' })).toHaveAttribute('href', 'mailto:rmissimawu@gmail.com');
-    await expect(notice.locator('div[tabindex="-1"]')).toBeFocused();
+    const trap = page.locator('input[name=hp_extra]');
+    await expect(trap).toHaveAttribute('tabindex', '-1');
+    await expect(trap).toHaveAttribute('autocomplete', 'off');
+    await expect(page.locator('div[aria-hidden="true"]:has(input[name=hp_extra])')).toHaveCount(1);
+    expect((await trap.boundingBox())!.x).toBeLessThan(-1000);
   });
 
   test('no horizontal overflow on a 360 px phone', async ({ page }) => {
@@ -87,16 +82,6 @@ test.describe('contact without JavaScript', () => {
     await expect(page.locator('#contact-message-error')).toContainText('at least 10 characters');
     await expect(page.locator('#contact-name')).toHaveValue('Ada');
     await expect(page.locator('#contact-message')).toHaveValue('Hi');
-  });
-
-  test('a filled honeypot lands on the thank-you page', async ({ page }) => {
-    await page.goto('/en/contact');
-    await page.fill('#contact-name', 'Ada');
-    await page.fill('#contact-email', 'ada@example.com');
-    await page.fill('#contact-message', 'A question about an existing product.');
-    await page.locator('input[name=nickname]').evaluate((el: HTMLInputElement) => { el.value = 'bot'; });
-    await page.getByRole('button', { name: 'Send the message' }).click();
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Thank you, your message arrived.');
-    expect(new URL(page.url()).pathname).toBe('/en/contact/thanks');
+    await expect(page.getByRole('group', { name: 'A few answers need another look.' })).toBeFocused();
   });
 });

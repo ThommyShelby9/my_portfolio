@@ -52,7 +52,8 @@ export default async function BriefPage({ params }: PageProps<'/[locale]/brief'>
   return (
     <>
       <IndexHeader kicker={t('kicker')} title={t('title')} lede={t('lede')} meta={t('meta')} />
-      <BriefForm locale={locale} permalink={`${localizedPath('/brief', locale)}#brief-form`} labels={labels} />
+      {/* No fragment in the permalink: a URL fragment makes browsers skip the summary's autofocus after a no-JS submit. */}
+      <BriefForm locale={locale} permalink={localizedPath('/brief', locale)} labels={labels} />
     </>
   );
 }

@@ -4,7 +4,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { OWNER } from '@/lib/site';
-import type { FeedbackLabels } from './FormParts';
+import type { FeedbackLabels } from './FormFeedback';
 
 const inlineLink = 'border-b pb-0.5 text-ivory no-underline transition-colors hover:border-champagne hover:text-champagne';
 
@@ -21,9 +21,13 @@ export async function formLabels(locale: Locale): Promise<{
   errors: Record<string, string>;
 }> {
   const [f, messages] = await Promise.all([getTranslations({ locale, namespace: 'forms' }), getMessages({ locale })]);
-  const email = (chunks: ReactNode) => (
-    <a href={`mailto:${OWNER.email}`} className={`${inlineLink} whitespace-nowrap border-champagne`}>{chunks}</a>
-  );
+  // The address comes from OWNER as an argument; the `mail` tag makes it a mailto link.
+  const direct = {
+    email: OWNER.email,
+    mail: (chunks: ReactNode) => (
+      <a href={`mailto:${OWNER.email}`} className={`${inlineLink} whitespace-nowrap border-champagne`}>{chunks}</a>
+    ),
+  };
   return {
     required: f('required'),
     pending: f('pending'),
@@ -34,8 +38,9 @@ export async function formLabels(locale: Locale): Promise<{
     feedback: {
       summaryTitle: f('summaryTitle'),
       summaryText: f('summaryText'),
-      rateLimited: f.rich('rateLimited', { email }),
-      failed: f.rich('failed', { email }),
+      summaryGeneric: f('summaryGeneric'),
+      rateLimited: f.rich('rateLimited', direct),
+      failed: f.rich('failed', direct),
     },
     errors: messages.errors as Record<string, string>,
   };

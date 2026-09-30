@@ -159,18 +159,19 @@
     "invalidEmail": "Adresse e-mail invalide.",
     "invalidUrl": "Adresse web invalide. Commencez par http:// ou https://.",
     "pitchTooShort": "Dites-m’en un peu plus : au moins 10 caractères.",
-    "pitchTooLong": "Ce résumé est trop long : 1000 caractères au maximum.",
+    "pitchTooLong": "Ce résumé est trop long : 1 000 caractères au maximum.",
     "messageTooShort": "Votre message est trop court : au moins 10 caractères.",
-    "messageTooLong": "Votre message est trop long : 3000 caractères au maximum."
+    "messageTooLong": "Votre message est trop long : 3 000 caractères au maximum."
   },
   "forms": {
     "required": "obligatoire",
     "pending": "Envoi en cours",
     "summaryTitle": "Quelques réponses sont à revoir.",
     "summaryText": "Vos réponses sont conservées. Suivez les liens pour corriger chaque champ.",
+    "summaryGeneric": "Une réponse n’a pas pu être prise en compte. Vérifiez le formulaire, puis renvoyez-le.",
     "honeypot": "Laissez ce champ vide",
-    "rateLimited": "Plusieurs envois viennent d’être faits depuis votre connexion. Réessayez dans une heure, ou écrivez-moi directement à <email>rmissimawu@gmail.com</email>.",
-    "failed": "L’envoi n’a pas abouti, vos réponses sont toujours là. Écrivez-moi directement à <email>rmissimawu@gmail.com</email>, je vous réponds sous 48 heures.",
+    "rateLimited": "Plusieurs envois viennent d’être faits depuis votre connexion. Réessayez dans une heure, ou écrivez-moi directement à <mail>{email}</mail>.",
+    "failed": "L’envoi n’a pas abouti, vos réponses sont toujours là. Écrivez-moi directement à <mail>{email}</mail>, je vous réponds sous 48 heures.",
     "privacy": "Vos réponses servent uniquement à vous répondre. <link>Politique de confidentialité</link>"
   },
   "brief": {
@@ -209,7 +210,7 @@
     },
     "pitch": {
       "label": "Votre projet en quelques lignes",
-      "hint": "Le problème à résoudre, pour qui, et ce qui existe déjà. De 10 à 1000 caractères."
+      "hint": "Le problème à résoudre, pour qui, et ce qui existe déjà. De 10 à 1 000 caractères."
     },
     "currentState": {
       "label": "Où en est le projet ?",
@@ -247,11 +248,11 @@
     "budget": {
       "label": "Budget envisagé",
       "hint": "En euros. Une fourchette suffit.",
-      "lt5k": "Moins de 5 000 €",
-      "k5to15": "5 000 à 15 000 €",
-      "k15to40": "15 000 à 40 000 €",
-      "k40to100": "40 000 à 100 000 €",
-      "k100plus": "Plus de 100 000 €",
+      "lt5k": "Moins de 5 000 €",
+      "k5to15": "5 000 à 15 000 €",
+      "k15to40": "15 000 à 40 000 €",
+      "k40to100": "40 000 à 100 000 €",
+      "k100plus": "Plus de 100 000 €",
       "unknown": "Pas encore défini"
     },
     "firstName": "Prénom",
@@ -300,7 +301,7 @@
     },
     "message": {
       "label": "Votre message",
-      "hint": "De 10 à 3000 caractères."
+      "hint": "De 10 à 3 000 caractères."
     },
     "submit": "Envoyer le message",
     "thanks": {

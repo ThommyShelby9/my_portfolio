@@ -5,7 +5,8 @@ import { submitBrief } from '@/app/[locale]/brief/actions';
 import { initialFormState } from '@/lib/forms/form-state';
 import { ChoiceGroup, type Choice } from './ChoiceGroup';
 import { Field } from './Field';
-import { FormFeedback, FormSection, Honeypot, errorText, type FeedbackLabels } from './FormParts';
+import { FormFeedback, type FeedbackLabels } from './FormFeedback';
+import { FormSection, Honeypot, errorText } from './FormParts';
 import { SubmitButton } from './SubmitButton';
 
 type Option = { value: string; label: string };
@@ -54,25 +55,32 @@ export function BriefForm({ locale, permalink, labels: L }: { locale: string; pe
   const checkboxes = (options: { name: string; label: string }[]): Choice[] =>
     options.map((o) => ({ name: o.name, value: 'on', label: o.label, checked: v[o.name] === 'on' }));
 
-  // Error summary targets, in form order: choice groups link to their first option.
-  const targets: [name: string, label: string, id: string][] = [
-    ['projectType', L.projectType.label, 'brief-projectType-0'],
-    ['pitch', L.pitch.label, 'brief-pitch'],
-    ['currentState', L.currentState.label, 'brief-currentState-0'],
-    ['teamSize', L.teamSize.label, 'brief-teamSize-0'],
-    ['notes', L.notes.label, 'brief-notes'],
-    ['deadline', L.deadline.label, 'brief-deadline-0'],
-    ['budget', L.budget.label, 'brief-budget-0'],
-    ['firstName', L.firstName, 'brief-firstName'],
-    ['lastName', L.lastName, 'brief-lastName'],
-    ['email', L.email.label, 'brief-email'],
-    ['company', L.company, 'brief-company'],
-    ['website', L.website.label, 'brief-website'],
-    ['source', L.source, 'brief-source'],
+  // Error summary targets, in form order. Links land on the field wrapper (`brief-<name>-field`);
+  // focus goes to the control, or to the first option of a choice group.
+  const targets: [name: string, label: string, group?: 'group'][] = [
+    ['projectType', L.projectType.label, 'group'],
+    ['pitch', L.pitch.label],
+    ['currentState', L.currentState.label, 'group'],
+    ['teamSize', L.teamSize.label, 'group'],
+    ['notes', L.notes.label],
+    ['deadline', L.deadline.label, 'group'],
+    ['budget', L.budget.label, 'group'],
+    ['firstName', L.firstName],
+    ['lastName', L.lastName],
+    ['email', L.email.label],
+    ['company', L.company],
+    ['website', L.website.label],
+    ['source', L.source],
   ];
   const items = targets
     .filter(([name]) => state.fieldErrors[name])
-    .map(([name, label, id]) => ({ id, label, message: err(name) ?? '' }));
+    .map(([name, label, group]) => ({
+      name,
+      id: group ? `brief-${name}-0` : `brief-${name}`,
+      anchor: `brief-${name}-field`,
+      label,
+      message: err(name) ?? '',
+    }));
 
   return (
     <form
@@ -131,7 +139,7 @@ export function BriefForm({ locale, permalink, labels: L }: { locale: string; pe
           choices={checkboxes([{ name: 'prefersCall', label: L.prefersCall }])} />
       </FormSection>
 
-      <Honeypot id="brief-nickname" label={L.honeypot} />
+      <Honeypot id="brief-hp-extra" label={L.honeypot} />
 
       <div className={`grid border-t border-line pt-12 ${GRID}`}>
         <div className="flex flex-col items-start gap-6 lg:col-start-2">
