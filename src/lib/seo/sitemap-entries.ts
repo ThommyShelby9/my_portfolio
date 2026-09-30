@@ -5,25 +5,15 @@ import { SITE_URL } from '@/lib/site';
 
 type Href = keyof typeof routing.pathnames;
 
-/** Static pages indexed today. Later lots add the ones listed in NOINDEX_OR_LATER. */
-export const STATIC_HREFS: Href[] = ['/', '/realisations', '/explorations'];
+/** Static pages in the sitemap. */
+export const STATIC_HREFS: Href[] = ['/', '/realisations', '/explorations', '/brief', '/contact', '/confidentialite', '/cgu'];
 
 /**
- * Routes that exist in `routing.pathnames` (or will) but are not in the sitemap yet: pages of later lots.
- * Lot 4/5 moves the indexable ones into STATIC_HREFS; a page that stays out must remain listed here as
- * noindex. tests/unit/sitemap-entries.test.ts fails on any route that is in neither list.
+ * Routes of `routing.pathnames` kept out of the sitemap: noindex pages (the thank-you pages) and pages
+ * of a later lot (Lot 5 moves the indexable ones into STATIC_HREFS). Typed as routing keys, so a stale
+ * entry does not compile, and tests/unit/sitemap-entries.test.ts fails on any route in neither list.
  */
-export const NOINDEX_OR_LATER: string[] = [
-  '/brief',
-  '/contact',
-  '/a-propos',
-  '/cv',
-  '/confidentialite',
-  '/cgu',
-  '/terminal',
-  '/brief/merci',
-  '/contact/merci',
-];
+export const NOINDEX_OR_LATER: Href[] = ['/a-propos', '/cv', '/brief/merci', '/contact/merci'];
 
 type Input = { realisations: string[]; explorations: string[]; lastModified?: Date };
 

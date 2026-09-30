@@ -16,6 +16,14 @@ describe('buildSitemapEntries', () => {
       'https://rostelmissimawu.com/en/work',
       'https://rostelmissimawu.com/explorations',
       'https://rostelmissimawu.com/en/explorations',
+      'https://rostelmissimawu.com/brief',
+      'https://rostelmissimawu.com/en/brief',
+      'https://rostelmissimawu.com/contact',
+      'https://rostelmissimawu.com/en/contact',
+      'https://rostelmissimawu.com/confidentialite',
+      'https://rostelmissimawu.com/en/privacy',
+      'https://rostelmissimawu.com/cgu',
+      'https://rostelmissimawu.com/en/terms',
       'https://rostelmissimawu.com/realisations/ubbfy',
       'https://rostelmissimawu.com/en/work/ubbfy',
       'https://rostelmissimawu.com/explorations/procom',
@@ -47,5 +55,19 @@ describe('sitemap coverage guard', () => {
 
   it('does not list a route that is already indexed', () => {
     for (const href of STATIC_HREFS) expect(NOINDEX_OR_LATER).not.toContain(href);
+  });
+
+  it('lists only real routing pathnames, so a stale entry fails', () => {
+    const known = Object.keys(routing.pathnames);
+    for (const href of [...NOINDEX_OR_LATER, ...STATIC_HREFS]) expect(known, href).toContain(href);
+    expect(new Set(NOINDEX_OR_LATER).size).toBe(NOINDEX_OR_LATER.length);
+  });
+
+  it('keeps the thank-you pages out of the sitemap', () => {
+    const urls = buildSitemapEntries({ realisations: [], explorations: [] }).map((e) => e.url);
+    for (const path of ['/brief/merci', '/en/brief/thanks', '/contact/merci', '/en/contact/thanks']) {
+      expect(urls).not.toContain(`https://rostelmissimawu.com${path}`);
+    }
+    expect(NOINDEX_OR_LATER).toEqual(expect.arrayContaining(['/brief/merci', '/contact/merci']));
   });
 });
