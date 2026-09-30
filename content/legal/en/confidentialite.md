@@ -46,7 +46,7 @@ The site is hosted on a private server rented from a professional hosting provid
 
 ## Retention
 
-Your answers are kept for at most 24 months after our last exchange, then deleted. In the database, each submission is erased automatically 24 months after it was received; the mailbox is reviewed manually to delete older exchanges.
+Your answers are kept for at most 24 months after our last exchange, then deleted. In the database, each submission carries an expiry date set 24 months after it was received, when it is erased; the mailbox is reviewed manually to delete older exchanges.
 
 If a collaboration follows, the related exchanges are kept longer, for as long as contractual and accounting obligations require. You can ask for your data to be deleted at any time.
 

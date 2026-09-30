@@ -46,7 +46,7 @@ Le site est hébergé sur un serveur privé loué auprès d’un hébergeur prof
 
 ## Durée de conservation
 
-Vos réponses sont conservées au plus 24 mois après notre dernier échange, puis supprimées. Dans la base de données, chaque envoi est effacé automatiquement 24 mois après sa réception ; la boîte e-mail est revue manuellement pour supprimer les échanges plus anciens.
+Vos réponses sont conservées au plus 24 mois après notre dernier échange, puis supprimées. Dans la base de données, chaque envoi porte une date d’expiration fixée à 24 mois après sa réception, à laquelle il est effacé ; la boîte e-mail est revue manuellement pour supprimer les échanges plus anciens.
 
 Si une collaboration s’ensuit, les échanges qui s’y rapportent sont conservés plus longtemps, le temps nécessaire aux obligations contractuelles et comptables. Vous pouvez à tout moment demander la suppression de vos données.
 
