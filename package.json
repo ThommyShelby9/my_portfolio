@@ -16,7 +16,8 @@
     "test:e2e": "playwright test",
     "lint:rules": "vitest run --config vitest.dist.config.ts",
     "favicons": "node scripts/favicons.mjs",
-    "sculpture:poster": "node scripts/sculpture-poster.mjs"
+    "sculpture:poster": "node scripts/sculpture-poster.mjs",
+    "cv:pdf": "node scripts/cv-pdf.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

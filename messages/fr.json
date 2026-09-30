@@ -25,7 +25,8 @@
     "ledeRest": ", ingénieur produit et Head of Engineering chez KPS Groupe. Six ans d’expérience, dont trois comme tech lead. Ubbfy, ContractIQ, ZenLife : des produits livrés, pas des maquettes.",
     "ctaWork": "Voir les réalisations",
     "ctaProject": "Parler d’un projet",
-    "scroll": "Défiler pour découvrir"
+    "scroll": "Défiler pour découvrir",
+    "ctaCv": "Télécharger le CV (PDF)"
   },
   "footer": {
     "privacy": "Confidentialité",
@@ -324,7 +325,8 @@
       "label": "En bref",
       "based": "Basé à",
       "basedValue": "Cotonou, Bénin · UTC+1",
-      "elsewhere": "Ailleurs"
+      "elsewhere": "Ailleurs",
+      "cv": "CV"
     },
     "career": {
       "kicker": "01 · Parcours",
@@ -367,5 +369,23 @@
       "metaDescription": "Éditeur du site, propriété intellectuelle des contenus, réalisations clients et explorations, responsabilité et droit applicable.",
       "title": "Conditions générales d’utilisation"
     }
+  },
+  "cv": {
+    "metaTitle": "CV · Rostel Panoumassi",
+    "metaDescription": "CV de Rostel Panoumassi, Head of Engineering & Innovation chez KPS Groupe à Cotonou : expérience, projets, compétences et formation. En PDF, en français et en anglais.",
+    "kicker": "Curriculum vitæ",
+    "download": "Télécharger le PDF",
+    "downloadNote": "A4, en français",
+    "contact": "Contact",
+    "email": "E-mail",
+    "site": "Site",
+    "based": "Basé à",
+    "basedValue": "Cotonou, Bénin · UTC+1",
+    "profile": "Profil",
+    "experience": "Expérience",
+    "projects": "Projets choisis",
+    "caseStudy": "Étude de cas",
+    "skills": "Compétences",
+    "education": "Formation"
   }
 }

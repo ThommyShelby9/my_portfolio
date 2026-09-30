@@ -18,6 +18,8 @@ describe('buildSitemapEntries', () => {
       'https://rostelmissimawu.com/en/explorations',
       'https://rostelmissimawu.com/a-propos',
       'https://rostelmissimawu.com/en/about',
+      'https://rostelmissimawu.com/cv',
+      'https://rostelmissimawu.com/en/cv',
       'https://rostelmissimawu.com/brief',
       'https://rostelmissimawu.com/en/brief',
       'https://rostelmissimawu.com/contact',

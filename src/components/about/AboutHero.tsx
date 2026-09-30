@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import { getTranslations } from 'next-intl/server';
 import type { Locale } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { LINKS, PORTRAIT } from '@/lib/profile/cv-data';
 
 const hero = (i: number) => ({ '--hero-i': i }) as CSSProperties;
@@ -36,6 +37,7 @@ export async function AboutHero({ locale }: { locale: Locale }) {
               <dd className="mt-2.5 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
                 <a href={LINKS.linkedin} rel="me noopener" className={link}>LinkedIn</a>
                 <a href={LINKS.github} rel="me noopener" className={link}>GitHub</a>
+                <Link href="/cv" className={link}>{t('facts.cv')}</Link>
               </dd>
             </div>
           </dl>

@@ -215,6 +215,12 @@ export const LANGUAGES: Language[] = [{ code: 'fr', name: { fr: 'Français', en:
 
 export const LINKS = { email: OWNER.email, linkedin: OWNER.linkedin, github: OWNER.github } as const;
 
+/** The printed CV in each language, generated from /cv and /en/cv by `pnpm cv:pdf` (public/cv/). */
+export const CV_PDF: Localized = {
+  fr: '/cv/rostel-panoumassi-cv.pdf',
+  en: '/cv/rostel-panoumassi-cv-en.pdf',
+};
+
 /**
  * The real portrait: 4:5 crops of the 654 px square source (full height, centred, never upscaled),
  * exported as WebP. The page shows them at their own ratio, so nothing is cropped again in CSS.
