@@ -11,16 +11,17 @@ describe('clientIp', () => {
     expect(clientIp(h({ 'x-forwarded-for': ' 3.3.3.3 , 4.4.4.4 ' }))).toBe('4.4.4.4');
     expect(clientIp(h({ 'x-forwarded-for': '3.3.3.3, ,' }))).toBe('3.3.3.3');
   });
-  it('ignores a spoofed cf-connecting-ip by default', () => {
-    expect(clientIp(h({ 'cf-connecting-ip': '6.6.6.6', 'x-real-ip': '2.2.2.2' }))).toBe('2.2.2.2');
-    expect(clientIp(h({ 'cf-connecting-ip': '6.6.6.6' }))).toBe('unknown');
-    vi.stubEnv('TRUST_CF_CONNECTING_IP', '0');
-    expect(clientIp(h({ 'cf-connecting-ip': '6.6.6.6', 'x-real-ip': '2.2.2.2' }))).toBe('2.2.2.2');
-  });
-  it('honours cf-connecting-ip only when TRUST_CF_CONNECTING_IP=1', () => {
+  it('trusts cf-connecting-ip by default (Cloudflare is in front)', () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '');
+    expect(clientIp(h({ 'cf-connecting-ip': '1.1.1.1', 'x-real-ip': '172.64.0.1', 'x-forwarded-for': '1.1.1.1, 172.64.0.1' }))).toBe('1.1.1.1');
+    expect(clientIp(h({ 'x-real-ip': '2.2.2.2' }))).toBe('2.2.2.2');
     vi.stubEnv('TRUST_CF_CONNECTING_IP', '1');
     expect(clientIp(h({ 'cf-connecting-ip': '1.1.1.1', 'x-real-ip': '2.2.2.2' }))).toBe('1.1.1.1');
-    expect(clientIp(h({ 'x-real-ip': '2.2.2.2' }))).toBe('2.2.2.2');
+  });
+  it('ignores cf-connecting-ip when TRUST_CF_CONNECTING_IP=0 (no Cloudflare in front)', () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '0');
+    expect(clientIp(h({ 'cf-connecting-ip': '6.6.6.6', 'x-real-ip': '2.2.2.2' }))).toBe('2.2.2.2');
+    expect(clientIp(h({ 'cf-connecting-ip': '6.6.6.6' }))).toBe('unknown');
   });
   it('falls back to unknown', () => {
     expect(clientIp(h({}))).toBe('unknown');

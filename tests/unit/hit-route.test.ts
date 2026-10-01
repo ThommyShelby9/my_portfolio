@@ -56,7 +56,8 @@ describe('POST /api/hit', () => {
   });
 
   it('records the normalised path, the ref host, the country and the Porto-Novo date', async () => {
-    vi.stubEnv('TRUST_CF_CONNECTING_IP', '1');
+    // Cloudflare is trusted by default: the country comes from cf-ipcountry.
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '');
     const res = await hit({ path: '/en/work/', ref: 'https://www.google.com/search?q=rostel' }, { 'cf-ipcountry': 'BJ' });
     expect(res.status).toBe(204);
     expect(await res.text()).toBe('');
@@ -65,8 +66,8 @@ describe('POST /api/hit', () => {
     expect(recordHit).toHaveBeenCalledWith({ path: '/en/work', ref: 'google_com', country: 'BJ', date: '2026-09-30' }, { fake: 'db' });
   });
 
-  it('ignores cf-ipcountry unless the Cloudflare trust switch is on', async () => {
-    vi.stubEnv('TRUST_CF_CONNECTING_IP', '');
+  it('ignores cf-ipcountry when the Cloudflare trust switch is off (TRUST_CF_CONNECTING_IP=0)', async () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '0');
     await hit({ path: '/' }, { 'cf-ipcountry': 'BJ' });
     expect(recordHit.mock.calls[0][0].country).toBeNull();
   });

@@ -2,7 +2,7 @@
 updated: "2026-09-30"
 ---
 
-Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. En dehors des journaux techniques du serveur décrits plus bas, les seules données personnelles qu’il recueille sont celles que vous choisissez de lui envoyer ; les visites, elles, sont seulement comptées, de façon anonyme. Cette page explique quelles données, pourquoi, où elles sont conservées et comment exercer vos droits.
+Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. En dehors des données techniques de connexion décrites plus bas (réseau et journaux du serveur), les seules données personnelles qu’il recueille sont celles que vous choisissez de lui envoyer ; les visites, elles, sont seulement comptées, de façon anonyme. Cette page explique quelles données, pourquoi, où elles sont conservées et comment exercer vos droits.
 
 ## Responsable du traitement
 
@@ -42,6 +42,8 @@ Seul Rostel Panoumassi consulte vos réponses. Elles sont hébergées par les pr
 - une base de données Google Cloud Firestore (projet Firebase), hébergée par Google aux États-Unis (emplacement multirégional nam5). Ce transfert est encadré par les clauses contractuelles types de la Commission européenne intégrées aux conditions de traitement des données de Google Cloud ;
 - la boîte Gmail de Rostel Panoumassi (Google, États-Unis), qui reçoit une copie de chaque envoi par l’intermédiaire d’un prestataire d’envoi d’e-mails.
 
+Avant d’atteindre le site, chaque visite passe par Cloudflare, Inc. (États-Unis), prestataire de réseau et de sécurité placé devant le site : il achemine les échanges et les protège contre les attaques. Il voit donc passer votre adresse IP et la page demandée, qu’il traite pour son service selon ses propres conditions de traitement des données. C’est aussi Cloudflare qui indique au site le pays d’où vient une visite (voir la mesure d’audience).
+
 Le site est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi. Comme tout serveur web, il tient des journaux techniques : l’adresse IP et la page demandée y sont conservées pour une durée limitée, à des fins de sécurité et de diagnostic.
 
 ## Durée de conservation
@@ -58,7 +60,7 @@ Pour savoir quelles pages sont lues, le site tient un simple compteur quotidien 
 
 - l’adresse de la page, si c’est une page du site (par exemple /realisations) ; toute autre adresse est comptée sous « autre » ;
 - le nom du site d’où vous venez, s’il s’agit d’un autre site (par exemple google.com) ;
-- le pays, seulement si l’infrastructure réseau placée devant le site le fournit, ce qui n’est pas le cas aujourd’hui ;
+- le pays d’où vient la visite (par exemple BJ), tel que Cloudflare le déduit de votre adresse IP ;
 - le total de pages vues de la journée.
 
 Le compteur n’enregistre ni adresse IP, ni identifiant, ni aucune information permettant de vous reconnaître d’une visite à l’autre. Ces chiffres sont stockés dans la même base Firestore.

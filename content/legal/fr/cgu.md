@@ -8,7 +8,7 @@ Les présentes conditions encadrent l’utilisation de ce site. En le consultant
 
 Le site est édité par Rostel Panoumassi, ingénieur produit, Cotonou, Bénin, qui en est aussi le directeur de la publication. Contact : [rmissimawu@gmail.com](mailto:rmissimawu@gmail.com).
 
-Il est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi.
+Il est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi. Le réseau Cloudflare, Inc. (États-Unis) est placé devant le site pour acheminer et protéger les échanges.
 
 ## Objet du site
 

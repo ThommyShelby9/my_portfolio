@@ -1,5 +1,5 @@
 import { hitCap } from '@/lib/server/daily-cap';
-import { clientIp } from '@/lib/server/client-ip';
+import { clientIp, trustCloudflare } from '@/lib/server/client-ip';
 import { getDb } from '@/lib/server/firestore';
 import { hitLimiter } from '@/lib/server/rate-limit';
 import { capRef, countryCode, dayKey, isBot, isSameOrigin, knownPath, OTHER, recordHit, refHost } from '@/lib/server/stats';
@@ -70,8 +70,8 @@ export async function POST(request: Request): Promise<Response> {
       {
         path: knownPath(path) ?? OTHER,
         ref: host && capRef(host, date),
-        // Like cf-connecting-ip, cf-ipcountry is client-controlled unless Cloudflare really is in front.
-        country: process.env.TRUST_CF_CONNECTING_IP === '1' ? countryCode(headers.get('cf-ipcountry')) : null,
+        // Cloudflare sets cf-ipcountry; like cf-connecting-ip it is ignored when TRUST_CF_CONNECTING_IP=0.
+        country: trustCloudflare() ? countryCode(headers.get('cf-ipcountry')) : null,
         date,
       },
       db,

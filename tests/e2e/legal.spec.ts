@@ -40,10 +40,10 @@ test.describe('legal pages', () => {
     }
   });
 
-  test('the privacy page states no cookies and the retention period, without an em dash', async ({ request }) => {
+  test('the privacy page states no cookies, the retention period and Cloudflare, without an em dash', async ({ request }) => {
     for (const [path, words] of [
-      ['/confidentialite', ['cookie', '24 mois']],
-      ['/en/privacy', ['cookie', '24 months']],
+      ['/confidentialite', ['cookie', '24 mois', 'Cloudflare, Inc.']],
+      ['/en/privacy', ['cookie', '24 months', 'Cloudflare, Inc.']],
     ] as const) {
       const html = await (await request.get(path)).text();
       for (const w of words) expect(html, `${path} ${w}`).toContain(w);
