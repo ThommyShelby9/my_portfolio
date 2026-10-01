@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { expect, it } from 'vitest';
@@ -37,3 +37,15 @@ for (const page of ['fr.html', 'en.html']) {
     }
   });
 }
+
+// /?sculpture=poster hides the page: it must only exist in the poster build (pnpm sculpture:poster).
+it('ships no sculpture poster mode (not a poster build)', () => {
+  const chunks = readdirSync('.next/static/chunks', { recursive: true })
+    .map(String)
+    .filter((f) => f.endsWith('.js'));
+  expect(chunks.length).toBeGreaterThan(0);
+  for (const f of chunks) {
+    const code = readFileSync(join('.next/static/chunks', f), 'utf8');
+    expect(code.includes('dataset.poster'), `${f}: run pnpm build (this is a poster build)`).toBe(false);
+  }
+});

@@ -1,10 +1,30 @@
-export type RuleId = 'em-dash' | 'emoji' | 'pill' | 'purple-gradient' | 'ai-tag' | 'favicon' | 'custom-cursor';
+export type RuleId = 'em-dash' | 'emoji' | 'pill' | 'purple-gradient' | 'ai-tag' | 'favicon' | 'custom-cursor' | 'required-page';
 export interface SourceFile { path: string; content: string }
 export interface Violation { rule: RuleId; path: string; detail: string }
 
 // Extended_Pictographic includes ©, ® and ™, which are legitimate typography.
 const ALLOWED_PICTOGRAPHS = new Set([0x00a9, 0x00ae, 0x2122]);
 const AI_TAG = /made with ai|generated (?:by|with) ai|built with (?:ai|lovable|v0|bolt|framer|webflow|wix)/i;
+
+/**
+ * Pages every build must contain: the privacy policy and the terms, in French and in English.
+ * Each entry lists the accepted built paths (relative to the pages root, the internal route first,
+ * then the public English slug should the route ever be renamed).
+ */
+export const REQUIRED_PAGES: readonly { label: string; paths: readonly string[] }[] = [
+  { label: 'privacy policy (fr)', paths: ['fr/confidentialite.html'] },
+  { label: 'terms (fr)', paths: ['fr/cgu.html'] },
+  { label: 'privacy policy (en)', paths: ['en/confidentialite.html', 'en/privacy.html'] },
+  { label: 'terms (en)', paths: ['en/cgu.html', 'en/terms.html'] },
+];
+
+/** Missing required pages, given every file path of the build (any separator, any prefix). */
+function missingPages(builtPaths: readonly string[]): Violation[] {
+  const paths = builtPaths.map((p) => `/${p.replace(/\\/g, '/')}`);
+  return REQUIRED_PAGES.filter(({ paths: accepted }) => !accepted.some((a) => paths.some((p) => p.endsWith(`/${a}`)))).map(
+    ({ label, paths: accepted }) => ({ rule: 'required-page' as const, path: accepted[0], detail: `missing from the build: ${label}` }),
+  );
+}
 
 function visibleText(html: string): string {
   return html
@@ -80,8 +100,12 @@ function isPillRadius(value: string): boolean {
   return false;
 }
 
-export function checkOwnerRules(files: SourceFile[]): Violation[] {
-  const violations: Violation[] = [];
+/**
+ * Checks built pages and stylesheets. With `builtPaths` (every file path of the build), it also
+ * checks that the required pages exist.
+ */
+export function checkOwnerRules(files: SourceFile[], builtPaths?: readonly string[]): Violation[] {
+  const violations: Violation[] = builtPaths ? missingPages(builtPaths) : [];
   const add = (rule: RuleId, path: string, detail: string) => violations.push({ rule, path, detail });
 
   for (const file of files) {

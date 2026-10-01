@@ -37,7 +37,11 @@ export function SculptureStage() {
 
   // Decide once on mount: 3D only with motion allowed, WebGL present, after the browser is idle.
   useEffect(() => {
-    const isPoster = new URLSearchParams(location.search).get('sculpture') === 'poster';
+    // Poster mode hides the page around the sculpture for scripts/sculpture-poster.mjs. It only
+    // exists in a build made with NEXT_PUBLIC_SCULPTURE_POSTER=1 (inlined at build time, so the
+    // check and the query string are dead code in the production build).
+    const isPoster =
+      process.env.NEXT_PUBLIC_SCULPTURE_POSTER === '1' && new URLSearchParams(location.search).get('sculpture') === 'poster';
     setMobile(matchMedia('(max-width: 1023px)').matches);
     if (isPoster) {
       document.documentElement.dataset.poster = '1';

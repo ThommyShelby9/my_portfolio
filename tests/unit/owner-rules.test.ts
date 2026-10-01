@@ -67,6 +67,19 @@ describe('checkOwnerRules', () => {
     expect(rules([{ path: 'a.css', content: '.btn{cursor:pointer}.x{cursor:default}' }])).toEqual([]);
   });
 
+  it('requires the privacy policy and the terms in both languages when given the build paths', () => {
+    const built = ['.next/server/app/fr/confidentialite.html', '.next\\server\\app\\fr\\cgu.html', 'x/en/confidentialite.html', 'x/en/cgu.html'];
+    expect(checkOwnerRules([], built)).toEqual([]);
+    // The public English slugs are accepted too.
+    expect(checkOwnerRules([], ['fr/confidentialite.html', 'fr/cgu.html', 'en/privacy.html', 'en/terms.html'])).toEqual([]);
+    const missing = checkOwnerRules([], ['fr/confidentialite.html', 'en/confidentialite.html', 'en/cgu.html', 'fr/cgu.txt']);
+    expect(missing.map((v) => [v.rule, v.path])).toEqual([['required-page', 'fr/cgu.html']]);
+    // An English page never stands in for the French one.
+    expect(checkOwnerRules([], ['en/confidentialite.html', 'en/cgu.html']).map((v) => v.path)).toEqual(['fr/confidentialite.html', 'fr/cgu.html']);
+    // Without the build paths, the rule is not checked.
+    expect(checkOwnerRules([])).toEqual([]);
+  });
+
   it('reports the file path and an excerpt', () => {
     const [v] = checkOwnerRules([{ path: 'fr/index.html', content: page('<p>Lead — engineer</p>') }]);
     expect(v.path).toBe('fr/index.html');

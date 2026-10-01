@@ -14,6 +14,19 @@ test.describe('sculpture', () => {
     await expect(page.locator('[data-sculpture-poster]')).toBeHidden();
   });
 
+  test('?sculpture=poster is inert in the production build: nothing is hidden', async ({ page }) => {
+    // Poster mode only exists in a build made with NEXT_PUBLIC_SCULPTURE_POSTER=1 (pnpm sculpture:poster).
+    await page.goto('/?sculpture=poster');
+    // Hydrated: the stage's mount effect (which would set poster mode) has run.
+    await expect(page.locator('html')).toHaveClass(/reveal-ready/);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.getByRole('banner')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).toBeAttached();
+    expect(await page.locator('html').getAttribute('data-poster')).toBeNull();
+    await expect(page.locator('[data-sculpture-stage]')).not.toHaveAttribute('data-trajectory', 'on');
+    expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).visibility)).toBe('visible');
+  });
+
   test('shows the poster under reduced motion, with no canvas', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');

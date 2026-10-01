@@ -54,6 +54,59 @@ test.describe('foundations', () => {
     }
   });
 
+  test('deep unknown paths get the styled, localized 404', async ({ page }) => {
+    // /foo/bar/baz goes through the proxy; /foo/bar/baz.php and /api/nope skip it (dot, api) and reach
+    // [locale]/[...rest] with an invalid locale, which the layout renders in French.
+    for (const path of ['/foo/bar/baz', '/foo/bar/baz.php', '/api/nope']) {
+      const res = await page.goto(path);
+      expect(res?.status(), path).toBe(404);
+      await expect(page.locator('html'), path).toHaveAttribute('lang', 'fr');
+      await expect(page.getByRole('heading', { level: 1 }), path).toHaveText('Cette page n’existe pas.');
+      // The site chrome and fonts, not the framework's bare page.
+      await expect(page.getByRole('banner'), path).toBeVisible();
+      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Cormorant/i);
+      await expect(page.locator('main').getByRole('link', { name: 'Voir les réalisations' }), path).toHaveAttribute('href', '/realisations');
+    }
+  });
+
+  test('a URL no route matches gets the styled, bilingual global 404', async ({ page }) => {
+    // One segment that is not a locale and skips the proxy: no route at all (app/global-not-found.tsx).
+    for (const path of ['/foo.php', '/wp-login.php']) {
+      const res = await page.goto(path);
+      expect(res?.status(), path).toBe(404);
+      const main = page.locator('[data-global-not-found]');
+      await expect(main, path).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cette page n’existe pas.');
+      await expect(main.locator('[lang="en"]').getByText('This page does not exist.')).toBeVisible();
+      await expect(main.getByRole('link', { name: 'Voir les réalisations' })).toHaveAttribute('href', '/realisations');
+      await expect(main.getByRole('link', { name: 'Back to the home page' })).toHaveAttribute('href', '/en');
+      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Cormorant/i);
+      expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), path).toBe('rgb(16, 17, 18)');
+      await expect(page.locator('link[rel="icon"]').first()).toHaveAttribute('href', /favicon/);
+      expect(await page.content(), path).not.toContain('—');
+    }
+  });
+
+  test('the global 404 has no accessibility violations', async ({ page }) => {
+    await page.goto('/foo.php');
+    await expect(page.locator('[data-global-not-found]')).toBeVisible();
+    const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+    expect(axe.violations).toEqual([]);
+  });
+
+  test('security headers are sent with the home page', async ({ request }) => {
+    for (const path of ['/', '/en']) {
+      const headers = (await request.get(path)).headers();
+      expect(headers['x-content-type-options'], path).toBe('nosniff');
+      expect(headers['referrer-policy'], path).toBe('strict-origin-when-cross-origin');
+      expect(headers['x-frame-options'], path).toBe('DENY');
+      expect(headers['permissions-policy'], path).toBe('camera=(), microphone=(), geolocation=()');
+      expect(headers['strict-transport-security'], path).toBe('max-age=31536000; includeSubDomains');
+      // No CSP yet (follow-up: the inline early script needs a nonce or a hash first).
+      expect(headers['content-security-policy'], path).toBeUndefined();
+    }
+  });
+
   test('buttons keep a square 2 px radius', async ({ page }) => {
     for (const path of ['/', '/en']) {
       await page.goto(path);

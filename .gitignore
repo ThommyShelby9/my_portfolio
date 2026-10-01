@@ -1,7 +1,4 @@
 node_modules/
-dist/
-!tests/dist/
-.astro/
 .env
 .env.*
 !.env.example
@@ -10,6 +7,8 @@ playwright-report/
 coverage/
 .superpowers/
 .DS_Store
+# Local leftovers of pre-v6 builds (not part of the site)
+/legacy/
 
 .next/
 next-env.d.ts
