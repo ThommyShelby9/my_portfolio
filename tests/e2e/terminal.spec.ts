@@ -17,13 +17,15 @@ async function type(page: Page, label: string, command: string) {
 
 test.describe('terminal', () => {
   for (const { path, lang, label, title, back, home, help } of PAGES) {
-    test(`${path} loads with the prompt focused and stays out of the index`, async ({ page }) => {
+    test(`${path} loads with the prompt focused (fine pointers) and stays out of the index`, async ({ page, isMobile }) => {
       const errors: string[] = [];
       page.on('pageerror', (e) => errors.push(e.message));
       await page.goto(path);
       await expect(page.locator('html')).toHaveAttribute('lang', lang);
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(title);
-      await expect(prompt(page, label)).toBeFocused();
+      // On touch screens the prompt waits for a tap: autofocus would pop the keyboard over the output.
+      if (isMobile) await expect(prompt(page, label)).not.toBeFocused();
+      else await expect(prompt(page, label)).toBeFocused();
       await expect(page.getByRole('link', { name: back })).toHaveAttribute('href', home);
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
       expect(errors).toEqual([]);
@@ -69,12 +71,12 @@ test.describe('terminal', () => {
     await expect(page).toHaveURL(/\/explorations\/procom$/);
   });
 
-  test('lang en switches to the English terminal and lang fr back', async ({ page }) => {
+  test('lang en switches to the English terminal and lang fr back', async ({ page, isMobile }) => {
     await page.goto('/terminal');
     await type(page, 'Commande du terminal', 'lang en');
     await expect(page).toHaveURL(/\/en\/terminal$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(prompt(page, 'Terminal command')).toBeFocused();
+    if (!isMobile) await expect(prompt(page, 'Terminal command')).toBeFocused();
     await type(page, 'Terminal command', 'lang fr');
     await expect.poll(() => new URL(page.url()).pathname, { timeout: 15000 }).toBe('/terminal');
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr', { timeout: 15000 });
@@ -105,6 +107,7 @@ test.describe('terminal', () => {
   test('Tab never traps the focus', async ({ page }) => {
     await page.goto('/terminal');
     const input = prompt(page, 'Commande du terminal');
+    await input.focus();
     await expect(input).toBeFocused();
     // Empty line: nothing to complete, Tab leaves the field.
     await input.press('Tab');
