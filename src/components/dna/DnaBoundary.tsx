@@ -7,8 +7,8 @@ interface Props {
   children: ReactNode;
 }
 
-/** Contains any failure of the 3D scene (chunk load, renderer creation) so the poster stays. */
-export class SculptureBoundary extends Component<Props, { failed: boolean }> {
+/** Contains any failure of the DNA scene (chunk load, renderer creation) so the poster stays. */
+export class DnaBoundary extends Component<Props, { failed: boolean }> {
   state = { failed: false };
 
   static getDerivedStateFromError() {

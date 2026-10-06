@@ -2,11 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { SculptureBoundary } from './SculptureBoundary';
-import { DESKTOP_RIBBON, MOBILE_RIBBON } from './mobius';
+import { particleBudget } from '@/lib/dna/budget';
+import { DnaBoundary } from './DnaBoundary';
 
-const Trajectory = dynamic(() => import('./SculptureTrajectory'), { ssr: false, loading: () => null });
-const Sculpture = dynamic(() => import('./Sculpture'), { ssr: false, loading: () => null });
+const DnaCanvas = dynamic(() => import('./DnaCanvas'), { ssr: false, loading: () => null });
 
 function hasWebGL(): boolean {
   try {
@@ -19,30 +18,39 @@ function hasWebGL(): boolean {
   }
 }
 
-export function SculptureStage() {
+type NavigatorHints = Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
+
+/**
+ * The DNA helix (spec §3.4): a still poster first, then the live particle scene once the browser is
+ * idle, when motion is allowed and WebGL works. Any 3D failure goes back to the poster.
+ */
+export function DnaStage() {
   const box = useRef<HTMLDivElement>(null);
-  const progress = useRef(0);
   const tilt = useRef({ x: 0, y: 0 });
   const [mode, setMode] = useState<'poster' | '3d'>('poster');
   const [visible, setVisible] = useState(true);
-  // The desktop stage is `position: fixed`, so it always "intersects"; it is really gone
-  // once the scroll trajectory has faded it out.
-  const [faded, setFaded] = useState(false);
   const [posterMode, setPosterMode] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [count, setCount] = useState(0);
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
-  // Any 3D failure (chunk, renderer creation, lost context) goes back to the poster.
   const fallback = useCallback(() => { setReady(false); setMode('poster'); }, []);
 
-  // Decide once on mount: 3D only with motion allowed, WebGL present, after the browser is idle.
   useEffect(() => {
-    // Poster mode hides the page around the sculpture for scripts/sculpture-poster.mjs. It only
-    // exists in a build made with NEXT_PUBLIC_SCULPTURE_POSTER=1 (inlined at build time, so the
-    // check and the query string are dead code in the production build).
+    // Poster mode hides the page around the helix for scripts/dna-poster.mjs. It only exists in a
+    // build made with NEXT_PUBLIC_DNA_POSTER=1 (inlined at build time: dead code in production).
     const isPoster =
-      process.env.NEXT_PUBLIC_SCULPTURE_POSTER === '1' && new URLSearchParams(location.search).get('sculpture') === 'poster';
+      process.env.NEXT_PUBLIC_DNA_POSTER === '1' && new URLSearchParams(location.search).get('dna') === 'poster';
+    const nav = navigator as NavigatorHints;
     setMobile(matchMedia('(max-width: 1023px)').matches);
+    setCount(
+      particleBudget({
+        width: innerWidth,
+        cores: nav.hardwareConcurrency || 4,
+        saveData: Boolean(nav.connection?.saveData),
+        deviceMemory: nav.deviceMemory,
+      }),
+    );
     if (isPoster) {
       document.documentElement.dataset.poster = '1';
       setPosterMode(true);
@@ -71,60 +79,52 @@ export function SculptureStage() {
     return () => { io.disconnect(); document.removeEventListener('visibilitychange', update); };
   }, []);
 
-  // Cursor tilt: desktop, fine pointer, motion allowed, not in poster mode.
+  // A few degrees of tilt towards a fine pointer; nothing follows the cursor (owner rule 7).
   useEffect(() => {
     if (posterMode || !matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
     const onMove = (e: PointerEvent) => {
-      tilt.current = { x: (e.clientY / innerHeight - 0.5) * 0.4, y: (e.clientX / innerWidth - 0.5) * 0.4 };
+      tilt.current = { x: (e.clientY / innerHeight - 0.5) * 0.12, y: (e.clientX / innerWidth - 0.5) * 0.12 };
     };
     addEventListener('pointermove', onMove, { passive: true });
     return () => removeEventListener('pointermove', onMove);
   }, [posterMode]);
 
-  const onFadedChange = useCallback((f: boolean) => setFaded(f), []);
-
-  const params = mobile ? MOBILE_RIBBON : DESKTOP_RIBBON;
-  const running = mode === '3d' && visible && !faded && !posterMode;
+  const running = mode === '3d' && visible && !posterMode;
 
   return (
     <div
       ref={box}
-      data-sculpture-stage
-      data-state={mode}
-      data-ready={String(ready)}
-      data-running={String(running)}
+      data-dna-stage
+      data-dna-state={mode}
+      data-dna-ready={String(ready)}
+      data-dna-running={String(running)}
       aria-hidden="true"
-      data-trajectory={posterMode ? 'on' : undefined}
-      className="pointer-events-none relative h-[42svh] w-full lg:absolute lg:right-0 lg:top-[calc(-1*var(--header-h))] lg:h-svh lg:w-[50vw]"
+      className="pointer-events-none absolute inset-0 opacity-40 lg:left-auto lg:w-[52vw] lg:opacity-100"
     >
       {!posterMode && (
         <picture>
-          <source media="(max-width: 1023px)" srcSet="/sculpture/mobius-mobile.webp" />
+          <source media="(max-width: 1023px)" srcSet="/dna/helix-mobile.webp" />
           {/* Raw <img>: decorative, pre-sized poster inside a <picture>; next/image cannot art-direct it. */}
           <img
-            src="/sculpture/mobius-desktop.webp"
+            src="/dna/helix-desktop.webp"
             alt=""
-            data-sculpture-poster
+            data-dna-poster
             className={`absolute inset-0 m-auto h-full w-full object-contain transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${ready ? 'invisible opacity-0' : ''}`}
           />
         </picture>
       )}
-      {mode === '3d' && !posterMode && (
-        <Trajectory stage={box} progress={progress} onFadedChange={onFadedChange} />
-      )}
-      {mode === '3d' && (
-        <SculptureBoundary onError={fallback}>
-          <Sculpture
-            params={params}
+      {mode === '3d' && count > 0 && (
+        <DnaBoundary onError={fallback}>
+          <DnaCanvas
+            count={count}
             frozen={posterMode}
             running={running || posterMode}
-            progress={progress}
             tilt={tilt}
             dpr={mobile ? 1.5 : 2}
             onReady={onReady}
             onLost={fallback}
           />
-        </SculptureBoundary>
+        </DnaBoundary>
       )}
     </div>
   );

@@ -46,7 +46,7 @@ describe('messages', () => {
   });
 
   it('state the owner facts in the hero', () => {
-    expect(flatFr['hero.ledeRest']).toContain('Six ans d’expérience, dont trois comme tech lead');
-    expect(flatEn['hero.ledeRest']).toContain('Six years of experience, three as tech lead');
+    expect(flatFr['hero.lede']).toContain('six ans d’expérience, dont trois comme tech lead');
+    expect(flatEn['hero.lede']).toContain('six years of experience, three as tech lead');
   });
 });

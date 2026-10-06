@@ -11,7 +11,6 @@ test.describe('home sequences', () => {
     await expect(headings.nth(3)).toContainText('Parlons de votre projet');
     await expect(page.locator('#realisations-accueil').getByText('Co-développé avec')).toBeVisible();
     await expect(page.locator('#projet').getByText(/sous 48 heures/)).toBeVisible();
-    await expect(page.getByText(/des produits livrés, pas des maquettes/)).toBeVisible();
   });
 
   test('English home is fully translated', async ({ page }) => {
@@ -39,43 +38,13 @@ test.describe('home sequences', () => {
     expect(await conv.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
   });
 
-  test('reduced motion: everything visible at once, still ring at Conversion, stage not fixed', async ({ page, isMobile }) => {
+  test('reduced motion: everything visible at once, poster only', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     const conv = page.getByRole('heading', { name: 'Parlons de votre projet.' });
     expect(await conv.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
-    await expect(page.locator('[data-conversion-poster]')).toBeVisible();
-    if (!isMobile) {
-      expect(await page.locator('[data-sculpture-stage]').evaluate((el) => getComputedStyle(el).position)).not.toBe('fixed');
-    }
-  });
-
-  test('live sculpture fades at Work and returns at Conversion (desktop)', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'desktop trajectory');
-    test.setTimeout(60_000);
-    await page.goto('/');
-    const stage = page.locator('[data-sculpture-stage]');
-    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 20_000 });
-    await page.getByRole('heading', { name: /Trois produits/ }).scrollIntoViewIfNeeded();
-    await page.mouse.wheel(0, 300);
-    await expect(stage).toHaveAttribute('data-running', 'false', { timeout: 5000 });
-    await page.getByRole('heading', { name: 'Parlons de votre projet.' }).scrollIntoViewIfNeeded();
-    await expect(stage).toHaveAttribute('data-running', 'true', { timeout: 5000 });
-    await expect(page.locator('[data-conversion-poster]')).toBeHidden();
-  });
-
-  test('ring returns to full opacity when scrolling back to the top (desktop)', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'desktop trajectory');
-    test.setTimeout(60_000);
-    await page.goto('/');
-    const stage = page.locator('[data-sculpture-stage]');
-    await expect(stage).toHaveAttribute('data-ready', 'true', { timeout: 20_000 });
-    await page.getByRole('heading', { name: 'Parlons de votre projet.' }).scrollIntoViewIfNeeded();
-    await expect(stage).toHaveAttribute('data-running', 'true', { timeout: 5000 });
-    await page.evaluate(() => scrollTo(0, 0));
-    await page.waitForTimeout(500);
-    await expect.poll(async () => stage.evaluate((el) => getComputedStyle(el).opacity), { timeout: 10_000 }).toBe('1');
-    await expect(stage).toHaveAttribute('data-running', 'true', { timeout: 5000 });
+    await expect(page.locator('[data-dna-stage] img[data-dna-poster]')).toBeVisible();
+    await expect(page.locator('[data-dna-stage] canvas')).toHaveCount(0);
   });
 
   test('mobile menu opens, lists the sections and works without JS', async ({ browser }) => {
@@ -138,4 +107,45 @@ test('mobile menu closes after a hash link and after client navigation', async (
   await expect(page).toHaveURL(/\/realisations$/, { timeout: 15_000 });
   await expect(page.locator('[data-mobile-menu]')).not.toHaveAttribute('open', '');
   await context.close();
+});
+
+test.describe('scene 00 Formation', () => {
+  test('states what and for whom in the first screen (FR)', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    const scene = page.locator('[data-dna-scene="formation"]');
+    await expect(scene.getByRole('heading', { level: 1 })).toHaveText('L’ingénierie est dans l’ADN.');
+    const lede = scene.getByText(/Je conçois et je livre des produits numériques/);
+    await expect(lede).toBeInViewport();
+    await expect(scene.getByRole('link', { name: 'Parler d’un projet' })).toHaveAttribute('href', '/brief');
+    await expect(scene.getByRole('link', { name: 'Voir les réalisations' })).toHaveAttribute('href', '/realisations');
+    await expect(scene.locator('[data-dna-stage]')).toBeAttached();
+  });
+
+  test('English hero', async ({ page }) => {
+    await page.goto('/en');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Engineering is in the DNA.');
+    await expect(page.locator('[data-dna-scene="formation"]').getByRole('link', { name: 'Discuss a project' })).toHaveAttribute('href', '/en/brief');
+  });
+
+  test('works without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.getByText(/Je conçois et je livre/)).toBeVisible();
+    await expect(page.locator('img[data-dna-poster]')).toBeVisible();
+    await context.close();
+  });
+
+  test('reads well at 360 px', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 740 });
+    await page.goto('/');
+    const h1 = page.getByRole('heading', { level: 1 });
+    await expect(h1).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    // The stage sits behind the text, faded.
+    const opacity = await page.locator('[data-dna-stage]').evaluate((el) => Number(getComputedStyle(el).opacity));
+    expect(opacity).toBeLessThanOrEqual(0.5);
+  });
 });

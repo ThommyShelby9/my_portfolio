@@ -7,7 +7,6 @@ import { Hero } from '@/components/home/Hero';
 import { Method } from '@/components/home/Method';
 import { Positioning } from '@/components/home/Positioning';
 import { SelectedWork } from '@/components/home/SelectedWork';
-import { SculptureStage } from '@/components/sculpture/SculptureStage';
 import type { Locale } from '@/i18n/routing';
 import { homeJsonLd } from '@/lib/seo/home-jsonld';
 import { pageMetadata } from '@/lib/seo/page-metadata';
@@ -24,7 +23,7 @@ export default function HomePage({ params }: PageProps<'/[locale]'>) {
   return (
     <>
       <JsonLd data={homeJsonLd(locale as Locale)} />
-      <Hero sculpture={<SculptureStage />} />
+      <Hero />
       <Positioning />
       <SelectedWork />
       <Method />

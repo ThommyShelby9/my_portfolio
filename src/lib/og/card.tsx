@@ -39,7 +39,7 @@ type Card = {
   footer: string;
   /** A capture shown in a frame on the right, bleeding off the edge. */
   capture?: string;
-  /** A transparent still (the sculpture) shown on the right without a frame. */
+  /** A transparent still (the DNA helix) shown on the right without a frame. */
   still?: string;
 };
 

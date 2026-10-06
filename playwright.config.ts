@@ -8,7 +8,11 @@ export default defineConfig({
   fullyParallel: true,
   // Headless Chromium renders WebGL in software; more workers starve the main thread and make timings flaky.
   workers: 2,
-  use: { baseURL: `http://127.0.0.1:${PORT}` },
+  use: {
+    baseURL: `http://127.0.0.1:${PORT}`,
+    // Software WebGL (SwiftShader) so the live DNA helix renders and is tested in headless runs.
+    launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
+  },
   webServer: [
     {
       // Forms and the visit counter write here: never to the real Firebase project.

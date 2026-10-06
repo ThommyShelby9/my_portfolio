@@ -12,16 +12,16 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-/** Default share image for every page without its own: the hero promise beside the sculpture still. */
+/** Default share image for every page without its own: the hero statement beside the DNA helix still. */
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: 'hero' });
   return ogCard({
     eyebrow: t('eyebrow'),
-    title: [{ text: t('titleBefore') }, { text: t('titleEm'), accent: true }, { text: t('titleAfter') }],
+    title: [{ text: t('title'), accent: true }],
     titleSize: 52,
     footer: 'Rostel Panoumassi',
-    still: '/sculpture/mobius-desktop.webp',
+    still: '/dna/helix-desktop.webp',
   });
 }

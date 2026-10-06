@@ -4,7 +4,7 @@
 @source not "../../tools";
 @source not "../../tests";
 @source not "../../docs";
-/* Consumers: the Header row (min-h) and SculptureStage (top offset). Keep the header exactly this tall. */
+/* Consumers: the Header row (min-h) and the hero height. Keep the header exactly this tall. */
 :root { --header-h: 88px; }
 
 @theme inline {
@@ -72,23 +72,10 @@
   }
 }
 
-/* With the desktop scroll trajectory running, the stage is pinned to the right half of the viewport.
-   Otherwise (no JS, reduced motion, below 1024px) it stays inside the hero. */
-@media (min-width: 1024px) {
-  [data-sculpture-stage][data-trajectory='on'] { position: fixed; top: 0; right: 0; height: 100svh; width: 50vw; }
-}
-
-/* Poster capture mode (?sculpture=poster): page transparent, only the stage visible. */
+/* Poster capture mode (?dna=poster, poster builds only): everything but the DNA stage is hidden. */
 html[data-poster='1'], html[data-poster='1'] body { background: transparent; }
-html[data-poster='1'] body > *:not(main),
-html[data-poster='1'] main section:not(:has([data-sculpture-slot])),
-html[data-poster='1'] main section > *:not([data-sculpture-slot]) { visibility: hidden; }
+html[data-poster='1'] body *:not([data-dna-stage]):not([data-dna-stage] *):not(:has([data-dna-stage])) { visibility: hidden; }
 html[data-poster='1'] .page-enter { animation: none; }
-
-/* The live sculpture returns at Conversion on desktop; its still twin is only for everyone else. */
-@media (min-width: 1024px) {
-  html:has([data-sculpture-stage][data-trajectory='on']) [data-conversion-poster] { display: none; }
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .page-enter { animation: page-enter 280ms ease-out both; }

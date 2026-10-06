@@ -21,9 +21,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   env: {
-    // Always inlined, '' when unset, so the sculpture's poster mode is dead code in normal builds
-    // (only scripts/sculpture-poster.mjs builds with 1).
-    NEXT_PUBLIC_SCULPTURE_POSTER: process.env.NEXT_PUBLIC_SCULPTURE_POSTER === '1' ? '1' : '',
+    // Always inlined, '' when unset, so the DNA poster mode is dead code in normal builds
+    // (only scripts/dna-poster.mjs builds with 1).
+    NEXT_PUBLIC_DNA_POSTER: process.env.NEXT_PUBLIC_DNA_POSTER === '1' ? '1' : '',
   },
   experimental: {
     // app/global-not-found.tsx: the 404 for URLs no route matches (the root layout sits under [locale]).

@@ -17,16 +17,13 @@
     "home": "Home, Rostel Panoumassi"
   },
   "hero": {
-    "eyebrow": "Digital product engineering · Cotonou",
-    "titleBefore": "I design and ship ",
-    "titleEm": "SaaS, payment and management",
-    "titleAfter": " platforms, from architecture to production.",
-    "ledeName": "Rostel Panoumassi",
-    "ledeRest": ", product engineer and Head of Engineering at KPS Groupe. Six years of experience, three as tech lead. Ubbfy, ContractIQ, ZenLife: products shipped, not mockups.",
-    "ctaWork": "See the work",
+    "eyebrow": "Rostel Panoumassi · Digital product engineering · Cotonou",
+    "title": "Engineering is in the DNA.",
+    "lede": "I design and ship digital products, from architecture to production: SaaS, payment and management platforms. Head of Engineering & Innovation at KPS Groupe, six years of experience, three as tech lead.",
     "ctaProject": "Discuss a project",
-    "scroll": "Scroll to discover",
-    "ctaCv": "Download the CV (PDF)"
+    "ctaWork": "See the work",
+    "ctaCv": "Download the CV (PDF)",
+    "scroll": "Scroll to sequence"
   },
   "footer": {
     "privacy": "Privacy",

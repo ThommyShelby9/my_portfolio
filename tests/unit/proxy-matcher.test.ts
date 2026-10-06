@@ -20,7 +20,7 @@ describe('proxy matcher', () => {
       '/favicon.ico',
       '/api/health',
       '/_next/static/x.js',
-      '/sculpture/mobius-desktop.webp',
+      '/dna/helix-desktop.webp',
       '/fr/opengraph-image',
       '/en/realisations/contractiq/opengraph-image',
     ]) {

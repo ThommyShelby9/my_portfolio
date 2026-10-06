@@ -6,18 +6,7 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
   const t = useTranslations('conversion');
   const sig = useTranslations('positioning');
   return (
-    <section id="projet" data-sculpture-return className="relative overflow-hidden border-t border-line py-[18vh]">
-      {/* Still ring for visitors without the live trajectory (no JS, reduced motion, no WebGL, mobile). */}
-      <picture>
-        <source media="(max-width: 1023px)" srcSet="/sculpture/mobius-mobile.webp" />
-        <img
-          src="/sculpture/mobius-desktop.webp"
-          alt=""
-          aria-hidden="true"
-          data-conversion-poster
-          className="pointer-events-none mx-auto mb-8 block w-[70vw] max-w-[420px] lg:absolute lg:right-[-4%] lg:top-1/2 lg:mb-0 lg:w-[min(44vw,600px)] lg:max-w-none lg:-translate-y-1/2"
-        />
-      </picture>
+    <section id="projet" className="relative overflow-hidden border-t border-line py-[18vh]">
       <Reveal className="relative mx-auto max-w-[1280px] px-5 md:px-10">
         <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{kicker ?? t('kicker')}</p>
         <h2 data-reveal className="mt-3.5 max-w-[12ch] font-display text-[clamp(46px,6vw,88px)] font-medium leading-[1.02]">{t('title')}</h2>

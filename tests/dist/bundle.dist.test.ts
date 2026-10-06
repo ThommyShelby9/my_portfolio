@@ -21,6 +21,25 @@ it('keeps the terminal shell out of every page’s initial JS', () => {
   }
 });
 
+/** Every prerendered page of the build. */
+function allPages(): string[] {
+  return readdirSync('.next/server/app', { recursive: true })
+    .map(String)
+    .filter((f) => f.endsWith('.html'))
+    .map((f) => f.replace(/\\/g, '/'));
+}
+
+// The DNA scene (three, R3F, shaders) is a lazy chunk: no page ships it in its initial JS.
+it('keeps the DNA scene out of every page’s initial JS', () => {
+  const pages = allPages();
+  expect(pages.length).toBeGreaterThan(10);
+  for (const page of pages) {
+    for (const file of initialScripts(page)) {
+      expect(readFileSync(file, 'utf8').includes('uIntro'), `${page}: ${file}`).toBe(false);
+    }
+  }
+});
+
 for (const page of ['fr.html', 'en.html']) {
   it(`${page}: initial JS stays within ${BUDGET / 1024} KB gzip and ships no GSAP`, () => {
     const files = initialScripts(page);
@@ -38,8 +57,8 @@ for (const page of ['fr.html', 'en.html']) {
   });
 }
 
-// /?sculpture=poster hides the page: it must only exist in the poster build (pnpm sculpture:poster).
-it('ships no sculpture poster mode (not a poster build)', () => {
+// /?dna=poster hides the page: it must only exist in the poster build (pnpm dna:poster).
+it('ships no DNA poster mode (not a poster build)', () => {
   const chunks = readdirSync('.next/static/chunks', { recursive: true })
     .map(String)
     .filter((f) => f.endsWith('.js'));

@@ -7,7 +7,7 @@ The portfolio of Rostel Panoumassi, product engineer and Head of Engineering & I
 - Next.js 16 (App Router, `output: 'standalone'`), React 19, TypeScript
 - next-intl 4 for the two locales and the localized paths (`src/i18n/routing.ts`)
 - Tailwind CSS 4; design tokens in `src/styles/globals.css`
-- React Three Fiber and three.js for the home sculpture, GSAP for scroll motion (neither ships in the home page's initial JS)
+- React Three Fiber and three.js for the home DNA helix, GSAP for scroll motion (neither ships in the home page's initial JS)
 - Case studies and explorations as Markdown in `content/`, legal pages in `content/legal/`
 - Firebase Admin (Firestore) for form submissions and the anonymous visit counter, Nodemailer for the email copy
 - Vitest (unit and build checks) and Playwright (end to end, with the Firestore emulator)
@@ -23,7 +23,7 @@ The portfolio of Rostel Panoumassi, product engineer and Head of Engineering & I
 | `pnpm lint:rules` | Checks the last build (`tests/dist`): owner rules on every page and stylesheet, required pages, initial JS budget of `/` (160 KB gzip) |
 | `PW_PORT=3111 pnpm test:e2e` | Builds, starts the Firestore emulator (port 8085) and the standalone server, runs Playwright (desktop and mobile) |
 | `pnpm cv:pdf` | Builds, then prints `/cv` and `/en/cv` to `public/cv/*.pdf` |
-| `pnpm sculpture:poster` | Makes a poster build, then renders the sculpture posters in `public/sculpture/` |
+| `pnpm dna:poster` | Makes a poster build, then renders the DNA helix posters in `public/dna/` |
 | `pnpm favicons` | Regenerates the favicon set from `src/assets/brand/favicon.svg` |
 
 Node 22.12 or later, pnpm 10.
@@ -32,9 +32,9 @@ Node 22.12 or later, pnpm 10.
 
 The CV (`/cv`, `/en/cv`) reads `src/lib/profile/cv-data.ts`, four case studies and the `cv` and `about` messages. After changing any of them, run `pnpm cv:pdf`: it prints both PDFs (one A4 page each, two at most) and writes `public/cv/cv-inputs.sha256`, the hash of the inputs they were printed from. `pnpm test` recomputes that hash and fails with "run pnpm cv:pdf" when the PDFs are stale. The new PDFs reach `.next/standalone` on the next `pnpm build`.
 
-### Sculpture posters
+### DNA helix posters
 
-The posters (`public/sculpture/mobius-{desktop,mobile}.webp`) are shown when 3D is not (reduced motion, no WebGL, before the browser is idle). `pnpm sculpture:poster` builds the site with `NEXT_PUBLIC_SCULPTURE_POSTER=1`, which enables `/?sculpture=poster` (the page hidden around a frozen sculpture), screenshots it at 1440 and 390 px, and stops. In any other build that query string does nothing. Run `pnpm build` afterwards: never test or ship the poster build.
+The posters (`public/dna/helix-{desktop,mobile}.webp`) are shown when 3D is not (reduced motion, no WebGL, before the browser is idle). `pnpm dna:poster` builds the site with `NEXT_PUBLIC_DNA_POSTER=1`, which enables `/?dna=poster` (the page hidden around a frozen helix), screenshots it at 1440 and 390 px, and stops. In any other build that query string does nothing. Run `pnpm build` afterwards: never test or ship the poster build.
 
 ## Environment variables
 
@@ -49,7 +49,7 @@ Copy `.env.example` to `.env.local` for local work. In production, set them in C
 | `MAIL_FROM` | Sender address. Defaults to `SMTP_USER`; required when the SMTP login is not an address (API-key providers such as Brevo or SendGrid). |
 | `MAIL_TO` | Recipient of submissions. Defaults to `rmissimawu@gmail.com`. |
 | `TRUST_CF_CONNECTING_IP` | Cloudflare is in front, so `cf-connecting-ip` (rate limits) and `cf-ipcountry` (visit counter) are trusted by default. Set to `0` only when the site is served without Cloudflare. |
-| `NEXT_PUBLIC_SCULPTURE_POSTER` | Build time, `1` only for the poster build (the poster script sets it). Leave unset everywhere else. |
+| `NEXT_PUBLIC_DNA_POSTER` | Build time, `1` only for the poster build (the poster script sets it). Leave unset everywhere else. |
 
 A submission goes to Firestore first, then by email. If Firestore fails, the email is still sent; if both fail, the visitor is invited to write to the address directly.
 

@@ -1,4 +1,4 @@
-// Starts the built standalone server for a local script (CV PDFs, sculpture posters): on a free
+// Starts the built standalone server for a local script (CV PDFs, DNA posters): on a free
 // port (never 3000 or 3111), bound to 0.0.0.0, and cut off from Firebase and SMTP.
 import { spawn } from 'node:child_process';
 import net from 'node:net';

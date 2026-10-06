@@ -7,8 +7,10 @@ test.describe('foundations', () => {
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('SaaS, de paiement et de gestion');
-    await expect(page.getByText(/Six ans d’expérience, dont trois comme tech lead/)).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('L’ingénierie est dans l’ADN.');
+    // The concrete statement (what, for whom) sits right under the h1 (owner rule: no vague hero).
+    await expect(page.getByText(/plateformes SaaS, de paiement et de gestion/)).toBeVisible();
+    await expect(page.getByText(/six ans d’expérience, dont trois comme tech lead/)).toBeVisible();
     await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', /\/en$/);
     expect(errors).toEqual([]);
   });
@@ -16,7 +18,8 @@ test.describe('foundations', () => {
   test('English home lives under /en', async ({ page }) => {
     await page.goto('/en');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('SaaS, payment and management');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Engineering is in the DNA.');
+    await expect(page.getByText(/SaaS, payment and management platforms/)).toBeVisible();
   });
 
   test('locale switch goes to the same page in the other language and back', async ({ page }) => {
@@ -129,7 +132,7 @@ test.describe('foundations', () => {
   });
 
   test('favicons and manifest are served', async ({ request }) => {
-    for (const path of ['/favicon.ico', '/favicon.svg', '/apple-touch-icon.png', '/site.webmanifest', '/sculpture/mobius-desktop.webp']) {
+    for (const path of ['/favicon.ico', '/favicon.svg', '/apple-touch-icon.png', '/site.webmanifest', '/dna/helix-desktop.webp']) {
       expect((await request.get(path)).status(), path).toBe(200);
     }
   });
@@ -188,7 +191,7 @@ test.describe('without JavaScript', () => {
     // domcontentloaded: the lazy work images go through the image optimizer, which can be slow while WebGL tests hog the CPU.
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-    await expect(page.locator('[data-sculpture-poster]')).toBeVisible();
+    await expect(page.locator('[data-dna-poster]')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Voir les réalisations' })).toBeVisible();
   });
 });

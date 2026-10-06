@@ -18,7 +18,7 @@ const CASES: Case[] = [
 export function SelectedWork() {
   const t = useTranslations('work');
   return (
-    <section id="realisations-accueil" data-sculpture-fade-out className="mx-auto max-w-[1280px] px-5 pb-[10vh] pt-[6vh] md:px-10">
+    <section id="realisations-accueil" className="mx-auto max-w-[1280px] px-5 pb-[10vh] pt-[6vh] md:px-10">
       <Reveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
           <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('kicker')}</p>
