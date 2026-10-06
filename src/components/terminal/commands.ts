@@ -53,7 +53,8 @@ export type TerminalContext = {
   messages: TerminalMessages;
   realisations: Entry[];
   explorations: Entry[];
-  profile: { name: string; role: string; employer: string };
+  /** `years` and `lead` fill the experience line (from OWNER, never written twice). */
+  profile: { name: string; role: string; employer: string; years: number; lead: number };
   cvPdf: string;
 };
 
@@ -119,7 +120,7 @@ function whoami({ messages, profile }: TerminalContext): Line[] {
   return [
     plain(fill(w.identity, { name: profile.name })),
     plain(fill(w.role, { role: profile.role, employer: profile.employer })),
-    plain(w.experience),
+    plain(fill(w.experience, { years: profile.years, lead: profile.lead })),
     muted(w.location),
   ];
 }

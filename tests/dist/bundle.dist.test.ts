@@ -12,15 +12,6 @@ function initialScripts(page: string): string[] {
     .map((m) => join('.next', m[1].replace(/^\/_next/, '')));
 }
 
-// The terminal (src/components/terminal) loads on demand on /terminal: no page ships it up front.
-it('keeps the terminal shell out of every page’s initial JS', () => {
-  for (const page of ['fr.html', 'en.html', 'fr/a-propos.html', 'en/a-propos.html', 'fr/terminal.html', 'en/terminal.html']) {
-    for (const file of initialScripts(page)) {
-      expect(readFileSync(file, 'utf8').includes('rostel@cotonou:~$'), `${page}: ${file}`).toBe(false);
-    }
-  }
-});
-
 /** Every prerendered page of the build. */
 function allPages(): string[] {
   return readdirSync('.next/server/app', { recursive: true })
@@ -28,6 +19,16 @@ function allPages(): string[] {
     .filter((f) => f.endsWith('.html'))
     .map((f) => f.replace(/\\/g, '/'));
 }
+
+// The terminal (src/components/terminal) loads on demand on /terminal: no page ships it up front.
+it('keeps the terminal shell out of every page’s initial JS', () => {
+  for (const page of allPages()) {
+    for (const file of initialScripts(page)) {
+      expect(readFileSync(file, 'utf8').includes('rostel@cotonou:~$'), `${page}: ${file}`).toBe(false);
+    }
+  }
+});
+
 
 // The DNA scene (three, R3F, shaders) is a lazy chunk: no page ships it in its initial JS.
 it('keeps the DNA scene out of every page’s initial JS', () => {

@@ -37,58 +37,10 @@
     "text": "The link may be old, or the address may contain a typo.",
     "work": "See the work"
   },
-  "positioning": {
-    "kicker": "02 · Beyond development",
-    "title": "I don’t just ship code. I ship products that hold up.",
-    "vision": "Vision",
-    "visionText": "Understand the business, the users and the constraints before writing a line.",
-    "architecture": "Architecture",
-    "architectureText": "Choose the foundations: data, payments, security, scale.",
-    "execution": "Execution",
-    "executionText": "Build, test, ship to production and keep improving with the team.",
-    "signatureA": "Ideas are everywhere.",
-    "signatureB": "Execution is a discipline."
-  },
   "work": {
-    "kicker": "03 · Selected work",
-    "title": "Three products, from architecture to launch.",
-    "all": "All work",
     "cta": "Read the case study",
     "ctaFor": "Read the case study: {name}",
-    "coBuilt": "Co-built with",
-    "ubbfy": {
-      "what": "ERP and geolocated time clock",
-      "role": "Lead engineer",
-      "roleDetail": "rebuild and architecture",
-      "challenge": "Rebuild a complete ERP around a single API serving three clients: web, PWA and a Flutter app.",
-      "alt": "Ubbfy, home page and candidate pipeline preview"
-    },
-    "contractiq": {
-      "what": "AI contract analysis SaaS",
-      "role": "Architecture and development",
-      "roleDetail": "B2B product",
-      "challenge": "Extract parties, deadlines and risky clauses from PDF contracts, then alert before every renewal. Gemini as the main engine, OpenAI as fallback.",
-      "alt": "ContractIQ, AI risk analysis of a contract"
-    },
-    "zenlife": {
-      "what": "Wellness app, web and mobile",
-      "role": "Design and development",
-      "roleDetail": "solo",
-      "challenge": "Planning, budget, messaging and reminders in a single app, used by 1,200+ active users within six months.",
-      "alt": "ZenLife, app dashboard"
-    }
-  },
-  "method": {
-    "kicker": "04 · Method",
-    "title": "From idea to production, without losing the thread.",
-    "discover": "Discover",
-    "discoverText": "Understand the problem, the users, the goals and the constraints.",
-    "design": "Design the system",
-    "designText": "Define the experience, the architecture, the features and the technical choices.",
-    "build": "Build and validate",
-    "buildText": "Develop, test, gather feedback and improve the product.",
-    "evolve": "Evolve",
-    "evolveText": "Prepare maintenance, performance and new features."
+    "coBuilt": "Co-built with"
   },
   "conversion": {
     "kicker": "05 · Stabilisation",
@@ -423,7 +375,7 @@
       "whoami": {
         "identity": "{name}, product engineer",
         "role": "{role} at {employer}",
-        "experience": "Six years of experience, three as tech lead",
+        "experience": "{years} years of experience, {lead} as tech lead",
         "location": "Cotonou, Benin · UTC+1"
       },
       "ls": "{count} projects. Type open <slug> to read one.",
@@ -436,6 +388,12 @@
       "langSwitch": "switching to French…",
       "unknown": "command not found: {cmd}. Type help.",
       "exit": "logout"
+    },
+    "notes": {
+      "coBuilt": "with {names}",
+      "contribution": "engineering contribution",
+      "pitched": "proposal presented to the client",
+      "unsolicited": "unsolicited proposal"
     }
   },
   "dna": {
@@ -464,5 +422,9 @@
       "intro": "Redesigns I imagined for brands, on my own initiative or presented to the client. Proposals, not delivered work.",
       "all": "The whole lab"
     }
+  },
+  "signature": {
+    "a": "Ideas are everywhere.",
+    "b": "Execution is a discipline."
   }
 }

@@ -2,6 +2,8 @@
 
 The portfolio of Rostel Panoumassi, product engineer and Head of Engineering & Innovation at KPS Groupe (Cotonou, UTC+1). It is written for clients: what he builds, how he works, the projects he shipped, and two ways to start a conversation (a project brief and a contact form). French is the default language (`/`), English lives under `/en`.
 
+The art direction is « Digital DNA » (spec: `docs/superpowers/specs/2026-10-06-portfolio-v7-digital-dna-design.md`): a real-time particle helix whose genes stand for how he designs products. On the home it follows six scenes as you scroll (formation, sequencing, construction, expression, lab, stabilisation); every project carries a DNA signature drawn from its genes. Palette « Instrument »: graphite, ivory and one signal orange; type in Archivo and IBM Plex Mono.
+
 ## Stack
 
 - Next.js 16 (App Router, `output: 'standalone'`), React 19, TypeScript
@@ -46,8 +48,8 @@ Copy `.env.example` to `.env.local` for local work. In production, set them in C
 | `FIREBASE_PROJECT_ID` | `rostel-portfolio-v6` |
 | `FIREBASE_SERVICE_ACCOUNT` | The service-account JSON key, base64 encoded (`base64 -w0 key.json`). Server only. Without it, nothing is stored and forms fall back to email. |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | SMTP delivery of the email copy. Port 465 uses TLS, anything else STARTTLS (default 587). Without host, user and password, email is skipped. |
-| `MAIL_FROM` | Sender address. Defaults to `SMTP_USER`; required when the SMTP login is not an address (API-key providers such as Brevo or SendGrid). |
-| `MAIL_TO` | Recipient of submissions. Defaults to `rmissimawu@gmail.com`. |
+| `MAIL_FROM` | Sender address (alias: `SMTP_FROM`). Defaults to `SMTP_USER`; required when the SMTP login is not an address (API-key providers such as Brevo or SendGrid). |
+| `MAIL_TO` | Recipient of submissions (alias: `NOTIFICATION_EMAIL`). Defaults to `rmissimawu@gmail.com`. |
 | `TRUST_CF_CONNECTING_IP` | Cloudflare is in front, so `cf-connecting-ip` (rate limits) and `cf-ipcountry` (visit counter) are trusted by default. Set to `0` only when the site is served without Cloudflare. |
 | `NEXT_PUBLIC_DNA_POSTER` | Build time, `1` only for the poster build (the poster script sets it). Leave unset everywhere else. |
 
@@ -87,8 +89,8 @@ The site must not look generated. These rules are checked in code (`tools/owner-
 
 - No em dash in any text the site shows. French text uses the typographic apostrophe (’) and a no-break space before `: ; ? !`.
 - No purple gradient, no pill shapes (controls keep a 2 px radius at most), no emoji used as icons, no custom cursor, no "made with AI" tag.
-- Champagne is the only accent colour; graphite is never used for text.
+- Signal orange (`#ff5a1f`) is the only saturated colour (rule `single-accent`); hairline and edge greys are never used for text. No fake status or loading screen (rule `fake-status`).
 - Every page has a favicon; the privacy policy and the terms exist in both languages.
-- Honesty: only metrics the owner confirmed, credited co-authors, no private repositories, explorations always labelled as self-initiated studies.
+- Honesty: only metrics the owner confirmed, credited co-authors, no private repositories, explorations always labelled as proposals (unsolicited, or presented to the client).
 - Accessibility: WCAG 2.2 AA, visible focus, labelled forms.
 - Performance: the home page's initial JS stays within 160 KB gzip.

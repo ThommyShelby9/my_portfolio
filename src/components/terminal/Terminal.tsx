@@ -63,7 +63,10 @@ export function Terminal({ ctx, labels, describedBy }: TerminalProps) {
     setEntries((prev) => [...prev, ...lines.map((l) => ({ ...l, id: nextId.current++ }))]);
 
   // Single-purpose page: the prompt takes the focus as soon as the shell is there.
-  useEffect(() => inputRef.current?.focus({ preventScroll: true }), []);
+  // Autofocus only with a fine pointer: on a phone it would pop the keyboard over the terminal.
+  useEffect(() => {
+    if (matchMedia('(pointer: fine)').matches) inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   useEffect(() => {
     const screen = screenRef.current;
@@ -125,6 +128,10 @@ export function Terminal({ ctx, labels, describedBy }: TerminalProps) {
     <div
       ref={screenRef}
       onMouseUp={focusPrompt}
+      // Focusable so keyboard users can scroll back through long output (Arrow keys belong to history).
+      tabIndex={0}
+      role="region"
+      aria-label={labels.output}
       className="h-full overflow-y-auto overscroll-contain px-4 py-4 font-mono text-[12.5px] leading-[1.7] text-ivory sm:px-6 sm:py-5 sm:text-[13.5px]"
     >
       <div role="log" aria-live="polite" aria-label={labels.output}>

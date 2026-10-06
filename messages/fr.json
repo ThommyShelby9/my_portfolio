@@ -37,58 +37,10 @@
     "text": "Le lien est peut-être ancien, ou l’adresse contient une faute de frappe.",
     "work": "Voir les réalisations"
   },
-  "positioning": {
-    "kicker": "02 · Au-delà du développement",
-    "title": "Je ne livre pas du code. Je livre des produits qui tiennent.",
-    "vision": "Vision",
-    "visionText": "Comprendre le métier, les utilisateurs et les contraintes avant d’écrire une ligne.",
-    "architecture": "Architecture",
-    "architectureText": "Choisir les fondations : données, paiements, sécurité, montée en charge.",
-    "execution": "Exécution",
-    "executionText": "Construire, tester, mettre en production et faire évoluer avec l’équipe.",
-    "signatureA": "Les idées sont partout.",
-    "signatureB": "L’exécution est une discipline."
-  },
   "work": {
-    "kicker": "03 · Réalisations",
-    "title": "Trois produits, de l’architecture au lancement.",
-    "all": "Toutes les réalisations",
     "cta": "Voir l’étude de cas",
     "ctaFor": "Voir l’étude de cas : {name}",
-    "coBuilt": "Co-développé avec",
-    "ubbfy": {
-      "what": "ERP et pointage géolocalisé",
-      "role": "Lead engineer",
-      "roleDetail": "refonte et architecture",
-      "challenge": "Reconstruire un ERP complet autour d’une seule API, servie à trois clients : web, PWA et application Flutter.",
-      "alt": "Ubbfy, page d’accueil et aperçu du suivi des candidats"
-    },
-    "contractiq": {
-      "what": "SaaS d’analyse de contrats par IA",
-      "role": "Architecture et développement",
-      "roleDetail": "produit B2B",
-      "challenge": "Extraire parties, échéances et clauses à risque de contrats PDF, puis alerter avant chaque renouvellement. Gemini en moteur principal, OpenAI en secours.",
-      "alt": "ContractIQ, analyse des risques d’un contrat par l’IA"
-    },
-    "zenlife": {
-      "what": "Application bien-être, web et mobile",
-      "role": "Conception et développement",
-      "roleDetail": "seul",
-      "challenge": "Planning, budget, messagerie et rappels réunis dans une seule application, utilisée par 1 200+ personnes actives en six mois.",
-      "alt": "ZenLife, tableau de bord de l’application"
-    }
-  },
-  "method": {
-    "kicker": "04 · Méthode",
-    "title": "De l’idée à la production, sans perdre le fil.",
-    "discover": "Découvrir",
-    "discoverText": "Comprendre le problème, les utilisateurs, les objectifs et les contraintes.",
-    "design": "Concevoir le système",
-    "designText": "Définir l’expérience, l’architecture, les fonctionnalités et les choix techniques.",
-    "build": "Construire et valider",
-    "buildText": "Développer, tester, recueillir les retours et améliorer le produit.",
-    "evolve": "Faire évoluer",
-    "evolveText": "Préparer la maintenance, les performances et les nouvelles fonctionnalités."
+    "coBuilt": "Co-développé avec"
   },
   "conversion": {
     "kicker": "05 · Stabilisation",
@@ -423,7 +375,7 @@
       "whoami": {
         "identity": "{name}, ingénieur produit",
         "role": "{role} chez {employer}",
-        "experience": "Six ans d’expérience, dont trois comme tech lead",
+        "experience": "{years} ans d’expérience, dont {lead} comme tech lead",
         "location": "Cotonou, Bénin · UTC+1"
       },
       "ls": "{count} réalisations. Tapez open <slug> pour en lire une.",
@@ -436,6 +388,12 @@
       "langSwitch": "passage en anglais…",
       "unknown": "commande introuvable : {cmd}. Tapez help.",
       "exit": "déconnexion"
+    },
+    "notes": {
+      "coBuilt": "avec {names}",
+      "contribution": "contribution à l’ingénierie",
+      "pitched": "proposition présentée au client",
+      "unsolicited": "proposition non commandée"
     }
   },
   "dna": {
@@ -464,5 +422,9 @@
       "intro": "Des refontes que j’ai imaginées pour des marques, de ma propre initiative ou présentées au client. Des propositions, pas des réalisations livrées.",
       "all": "Tout le laboratoire"
     }
+  },
+  "signature": {
+    "a": "Les idées sont partout.",
+    "b": "L’exécution est une discipline."
   }
 }

@@ -49,7 +49,7 @@ test.describe('terminal', () => {
     await expect(log).toContainText('ubbfy');
     await expect(log).toContainText('TadagbeRhPlus');
     await type(page, 'Commande du terminal', 'whoami');
-    await expect(log).toContainText('Six ans d’expérience, dont trois comme tech lead');
+    await expect(log).toContainText('6 ans d’expérience, dont 3 comme tech lead');
     await type(page, 'Commande du terminal', 'foo');
     await expect(log).toContainText('commande introuvable : foo. Tapez help.');
   });

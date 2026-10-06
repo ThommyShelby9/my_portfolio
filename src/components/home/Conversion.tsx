@@ -4,7 +4,7 @@ import { ButtonLink, buttonClassName } from '@/components/site/ButtonLink';
 
 export function Conversion({ kicker }: { kicker?: string } = {}) {
   const t = useTranslations('conversion');
-  const sig = useTranslations('positioning');
+  const sig = useTranslations('signature');
   return (
     <section
       id="projet"
@@ -29,7 +29,7 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
           <a href="https://github.com/ThommyShelby9" rel="me noopener" className="border-b border-edge pb-1 no-underline hover:border-signal hover:text-signal">GitHub</a>
         </p>
         <p data-reveal className="mt-[10vh] font-display text-[clamp(18px,1.8vw,24px)] font-extrabold uppercase tracking-[-0.01em] text-muted">
-          {sig('signatureA')} <em className="not-italic text-signal">{sig('signatureB')}</em>
+          {sig('a')} <em className="not-italic text-signal">{sig('b')}</em>
         </p>
       </Reveal>
     </section>

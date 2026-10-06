@@ -27,9 +27,21 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/terminal
 const KEYS_ID = 'terminal-keys';
 const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-signal hover:text-signal';
 
+type Notes = { coBuilt: string; contribution: string; pitched: string; unsolicited: string };
+
+/** The same honesty qualifiers as the site: co-authors, contribution roles, proposals (owner rule 11). */
+function note(p: Project, n: Notes): string | undefined {
+  if (p.kind === 'exploration') return p.proposal === 'pitched' ? n.pitched : n.unsolicited;
+  if (p.coauthors.length > 0) return n.coBuilt.replace('{names}', p.coauthors.join(', '));
+  if (/^(contribution|engineering contribution)/i.test(p.role)) return n.contribution;
+  return undefined;
+}
+
 // `ls` reads like a directory listing: alphabetical, as a shell sorts.
-const entries = (projects: Project[]): Entry[] =>
-  projects.map((p) => ({ slug: p.slug, title: p.title })).sort((a, b) => a.slug.localeCompare(b.slug));
+const entries = (projects: Project[], n: Notes): Entry[] =>
+  projects
+    .map((p) => { const extra = note(p, n); return { slug: p.slug, title: extra ? `${p.title} · ${extra}` : p.title }; })
+    .sort((a, b) => a.slug.localeCompare(b.slug));
 
 export default async function TerminalPage({ params }: PageProps<'/[locale]/terminal'>) {
   const { locale } = await params;
@@ -41,12 +53,20 @@ export default async function TerminalPage({ params }: PageProps<'/[locale]/term
     getProjects('exploration', locale),
   ]);
 
+  const notes = t.raw('notes') as Notes;
+  const out = t.raw('out') as TerminalMessages;
   const ctx: TerminalContext = {
     locale,
-    messages: t.raw('out') as TerminalMessages,
-    realisations: entries(realisations),
-    explorations: entries(explorations),
-    profile: { name: OWNER.name, role: currentRole().title[locale], employer: OWNER.employer },
+    messages: out,
+    realisations: entries(realisations, notes),
+    explorations: entries(explorations, notes),
+    profile: {
+      name: OWNER.name,
+      role: currentRole().title[locale],
+      employer: OWNER.employer,
+      years: OWNER.yearsExperience,
+      lead: OWNER.yearsLead,
+    },
     cvPdf: CV_PDF[locale],
   };
 

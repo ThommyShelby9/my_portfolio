@@ -17,6 +17,30 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllEnvs());
 
 describe('sendMail', () => {
+  it('reads the Coolify names SMTP_FROM and NOTIFICATION_EMAIL when MAIL_* are unset', async () => {
+    vi.stubEnv('SMTP_HOST', 'smtp.test');
+    vi.stubEnv('SMTP_USER', 'apikey');
+    vi.stubEnv('SMTP_PASS', 'p');
+    vi.stubEnv('MAIL_FROM', '');
+    vi.stubEnv('MAIL_TO', '');
+    vi.stubEnv('SMTP_FROM', 'site@example.com');
+    vi.stubEnv('NOTIFICATION_EMAIL', 'owner@example.com');
+    expect(await sendMail(input)).toBe('sent');
+    expect(sendMailFn).toHaveBeenCalledWith(expect.objectContaining({ from: 'site@example.com', to: 'owner@example.com' }));
+  });
+
+  it('prefers MAIL_FROM and MAIL_TO over the aliases', async () => {
+    vi.stubEnv('SMTP_HOST', 'smtp.test');
+    vi.stubEnv('SMTP_USER', 'u');
+    vi.stubEnv('SMTP_PASS', 'p');
+    vi.stubEnv('MAIL_FROM', 'a@example.com');
+    vi.stubEnv('MAIL_TO', 'b@example.com');
+    vi.stubEnv('SMTP_FROM', 'site@example.com');
+    vi.stubEnv('NOTIFICATION_EMAIL', 'owner@example.com');
+    await sendMail(input);
+    expect(sendMailFn).toHaveBeenCalledWith(expect.objectContaining({ from: 'a@example.com', to: 'b@example.com' }));
+  });
+
   it('skips when SMTP env is missing', async () => {
     vi.stubEnv('SMTP_HOST', '');
     vi.stubEnv('SMTP_USER', '');

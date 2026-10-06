@@ -32,7 +32,7 @@ function context(locale: Locale): TerminalContext {
       { slug: 'procom', title: 'Procom' },
       { slug: 'lecentre', title: 'Le Centre' },
     ],
-    profile: { name: 'Rostel Panoumassi', role: 'Head of Engineering & Innovation', employer: 'KPS Groupe' },
+    profile: { name: 'Rostel Panoumassi', role: 'Head of Engineering & Innovation', employer: 'KPS Groupe', years: 6, lead: 3 },
     cvPdf: locale === 'fr' ? '/cv/rostel-panoumassi-cv.pdf' : '/cv/rostel-panoumassi-cv-en.pdf',
   };
 }
@@ -75,13 +75,13 @@ describe('run', () => {
     expect(text(run('whoami', FR))).toEqual([
       'Rostel Panoumassi, ingénieur produit',
       'Head of Engineering & Innovation chez KPS Groupe',
-      'Six ans d’expérience, dont trois comme tech lead',
+      '6 ans d’expérience, dont 3 comme tech lead',
       'Cotonou, Bénin · UTC+1',
     ]);
     expect(text(run('whoami', EN))).toEqual([
       'Rostel Panoumassi, product engineer',
       'Head of Engineering & Innovation at KPS Groupe',
-      'Six years of experience, three as tech lead',
+      '6 years of experience, 3 as tech lead',
       'Cotonou, Benin · UTC+1',
     ]);
   });
@@ -230,5 +230,20 @@ describe('history', () => {
   it('resets the walk after a command runs', () => {
     const h = recall(withRuns('ls', 'help'), 'up', '').history;
     expect(record(h, 'cv')).toEqual({ entries: ['ls', 'help', 'cv'], index: null, draft: '' });
+  });
+});
+
+describe('owner facts', () => {
+  it('whoami takes its years from OWNER', async () => {
+    const { OWNER } = await import('@/lib/site');
+    const ctx = { ...context('fr'), profile: { ...context('fr').profile, years: OWNER.yearsExperience, lead: OWNER.yearsLead } };
+    expect(text(run('whoami', ctx))[2]).toBe(`${OWNER.yearsExperience} ans d’expérience, dont ${OWNER.yearsLead} comme tech lead`);
+  });
+});
+
+describe('open never leaves the known slugs', () => {
+  it.each(['//evil.com', '../a-propos', '%2e%2e', 'https://evil.com', '/realisations/ubbfy'])('refuses %s', (arg) => {
+    const result = run(`open ${arg}`, context('fr'));
+    expect(result.action).toBeUndefined();
   });
 });
