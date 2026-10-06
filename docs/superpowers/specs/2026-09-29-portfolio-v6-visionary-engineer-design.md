@@ -3,6 +3,7 @@
 **Date** : 2026-09-29
 **Auteur** : Rostel Panoumassi (avec assistance Claude)
 **Statut** : direction, plan du site et architecture validés en brainstorming, spec en relecture
+**Mise à jour 2026-10-06** : la présentation (DA Obsidian & Champagne, sculpture Möbius, accueil en 5 séquences) est remplacée par `2026-10-06-portfolio-v7-digital-dna-design.md`. Le fond (contenu, formulaires, données, SEO, déploiement) reste valable.
 **Remplace** : `2026-09-28-portfolio-v6-collection-nocturne-design.md` (direction « Collection · Nocturne », Astro, cible recruteurs), conservée comme archive
 **Source de la direction** : `new.md` (document de DA rédigé avec ChatGPT) et ses captures `image*.png`, à la racine du repo
 **Prototype validé** : `.superpowers/brainstorm/288-1790671180/content/visionary-hero-v2.html` (hero + sculpture, forme B « Möbius », teinte Champagne)
