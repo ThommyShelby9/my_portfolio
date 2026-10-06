@@ -13,3 +13,7 @@ new.md
 image*.png
 .env
 .env.*
+# Test tooling: it imports from tests/, which is not in the image.
+playwright.config.ts
+vitest.config.ts
+vitest.dist.config.ts
