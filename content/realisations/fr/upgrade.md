@@ -9,6 +9,7 @@ coauthors: []
 client: "Upgrade Afrique"
 sector: "Éducation, acquisition de prospects"
 stack: [Next.js 15, React 19, TypeScript, MongoDB, Mongoose, Turborepo, Resend, Meta Conversions API, Docker]
+genes: [engineering, architecture, devops]
 status: live
 liveUrl: https://upgrade-afrique.com
 featured: null

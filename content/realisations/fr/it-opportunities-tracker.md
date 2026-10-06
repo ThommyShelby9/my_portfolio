@@ -6,6 +6,7 @@ role: "Contribution à l’ingénierie"
 coauthors: []
 sector: "Veille du marché IT, données"
 stack: [Python, Selenium, PostgreSQL, Django 5, DRF, Docker, YAML]
+genes: [engineering, product]
 status: private
 featured: null
 order: 6

@@ -9,6 +9,7 @@ coauthors: []
 client: LeConsultant
 sector: "B2B, public procurement"
 stack: [Laravel 8, PHP 8.2, Livewire 2, MySQL, Fortify, DomPDF, Kkiapay, PayPlus]
+genes: [engineering, product]
 status: archived
 featured: null
 order: 8

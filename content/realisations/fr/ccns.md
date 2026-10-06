@@ -8,6 +8,7 @@ coauthors: []
 client: "Commission Catholique Nationale pour la Santé (CCNS)"
 sector: "Santé, institutionnel"
 stack: [Vue 3, TypeScript, Vite, Tailwind CSS]
+genes: [product, engineering]
 status: live
 liveUrl: https://ccnsbenin.vercel.app
 featured: null

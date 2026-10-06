@@ -9,6 +9,7 @@ coauthors: []
 client: "Planus Analytics"
 sector: "IT consulting, company website"
 stack: [Vue 3, TypeScript, Vite, Pinia, Bootstrap 5, Tailwind CSS, Chart.js]
+genes: [engineering, product]
 status: live
 liveUrl: https://planus-analytics.com
 featured: null

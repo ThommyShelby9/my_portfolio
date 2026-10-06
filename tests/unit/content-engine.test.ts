@@ -12,6 +12,17 @@ const demo = () =>
   matter(readFileSync(path.join(FIX, 'realisations/fr/demo.md'), 'utf8')).data as Record<string, unknown>;
 
 describe('schema', () => {
+  describe('genes', () => {
+    it('requires 2 to 4 distinct known genes', () => {
+      expect(parseFrontmatter('realisation', { ...demo(), genes: ['engineering'] }).success).toBe(false);
+      expect(parseFrontmatter('realisation', { ...demo(), genes: ['engineering', 'product', 'architecture', 'devops', 'leadership'] }).success).toBe(false);
+      expect(parseFrontmatter('realisation', { ...demo(), genes: ['engineering', 'engineering'] }).success).toBe(false);
+      expect(parseFrontmatter('realisation', { ...demo(), genes: ['engineering', 'magic'] }).success).toBe(false);
+      const { genes: _g, ...noGenes } = demo();
+      expect(parseFrontmatter('realisation', noGenes).success).toBe(false);
+    });
+  });
+
   it('accepts the demo fixture', () => {
     expect(parseFrontmatter('realisation', demo()).success).toBe(true);
   });

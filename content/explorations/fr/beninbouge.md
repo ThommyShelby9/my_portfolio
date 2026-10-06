@@ -7,6 +7,7 @@ team: "Solo"
 coauthors: []
 sector: "Média numérique"
 stack: [Vue 3, TypeScript, Vite, vite-ssg, Pinia, GSAP, Tailwind CSS, Vitest, Docker, Nginx]
+genes: [product, innovation]
 status: concept
 featured: null
 order: 1

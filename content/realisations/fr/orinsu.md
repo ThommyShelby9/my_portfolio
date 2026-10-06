@@ -6,6 +6,7 @@ role: "Contribution à l’ingénierie"
 coauthors: []
 sector: "Événements, restauration, tourisme"
 stack: [Node.js, Express 5, TypeScript, MongoDB, Mongoose, Redis, Cloudinary, Swagger, Jest, Vue 3, Pinia, Tailwind CSS, React Native]
+genes: [engineering, product]
 status: private
 featured: null
 order: 5

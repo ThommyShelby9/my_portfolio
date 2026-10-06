@@ -8,6 +8,7 @@ coauthors: []
 client: "Personal product"
 sector: "Wellbeing, personal organisation"
 stack: [Vue 3, TypeScript, Pinia, Tailwind CSS, Capacitor, Spring Boot, Java 17, PostgreSQL, Flyway, Redis, WebSocket, Firebase]
+genes: [product, engineering, architecture]
 status: archived
 featured: 3
 order: 3

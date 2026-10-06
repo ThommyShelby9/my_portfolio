@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { GENES } from '@/lib/dna/genes';
 
 export type ProjectKind = 'realisation' | 'exploration';
 
@@ -35,6 +36,12 @@ const base = z.object({
   images: z.array(image),
   proofs: z.array(proof).default([]),
   proposal: z.enum(PROPOSALS).optional(),
+  /** Digital DNA of the project (spec §5.4): 2 to 4 distinct genes, same in both locales. */
+  genes: z
+    .array(z.enum(GENES))
+    .min(2)
+    .max(4)
+    .refine((g) => new Set(g).size === g.length, 'genes must be distinct'),
   seoDescription: z.string().min(1).max(170),
 }).strict();
 

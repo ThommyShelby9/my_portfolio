@@ -8,6 +8,7 @@ coauthors: []
 client: "Orisum Groupe"
 sector: "Online fundraising, mobile payments"
 stack: [Vue 3, TypeScript, Vite, Pinia, Express 5, MongoDB, Mongoose, FedaPay, Firebase, Cloudinary, Joi, Jest]
+genes: [product, engineering]
 status: private
 featured: null
 order: 11

@@ -9,6 +9,7 @@ coauthors: []
 client: Ubbfy
 sector: "ERP, HR, multi-company"
 stack: [Django 5, DRF, PostgreSQL, Redis, Channels, Celery, Vue 3, PrimeVue, Flutter]
+genes: [engineering, product, architecture, devops]
 status: live
 liveUrl: https://app.ubbfy.com
 featured: 1

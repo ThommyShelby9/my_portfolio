@@ -4,6 +4,7 @@ summary: A demo project for tests.
 year: 2025
 role: Front-end engineering
 stack: [Next.js, TypeScript]
+genes: [engineering, product]
 status: live
 liveUrl: https://example.com
 order: 1

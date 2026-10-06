@@ -7,6 +7,7 @@ coauthors: [Jérémie Zitti]
 client: "Independent product"
 sector: "B2B SaaS, contract management"
 stack: [Next.js 15, React 19, TypeScript, MongoDB, Mongoose, NextAuth, Gemini, OpenAI, FedaPay, Resend, MinIO, Sentry, Vitest, Playwright, Docker]
+genes: [engineering, architecture, innovation, product]
 status: private
 featured: 2
 order: 2

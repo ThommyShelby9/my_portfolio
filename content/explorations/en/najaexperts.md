@@ -7,6 +7,7 @@ team: "Solo"
 coauthors: []
 sector: "Real estate"
 stack: [Next.js 16, HTML, CSS, JavaScript, Docker, Nginx]
+genes: [product, innovation]
 status: concept
 featured: null
 order: 3

@@ -9,6 +9,7 @@ coauthors: []
 client: "KPS Groupe (in-house)"
 sector: "HR, training, company websites"
 stack: [Laravel 12, Vue 3, TypeScript, Vite, Tailwind CSS, Pinia, jsPDF, Nginx]
+genes: [engineering, architecture, leadership]
 status: live
 liveUrl: https://easytowork.fr
 featured: null

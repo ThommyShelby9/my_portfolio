@@ -4,6 +4,7 @@ summary: Un projet de démonstration pour les tests.
 year: 2025
 role: Ingénierie front-end
 stack: [Next.js, TypeScript]
+genes: [engineering, product]
 status: live
 liveUrl: https://example.com
 order: 1

@@ -6,6 +6,7 @@ role: "Front-end design and development"
 coauthors: []
 sector: "Communication agency"
 stack: [Next.js 16, React 19, TypeScript, GSAP, Lenis, Tailwind CSS 4]
+genes: [product, innovation]
 status: concept
 featured: null
 order: 4

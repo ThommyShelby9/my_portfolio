@@ -9,6 +9,7 @@ coauthors: []
 client: "Cabinet de conseil RH, Bénin (confidentiel)"
 sector: "SaaS, ressources humaines"
 stack: [Django 4.2, Python 3.11, MySQL, Celery, RabbitMQ, Redis, Vue 3]
+genes: [architecture, engineering, devops, leadership]
 status: live
 liveUrl: https://tadagberhplus.com
 featured: null

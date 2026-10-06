@@ -8,6 +8,7 @@ coauthors: []
 client: WhatsPay
 sector: "Influencer marketing, West Africa"
 stack: [Laravel 12, PHP 8.2, PostgreSQL, Redis, RabbitMQ, WaSender API, PayPlus]
+genes: [architecture, engineering, innovation]
 status: live
 liveUrl: https://whatspay.africa
 featured: null

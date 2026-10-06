@@ -7,6 +7,7 @@ team: "Solo"
 coauthors: []
 sector: "Culture, museum"
 stack: [Vue 3, TypeScript, Vite, WebGL, Docker, Nginx]
+genes: [product, innovation]
 status: concept
 featured: null
 order: 2

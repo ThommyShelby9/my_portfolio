@@ -9,6 +9,7 @@ coauthors: []
 client: "Bilal Sékou, communication strategist"
 sector: "Personal website, e-book sales"
 stack: [Nuxt 3, Vue 3, TypeScript, Tailwind CSS, Pinia, Zod, Kkiapay, Nodemailer]
+genes: [product, engineering]
 status: private
 featured: null
 order: 16

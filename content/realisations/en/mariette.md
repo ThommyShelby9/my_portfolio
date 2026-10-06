@@ -9,6 +9,7 @@ coauthors: []
 client: "Mariette H. Nobre, independent professional"
 sector: "Blog, portfolio"
 stack: [Next.js 15, React 19, TypeScript, MongoDB, Mongoose, NextAuth v5, Tiptap, UploadThing, TanStack Query]
+genes: [engineering, architecture]
 status: archived
 featured: null
 order: 17

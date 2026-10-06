@@ -7,6 +7,7 @@ coauthors: []
 client: "Freelance Club (KPS Groupe)"
 sector: "SaaS, portage salarial"
 stack: [Node.js, Express 5, TypeScript, MongoDB, Mongoose, Redis, Bull, Socket.io, MinIO, Swagger, Vue 3, Pinia, Jest]
+genes: [engineering, product]
 status: live
 liveUrl: https://freelanceclubs.com
 featured: null

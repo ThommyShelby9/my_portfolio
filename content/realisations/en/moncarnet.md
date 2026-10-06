@@ -8,6 +8,7 @@ team: "Solo"
 coauthors: []
 sector: "Digital health, maternal and child health"
 stack: [Next.js 16, React 19, PostgreSQL, Drizzle ORM, Zod, Tailwind CSS 4, Vitest, PWA]
+genes: [product, engineering, innovation]
 status: live
 liveUrl: https://moncarnet.kheios.com
 featured: null
