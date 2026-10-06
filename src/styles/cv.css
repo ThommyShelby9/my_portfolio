@@ -1,0 +1,230 @@
+/* The CV (/cv, /en/cv): the site's look on screen, a white A4 page in print (and in the PDFs printed
+   by scripts/cv-pdf.mjs). Colours go through --cv-* tokens so print only swaps the palette. */
+
+.cv {
+  --cv-ink: var(--color-ivory);
+  --cv-muted: var(--color-muted);
+  --cv-faint: var(--color-faint);
+  --cv-rule: var(--color-line);
+  --cv-accent: var(--color-signal);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 9vh 20px 14vh;
+  color: var(--cv-ink);
+}
+@media (min-width: 768px) {
+  .cv { padding-inline: 40px; }
+}
+
+/* Text links only: the download button keeps its own (Tailwind) button styles. */
+.cv a:not([data-cv-download]) {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-edge);
+  transition: color 0.2s, border-color 0.2s;
+}
+.cv a:not([data-cv-download]):hover { color: var(--cv-accent); border-color: var(--cv-accent); }
+
+/* Header: identity, and the download action on screen. */
+.cv-head {
+  display: grid;
+  gap: 32px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--cv-rule);
+}
+@media (min-width: 900px) {
+  .cv-head { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+}
+.cv-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cv-accent);
+}
+.cv-name {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+.cv-title {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.cv-role { margin-top: 8px; font-size: 15px; color: var(--cv-muted); }
+.cv-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+@media (min-width: 900px) {
+  .cv-actions { align-items: flex-end; }
+}
+.cv-note { font-family: var(--font-mono); font-size: 11px; color: var(--cv-faint); }
+
+/* Body: main column (profile, experience) and a side column (contact, skills, education), then the
+   selected projects as a full-width band (two by two), so the printed CV fits on one page. */
+.cv-body { display: grid; gap: 64px; margin-top: 56px; }
+@media (min-width: 1024px) {
+  .cv-body { grid-template-columns: minmax(0, 1fr) 320px; gap: 88px; }
+}
+.cv-section + .cv-section { margin-top: 56px; }
+.cv-h2 {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--cv-rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cv-accent);
+}
+/* Under the Experience heading: the listed roles start in 2023, the six years started earlier. */
+.cv-career-note { margin-top: 16px; max-width: 64ch; font-size: 14.5px; line-height: 1.6; color: var(--cv-muted); }
+.cv-lede { margin-top: 22px; max-width: 64ch; font-size: 17px; line-height: 1.7; color: var(--cv-muted); }
+
+.cv-list > li { padding-block: 24px; border-bottom: 1px solid var(--cv-rule); }
+.cv-list > li:last-child { border-bottom: 0; }
+.cv-list-tight > li { padding-block: 18px; }
+.cv-projects { margin-top: 64px; }
+@media (min-width: 900px) {
+  .cv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
+  .cv-grid > li:nth-last-child(-n + 2) { border-bottom: 0; }
+}
+.cv-entry-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; }
+.cv-h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+  font-variant-numeric: lining-nums;
+}
+.cv-h4 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variant-numeric: lining-nums;
+}
+.cv-when { font-family: var(--font-mono); font-size: 12px; color: var(--cv-faint); white-space: nowrap; }
+.cv-what { margin-top: 6px; font-size: 14.5px; line-height: 1.5; }
+.cv-soft { color: var(--cv-muted); }
+.cv-desc { margin-top: 6px; max-width: 66ch; font-size: 15px; line-height: 1.65; color: var(--cv-muted); }
+.cv-metrics { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 12px; font-size: 14.5px; }
+.cv-metrics li { position: relative; padding-left: 15px; }
+.cv-metrics li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  background: var(--cv-accent);
+}
+.cv-link { margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--cv-faint); }
+
+.cv-dl { display: grid; gap: 18px; margin-top: 22px; }
+.cv-dl dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cv-faint);
+}
+.cv-dl dd { margin-top: 6px; font-size: 14.5px; }
+/* A contact link never breaks (the LinkedIn slug has a hyphen). */
+.cv-contact a { white-space: nowrap; }
+.cv-skills { display: grid; gap: 18px; margin-top: 22px; }
+.cv-skills .cv-desc { margin-top: 4px; font-size: 14.5px; }
+
+@media print {
+  @page { size: A4; margin: 10mm 12mm; }
+
+  html:has([data-cv]) { color-scheme: light; }
+  html:has([data-cv]), body:has([data-cv]) { background: #fff; }
+  /* Only the document: no skip link, header or footer. */
+  body:has([data-cv]) > :not(main) { display: none !important; }
+  [data-cv-screen] { display: none !important; }
+
+  .cv {
+    --cv-ink: #1a1a18;
+    --cv-muted: #3a3936;
+    --cv-faint: #6b6964;
+    --cv-rule: #d9d6cf;
+    --cv-accent: #b23a0e;
+    max-width: none;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cv a:not([data-cv-download]) { border-bottom: 0; }
+
+  /* One grid for the page: the column wrappers step aside so every section can be placed.
+     Contact joins the header row, the profile spans the width, projects close the page two by two. */
+  .cv {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64mm;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-areas:
+      'head contact'
+      'profile profile'
+      'experience skills'
+      'experience education'
+      'projects projects';
+    column-gap: 9mm;
+    align-items: start;
+  }
+  .cv-body, .cv-main, .cv-side { display: contents; }
+  .cv-head { grid-area: head; }
+  /* Wider than its track, growing leftwards into the header's free space: the LinkedIn URL stays on one line. */
+  .cv [data-area='contact'] { grid-area: contact; align-self: end; justify-self: end; width: 84mm; padding-bottom: 4.5mm; }
+  .cv [data-area='profile'] { grid-area: profile; }
+  .cv [data-area='experience'] { grid-area: experience; }
+  .cv [data-area='skills'] { grid-area: skills; }
+  .cv [data-area='education'] { grid-area: education; }
+  .cv [data-area='projects'] { grid-area: projects; }
+  .cv .cv-section { margin-top: 3.5mm; }
+  .cv [data-area='contact'] .cv-h2 { display: none; }
+
+  .cv-head { display: block; padding-bottom: 4.5mm; border-bottom: 0; }
+  .cv [data-area='profile'] { margin-top: 0 !important; border-top: 0.6pt solid var(--cv-rule); padding-top: 3.5mm; }
+  .cv [data-area='profile'] .cv-h2 { display: none; }
+  .cv-kicker { display: none; }
+  .cv-name { margin-top: 0; font-size: 25pt; line-height: 1; }
+  .cv-title { margin-top: 1.8mm; font-size: 13pt; }
+  .cv-role { margin-top: 0.8mm; font-size: 9pt; }
+
+  .cv-h2 { padding-bottom: 1.4mm; border-bottom-width: 0.6pt; font-size: 6.8pt; letter-spacing: 0.18em; }
+  .cv-career-note { margin-top: 1.2mm; max-width: none; font-size: 7.6pt; line-height: 1.35; }
+  .cv-lede { margin-top: 0; max-width: none; font-size: 9pt; line-height: 1.5; color: var(--cv-ink); }
+
+  .cv-list > li { padding-block: 1.7mm; border-bottom-width: 0.4pt; break-inside: avoid; }
+  .cv-list-tight > li { padding-block: 1.5mm; }
+  .cv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 9mm; }
+  .cv-grid > li:nth-last-child(-n + 2) { border-bottom: 0; }
+  .cv-entry-head { gap: 0 4mm; }
+  .cv-h3 { font-size: 12pt; line-height: 1.15; }
+  .cv-h4 { font-size: 10.5pt; }
+  .cv-when { font-size: 7pt; }
+  .cv-what { margin-top: 0.4mm; font-size: 8.2pt; line-height: 1.35; }
+  .cv-desc { margin-top: 0.5mm; max-width: none; font-size: 8.2pt; line-height: 1.4; }
+  .cv-metrics { gap: 0.4mm 5mm; margin-top: 0.8mm; font-size: 8.2pt; }
+  .cv-metrics li { padding-left: 3mm; }
+  .cv-metrics li::before { width: 1.3mm; height: 1.3mm; top: 0.6em; }
+  .cv-link { margin-top: 0.6mm; font-size: 7pt; }
+  .cv-link .cv-soft { display: none; }
+
+  .cv-dl { gap: 0.9mm; margin-top: 0; }
+  .cv-dl > div { display: grid; grid-template-columns: 18mm minmax(0, 1fr); align-items: baseline; }
+  .cv-dl dt { font-size: 7pt; }
+  .cv-dl dd { margin-top: 0; font-size: 8.2pt; }
+  .cv-skills { gap: 1.6mm; margin-top: 2mm; }
+  .cv-skills > li { display: grid; grid-template-columns: 17mm minmax(0, 1fr); column-gap: 2mm; align-items: baseline; }
+  .cv-skills .cv-h4 { font-size: 9.5pt; line-height: 1.2; }
+  .cv-skills .cv-desc { margin-top: 0; font-size: 8.2pt; line-height: 1.4; }
+  .cv-list-tight .cv-entry-head { gap: 0 3mm; }
+}

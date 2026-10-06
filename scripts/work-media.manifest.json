@@ -1,0 +1,566 @@
+[
+  {
+    "slug": "ubbfy",
+    "file": "/work/ubbfy/01.webp",
+    "width": 1600,
+    "height": 866,
+    "kind": "interior",
+    "source": "git:v5-manifesto:public/images/ubbfy.png",
+    "alt": {
+      "fr": "Tableau de bord de la plateforme Ubbfy",
+      "en": "Ubbfy platform dashboard"
+    }
+  },
+  {
+    "slug": "ubbfy",
+    "file": "/work/ubbfy/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://app.ubbfy.com",
+    "alt": {
+      "fr": "Page de connexion d’Ubbfy",
+      "en": "Ubbfy sign-in page"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/02b-contract-detail-risks.png",
+    "alt": {
+      "fr": "Fiche contrat avec les risques détectés par l’IA",
+      "en": "Contract detail with AI-detected risks"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/01-command-center.png",
+    "alt": {
+      "fr": "Centre de commande des contrats",
+      "en": "Contract command center"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/03.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/02-contract-detail-ai.png",
+    "alt": {
+      "fr": "Analyse IA d’un contrat",
+      "en": "AI analysis of a contract"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/04.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/03-health-score.png",
+    "alt": {
+      "fr": "Score de santé du portefeuille de contrats",
+      "en": "Contract portfolio health score"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/05.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/04b-at-risk-list.png",
+    "alt": {
+      "fr": "Liste des contrats à risque",
+      "en": "List of at-risk contracts"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/06.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/05-invoice-extracted-fields.png",
+    "alt": {
+      "fr": "Champs extraits automatiquement d’une facture",
+      "en": "Fields automatically extracted from an invoice"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/07.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/contractiq/06-ghost-subscriptions.png",
+    "alt": {
+      "fr": "Détection des abonnements fantômes",
+      "en": "Ghost subscription detection"
+    }
+  },
+  {
+    "slug": "contractiq",
+    "file": "/work/contractiq/08.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "file:.superpowers/assets/contractiq/07-public-signature-page.png",
+    "alt": {
+      "fr": "Page publique de signature",
+      "en": "Public signature page"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/01.webp",
+    "width": 1280,
+    "height": 720,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/desktop-dash.png",
+    "alt": {
+      "fr": "Tableau de bord ZenLife sur ordinateur",
+      "en": "ZenLife desktop dashboard"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/02.webp",
+    "width": 1280,
+    "height": 1100,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/tableau-de-bord-dark.png",
+    "alt": {
+      "fr": "Tableau de bord ZenLife en thème sombre",
+      "en": "ZenLife dashboard, dark theme"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/03.webp",
+    "width": 1280,
+    "height": 1156,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/finances-resume-dark.png",
+    "alt": {
+      "fr": "Résumé des finances dans ZenLife, thème sombre",
+      "en": "ZenLife finance summary, dark theme"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/04.webp",
+    "width": 1280,
+    "height": 1274,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/planificateur-jour-dark.png",
+    "alt": {
+      "fr": "Planificateur de la journée dans ZenLife",
+      "en": "ZenLife daily planner"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/05.webp",
+    "width": 1280,
+    "height": 991,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/pensees-positives-dark.png",
+    "alt": {
+      "fr": "Pensées positives dans ZenLife",
+      "en": "Positive thoughts in ZenLife"
+    }
+  },
+  {
+    "slug": "zenlife",
+    "file": "/work/zenlife/06.webp",
+    "width": 390,
+    "height": 844,
+    "kind": "interior",
+    "source": "file:.superpowers/assets/zenlife/mobile-dash.png",
+    "alt": {
+      "fr": "Tableau de bord ZenLife sur mobile",
+      "en": "ZenLife dashboard on mobile"
+    }
+  },
+  {
+    "slug": "tadagberhplus",
+    "file": "/work/tadagberhplus/01.webp",
+    "width": 1600,
+    "height": 864,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/tadagberhplus.png",
+    "alt": {
+      "fr": "Site vitrine d’un cabinet de conseil RH, Bénin",
+      "en": "Showcase site of an HR consulting firm, Benin"
+    }
+  },
+  {
+    "slug": "tadagberhplus",
+    "file": "/work/tadagberhplus/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://tadagberhplus.com",
+    "alt": {
+      "fr": "Page d’accueil en ligne",
+      "en": "Live home page"
+    }
+  },
+  {
+    "slug": "ccns",
+    "file": "/work/ccns/01.webp",
+    "width": 1600,
+    "height": 808,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/ccns.png",
+    "alt": {
+      "fr": "Site de la CCNS",
+      "en": "CCNS website"
+    }
+  },
+  {
+    "slug": "ccns",
+    "file": "/work/ccns/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://ccnsbenin.vercel.app",
+    "alt": {
+      "fr": "Page d’accueil en ligne",
+      "en": "Live home page"
+    }
+  },
+  {
+    "slug": "leconsultant",
+    "file": "/work/leconsultant/01.webp",
+    "width": 1600,
+    "height": 864,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/leconsultant.png",
+    "alt": {
+      "fr": "Site Le Consultant",
+      "en": "Le Consultant website"
+    }
+  },
+  {
+    "slug": "easytowork",
+    "file": "/work/easytowork/01.webp",
+    "width": 1600,
+    "height": 420,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/easytowork.png",
+    "alt": {
+      "fr": "Site Easy To Work",
+      "en": "Easy To Work website"
+    }
+  },
+  {
+    "slug": "easytowork",
+    "file": "/work/easytowork/02.webp",
+    "width": 1600,
+    "height": 828,
+    "kind": "public",
+    "source": "url:https://easytowork.fr",
+    "alt": {
+      "fr": "Page d’accueil en ligne",
+      "en": "Live home page"
+    }
+  },
+  {
+    "slug": "planus",
+    "file": "/work/planus/01.webp",
+    "width": 1600,
+    "height": 865,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/planus.png",
+    "alt": {
+      "fr": "Site Planus Analytics",
+      "en": "Planus Analytics website"
+    }
+  },
+  {
+    "slug": "whatspay",
+    "file": "/work/whatspay/01.webp",
+    "width": 1600,
+    "height": 866,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/whatspay.png",
+    "alt": {
+      "fr": "Site WhatsPay",
+      "en": "WhatsPay website"
+    }
+  },
+  {
+    "slug": "whatspay",
+    "file": "/work/whatspay/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://whatspay.africa",
+    "alt": {
+      "fr": "Page d’accueil en ligne",
+      "en": "Live home page"
+    }
+  },
+  {
+    "slug": "upgrade",
+    "file": "/work/upgrade/01.webp",
+    "width": 1304,
+    "height": 694,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/upgrade.png",
+    "alt": {
+      "fr": "Site Upgrade Afrique",
+      "en": "Upgrade Afrique website"
+    }
+  },
+  {
+    "slug": "upgrade",
+    "file": "/work/upgrade/02.webp",
+    "width": 1600,
+    "height": 690,
+    "kind": "public",
+    "source": "url:https://upgrade-afrique.com",
+    "alt": {
+      "fr": "Page d’accueil en ligne",
+      "en": "Live home page"
+    }
+  },
+  {
+    "slug": "freelanceclub",
+    "file": "/work/freelanceclub/01.webp",
+    "width": 1600,
+    "height": 865,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/freelanceclub.png",
+    "alt": {
+      "fr": "Site Freelance Club",
+      "en": "Freelance Club website"
+    }
+  },
+  {
+    "slug": "bilalsekou",
+    "file": "/work/bilalsekou/01.webp",
+    "width": 1600,
+    "height": 865,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/bilal_portfolio.png",
+    "alt": {
+      "fr": "Portfolio de Bilal Sékou",
+      "en": "Bilal Sékou’s portfolio"
+    }
+  },
+  {
+    "slug": "mariette",
+    "file": "/work/mariette/01.webp",
+    "width": 1600,
+    "height": 865,
+    "kind": "public",
+    "source": "git:v5-manifesto:public/images/portfolio_mariette.png",
+    "alt": {
+      "fr": "Portfolio de Mariette",
+      "en": "Mariette’s portfolio"
+    }
+  },
+  {
+    "slug": "moncarnet",
+    "file": "/work/moncarnet/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://moncarnet.kheios.com",
+    "alt": {
+      "fr": "Page d’accueil de MonCarnet",
+      "en": "MonCarnet home page"
+    }
+  },
+  {
+    "slug": "moncarnet",
+    "file": "/work/moncarnet/02.webp",
+    "width": 1280,
+    "height": 800,
+    "kind": "interior",
+    "source": "gh:ThommyShelby9/moncarnet:public/decouvrir/adjoa-alerte.webp",
+    "alt": {
+      "fr": "Tableau de bord soignant avec alerte, données fictives",
+      "en": "Caregiver dashboard with an alert, fictional data"
+    }
+  },
+  {
+    "slug": "moncarnet",
+    "file": "/work/moncarnet/03.webp",
+    "width": 780,
+    "height": 1688,
+    "kind": "interior",
+    "source": "gh:ThommyShelby9/moncarnet:public/decouvrir/awa-accueil.webp",
+    "alt": {
+      "fr": "Accueil mobile d’une femme enceinte, données fictives",
+      "en": "Mobile home of an expecting mother, fictional data"
+    }
+  },
+  {
+    "slug": "moncarnet",
+    "file": "/work/moncarnet/04.webp",
+    "width": 780,
+    "height": 1688,
+    "kind": "interior",
+    "source": "gh:ThommyShelby9/moncarnet:public/decouvrir/codjo-carnet.webp",
+    "alt": {
+      "fr": "Carnet de vaccination et tension sur mobile, données fictives",
+      "en": "Vaccination and blood pressure record on mobile, fictional data"
+    }
+  },
+  {
+    "slug": "moncarnet",
+    "file": "/work/moncarnet/05.webp",
+    "width": 1280,
+    "height": 800,
+    "kind": "interior",
+    "source": "gh:ThommyShelby9/moncarnet:public/decouvrir/pilotage-ministere.webp",
+    "alt": {
+      "fr": "Vue de pilotage nationale, données fictives",
+      "en": "National oversight view, fictional data"
+    }
+  },
+  {
+    "slug": "lecentre",
+    "file": "/work/lecentre/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://lecentre.kheios.com",
+    "alt": {
+      "fr": "Page d’accueil de la proposition Le Centre",
+      "en": "Le Centre proposal home page"
+    }
+  },
+  {
+    "slug": "lecentre",
+    "file": "/work/lecentre/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:https://lecentre.kheios.com/#/collection",
+    "alt": {
+      "fr": "Page collection de la proposition Le Centre",
+      "en": "Collection page of the Le Centre proposal"
+    }
+  },
+  {
+    "slug": "procom",
+    "file": "/work/procom/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Accueil de la proposition Procom, le flux d’influence",
+      "en": "Procom proposal home, the influence flow"
+    }
+  },
+  {
+    "slug": "procom",
+    "file": "/work/procom/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Section « Sept forces, un seul flux »",
+      "en": "Section “Seven forces, one flow”"
+    }
+  },
+  {
+    "slug": "procom",
+    "file": "/work/procom/03.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5303/",
+    "alt": {
+      "fr": "Section méthode : stratégie, narration, propagation, mesure",
+      "en": "Method section: strategy, narrative, propagation, measurement"
+    }
+  },
+  {
+    "slug": "beninbouge",
+    "file": "/work/beninbouge/01.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5301/article/2",
+    "alt": {
+      "fr": "Page d’article de la proposition Bénin Bouge",
+      "en": "Article page of the Bénin Bouge proposal"
+    }
+  },
+  {
+    "slug": "beninbouge",
+    "file": "/work/beninbouge/02.webp",
+    "width": 1600,
+    "height": 1000,
+    "kind": "public",
+    "source": "url:http://localhost:5301/",
+    "alt": {
+      "fr": "Grille d’actualités de la page d’accueil",
+      "en": "News grid on the home page"
+    }
+  },
+  {
+    "slug": "beninbouge",
+    "file": "/work/beninbouge/03.webp",
+    "width": 1600,
+    "height": 1300,
+    "kind": "public",
+    "source": "url:http://localhost:5301/",
+    "alt": {
+      "fr": "Carte interactive des départements du Bénin, Borgou en surbrillance",
+      "en": "Interactive map of Benin departments, Borgou highlighted"
+    }
+  },
+  {
+    "slug": "najaexperts",
+    "file": "/work/najaexperts/01.webp",
+    "width": 1600,
+    "height": 961,
+    "kind": "public",
+    "source": "url:http://localhost:5302/a",
+    "alt": {
+      "fr": "Proposition A, page d’accueil",
+      "en": "Proposal A, home page"
+    }
+  },
+  {
+    "slug": "najaexperts",
+    "file": "/work/najaexperts/02.webp",
+    "width": 1600,
+    "height": 961,
+    "kind": "public",
+    "source": "url:http://localhost:5302/b",
+    "alt": {
+      "fr": "Proposition B, page d’accueil",
+      "en": "Proposal B, home page"
+    }
+  },
+  {
+    "slug": "najaexperts",
+    "file": "/work/najaexperts/03.webp",
+    "width": 1600,
+    "height": 961,
+    "kind": "public",
+    "source": "url:http://localhost:5302/c",
+    "alt": {
+      "fr": "Proposition C, page d’accueil",
+      "en": "Proposal C, home page"
+    }
+  }
+]

@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "title": "Rostel Panoumassi · Digital product engineering",
+    "description": "I design and ship SaaS, payment and management platforms, from architecture to production. Six years of experience, three as tech lead. Cotonou, Benin."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "skip": "Skip to content",
+    "work": "Work",
+    "expertise": "DNA",
+    "about": "About",
+    "explorations": "Lab",
+    "cta": "Discuss a project",
+    "menu": "Menu",
+    "closeMenu": "Close the menu",
+    "switchLocale": "FR, lire ce site en français",
+    "home": "Home, Rostel Panoumassi"
+  },
+  "hero": {
+    "eyebrow": "Rostel Panoumassi · Digital product engineering · Cotonou",
+    "title": "Engineering is in the DNA.",
+    "lede": "I design and ship digital products, from architecture to production: SaaS, payment and management platforms. Head of Engineering & Innovation at KPS Groupe, six years of experience, three as tech lead.",
+    "ctaProject": "Discuss a project",
+    "ctaWork": "See the work",
+    "ctaCv": "Download the CV (PDF)",
+    "scroll": "Scroll to sequence"
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "built": "Designed and built by hand"
+  },
+  "notFound": {
+    "title": "This page does not exist.",
+    "back": "Back to the home page",
+    "kicker": "Error 404",
+    "text": "The link may be old, or the address may contain a typo.",
+    "work": "See the work"
+  },
+  "work": {
+    "cta": "Read the case study",
+    "ctaFor": "Read the case study: {name}",
+    "coBuilt": "Co-built with"
+  },
+  "conversion": {
+    "kicker": "05 · Stabilisation",
+    "title": "Ready to build.",
+    "text": "A platform to design, a product to take over or a team to structure: describe your needs in a few minutes, I reply within 48 hours.",
+    "brief": "Describe my project",
+    "email": "Send an email"
+  },
+  "workIndex": {
+    "metaTitle": "Work · Rostel Panoumassi",
+    "metaDescription": "The products I designed and shipped: ERP, B2B SaaS, mobile payments, HR, health. For each one, my role, the team, the stack and the technical decisions.",
+    "kicker": "Work",
+    "title": "Products shipped, from the first schema to production.",
+    "lede": "ERP, SaaS, mobile payments, HR, health: for every project, my exact role, the team, the stack and the decisions that mattered.",
+    "count": "{count} projects · {from} to {to}",
+    "othersKicker": "More work",
+    "othersTitle": "From HR platforms to mobile payments, the rest of the shipped work.",
+    "explorationsText": "Redesign proposals made on my own initiative, shown for what they are.",
+    "explorationsLink": "See the explorations"
+  },
+  "caseStudy": {
+    "metaTitle": "{title}, case study · Rostel Panoumassi",
+    "back": "All work",
+    "role": "Role",
+    "team": "Team",
+    "client": "Client",
+    "year": "Year",
+    "stack": "Stack",
+    "status": "Status",
+    "statusLive": "Live",
+    "statusArchived": "Archived",
+    "statusPrivate": "Private",
+    "statusConcept": "Prototype",
+    "visit": "Visit the site",
+    "gallery": "Gallery",
+    "result": "Outcome",
+    "nav": "More case studies",
+    "prev": "Previous project",
+    "next": "Next project",
+    "conversionKicker": "Your project",
+    "noImagesPrivate": "Private project, no public screenshots",
+    "noImagesArchived": "Archived project, no public screenshots",
+    "noImagesOther": "No public screenshot for this project",
+    "caseStudy": "Case study",
+    "genes": "DNA"
+  },
+  "explorations": {
+    "metaTitle": "Lab · Rostel Panoumassi",
+    "metaDescription": "Redesign proposals made on my own initiative for existing websites: an audit, a visual direction and a working prototype.",
+    "kicker": "04 · Lab",
+    "title": "The mutations, presented for what they are.",
+    "lede": "Studies made on my own initiative for existing websites: an audit, a visual direction, a working prototype. They are not shipped client work, and each one says so.",
+    "count": "{count} studies · {year}",
+    "badgeUnsolicited": "Unsolicited redesign proposal",
+    "badgePitched": "Redesign proposal presented to the client",
+    "back": "The whole lab",
+    "nav": "More explorations",
+    "prev": "Previous exploration",
+    "next": "Next exploration",
+    "workText": "Products designed and shipped for clients are in the work section.",
+    "workLink": "See the work",
+    "caseMetaTitle": "{title}, redesign proposal · Rostel Panoumassi"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "tooLong": "This field is too long.",
+    "invalidEmail": "Invalid email address.",
+    "invalidUrl": "Invalid web address. Start with http:// or https://.",
+    "pitchTooShort": "Tell me a bit more: at least 10 characters.",
+    "pitchTooLong": "This summary is too long: 1,000 characters at most.",
+    "messageTooShort": "Your message is too short: at least 10 characters.",
+    "messageTooLong": "Your message is too long: 3,000 characters at most."
+  },
+  "forms": {
+    "required": "required",
+    "pending": "Sending",
+    "summaryTitle": "A few answers need another look.",
+    "summaryText": "Your answers are kept. Follow the links to fix each field.",
+    "summaryGeneric": "One answer could not be processed. Check the form, then send it again.",
+    "honeypot": "Leave this field empty",
+    "rateLimited": "Several submissions were just sent from your connection. Try again in an hour, or write to me directly at <mail>{email}</mail>.",
+    "failed": "The message could not be sent, and your answers are still here. Write to me directly at <mail>{email}</mail>. I reply within 48 hours.",
+    "privacy": "Your answers are only used to reply to you. <link>Privacy policy</link>"
+  },
+  "brief": {
+    "metaTitle": "Project brief · Rostel Panoumassi",
+    "metaDescription": "Describe your project in a few minutes: need, context, timeline and budget. I reply within 48 hours.",
+    "kicker": "Project brief",
+    "title": "Tell me about your project.",
+    "lede": "A few minutes is enough. I reply within 48 hours.",
+    "meta": "4 parts · 8 required fields",
+    "formLabel": "Project brief",
+    "sections": {
+      "project": {
+        "legend": "01 · The project",
+        "text": "What you want to build or improve."
+      },
+      "context": {
+        "legend": "02 · The context",
+        "text": "Where the product stands, and who already works on it."
+      },
+      "frame": {
+        "legend": "03 · The frame",
+        "text": "A rough idea is enough, it is not a commitment."
+      },
+      "you": {
+        "legend": "04 · You",
+        "text": "To reply to you, and for nothing else."
+      }
+    },
+    "projectType": {
+      "label": "Type of need",
+      "new": "A new product",
+      "revamp": "A product redesign",
+      "audit": "A technical audit",
+      "spot": "A one-off engagement",
+      "unsure": "Not sure yet"
+    },
+    "pitch": {
+      "label": "Your project in a few lines",
+      "hint": "The problem to solve, for whom, and what already exists. 10 to 1,000 characters."
+    },
+    "currentState": {
+      "label": "Where does the project stand?",
+      "idea": "An idea",
+      "design": "Mockups or a specification",
+      "inProgressBlocked": "In development, but stuck",
+      "mvpInProd": "A first version in production",
+      "existingRevamp": "An existing product to rebuild",
+      "auditOnly": "A product to audit"
+    },
+    "teamSize": {
+      "label": "Size of your team",
+      "solo": "One person",
+      "small": "2 to 5 people",
+      "medium": "6 to 15 people",
+      "large": "More than 15 people"
+    },
+    "resources": {
+      "label": "Already on the team",
+      "hasTechTeam": "Developers",
+      "hasDesigner": "A designer",
+      "hasProductOwner": "A product owner"
+    },
+    "notes": {
+      "label": "Useful details",
+      "hint": "Current stack, constraints, links to what exists."
+    },
+    "deadline": {
+      "label": "Desired timeline",
+      "lt1m": "Under a month",
+      "m1to3": "1 to 3 months",
+      "m3to6": "3 to 6 months",
+      "flexible": "Flexible"
+    },
+    "budget": {
+      "label": "Expected budget",
+      "hint": "In euros. A range is enough.",
+      "lt5k": "Under €5,000",
+      "k5to15": "€5,000 to €15,000",
+      "k15to40": "€15,000 to €40,000",
+      "k40to100": "€40,000 to €100,000",
+      "k100plus": "Over €100,000",
+      "unknown": "Not defined yet"
+    },
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": {
+      "label": "Email address",
+      "hint": "My reply will arrive here."
+    },
+    "company": "Company",
+    "website": {
+      "label": "Website",
+      "placeholder": "https://"
+    },
+    "source": "How did you hear about me?",
+    "firstContact": "First conversation",
+    "prefersCall": "I would rather start with a call",
+    "submit": "Send the brief",
+    "thanks": {
+      "metaTitle": "Brief sent · Rostel Panoumassi",
+      "metaDescription": "Your brief arrived. I reply within 48 hours.",
+      "kicker": "Brief sent",
+      "title": "Thank you, your brief arrived.",
+      "text": "I reply within 48 hours, at the address you gave.",
+      "home": "Back to the home page",
+      "work": "See the work"
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact · Rostel Panoumassi",
+    "metaDescription": "Write to Rostel Panoumassi, product engineer in Cotonou: email, LinkedIn, GitHub, or a short message from this page.",
+    "kicker": "Contact",
+    "title": "Write directly.",
+    "lede": "A question, an introduction, a conversation about a product: a short message is enough. I reply within 48 hours.",
+    "channels": "Reach me",
+    "email": "Email",
+    "elsewhere": "Elsewhere",
+    "location": "Based in",
+    "locationValue": "Cotonou, Benin · UTC+1",
+    "briefText": "For a project, the brief is faster.",
+    "briefLink": "Describe my project",
+    "formTitle": "A short message",
+    "name": "Name",
+    "emailField": {
+      "label": "Email address",
+      "hint": "My reply will arrive here."
+    },
+    "message": {
+      "label": "Your message",
+      "hint": "10 to 3,000 characters."
+    },
+    "submit": "Send the message",
+    "thanks": {
+      "metaTitle": "Message sent · Rostel Panoumassi",
+      "metaDescription": "Your message arrived. I reply within 48 hours.",
+      "kicker": "Message sent",
+      "title": "Thank you, your message arrived.",
+      "text": "I reply within 48 hours, at the address you gave.",
+      "home": "Back to the home page",
+      "work": "See the work"
+    }
+  },
+  "about": {
+    "metaTitle": "About · Rostel Panoumassi",
+    "metaDescription": "Rostel Panoumassi, Head of Engineering & Innovation at KPS Groupe in Cotonou: six years of experience, three as tech lead. Career, method, skills and education.",
+    "kicker": "About",
+    "title": "Product engineer, tech lead, trainer.",
+    "lede": "I’m Rostel Panoumassi, Head of Engineering & Innovation at KPS Groupe, in Cotonou. Six years of experience, three as tech lead: I design platforms, settle the architecture choices and train the teams that keep them running.",
+    "facts": {
+      "label": "In short",
+      "based": "Based in",
+      "basedValue": "Cotonou, Benin · UTC+1",
+      "elsewhere": "Elsewhere",
+      "cv": "CV"
+    },
+    "career": {
+      "kicker": "01 · Career",
+      "title": "Platforms shipped, teams led.",
+      "note": "Roles documented since 2023. The years before: projects and training.",
+      "current": "Current role"
+    },
+    "method": {
+      "kicker": "02 · How I work",
+      "title": "A team that knows what it builds, and why.",
+      "frame": "Frame",
+      "frameText": "Before the first line of code, pin down with the business the problem, the users, the constraints and the scope of the first release.",
+      "decide": "Decide in writing",
+      "decideText": "Key architecture choices are documented: the context, the options, the decision.",
+      "deliver": "Deliver on a rhythm",
+      "deliverText": "Short cycles, regular releases and continuous integration: the Agile and DevOps practices I put in place at KPS Groupe.",
+      "coach": "Pass it on",
+      "coachText": "I lead and train developers. My degree in andragogy, the practice of adult education, taught me to start from what each person already knows and to check what has truly been learned."
+    },
+    "skills": {
+      "kicker": "03 · What I work with",
+      "title": "A broad stack, chosen project by project."
+    },
+    "education": {
+      "kicker": "04 · Education",
+      "title": "Trained in code, and in teaching."
+    }
+  },
+  "legal": {
+    "kicker": "Legal",
+    "updated": "Last updated: <time>{date}</time>",
+    "toc": "Contents",
+    "privacy": {
+      "metaTitle": "Privacy policy · Rostel Panoumassi",
+      "metaDescription": "The data this site collects, why, where it is kept and how to exercise your rights. No cookies, no trackers.",
+      "title": "Privacy policy"
+    },
+    "terms": {
+      "metaTitle": "Terms of use · Rostel Panoumassi",
+      "metaDescription": "Site publisher, intellectual property of the content, client work and explorations, liability and governing law.",
+      "title": "Terms of use"
+    }
+  },
+  "cv": {
+    "metaTitle": "CV · Rostel Panoumassi",
+    "metaDescription": "CV of Rostel Panoumassi, Head of Engineering & Innovation at KPS Groupe in Cotonou: experience, projects, skills and education. As a PDF, in English and in French.",
+    "kicker": "Curriculum vitae",
+    "download": "Download the PDF",
+    "downloadNote": "A4, in English",
+    "contact": "Contact",
+    "email": "Email",
+    "site": "Website",
+    "based": "Based in",
+    "basedValue": "Cotonou, Benin · UTC+1",
+    "profile": "Profile",
+    "experience": "Experience",
+    "projects": "Selected projects",
+    "caseStudy": "Case study",
+    "skills": "Skills",
+    "education": "Education"
+  },
+  "terminal": {
+    "metaTitle": "Terminal",
+    "metaDescription": "Rostel Panoumassi’s site from the command line: work, explorations, CV and contact, from the keyboard.",
+    "title": "The site, from the command line.",
+    "back": "Back to the site",
+    "label": "Terminal command",
+    "output": "Terminal output",
+    "keys": "Enter runs. Tab completes commands and slugs. Up and down arrows: history. Shift+Tab leaves the field.",
+    "fallback": {
+      "text": "The terminal needs JavaScript. The same destinations, as links:",
+      "work": "Work",
+      "explorations": "Explorations",
+      "brief": "Send a brief",
+      "contact": "Contact",
+      "cv": "CV as a PDF",
+      "home": "Home"
+    },
+    "out": {
+      "welcome": "Rostel Panoumassi, product engineer. Type help to see the commands.",
+      "helpTitle": "Available commands:",
+      "helpKeys": "Tab completes, up and down arrows for history.",
+      "help": {
+        "help": "show this help",
+        "whoami": "who I am",
+        "ls": "list the work",
+        "open": "open a case study or an exploration",
+        "explorations": "list the explorations",
+        "brief": "open the project brief form",
+        "contact": "open the contact page",
+        "cv": "open the CV as a PDF",
+        "lang": "switch the site to French or English",
+        "clear": "clear the screen",
+        "exit": "back to the home page"
+      },
+      "whoami": {
+        "identity": "{name}, product engineer",
+        "role": "{role} at {employer}",
+        "experience": "{years} years of experience, {lead} as tech lead",
+        "location": "Cotonou, Benin · UTC+1"
+      },
+      "ls": "{count} projects. Type open <slug> to read one.",
+      "explorations": "{count} explorations: studies made on my own initiative, not delivered work. Type open <slug> to read one.",
+      "opening": "opening {path}…",
+      "openUsage": "usage: open <slug>. Type ls or explorations for the list.",
+      "openUnknown": "open: {slug}: not found. Type ls or explorations for the list.",
+      "langUsage": "usage: lang fr|en",
+      "langSame": "The site is already in English.",
+      "langSwitch": "switching to French…",
+      "unknown": "command not found: {cmd}. Type help.",
+      "exit": "logout"
+    },
+    "notes": {
+      "coBuilt": "with {names}",
+      "contribution": "engineering contribution",
+      "pitched": "proposal presented to the client",
+      "unsolicited": "unsolicited proposal"
+    }
+  },
+  "dna": {
+    "sequencing": {
+      "kicker": "01 · Sequencing",
+      "title": "Six genes, three pairs.",
+      "intro": "How I design a product, read as DNA: pairs that do not work without each other, and proof behind every gene.",
+      "sequence": "Sequence",
+      "proofs": "Proof"
+    },
+    "construction": {
+      "kicker": "02 · Construction",
+      "title": "From idea to production.",
+      "intro": "The same sequence on every project, from the first conversation to going live."
+    },
+    "expression": {
+      "kicker": "03 · Expression",
+      "title": "What the DNA produces.",
+      "intro": "Three shipped products. Each carries its signature, made of its genes.",
+      "all": "All the work",
+      "genes": "Genes"
+    },
+    "lab": {
+      "kicker": "04 · Lab",
+      "title": "The mutations.",
+      "intro": "Redesigns I imagined for brands, on my own initiative or presented to the client. Proposals, not delivered work.",
+      "all": "The whole lab"
+    }
+  },
+  "signature": {
+    "a": "Ideas are everywhere.",
+    "b": "Execution is a discipline."
+  }
+}

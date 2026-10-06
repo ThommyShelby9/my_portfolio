@@ -1,0 +1,18 @@
+node_modules/
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+coverage/
+.superpowers/
+.DS_Store
+# Local leftovers of pre-v6 builds (not part of the site)
+/legacy/
+
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Firebase emulator logs (e2e)
+*-debug.log

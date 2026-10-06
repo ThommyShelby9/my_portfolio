@@ -1,0 +1,205 @@
+export type RuleId = 'em-dash' | 'emoji' | 'pill' | 'purple-gradient' | 'ai-tag' | 'favicon' | 'custom-cursor' | 'required-page' | 'single-accent' | 'fake-status';
+export interface SourceFile { path: string; content: string }
+export interface Violation { rule: RuleId; path: string; detail: string }
+
+// Extended_Pictographic includes ©, ® and ™, which are legitimate typography.
+const ALLOWED_PICTOGRAPHS = new Set([0x00a9, 0x00ae, 0x2122]);
+const AI_TAG = /made with ai|generated (?:by|with) ai|built with (?:ai|lovable|v0|bolt|framer|webflow|wix)/i;
+
+/**
+ * Pages every build must contain: the privacy policy and the terms, in French and in English.
+ * Each entry lists the accepted built paths (relative to the pages root, the internal route first,
+ * then the public English slug should the route ever be renamed).
+ */
+export const REQUIRED_PAGES: readonly { label: string; paths: readonly string[] }[] = [
+  { label: 'privacy policy (fr)', paths: ['fr/confidentialite.html'] },
+  { label: 'terms (fr)', paths: ['fr/cgu.html'] },
+  { label: 'privacy policy (en)', paths: ['en/confidentialite.html', 'en/privacy.html'] },
+  { label: 'terms (en)', paths: ['en/cgu.html', 'en/terms.html'] },
+];
+
+/** Missing required pages, given every file path of the build (any separator, any prefix). */
+function missingPages(builtPaths: readonly string[]): Violation[] {
+  const paths = builtPaths.map((p) => `/${p.replace(/\\/g, '/')}`);
+  return REQUIRED_PAGES.filter(({ paths: accepted }) => !accepted.some((a) => paths.some((p) => p.endsWith(`/${a}`)))).map(
+    ({ label, paths: accepted }) => ({ rule: 'required-page' as const, path: accepted[0], detail: `missing from the build: ${label}` }),
+  );
+}
+
+function visibleText(html: string): string {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ');
+}
+
+function excerpt(text: string, index: number): string {
+  return text.slice(Math.max(0, index - 30), index + 30).replace(/\s+/g, ' ').trim();
+}
+
+function cssOf(file: SourceFile): string {
+  if (file.path.endsWith('.css')) return file.content;
+  if (!file.path.endsWith('.html')) return '';
+  const tags = [...file.content.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map((m) => m[1]);
+  const attrs = [...file.content.matchAll(/\sstyle\s*=\s*"([^"]*)"/gi)].map((m) => m[1]);
+  return [...tags, ...attrs].join('\n');
+}
+
+function hexToRgb(hex: string): [number, number, number] | null {
+  let h = hex.slice(1);
+  if (h.length === 3 || h.length === 4) h = [...h.slice(0, 3)].map((c) => c + c).join('');
+  if (h.length !== 6 && h.length !== 8) return null;
+  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)) as [number, number, number];
+}
+
+function isPurpleHsl(h: number, s: number, l: number): boolean {
+  return h >= 250 && h <= 320 && s >= 0.25 && l >= 0.15 && l <= 0.9;
+}
+
+function isPurple([r, g, b]: [number, number, number]): boolean {
+  const [rn, gn, bn] = [r / 255, g / 255, b / 255];
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const l = (max + min) / 2;
+  const d = max - min;
+  if (d === 0) return false;
+  const s = d / (1 - Math.abs(2 * l - 1));
+  let h: number;
+  if (max === rn) h = ((gn - bn) / d) % 6;
+  else if (max === gn) h = (bn - rn) / d + 2;
+  else h = (rn - gn) / d + 4;
+  h = (h * 60 + 360) % 360;
+  return isPurpleHsl(h, s, l);
+}
+
+/** True when a gradient argument list contains a purple stop (hex, rgb, hsl, oklch or a named purple token). */
+function hasPurpleStop(args: string): boolean {
+  for (const m of args.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
+    const rgb = hexToRgb(m[0]);
+    if (rgb && isPurple(rgb)) return true;
+  }
+  for (const m of args.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/gi)) {
+    if (isPurple([Number(m[1]), Number(m[2]), Number(m[3])])) return true;
+  }
+  for (const m of args.matchAll(/hsla?\(\s*(-?[\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/gi)) {
+    if (isPurpleHsl(((Number(m[1]) % 360) + 360) % 360, Number(m[2]) / 100, Number(m[3]) / 100)) return true;
+  }
+  for (const m of args.matchAll(/oklch\(\s*[\d.]+%?\s+([\d.]+)\s+(-?[\d.]+)(?:deg)?/gi)) {
+    const h = ((Number(m[2]) % 360) + 360) % 360;
+    if (Number(m[1]) >= 0.08 && h >= 270 && h <= 330) return true;
+  }
+  return /var\(\s*--color-(?:purple|violet|fuchsia)-/i.test(args);
+}
+
+/** Hue of --color-signal (#ff5a1f) in HSL degrees; its darker print variant #b23a0e shares it. */
+const SIGNAL_HUE = 16;
+
+function hsl([r, g, b]: [number, number, number]): [number, number, number] {
+  const [rn, gn, bn] = [r / 255, g / 255, b / 255];
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const l = (max + min) / 2;
+  const d = max - min;
+  if (d === 0) return [0, 0, l];
+  const s = d / (1 - Math.abs(2 * l - 1));
+  let h: number;
+  if (max === rn) h = ((gn - bn) / d) % 6;
+  else if (max === gn) h = (bn - rn) / d + 2;
+  else h = (rn - gn) / d + 4;
+  return [(h * 60 + 360) % 360, s, l];
+}
+
+function isForeignAccentHsl(h: number, s: number, l: number): boolean {
+  if (s < 0.35 || l < 0.12 || l > 0.92) return false;
+  const distance = Math.min(Math.abs(h - SIGNAL_HUE), 360 - Math.abs(h - SIGNAL_HUE));
+  return distance > 12;
+}
+
+/** First saturated colour in a stylesheet that is not the signal orange, or null. */
+function foreignAccent(css: string): string | null {
+  for (const m of css.matchAll(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi)) {
+    const rgb = hexToRgb(m[0]);
+    if (rgb && isForeignAccentHsl(...hsl(rgb))) return m[0];
+  }
+  for (const m of css.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/gi)) {
+    if (isForeignAccentHsl(...hsl([Number(m[1]), Number(m[2]), Number(m[3])]))) return m[0];
+  }
+  for (const m of css.matchAll(/hsla?\(\s*(-?[\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/gi)) {
+    if (isForeignAccentHsl(((Number(m[1]) % 360) + 360) % 360, Number(m[2]) / 100, Number(m[3]) / 100)) return m[0];
+  }
+  for (const m of css.matchAll(/oklch\(\s*([\d.]+)%?\s+([\d.]+)\s+(-?[\d.]+)(?:deg)?/gi)) {
+    const h = ((Number(m[3]) % 360) + 360) % 360;
+    // #ff5a1f is about oklch(0.68 0.21 38).
+    if (Number(m[2]) >= 0.08 && (h < 25 || h > 55)) return m[0];
+  }
+  return null;
+}
+
+const FAKE_STATUS = /system (?:status|online|ready)|enter (?:the )?system|identity confirmed|mission (?:completed|status)/i;
+
+function isPillRadius(value: string): boolean {
+  if (/infinity|var\(\s*--radius-full|9999/i.test(value)) return true;
+  for (const m of value.matchAll(/(\d+(?:\.\d+)?)(px|rem|em)/g)) {
+    const n = Number(m[1]);
+    if ((m[2] === 'px' && n >= 100) || (m[2] !== 'px' && n >= 6)) return true;
+  }
+  return false;
+}
+
+/**
+ * Checks built pages and stylesheets. With `builtPaths` (every file path of the build), it also
+ * checks that the required pages exist.
+ */
+export function checkOwnerRules(files: SourceFile[], builtPaths?: readonly string[]): Violation[] {
+  const violations: Violation[] = builtPaths ? missingPages(builtPaths) : [];
+  const add = (rule: RuleId, path: string, detail: string) => violations.push({ rule, path, detail });
+
+  for (const file of files) {
+    if (file.path.endsWith('.html')) {
+      const text = visibleText(file.content);
+      const dash = text.search(/—|&mdash;|&#0*8212;|&#x0*2014;/i);
+      if (dash !== -1) add('em-dash', file.path, excerpt(text, dash));
+
+      for (const m of text.matchAll(/\p{Extended_Pictographic}/gu)) {
+        if (!ALLOWED_PICTOGRAPHS.has(m[0].codePointAt(0)!)) {
+          add('emoji', file.path, excerpt(text, m.index ?? 0));
+          break;
+        }
+      }
+
+      const tag = text.match(AI_TAG);
+      if (tag) add('ai-tag', file.path, tag[0]);
+
+      const status = text.match(FAKE_STATUS);
+      if (status) add('fake-status', file.path, status[0]);
+
+      if (!/<link\b[^>]*\brel\s*=\s*["'](?:shortcut )?icon["']/i.test(file.content)) {
+        add('favicon', file.path, 'no <link rel="icon"> in the document');
+      }
+    }
+
+    const css = cssOf(file);
+    if (!css) continue;
+
+    for (const m of css.matchAll(/border(?:-[a-z]+){0,2}-radius\s*:\s*([^;}"]+)/gi)) {
+      if (isPillRadius(m[1])) {
+        add('pill', file.path, m[0].trim());
+        break;
+      }
+    }
+
+    for (const m of css.matchAll(/(?:linear|radial|conic)-gradient\(([^;{}]*)\)/gi)) {
+      if (hasPurpleStop(m[1])) {
+        add('purple-gradient', file.path, m[0].slice(0, 80));
+        break;
+      }
+    }
+
+    const accent = foreignAccent(css);
+    if (accent) add('single-accent', file.path, accent);
+
+    const cursor = css.match(/cursor\s*:\s*url\(/i);
+    if (cursor) add('custom-cursor', file.path, cursor[0]);
+  }
+  return violations;
+}
