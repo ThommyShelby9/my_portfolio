@@ -3,9 +3,11 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { particleBudget } from '@/lib/dna/budget';
+import type { Gene } from '@/lib/dna/genes';
 import { DnaBoundary } from './DnaBoundary';
 
 const DnaCanvas = dynamic(() => import('./DnaCanvas'), { ssr: false, loading: () => null });
+const DnaTrajectory = dynamic(() => import('./DnaTrajectory'), { ssr: false, loading: () => null });
 
 function hasWebGL(): boolean {
   try {
@@ -24,9 +26,18 @@ type NavigatorHints = Navigator & { connection?: { saveData?: boolean }; deviceM
  * The DNA helix (spec §3.4): a still poster first, then the live particle scene once the browser is
  * idle, when motion is allowed and WebGL works. Any 3D failure goes back to the poster.
  */
-export function DnaStage() {
+interface Props {
+  /** Home only: the live helix stays fixed behind the page and follows the scenes (spec §4.1). */
+  fixed?: boolean;
+  /** Genes of the featured projects, top ring first (scene 03). */
+  signatures?: readonly (readonly Gene[])[];
+}
+
+export function DnaStage({ fixed = false, signatures }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const tilt = useRef({ x: 0, y: 0 });
+  const state = useRef(1);
+  const focus = useRef(-1);
   const [mode, setMode] = useState<'poster' | '3d'>('poster');
   const [visible, setVisible] = useState(true);
   const [posterMode, setPosterMode] = useState(false);
@@ -98,6 +109,7 @@ export function DnaStage() {
       data-dna-state={mode}
       data-dna-ready={String(ready)}
       data-dna-running={String(running)}
+      data-dna-fixed={fixed ? 'true' : undefined}
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 opacity-40 lg:left-auto lg:w-[52vw] lg:opacity-100"
     >
@@ -113,10 +125,14 @@ export function DnaStage() {
           />
         </picture>
       )}
+      {mode === '3d' && fixed && !posterMode && <DnaTrajectory stage={box} state={state} focus={focus} />}
       {mode === '3d' && count > 0 && (
         <DnaBoundary onError={fallback}>
           <DnaCanvas
             count={count}
+            signatures={signatures}
+            state={state}
+            focus={focus}
             frozen={posterMode}
             running={running || posterMode}
             tilt={tilt}

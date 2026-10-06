@@ -7,7 +7,7 @@ const item = 'no-underline transition-colors hover:text-ivory';
 export function Footer() {
   const t = useTranslations('footer');
   return (
-    <footer className="border-t border-line py-9 font-mono text-[11.5px] uppercase tracking-[0.12em] text-faint">
+    <footer className="relative z-10 border-t border-line bg-graphite py-9 font-mono text-[11.5px] uppercase tracking-[0.12em] text-faint">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-4 px-5 md:px-10">
         <div className="flex flex-wrap gap-x-7 gap-y-3">
           <span>Rostel Panoumassi · Cotonou</span>

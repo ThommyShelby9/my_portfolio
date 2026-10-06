@@ -2,29 +2,64 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 test.describe('home sequences', () => {
-  test('French home shows the four sequences in order', async ({ page }) => {
+  test('French home shows the six DNA scenes in order', async ({ page }) => {
     await page.goto('/');
+    const scenes = await page.locator('[data-dna-scene]').evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.dnaScene));
+    expect(scenes).toEqual(['formation', 'sequencing', 'construction', 'expression', 'lab', 'stabilisation']);
     const headings = page.getByRole('heading', { level: 2 });
-    await expect(headings.nth(0)).toContainText('Je ne livre pas du code');
-    await expect(headings.nth(1)).toContainText('Trois produits');
-    await expect(headings.nth(2)).toContainText('De l’idée à la production');
-    await expect(headings.nth(3)).toContainText('Parlons de votre projet');
-    await expect(page.locator('#realisations-accueil').getByText('Co-développé avec')).toBeVisible();
+    await expect(headings.nth(0)).toHaveText('Six gènes, trois paires.');
+    await expect(headings.nth(1)).toHaveText('De l’idée à la production.');
+    await expect(headings.nth(2)).toHaveText('Ce que l’ADN produit.');
+    await expect(headings.nth(3)).toHaveText('Les mutations.');
+    await expect(headings.nth(4)).toHaveText('Prêt à construire.');
+    await expect(page.locator('#realisations-accueil').getByText('Co-développé avec Jérémie Zitti', { exact: true })).toBeVisible();
+    await expect(page.locator('#realisations-accueil h3')).toHaveText(['Ubbfy', 'ContractIQ', 'ZenLife']);
+    await expect(page.locator('#laboratoire [data-exploration-badge]')).toHaveCount(4);
     await expect(page.locator('#projet').getByText(/sous 48 heures/)).toBeVisible();
   });
 
   test('English home is fully translated', async ({ page }) => {
     await page.goto('/en');
-    await expect(page.getByRole('heading', { name: /ship products that hold up/ })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Three products/ })).toBeVisible();
-    await expect(page.locator('#realisations-accueil').getByText('Co-built with')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Six genes, three pairs.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'What the DNA produces.' })).toBeVisible();
+    await expect(page.locator('#realisations-accueil').getByText('Co-built with Jérémie Zitti', { exact: true })).toBeVisible();
     await expect(page.locator('#projet').getByText(/within 48 hours/)).toBeVisible();
-    await expect(page.locator('main')).not.toContainText(/Parlons de votre projet|Réalisations|sous 48 heures|Co-développé/);
+    await expect(page.locator('main')).not.toContainText(/Prêt à construire|Séquencer|sous 48 heures|Co-développé/);
+  });
+
+  test('Séquencer reveals the proofs of a pair, with and without JavaScript', async ({ browser }) => {
+    test.setTimeout(90_000);
+    for (const javaScriptEnabled of [true, false]) {
+      const context = await browser.newContext({ javaScriptEnabled });
+      const page = await context.newPage();
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      const pair = page.locator('#adn [data-dna-focus="2"]');
+      const proofs = pair.getByRole('list', { name: 'Preuves' });
+      await expect(proofs).toBeHidden();
+      await pair.getByText('Séquencer').click();
+      await expect(proofs).toBeVisible();
+      await expect(proofs).toContainText('3 mises à jour réglementaires CNSS');
+      await context.close();
+    }
+  });
+
+  test('the live helix follows the scenes on scroll', async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.goto('/');
+    const stage = page.locator('[data-dna-stage]');
+    await expect(stage).toHaveAttribute('data-dna-ready', 'true', { timeout: 20_000 });
+    await expect(stage).toHaveCSS('position', 'fixed');
+    for (const [id, state] of [['#methode', '2'], ['#realisations-accueil', '3'], ['#laboratoire', '4'], ['#projet', '5']]) {
+      await page.locator(id).evaluate((el) => el.scrollIntoView({ block: 'start' }));
+      await expect(stage).toHaveAttribute('data-dna-scene', state, { timeout: 5000 });
+    }
+    await page.evaluate(() => scrollTo(0, 0));
+    await expect(stage).toHaveAttribute('data-dna-scene', '1', { timeout: 5000 });
   });
 
   test('below-fold text appears when scrolled into view', async ({ page }) => {
     await page.goto('/');
-    const conv = page.getByRole('heading', { name: 'Parlons de votre projet.' });
+    const conv = page.getByRole('heading', { name: 'Prêt à construire.' });
     await conv.scrollIntoViewIfNeeded();
     await expect.poll(async () => conv.evaluate((el) => getComputedStyle(el).opacity), { timeout: 15_000 }).toBe('1');
   });
@@ -33,7 +68,7 @@ test.describe('home sequences', () => {
     await page.route('**/_next/static/chunks/**', (route) => route.abort());
     await page.goto('/');
     await page.waitForTimeout(3000);
-    const conv = page.getByRole('heading', { name: 'Parlons de votre projet.' });
+    const conv = page.getByRole('heading', { name: 'Prêt à construire.' });
     await conv.scrollIntoViewIfNeeded();
     expect(await conv.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
   });
@@ -41,7 +76,7 @@ test.describe('home sequences', () => {
   test('reduced motion: everything visible at once, poster only', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
-    const conv = page.getByRole('heading', { name: 'Parlons de votre projet.' });
+    const conv = page.getByRole('heading', { name: 'Prêt à construire.' });
     expect(await conv.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
     await expect(page.locator('[data-dna-stage] img[data-dna-poster]')).toBeVisible();
     await expect(page.locator('[data-dna-stage] canvas')).toHaveCount(0);
@@ -99,7 +134,7 @@ test('mobile menu closes after a hash link and after client navigation', async (
   const menu = page.locator('[data-mobile-menu]');
   await menu.locator('summary').click();
   await expect(menu).toHaveAttribute('open', '');
-  await menu.getByRole('link', { name: 'Expertise' }).click();
+  await menu.getByRole('link', { name: 'ADN' }).click();
   await expect(menu).not.toHaveAttribute('open', '');
   await menu.locator('summary').click();
   await expect(menu).toHaveAttribute('open', '');

@@ -7,7 +7,7 @@
     "label": "Navigation principale",
     "skip": "Aller au contenu",
     "work": "Réalisations",
-    "expertise": "Expertise",
+    "expertise": "ADN",
     "about": "À propos",
     "explorations": "Explorations",
     "cta": "Parler d’un projet",
@@ -91,8 +91,8 @@
     "evolveText": "Préparer la maintenance, les performances et les nouvelles fonctionnalités."
   },
   "conversion": {
-    "kicker": "05 · Votre projet",
-    "title": "Parlons de votre projet.",
+    "kicker": "05 · Stabilisation",
+    "title": "Prêt à construire.",
     "text": "Une plateforme à concevoir, un produit à reprendre ou une équipe à structurer : décrivez votre besoin en quelques minutes, je vous réponds sous 48 heures.",
     "brief": "Décrire mon projet",
     "email": "Écrire un email"
@@ -435,6 +435,33 @@
       "langSwitch": "passage en anglais…",
       "unknown": "commande introuvable : {cmd}. Tapez help.",
       "exit": "déconnexion"
+    }
+  },
+  "dna": {
+    "sequencing": {
+      "kicker": "01 · Séquençage",
+      "title": "Six gènes, trois paires.",
+      "intro": "Ce qui fait la façon dont je conçois un produit, lu comme un ADN : des paires qui ne marchent pas l’une sans l’autre, et des preuves derrière chaque gène.",
+      "sequence": "Séquencer",
+      "proofs": "Preuves"
+    },
+    "construction": {
+      "kicker": "02 · Construction",
+      "title": "De l’idée à la production.",
+      "intro": "La même séquence à chaque projet, de la première conversation à la mise en ligne."
+    },
+    "expression": {
+      "kicker": "03 · Expression",
+      "title": "Ce que l’ADN produit.",
+      "intro": "Trois produits livrés. Chacun porte sa signature, composée de ses gènes.",
+      "all": "Toutes les réalisations",
+      "genes": "Gènes"
+    },
+    "lab": {
+      "kicker": "04 · Laboratoire",
+      "title": "Les mutations.",
+      "intro": "Des refontes que j’ai imaginées pour des marques, de ma propre initiative ou présentées au client. Des propositions, pas des réalisations livrées.",
+      "all": "Tout le laboratoire"
     }
   }
 }

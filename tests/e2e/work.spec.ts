@@ -37,7 +37,7 @@ test.describe('work pages', () => {
 
   test('home case links and header links resolve', async ({ page, request }) => {
     await page.goto('/');
-    const hrefs = await page.locator('#realisations-accueil a[href^="/realisations/"]').evaluateAll((els) => els.map((el) => el.getAttribute('href')));
+    const hrefs = [...new Set(await page.locator('#realisations-accueil a[href^="/realisations/"]').evaluateAll((els) => els.map((el) => el.getAttribute('href'))))];
     expect(hrefs).toHaveLength(3);
     for (const href of hrefs) expect((await request.get(href!)).status(), href!).toBe(200);
     for (const href of ['/realisations', '/explorations', '/en/work', '/en/explorations']) {

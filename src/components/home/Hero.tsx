@@ -1,20 +1,22 @@
 import type { CSSProperties } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { DnaStage } from '@/components/dna/DnaStage';
+import type { Gene } from '@/lib/dna/genes';
 import { ButtonLink } from '@/components/site/ButtonLink';
 import type { Locale } from '@/i18n/routing';
 import { CV_PDF } from '@/lib/profile/cv-data';
 
 /** Scene 00 « Formation »: the helix condenses behind a concrete statement (spec §4.1). */
-export function Hero() {
+export function Hero({ signatures }: { signatures?: readonly (readonly Gene[])[] }) {
   const t = useTranslations('hero');
   const locale = useLocale() as Locale;
   return (
     <section
       data-dna-scene="formation"
+      data-dna-state="1"
       className="relative isolate overflow-hidden"
     >
-      <DnaStage />
+      <DnaStage fixed signatures={signatures} />
       <div className="relative z-10 mx-auto flex min-h-[calc(100svh-var(--header-h))] max-w-[1280px] flex-col justify-center px-5 py-16 md:px-10">
         <p data-hero style={{ '--hero-i': 0 } as CSSProperties} className="font-mono text-[11.5px] font-medium uppercase tracking-[0.16em] text-signal">
           {t('eyebrow')}

@@ -7,7 +7,7 @@
     "label": "Main navigation",
     "skip": "Skip to content",
     "work": "Work",
-    "expertise": "Expertise",
+    "expertise": "DNA",
     "about": "About",
     "explorations": "Explorations",
     "cta": "Discuss a project",
@@ -91,8 +91,8 @@
     "evolveText": "Prepare maintenance, performance and new features."
   },
   "conversion": {
-    "kicker": "05 · Your project",
-    "title": "Let’s talk about your project.",
+    "kicker": "05 · Stabilisation",
+    "title": "Ready to build.",
     "text": "A platform to design, a product to take over or a team to structure: describe your needs in a few minutes, I reply within 48 hours.",
     "brief": "Describe my project",
     "email": "Send an email"
@@ -435,6 +435,33 @@
       "langSwitch": "switching to French…",
       "unknown": "command not found: {cmd}. Type help.",
       "exit": "logout"
+    }
+  },
+  "dna": {
+    "sequencing": {
+      "kicker": "01 · Sequencing",
+      "title": "Six genes, three pairs.",
+      "intro": "How I design a product, read as DNA: pairs that do not work without each other, and proof behind every gene.",
+      "sequence": "Sequence",
+      "proofs": "Proof"
+    },
+    "construction": {
+      "kicker": "02 · Construction",
+      "title": "From idea to production.",
+      "intro": "The same sequence on every project, from the first conversation to going live."
+    },
+    "expression": {
+      "kicker": "03 · Expression",
+      "title": "What the DNA produces.",
+      "intro": "Three shipped products. Each carries its signature, made of its genes.",
+      "all": "All the work",
+      "genes": "Genes"
+    },
+    "lab": {
+      "kicker": "04 · Lab",
+      "title": "The mutations.",
+      "intro": "Redesigns I imagined for brands, on my own initiative or presented to the client. Proposals, not delivered work.",
+      "all": "The whole lab"
     }
   }
 }

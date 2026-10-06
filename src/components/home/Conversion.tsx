@@ -6,10 +6,15 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
   const t = useTranslations('conversion');
   const sig = useTranslations('positioning');
   return (
-    <section id="projet" className="relative overflow-hidden border-t border-line py-[18vh]">
+    <section
+      id="projet"
+      data-dna-scene="stabilisation"
+      data-dna-state="5"
+      className="relative z-10 overflow-hidden border-t border-line py-[18vh]"
+    >
       <Reveal className="relative mx-auto max-w-[1280px] px-5 md:px-10">
         <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{kicker ?? t('kicker')}</p>
-        <h2 data-reveal className="mt-3.5 max-w-[12ch] font-display text-[clamp(46px,6vw,88px)] font-medium leading-[1.02]">{t('title')}</h2>
+        <h2 data-reveal className="mt-4 max-w-[12ch] font-display text-[clamp(46px,7vw,104px)] font-extrabold uppercase leading-[0.92] tracking-[-0.03em]">{t('title')}</h2>
         <p data-reveal className="mb-8 mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{t('text')}</p>
         <div className="flex flex-wrap gap-3.5">
           <div data-reveal>
@@ -23,8 +28,8 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
           <a href="https://www.linkedin.com/in/rostelpanoumassi-6b6608335" rel="me noopener" className="border-b border-edge pb-1 no-underline hover:border-signal hover:text-signal">LinkedIn</a>
           <a href="https://github.com/ThommyShelby9" rel="me noopener" className="border-b border-edge pb-1 no-underline hover:border-signal hover:text-signal">GitHub</a>
         </p>
-        <p data-reveal className="mt-[10vh] font-display text-[22px] font-medium text-muted">
-          {sig('signatureA')} <em className="italic text-signal">{sig('signatureB')}</em>
+        <p data-reveal className="mt-[10vh] font-display text-[clamp(18px,1.8vw,24px)] font-extrabold uppercase tracking-[-0.01em] text-muted">
+          {sig('signatureA')} <em className="not-italic text-signal">{sig('signatureB')}</em>
         </p>
       </Reveal>
     </section>

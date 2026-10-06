@@ -77,6 +77,14 @@ html[data-poster='1'], html[data-poster='1'] body { background: transparent; }
 html[data-poster='1'] body *:not([data-dna-stage]):not([data-dna-stage] *):not(:has([data-dna-stage])) { visibility: hidden; }
 html[data-poster='1'] .page-enter { animation: none; }
 
+/* Home: once live, the helix stays fixed behind every scene (scenes and footer sit at z-10);
+   the poster fallback (no JS, no WebGL, reduced motion) stays inside the hero. */
+[data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { position: fixed; height: 100svh; }
+@media (max-width: 1023px) {
+  /* Behind full-width text on phones: quieter. */
+  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { opacity: 0.22; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .page-enter { animation: page-enter 280ms ease-out both; }
 }
