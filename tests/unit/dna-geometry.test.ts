@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { particleBudget } from '@/lib/dna/budget';
 import { GENES, PAIRS } from '@/lib/dna/genes';
 import { HELIX, helixPoint } from '@/lib/dna/helix';
-import { buildLayout, ROLE } from '@/lib/dna/layout';
+import { buildLayout, CLUSTER_CENTRES, CLUSTER_COUNT, GROUPS, LAYER_COUNT, ROLE } from '@/lib/dna/layout';
+import { signaturePath, signatureRadius } from '@/lib/dna/signature';
 import { mulberry32 } from '@/lib/dna/rng';
 
 describe('mulberry32', () => {
@@ -100,5 +101,97 @@ describe('particleBudget', () => {
     expect(particleBudget({ width: 1440, cores: 2, saveData: false })).toBe(4000);
     expect(particleBudget({ width: 1440, cores: 8, saveData: true })).toBe(4000);
     expect(particleBudget({ width: 1440, cores: 8, saveData: false, deviceMemory: 2 })).toBe(4000);
+  });
+});
+
+describe('signatures', () => {
+  it('keeps the radius within [0.68, 1.32]', () => {
+    for (const genes of [['engineering', 'product'], ['architecture', 'innovation', 'devops', 'leadership']] as const) {
+      for (let k = 0; k < 360; k++) {
+        const r = signatureRadius(genes, (k / 360) * Math.PI * 2);
+        expect(r).toBeGreaterThanOrEqual(0.68 - 1e-9);
+        expect(r).toBeLessThanOrEqual(1.32 + 1e-9);
+      }
+    }
+  });
+  it('differs between different gene sets', () => {
+    const a = signaturePath(['engineering', 'product']);
+    const b = signaturePath(['devops', 'leadership']);
+    expect(a).not.toBe(b);
+  });
+  it('draws a closed path inside its box', () => {
+    const d = signaturePath(['engineering', 'product', 'architecture'], 100);
+    expect(d.startsWith('M')).toBe(true);
+    expect(d.endsWith('Z')).toBe(true);
+    for (const n of d.match(/-?\d+(?:\.\d+)?/g)!.map(Number)) {
+      expect(n).toBeGreaterThanOrEqual(0);
+      expect(n).toBeLessThanOrEqual(100);
+    }
+  });
+});
+
+describe('layout states', () => {
+  const layout = buildLayout({ count: 6000, seed: 3, signatures: [['engineering', 'product'], ['architecture', 'innovation'], ['devops', 'leadership']] });
+  const at = (arr: Float32Array, i: number) => [arr[i * 3], arr[i * 3 + 1], arr[i * 3 + 2]];
+
+  it('sizes every state and keeps the helix unchanged by them', () => {
+    for (const arr of [layout.layers, layout.signatures, layout.clusters, layout.calm]) expect(arr).toHaveLength(18000);
+    expect(layout.group).toHaveLength(6000);
+    expect(buildLayout({ count: 500, seed: 7 }).helix).toEqual(buildLayout({ count: 500, seed: 7, signatures: [['devops', 'product']] }).helix);
+  });
+
+  it('assigns integer groups in [0, GROUPS)', () => {
+    for (const g of layout.group) {
+      expect(Number.isInteger(g)).toBe(true);
+      expect(g).toBeGreaterThanOrEqual(0);
+      expect(g).toBeLessThan(GROUPS);
+    }
+  });
+
+  it('stacks five layers, top first', () => {
+    for (let i = 0; i < layout.count; i++) {
+      if (layout.role[i] === ROLE.dust) continue;
+      const [x, y, z] = at(layout.layers, i);
+      const layer = layout.group[i] % LAYER_COUNT;
+      expect(Math.abs(y - (3 - layer * 1.5))).toBeLessThan(0.15);
+      expect(Math.hypot(x, z)).toBeLessThanOrEqual(1.7 + 1e-6);
+    }
+  });
+
+  it('puts each signature ring at its height and radius', () => {
+    for (let i = 0; i < layout.count; i++) {
+      if (layout.role[i] === ROLE.dust) continue;
+      const [x, y, z] = at(layout.signatures, i);
+      const s = layout.group[i] % 3;
+      expect(Math.abs(y - (2.6 - s * 2.6))).toBeLessThan(0.2);
+      expect(Math.hypot(x, z)).toBeGreaterThan(1.35 * 0.68 - 0.2);
+      expect(Math.hypot(x, z)).toBeLessThan(1.35 * 1.32 + 0.2);
+    }
+  });
+
+  it('gathers clusters around their centres', () => {
+    for (let i = 0; i < layout.count; i++) {
+      if (layout.role[i] === ROLE.dust) continue;
+      const [x, y, z] = at(layout.clusters, i);
+      const [cx, cy, cz] = CLUSTER_CENTRES[layout.group[i] % CLUSTER_COUNT];
+      expect(Math.hypot(x - cx, y - cy, z - cz)).toBeLessThanOrEqual(0.55 + 1e-6);
+    }
+  });
+
+  it('tightens the helix in the calm state and leaves dust where it is', () => {
+    for (let i = 0; i < layout.count; i++) {
+      const [hx, , hz] = at(layout.helix, i);
+      const [cx, , cz] = at(layout.calm, i);
+      if (layout.role[i] === ROLE.dust) {
+        expect(at(layout.calm, i)).toEqual(at(layout.cloud, i));
+        expect(at(layout.layers, i)).toEqual(at(layout.cloud, i));
+      } else {
+        expect(Math.hypot(cx, cz)).toBeCloseTo(Math.hypot(hx, hz) * 0.8, 5);
+      }
+    }
+  });
+
+  it('requires at least one signature', () => {
+    expect(() => buildLayout({ count: 10, signatures: [] })).toThrow();
   });
 });
