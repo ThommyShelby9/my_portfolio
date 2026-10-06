@@ -21,7 +21,7 @@ const FONTS_DIR = path.join(process.cwd(), 'src/assets/fonts');
 let fonts: Promise<[Buffer, Buffer]> | undefined;
 const loadFonts = () =>
   (fonts ??= Promise.all([
-    readFile(path.join(FONTS_DIR, 'cormorant-garamond-latin-500-normal.woff')),
+    readFile(path.join(FONTS_DIR, 'archivo-latin-800-normal.woff')),
     readFile(path.join(FONTS_DIR, 'ibm-plex-mono-latin-500-normal.woff')),
   ]));
 
@@ -44,7 +44,7 @@ type Card = {
 };
 
 export async function ogCard({ eyebrow, title, titleSize, footer, capture, still }: Card): Promise<ImageResponse> {
-  const [[serif, mono], captureUri, stillUri] = await Promise.all([
+  const [[display, mono], captureUri, stillUri] = await Promise.all([
     loadFonts(),
     capture ? pngDataUri(capture, 720) : undefined,
     still ? pngDataUri(still, 560) : undefined,
@@ -52,7 +52,7 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
   const hasVisual = Boolean(captureUri || stillUri);
   return new ImageResponse(
     (
-      <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: C.graphite, fontFamily: 'Cormorant' }}>
+      <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: C.graphite, fontFamily: 'Archivo' }}>
         {captureUri && (
           <div style={{ position: 'absolute', left: 660, top: 118, display: 'flex', border: `1px solid ${C.line}`, background: C.graphite2 }}>
             <img src={captureUri} width={720} height={450} style={{ objectFit: 'cover', objectPosition: 'top' }} alt="" />
@@ -71,7 +71,7 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
             padding: '64px 0 60px 72px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: C.ivory, fontSize: 40, fontWeight: 500 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: C.ivory, fontSize: 40, fontWeight: 800 }}>
             RP
             <div style={{ width: 44, height: 1, background: C.signal }} />
           </div>
@@ -81,7 +81,7 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
                 {eyebrow}
               </div>
             )}
-            <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: titleSize, lineHeight: 1.04, color: C.ivory, letterSpacing: -1 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: titleSize, lineHeight: 0.98, color: C.ivory, letterSpacing: -1.5, textTransform: 'uppercase', fontWeight: 800 }}>
               {words(title).map((w, i) => (
                 <span key={i} style={{ color: w.accent ? C.signal : C.ivory, marginRight: titleSize * 0.24 }}>{w.text}</span>
               ))}
@@ -97,7 +97,7 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
     {
       ...OG_SIZE,
       fonts: [
-        { name: 'Cormorant', data: serif, weight: 500, style: 'normal' },
+        { name: 'Archivo', data: display, weight: 800, style: 'normal' },
         { name: 'Plex Mono', data: mono, weight: 500, style: 'normal' },
       ],
     },

@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import type { Project } from '@/lib/content/load';
+import { ProjectSignature } from '@/components/dna/ProjectSignature';
 import { ExplorationBadge } from './ExplorationBadge';
 import { NO_IMAGE_KEY, STATUS_KEY, caseHref, coverOf } from './labels';
 import { WorkVisual } from './WorkVisual';
@@ -26,13 +27,16 @@ export function WorkCard({ project: p, index, headingLevel = 3 }: Props) {
         sizes="(min-width: 1280px) 590px, (min-width: 768px) 48vw, 100vw"
       />
       <div className="mt-6 flex items-baseline justify-between gap-4 font-mono text-xs text-faint">
-        <span>{String(index + 1).padStart(2, '0')}</span>
+        <span className="flex items-center gap-3">
+          <ProjectSignature genes={p.genes} size={32} className="text-ivory" />
+          {String(index + 1).padStart(2, '0')}
+        </span>
         <span>
           {p.year} · {t(STATUS_KEY[p.status])}
         </span>
       </div>
       {p.kind === 'exploration' && <ExplorationBadge proposal={p.proposal} className="mt-5 self-start" />}
-      <Heading className="mt-4 font-display text-[clamp(30px,2.6vw,38px)] font-medium leading-[1.05]">
+      <Heading className="mt-4 font-display text-[clamp(30px,2.6vw,38px)] font-extrabold uppercase tracking-[-0.02em] leading-[0.96]">
         <Link
           href={caseHref(p)}
           className="no-underline transition-colors duration-300 after:absolute after:inset-0 after:content-[''] group-hover:text-signal"

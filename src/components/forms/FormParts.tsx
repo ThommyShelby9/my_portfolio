@@ -25,7 +25,7 @@ export function FormSection({ legend, text, children }: { legend: string; text: 
       <legend className="float-left font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal lg:col-start-1 lg:row-start-1">
         {legend}
       </legend>
-      <p className="max-w-[26ch] font-display text-[24px] font-medium leading-[1.25] text-muted lg:col-start-1 lg:row-start-2">{text}</p>
+      <p className="max-w-[26ch] font-sans text-[19px] font-normal leading-[1.55] text-muted lg:col-start-1 lg:row-start-2">{text}</p>
       <div className="mt-7 flex min-w-0 flex-col gap-10 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">{children}</div>
     </fieldset>
   );

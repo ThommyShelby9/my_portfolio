@@ -30,7 +30,7 @@ export async function LegalPage({ locale, title, doc }: Props) {
         <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
           {t('kicker')}
         </p>
-        <h1 data-hero style={hero(1)} className="mt-5 max-w-[17ch] font-display text-[clamp(40px,5.4vw,80px)] font-medium leading-[1.04] tracking-[-0.015em]">
+        <h1 data-hero style={hero(1)} className="mt-5 max-w-[17ch] font-display text-[clamp(40px,5.4vw,80px)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em]">
           {title}
         </h1>
         <div data-hero style={hero(2)} className="mt-9 flex flex-col gap-6 border-b border-line pb-10 md:flex-row md:items-end md:justify-between md:gap-16">

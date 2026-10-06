@@ -25,7 +25,7 @@ export async function Career({ locale }: { locale: Locale }) {
                 className="grid gap-x-10 gap-y-3 border-t border-line py-8 md:grid-cols-[190px_minmax(0,1fr)] lg:grid-cols-[210px_minmax(0,5fr)_minmax(0,6fr)] lg:py-9"
               >
                 <div className="md:col-start-2 md:row-start-1">
-                  <h3 className="font-display text-[clamp(26px,2.4vw,32px)] font-medium leading-[1.1] [font-variant-numeric:lining-nums]">{role.organisation}</h3>
+                  <h3 className="font-display text-[clamp(26px,2.4vw,32px)] font-extrabold uppercase tracking-[-0.02em] leading-[1.1] [font-variant-numeric:lining-nums]">{role.organisation}</h3>
                   <p className="mt-2 text-[14.5px] leading-[1.5] text-ivory">
                     {role.title[locale]}
                     {kind && <span className="text-muted"> · {kind}</span>}

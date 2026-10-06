@@ -17,7 +17,7 @@ function Chapter({ n, id, heading, wide = false, children }: ShellProps) {
             {String(n).padStart(2, '0')}
             <span className="inline-block h-px w-7 bg-signal" />
           </span>
-          <h2 id={id} className="mt-5 max-w-[16ch] font-display text-[clamp(32px,3.2vw,46px)] font-medium leading-[1.06]">
+          <h2 id={id} className="mt-5 max-w-[16ch] font-display text-[clamp(32px,3.2vw,46px)] font-extrabold uppercase tracking-[-0.02em] leading-[0.96]">
             {heading}
           </h2>
         </div>
@@ -42,7 +42,7 @@ function ProofBand({ proofs }: { proofs: Project['proofs'] }) {
         return (
           <li key={proof.text} className={`bg-graphite px-6 pb-8 pt-7 md:px-8 ${single ? 'sm:flex sm:items-end sm:gap-8' : ''}`}>
             {figure && (
-              <p aria-hidden={whole || undefined} className="whitespace-nowrap font-display text-[clamp(56px,6vw,88px)] font-medium leading-none tracking-[-0.02em] text-signal">
+              <p aria-hidden={whole || undefined} className="whitespace-nowrap font-display text-[clamp(56px,6vw,88px)] font-extrabold uppercase leading-none tracking-[-0.025em] text-signal">
                 {figure}
               </p>
             )}

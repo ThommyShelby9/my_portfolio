@@ -50,7 +50,7 @@ export function ErrorSummary({ title, text, items, generic, ref }: Props) {
       aria-labelledby="error-summary-title"
       className="scroll-mt-6 border border-signal bg-graphite-2 px-6 py-7 outline-offset-4 md:px-8"
     >
-      <h2 id="error-summary-title" className="font-display text-[26px] font-medium leading-[1.2]">{title}</h2>
+      <h2 id="error-summary-title" className="font-display text-[26px] font-extrabold uppercase tracking-[-0.02em] leading-[1.2]">{title}</h2>
       <p className="mt-2 text-[14.5px] leading-[1.6] text-muted">{items.length > 0 ? text : generic}</p>
       {items.length > 0 && (
         <ul className="mt-5 flex flex-col gap-2.5 border-t border-line pt-5">

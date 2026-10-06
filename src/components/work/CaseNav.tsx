@@ -28,7 +28,7 @@ export function CaseNav({ kind, prev, next }: Props) {
               <Arrow back />
               {t('prev')}
             </span>
-            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-signal">{prev.title}</span>
+            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-extrabold uppercase tracking-[-0.02em] leading-[0.96] transition-colors group-hover:text-signal">{prev.title}</span>
             {prev.sector && <span className="font-mono text-xs uppercase tracking-[0.1em] text-faint">{prev.sector}</span>}
           </Link>
         ) : (
@@ -40,7 +40,7 @@ export function CaseNav({ kind, prev, next }: Props) {
               {t('next')}
               <Arrow />
             </span>
-            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-signal">{next.title}</span>
+            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-extrabold uppercase tracking-[-0.02em] leading-[0.96] transition-colors group-hover:text-signal">{next.title}</span>
             {next.sector && <span className="font-mono text-xs uppercase tracking-[0.1em] text-faint">{next.sector}</span>}
           </Link>
         )}

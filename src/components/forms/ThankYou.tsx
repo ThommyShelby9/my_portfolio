@@ -13,7 +13,7 @@ export function ThankYou({ kicker, title, text, home, work }: Props) {
         <span aria-hidden="true" className="size-[7px] bg-signal" />
         {kicker}
       </p>
-      <h1 data-hero style={hero(1)} className="mt-5 max-w-[18ch] font-display text-[clamp(44px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
+      <h1 data-hero style={hero(1)} className="mt-5 max-w-[18ch] font-display text-[clamp(44px,6vw,88px)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em]">
         {title}
       </h1>
       <p data-hero style={hero(2)} className="mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{text}</p>

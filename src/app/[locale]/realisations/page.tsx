@@ -52,6 +52,7 @@ export default async function WorkIndexPage({ params }: PageProps<'/[locale]/rea
                   coauthors: p.coauthors,
                   stack: p.stack.slice(0, 6),
                   image: p.images[0],
+                  genes: p.genes,
                 }}
               />
             </li>
@@ -61,13 +62,13 @@ export default async function WorkIndexPage({ params }: PageProps<'/[locale]/rea
       <section aria-labelledby="autres-realisations" className="mx-auto max-w-[1280px] px-5 pb-[14vh] pt-[14vh] md:px-10">
         <Reveal>
           <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('othersKicker')}</p>
-          <h2 id="autres-realisations" data-reveal className="mt-3.5 max-w-[22ch] font-display text-[clamp(34px,4vw,56px)] font-medium leading-[1.05]">
+          <h2 id="autres-realisations" data-reveal className="mt-3.5 max-w-[22ch] font-display text-[clamp(34px,4vw,56px)] font-extrabold uppercase tracking-[-0.02em] leading-[0.96]">
             {t('othersTitle')}
           </h2>
         </Reveal>
         <WorkGrid projects={others} offset={featured.length} />
         <Reveal className="mt-[14vh] flex flex-col gap-4 border-t border-line pt-10 md:flex-row md:items-baseline md:justify-between">
-          <p data-reveal className="max-w-[52ch] font-display text-[24px] font-medium leading-[1.3] text-muted">{t('explorationsText')}</p>
+          <p data-reveal className="max-w-[52ch] font-sans text-[19px] font-normal leading-[1.55] text-muted">{t('explorationsText')}</p>
           <div data-reveal>
             <Link href="/explorations" className="border-b border-edge pb-1 text-sm no-underline hover:border-signal hover:text-signal">
               {t('explorationsLink')}

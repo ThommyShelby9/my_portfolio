@@ -62,7 +62,7 @@ export default async function TerminalPage({ params }: PageProps<'/[locale]/term
   return (
     <section className="mx-auto max-w-[1040px] px-5 pb-[12vh] pt-[5vh] md:px-10 md:pt-[7vh]">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4">
-        <h1 className="font-display text-[clamp(30px,3.6vw,44px)] font-medium leading-[1.1] tracking-[-0.01em]">{t('title')}</h1>
+        <h1 className="font-display text-[clamp(30px,3.6vw,44px)] font-extrabold uppercase leading-[1.1] tracking-[-0.025em]">{t('title')}</h1>
         <Link href="/" className={`inline-flex items-center gap-2 font-mono text-xs font-medium ${link}`}>
           <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
             <path d="M12 7H2M6 3 2 7l4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />

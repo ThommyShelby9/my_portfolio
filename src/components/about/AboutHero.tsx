@@ -16,7 +16,7 @@ export async function AboutHero({ locale }: { locale: Locale }) {
     <header className="mx-auto grid max-w-[1280px] gap-x-20 gap-y-14 px-5 pt-[9vh] md:px-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:pt-[12vh]">
       <div>
         <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('kicker')}</p>
-        <h1 data-hero style={hero(1)} className="mt-5 font-display text-[clamp(44px,6vw,84px)] font-medium leading-[1.02] tracking-[-0.015em]">
+        <h1 data-hero style={hero(1)} className="mt-5 font-display text-[clamp(44px,6vw,84px)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em]">
           {roles.map((role, i) => (
             <span key={role}>
               {i > 0 && ' '}

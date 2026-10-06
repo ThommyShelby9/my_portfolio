@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { Reveal } from '@/components/motion/Reveal';
 import { ButtonLink } from '@/components/site/ButtonLink';
+import { ProjectSignature } from '@/components/dna/ProjectSignature';
+import type { Gene } from '@/lib/dna/genes';
 import { WorkVisual, type VisualImage } from './WorkVisual';
 
 export type WorkCaseItem = {
@@ -15,6 +17,8 @@ export type WorkCaseItem = {
   coauthors: readonly string[];
   stack: readonly string[];
   image?: VisualImage;
+  /** The project's DNA, drawn as its signature next to the index. */
+  genes?: readonly Gene[];
 };
 
 type Props = { item: WorkCaseItem; index: number; headingLevel?: 2 | 3 };
@@ -38,8 +42,11 @@ export function WorkCase({ item, index, headingLevel = 3 }: Props) {
         />
       </div>
       <div data-reveal>
-        <span className="font-mono text-xs text-faint">{String(index + 1).padStart(2, '0')}</span>
-        <Heading className="mb-1.5 mt-3 font-display text-[44px] font-medium leading-none">{item.name}</Heading>
+        <span className="flex items-center gap-3 font-mono text-xs text-faint">
+          {item.genes && <ProjectSignature genes={item.genes} size={40} className="text-ivory" />}
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <Heading className="mb-1.5 mt-3 font-display text-[44px] font-extrabold uppercase tracking-[-0.02em] leading-none">{item.name}</Heading>
         <p className="font-mono text-xs font-medium uppercase tracking-[0.1em] text-signal">{item.what}</p>
         <p className="mt-5 text-[13px] text-faint">
           <strong className="font-medium text-ivory">{item.role}</strong>

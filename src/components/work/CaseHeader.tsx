@@ -1,5 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { ProjectSignature } from '@/components/dna/ProjectSignature';
+import type { Locale } from '@/i18n/routing';
+import { GENE_LABEL } from '@/lib/dna/genes';
 import { Link } from '@/i18n/navigation';
 import type { Project } from '@/lib/content/load';
 import { ExplorationBadge } from './ExplorationBadge';
@@ -22,6 +25,7 @@ export function CaseHeader({ project: p }: { project: Project }) {
   const w = useTranslations('work');
   const x = useTranslations('explorations');
   const isExploration = p.kind === 'exploration';
+  const locale = useLocale() as Locale;
   return (
     <header className="mx-auto max-w-[1280px] px-5 pt-[6vh] md:px-10 lg:pt-[8vh]">
       <Link
@@ -33,7 +37,8 @@ export function CaseHeader({ project: p }: { project: Project }) {
         </svg>
         {isExploration ? x('back') : t('back')}
       </Link>
-      <div className="mt-[7vh] lg:mt-[9vh]">
+      <div className="mt-[7vh] grid items-start gap-8 lg:mt-[9vh] lg:grid-cols-[1fr_auto]">
+        <div>
         {isExploration && (
           <div data-hero style={hero(0)} className="mb-7">
             <ExplorationBadge proposal={p.proposal} />
@@ -44,15 +49,23 @@ export function CaseHeader({ project: p }: { project: Project }) {
             {p.sector}
           </p>
         )}
-        <h1 data-hero style={hero(1)} className="mt-5 max-w-[16ch] font-display text-[clamp(52px,8vw,120px)] font-medium leading-[0.95] tracking-[-0.02em]">
+        <h1 data-hero style={hero(1)} className="mt-5 max-w-[16ch] font-display text-[clamp(52px,8vw,120px)] font-extrabold uppercase leading-[0.95] tracking-[-0.025em]">
           {p.title}
         </h1>
         <p data-hero style={hero(2)} className="mt-8 max-w-[58ch] text-[17.5px] leading-[1.7] text-muted">
           {p.summary}
         </p>
+        </div>
+        {/* The project's DNA signature, the same curve as its ring on the home (spec §3.5). */}
+        <div data-hero style={hero(1)} className="order-first text-ivory lg:order-none">
+          <ProjectSignature genes={p.genes} size={168} className="h-24 w-24 lg:h-[168px] lg:w-[168px]" />
+        </div>
       </div>
       <dl data-hero style={hero(3)} className="mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-9 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
         <Item label={t('role')}>{p.role}</Item>
+        <Item label={t('genes')}>
+          <span className="font-mono text-[12px] uppercase tracking-[0.12em]">{p.genes.map((g) => GENE_LABEL[locale][g]).join(' · ')}</span>
+        </Item>
         {p.team && <Item label={t('team')}>{p.team}</Item>}
         {p.coauthors.length > 0 && <Item label={w('coBuilt')}>{p.coauthors.join(', ')}</Item>}
         {p.client && <Item label={t('client')}>{p.client}</Item>}

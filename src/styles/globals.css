@@ -199,3 +199,6 @@ html[data-poster='1'] .page-enter { animation: none; }
   }
   .legal-prose > h2 + * { margin-top: 0.9em; }
 }
+
+/* The inner-page still is redundant on the home, which has the live helix. */
+html:has([data-dna-stage]) [data-helix-ornament] { display: none; }
