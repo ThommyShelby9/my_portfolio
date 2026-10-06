@@ -24,11 +24,11 @@ export function CaseNav({ kind, prev, next }: Props) {
       <div className="grid border-t border-line md:grid-cols-2">
         {prev ? (
           <Link href={caseHref(prev)} className={`${cell} md:border-r md:border-line md:pr-10`}>
-            <span className="flex items-center gap-2.5 font-mono text-xs text-faint transition-colors group-hover:text-champagne">
+            <span className="flex items-center gap-2.5 font-mono text-xs text-faint transition-colors group-hover:text-signal">
               <Arrow back />
               {t('prev')}
             </span>
-            <span className="font-serif text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-champagne">{prev.title}</span>
+            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-signal">{prev.title}</span>
             {prev.sector && <span className="font-mono text-xs uppercase tracking-[0.1em] text-faint">{prev.sector}</span>}
           </Link>
         ) : (
@@ -36,11 +36,11 @@ export function CaseNav({ kind, prev, next }: Props) {
         )}
         {next && (
           <Link href={caseHref(next)} className={`${cell} ${prev ? 'border-t border-line' : ''} md:items-end md:border-t-0 md:pl-10 md:text-right`}>
-            <span className="flex items-center gap-2.5 font-mono text-xs text-faint transition-colors group-hover:text-champagne">
+            <span className="flex items-center gap-2.5 font-mono text-xs text-faint transition-colors group-hover:text-signal">
               {t('next')}
               <Arrow />
             </span>
-            <span className="font-serif text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-champagne">{next.title}</span>
+            <span className="font-display text-[clamp(32px,3.4vw,48px)] font-medium leading-[1.02] transition-colors group-hover:text-signal">{next.title}</span>
             {next.sector && <span className="font-mono text-xs uppercase tracking-[0.1em] text-faint">{next.sector}</span>}
           </Link>
         )}

@@ -6,7 +6,7 @@ import type { Locale } from '@/i18n/routing';
 import { OWNER } from '@/lib/site';
 import type { FeedbackLabels } from './FormFeedback';
 
-const inlineLink = 'border-b pb-0.5 text-ivory no-underline transition-colors hover:border-champagne hover:text-champagne';
+const inlineLink = 'border-b pb-0.5 text-ivory no-underline transition-colors hover:border-signal hover:text-signal';
 
 /**
  * Strings every form needs, resolved on the server: client components never read messages
@@ -25,7 +25,7 @@ export async function formLabels(locale: Locale): Promise<{
   const direct = {
     email: OWNER.email,
     mail: (chunks: ReactNode) => (
-      <a href={`mailto:${OWNER.email}`} className={`${inlineLink} whitespace-nowrap border-champagne`}>{chunks}</a>
+      <a href={`mailto:${OWNER.email}`} className={`${inlineLink} whitespace-nowrap border-signal`}>{chunks}</a>
     ),
   };
   return {

@@ -5,12 +5,13 @@ const page = (body: string, head = '<link rel="icon" href="/favicon.svg">') =>
   `<!doctype html><html><head>${head}</head><body>${body}</body></html>`;
 const rules = (files: { path: string; content: string }[]): RuleId[] =>
   checkOwnerRules(files).map((v) => v.rule);
+const purple = (files: { path: string; content: string }[]): RuleId[] => rules(files).filter((r) => r === 'purple-gradient');
 
 describe('checkOwnerRules', () => {
   it('passes a clean page and stylesheet', () => {
     expect(rules([
       { path: 'index.html', content: page('<p>Six years, © 2026 Rostel.</p>') },
-      { path: 'a.css', content: '.btn{border-radius:2px}.avatar{border-radius:50%}.wall::before{background:radial-gradient(ellipse, rgba(255,228,178,.2), transparent)}' },
+      { path: 'a.css', content: '.btn{border-radius:2px}.avatar{border-radius:50%}.wall::before{background:radial-gradient(ellipse, rgba(255,90,31,.2), transparent)}' },
     ])).toEqual([]);
   });
 
@@ -44,13 +45,13 @@ describe('checkOwnerRules', () => {
   });
 
   it('flags purple gradients in hex, rgb, hsl, oklch and named purple tokens', () => {
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(90deg,#7c3aed,#db2777)}' }])).toEqual(['purple-gradient']);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(rgb(139, 92, 246), #000)}' }])).toEqual(['purple-gradient']);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(#e3bd74,#0e0d0c)}' }])).toEqual([]);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(hsl(270 80% 60%), #000)}' }])).toEqual(['purple-gradient']);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.55 0.25 295), #000)}' }])).toEqual(['purple-gradient']);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(var(--color-violet-500), transparent)}' }])).toEqual(['purple-gradient']);
-    expect(rules([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.8 0.08 85), #000)}' }])).toEqual([]);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(90deg,#7c3aed,#db2777)}' }])).toEqual(['purple-gradient']);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(rgb(139, 92, 246), #000)}' }])).toEqual(['purple-gradient']);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(#e3bd74,#0e0d0c)}' }])).toEqual([]);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(hsl(270 80% 60%), #000)}' }])).toEqual(['purple-gradient']);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.55 0.25 295), #000)}' }])).toEqual(['purple-gradient']);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(var(--color-violet-500), transparent)}' }])).toEqual(['purple-gradient']);
+    expect(purple([{ path: 'a.css', content: '.h{background:linear-gradient(oklch(0.8 0.08 85), #000)}' }])).toEqual([]);
   });
 
   it('flags AI or builder tags', () => {
@@ -84,5 +85,34 @@ describe('checkOwnerRules', () => {
     const [v] = checkOwnerRules([{ path: 'fr/index.html', content: page('<p>Lead — engineer</p>') }]);
     expect(v.path).toBe('fr/index.html');
     expect(v.detail).toContain('Lead');
+  });
+});
+
+describe('single-accent', () => {
+  const css = (content: string) => checkOwnerRules([{ path: 'app.css', content }]).filter((v) => v.rule === 'single-accent');
+  it('accepts the signal orange, its dark print variant and greys', () => {
+    expect(css('a{color:#ff5a1f}b{color:#b23a0e}c{color:#edeae4;background:#121211;border-color:#6b6964}')).toEqual([]);
+  });
+  it('flags any other saturated colour (hex, rgb, hsl, oklch)', () => {
+    expect(css('a{color:#3b82f6}')).toHaveLength(1);
+    expect(css('a{color:rgb(34,197,94)}')).toHaveLength(1);
+    expect(css('a{color:hsl(200 80% 50%)}')).toHaveLength(1);
+    expect(css('a{color:oklch(0.62 0.19 260)}')).toHaveLength(1);
+  });
+  it('ignores near-black, near-white and transparent values', () => {
+    expect(css('a{color:#0000;background:#fff;border-color:#000}')).toEqual([]);
+  });
+});
+
+describe('fake-status', () => {
+  const html = (body: string) =>
+    checkOwnerRules([{ path: 'index.html', content: `<link rel="icon" href="/favicon.ico"><body>${body}</body>` }]).filter((v) => v.rule === 'fake-status');
+  it('flags mission-control style fake statuses', () => {
+    expect(html('<p>SYSTEM STATUS 100%</p>')).toHaveLength(1);
+    expect(html('<button>Enter system</button>')).toHaveLength(1);
+    expect(html('<p>Identity confirmed.</p>')).toHaveLength(1);
+  });
+  it('accepts normal copy', () => {
+    expect(html('<p>Ubbfy, système de gestion en production.</p>')).toEqual([]);
   });
 });

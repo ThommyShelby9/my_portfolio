@@ -7,7 +7,7 @@ import { HitBeacon } from '@/components/site/HitBeacon';
 import { SkipLink } from '@/components/site/SkipLink';
 import { SITE_URL } from '@/lib/site';
 import { routing, type Locale } from '@/i18n/routing';
-import { mono, sans, serif } from '@/styles/fonts';
+import { archivo, mono } from '@/styles/fonts';
 import '@/styles/globals.css';
 
 
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
   };
 }
 
-export const viewport = { themeColor: '#101112' };
+export const viewport = { themeColor: '#121211' };
 
 // Adds `js` before first paint so reveal styles only hide content when JS runs.
 // The 2.5 s timer rescues the content only when the reveal code never ran
@@ -53,7 +53,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const locale = localeOf((await params).locale);
   setRequestLocale(locale);
   return (
-    <html lang={locale} className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${archivo.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: EARLY_JS }} />
       </head>

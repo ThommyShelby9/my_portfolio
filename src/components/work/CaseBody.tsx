@@ -7,17 +7,17 @@ import { Gallery } from './Gallery';
 
 type ShellProps = { n: number; id: string; heading: ReactNode; wide?: boolean; children: ReactNode };
 
-/** One numbered chapter: serif h2 with its champagne number on the left, content on the right. */
+/** One numbered chapter: display h2 with its signal number on the left, content on the right. */
 function Chapter({ n, id, heading, wide = false, children }: ShellProps) {
   return (
     <section aria-labelledby={id} className="border-t border-line py-[9vh] lg:py-[12vh]">
       <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-14">
         <div data-reveal className={wide ? '' : 'lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:self-start'}>
-          <span aria-hidden="true" className="flex items-center gap-3 font-mono text-xs text-champagne">
+          <span aria-hidden="true" className="flex items-center gap-3 font-mono text-xs text-signal">
             {String(n).padStart(2, '0')}
-            <span className="inline-block h-px w-7 bg-champagne" />
+            <span className="inline-block h-px w-7 bg-signal" />
           </span>
-          <h2 id={id} className="mt-5 max-w-[16ch] font-serif text-[clamp(32px,3.2vw,46px)] font-medium leading-[1.06]">
+          <h2 id={id} className="mt-5 max-w-[16ch] font-display text-[clamp(32px,3.2vw,46px)] font-medium leading-[1.06]">
             {heading}
           </h2>
         </div>
@@ -31,7 +31,7 @@ function Prose({ html }: { html: string }) {
   return <div className="case-prose" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-/** Sourced proofs as large champagne figures; a single proof sits beside its caption. */
+/** Sourced proofs as large signal figures; a single proof sits beside its caption. */
 function ProofBand({ proofs }: { proofs: Project['proofs'] }) {
   const single = proofs.length === 1;
   return (
@@ -40,9 +40,9 @@ function ProofBand({ proofs }: { proofs: Project['proofs'] }) {
         const { figure, caption } = splitProof(proof.text);
         const whole = caption === proof.text.trim();
         return (
-          <li key={proof.text} className={`bg-obsidian px-6 pb-8 pt-7 md:px-8 ${single ? 'sm:flex sm:items-end sm:gap-8' : ''}`}>
+          <li key={proof.text} className={`bg-graphite px-6 pb-8 pt-7 md:px-8 ${single ? 'sm:flex sm:items-end sm:gap-8' : ''}`}>
             {figure && (
-              <p aria-hidden={whole || undefined} className="whitespace-nowrap font-serif text-[clamp(56px,6vw,88px)] font-medium leading-none tracking-[-0.02em] text-champagne">
+              <p aria-hidden={whole || undefined} className="whitespace-nowrap font-display text-[clamp(56px,6vw,88px)] font-medium leading-none tracking-[-0.02em] text-signal">
                 {figure}
               </p>
             )}

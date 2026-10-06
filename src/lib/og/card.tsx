@@ -7,13 +7,13 @@ import sharp from 'sharp';
 export const OG_SIZE = { width: 1200, height: 630 };
 
 const C = {
-  obsidian: '#101112',
-  obsidian2: '#161719',
-  ivory: '#E9E5DC',
-  champagne: '#BCA57B',
-  muted: '#A7A49C',
-  faint: '#8A8C90',
-  line: '#26272A',
+  graphite: '#121211',
+  graphite2: '#1a1a18',
+  ivory: '#edeae4',
+  signal: '#ff5a1f',
+  muted: '#a8a59e',
+  faint: '#8b8984',
+  line: '#2a2a27',
 };
 
 // Bundled locally (SIL OFL, see src/assets/fonts): nothing is fetched at build time.
@@ -33,7 +33,7 @@ async function pngDataUri(publicPath: string, width: number): Promise<string> {
 
 type Card = {
   eyebrow?: string;
-  /** Title runs; accent runs are set in champagne. */
+  /** Title runs; accent runs are set in signal. */
   title: { text: string; accent?: boolean }[];
   titleSize: number;
   footer: string;
@@ -52,9 +52,9 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
   const hasVisual = Boolean(captureUri || stillUri);
   return new ImageResponse(
     (
-      <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: C.obsidian, fontFamily: 'Cormorant' }}>
+      <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: C.graphite, fontFamily: 'Cormorant' }}>
         {captureUri && (
-          <div style={{ position: 'absolute', left: 660, top: 118, display: 'flex', border: `1px solid ${C.line}`, background: C.obsidian2 }}>
+          <div style={{ position: 'absolute', left: 660, top: 118, display: 'flex', border: `1px solid ${C.line}`, background: C.graphite2 }}>
             <img src={captureUri} width={720} height={450} style={{ objectFit: 'cover', objectPosition: 'top' }} alt="" />
           </div>
         )}
@@ -73,21 +73,21 @@ export async function ogCard({ eyebrow, title, titleSize, footer, capture, still
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: C.ivory, fontSize: 40, fontWeight: 500 }}>
             RP
-            <div style={{ width: 44, height: 1, background: C.champagne }} />
+            <div style={{ width: 44, height: 1, background: C.signal }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', paddingRight: 48 }}>
             {eyebrow && (
-              <div style={{ fontFamily: 'Plex Mono', fontSize: 18, letterSpacing: 3, textTransform: 'uppercase', color: C.champagne, marginBottom: 22 }}>
+              <div style={{ fontFamily: 'Plex Mono', fontSize: 18, letterSpacing: 3, textTransform: 'uppercase', color: C.signal, marginBottom: 22 }}>
                 {eyebrow}
               </div>
             )}
             <div style={{ display: 'flex', flexWrap: 'wrap', fontSize: titleSize, lineHeight: 1.04, color: C.ivory, letterSpacing: -1 }}>
               {words(title).map((w, i) => (
-                <span key={i} style={{ color: w.accent ? C.champagne : C.ivory, marginRight: titleSize * 0.24 }}>{w.text}</span>
+                <span key={i} style={{ color: w.accent ? C.signal : C.ivory, marginRight: titleSize * 0.24 }}>{w.text}</span>
               ))}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 40 }}>
-              <div style={{ width: 56, height: 1, background: C.champagne }} />
+              <div style={{ width: 56, height: 1, background: C.signal }} />
               <div style={{ fontFamily: 'Plex Mono', fontSize: 17, color: C.faint }}>{footer}</div>
             </div>
           </div>

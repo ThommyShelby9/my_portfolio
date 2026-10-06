@@ -40,7 +40,7 @@ export function ContactForm({ locale, permalink, labels: L }: { locale: string; 
 
   return (
     <form id="contact-form" action={formAction} noValidate aria-labelledby="contact-form-title" className="relative min-w-0">
-      <h2 id="contact-form-title" className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
+      <h2 id="contact-form-title" className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
         {L.title}
       </h2>
       <input type="hidden" name="locale" value={locale} />

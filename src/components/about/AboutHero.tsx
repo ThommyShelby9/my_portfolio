@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { LINKS, PORTRAIT } from '@/lib/profile/cv-data';
 
 const hero = (i: number) => ({ '--hero-i': i }) as CSSProperties;
-const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-champagne hover:text-champagne';
+const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-signal hover:text-signal';
 
 /** Opening of the About page: title, lede, two facts and the real portrait. Above the fold: CSS-only entrance. */
 export async function AboutHero({ locale }: { locale: Locale }) {
@@ -15,8 +15,8 @@ export async function AboutHero({ locale }: { locale: Locale }) {
   return (
     <header className="mx-auto grid max-w-[1280px] gap-x-20 gap-y-14 px-5 pt-[9vh] md:px-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:pt-[12vh]">
       <div>
-        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{t('kicker')}</p>
-        <h1 data-hero style={hero(1)} className="mt-5 font-serif text-[clamp(44px,6vw,84px)] font-medium leading-[1.02] tracking-[-0.015em]">
+        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('kicker')}</p>
+        <h1 data-hero style={hero(1)} className="mt-5 font-display text-[clamp(44px,6vw,84px)] font-medium leading-[1.02] tracking-[-0.015em]">
           {roles.map((role, i) => (
             <span key={role}>
               {i > 0 && ' '}
@@ -45,7 +45,7 @@ export async function AboutHero({ locale }: { locale: Locale }) {
       </div>
 
       <figure data-hero style={hero(2)} className="m-0 w-full max-w-[400px] lg:max-w-[440px] lg:justify-self-end">
-        <div className="border border-line bg-obsidian-2 p-2.5">
+        <div className="border border-line bg-graphite-2 p-2.5">
           {/* Two 4:5 exports of the 654 px source, shown at their own ratio. `sizes` is the rendered width (frame minus its 10 px mat and 1 px border), so each candidate is only ever scaled down at 1x. */}
           <img
             data-portrait

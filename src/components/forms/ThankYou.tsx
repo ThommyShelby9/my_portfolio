@@ -9,11 +9,11 @@ const hero = (i: number) => ({ '--hero-i': i }) as CSSProperties;
 export function ThankYou({ kicker, title, text, home, work }: Props) {
   return (
     <section className="mx-auto flex min-h-[70svh] max-w-[1280px] flex-col justify-center px-5 py-[12vh] md:px-10">
-      <p data-hero style={hero(0)} className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
-        <span aria-hidden="true" className="size-[7px] bg-champagne" />
+      <p data-hero style={hero(0)} className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
+        <span aria-hidden="true" className="size-[7px] bg-signal" />
         {kicker}
       </p>
-      <h1 data-hero style={hero(1)} className="mt-5 max-w-[18ch] font-serif text-[clamp(44px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
+      <h1 data-hero style={hero(1)} className="mt-5 max-w-[18ch] font-display text-[clamp(44px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
         {title}
       </h1>
       <p data-hero style={hero(2)} className="mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{text}</p>

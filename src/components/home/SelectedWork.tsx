@@ -21,11 +21,11 @@ export function SelectedWork() {
     <section id="realisations-accueil" data-sculpture-fade-out className="mx-auto max-w-[1280px] px-5 pb-[10vh] pt-[6vh] md:px-10">
       <Reveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{t('kicker')}</p>
-          <h2 data-reveal className="mt-3.5 max-w-[20ch] font-serif text-[clamp(34px,4vw,56px)] font-medium leading-[1.05]">{t('title')}</h2>
+          <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('kicker')}</p>
+          <h2 data-reveal className="mt-3.5 max-w-[20ch] font-display text-[clamp(34px,4vw,56px)] font-medium leading-[1.05]">{t('title')}</h2>
         </div>
         <div data-reveal>
-          <Link href="/realisations" className="border-b border-graphite pb-1 text-sm no-underline hover:border-champagne hover:text-champagne">{t('all')}</Link>
+          <Link href="/realisations" className="border-b border-edge pb-1 text-sm no-underline hover:border-signal hover:text-signal">{t('all')}</Link>
         </div>
       </Reveal>
       <ol>

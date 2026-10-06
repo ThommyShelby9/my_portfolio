@@ -9,10 +9,10 @@ type HeaderProps = { kicker: string; title: string; lede: string; meta: string }
 export function IndexHeader({ kicker, title, lede, meta }: HeaderProps) {
   return (
     <header className="mx-auto max-w-[1280px] px-5 pt-[9vh] md:px-10 lg:pt-[14vh]">
-      <p data-hero style={{ '--hero-i': 0 } as CSSProperties} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
+      <p data-hero style={{ '--hero-i': 0 } as CSSProperties} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
         {kicker}
       </p>
-      <h1 data-hero style={{ '--hero-i': 1 } as CSSProperties} className="mt-5 max-w-[17ch] font-serif text-[clamp(42px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
+      <h1 data-hero style={{ '--hero-i': 1 } as CSSProperties} className="mt-5 max-w-[17ch] font-display text-[clamp(42px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
         {title}
       </h1>
       <div data-hero style={{ '--hero-i': 2 } as CSSProperties} className="mt-9 flex flex-col gap-6 border-b border-line pb-10 md:flex-row md:items-end md:justify-between md:gap-16">

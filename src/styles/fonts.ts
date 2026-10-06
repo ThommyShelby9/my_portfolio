@@ -1,17 +1,9 @@
-import { Cormorant_Garamond, IBM_Plex_Mono, Manrope } from 'next/font/google';
+import { Archivo, IBM_Plex_Mono } from 'next/font/google';
 
-export const serif = Cormorant_Garamond({
+export const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-export const sans = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-manrope',
+  weight: ['400', '500', '600', '800'],
+  variable: '--font-archivo',
   display: 'swap',
 });
 

@@ -17,7 +17,7 @@ export function Header() {
     { href: '/explorations', label: t('explorations') },
   ];
   return (
-    <header className="sticky top-0 z-30 bg-obsidian/85 backdrop-blur-md">
+    <header className="sticky top-0 z-30 bg-graphite/85 backdrop-blur-md">
       <div className="relative mx-auto flex min-h-(--header-h) max-w-[1280px] items-center gap-3 px-5 md:gap-10 md:px-10">
         <Link href="/" aria-label={t('home')} className="text-ivory no-underline">
           <Monogram />

@@ -20,7 +20,7 @@ export function Gallery({ images, start = 2 }: Props) {
           <figure>
             <div
               data-reveal="mask"
-              className="relative overflow-hidden border border-line bg-obsidian-2 md:flex md:aspect-[16/10] md:items-center md:justify-center md:p-[3.5%]"
+              className="relative overflow-hidden border border-line bg-graphite-2 md:flex md:aspect-[16/10] md:items-center md:justify-center md:p-[3.5%]"
             >
               <Image
                 src={img.src}
@@ -33,7 +33,7 @@ export function Gallery({ images, start = 2 }: Props) {
             </div>
             {/* Same words as the alt text: hidden from assistive technologies to avoid reading them twice. */}
             <figcaption aria-hidden="true" className="mt-3.5 flex gap-3 font-mono text-[11.5px] leading-[1.6] text-faint">
-              <span className="shrink-0 text-champagne">{String(start + i).padStart(2, '0')}</span>
+              <span className="shrink-0 text-signal">{String(start + i).padStart(2, '0')}</span>
               {img.alt}
             </figcaption>
           </figure>

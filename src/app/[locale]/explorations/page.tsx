@@ -35,9 +35,9 @@ export default async function ExplorationsPage({ params }: PageProps<'/[locale]/
       <section className="mx-auto max-w-[1280px] px-5 pb-[14vh] pt-[8vh] md:px-10">
         <WorkGrid projects={projects} headingLevel={2} />
         <Reveal className="mt-[14vh] flex flex-col gap-4 border-t border-line pt-10 md:flex-row md:items-baseline md:justify-between">
-          <p data-reveal className="max-w-[52ch] font-serif text-[24px] font-medium leading-[1.3] text-muted">{t('workText')}</p>
+          <p data-reveal className="max-w-[52ch] font-display text-[24px] font-medium leading-[1.3] text-muted">{t('workText')}</p>
           <div data-reveal>
-            <Link href="/realisations" className="border-b border-graphite pb-1 text-sm no-underline hover:border-champagne hover:text-champagne">
+            <Link href="/realisations" className="border-b border-edge pb-1 text-sm no-underline hover:border-signal hover:text-signal">
               {t('workLink')}
             </Link>
           </div>

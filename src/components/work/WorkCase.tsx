@@ -6,7 +6,7 @@ import { WorkVisual, type VisualImage } from './WorkVisual';
 export type WorkCaseItem = {
   slug: string;
   name: string;
-  /** What the product is, in a few words (mono, champagne). */
+  /** What the product is, in a few words (mono, signal). */
   what: string;
   role: string;
   roleDetail?: string;
@@ -39,8 +39,8 @@ export function WorkCase({ item, index, headingLevel = 3 }: Props) {
       </div>
       <div data-reveal>
         <span className="font-mono text-xs text-faint">{String(index + 1).padStart(2, '0')}</span>
-        <Heading className="mb-1.5 mt-3 font-serif text-[44px] font-medium leading-none">{item.name}</Heading>
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.1em] text-champagne">{item.what}</p>
+        <Heading className="mb-1.5 mt-3 font-display text-[44px] font-medium leading-none">{item.name}</Heading>
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.1em] text-signal">{item.what}</p>
         <p className="mt-5 text-[13px] text-faint">
           <strong className="font-medium text-ivory">{item.role}</strong>
           {item.roleDetail && <> · {item.roleDetail}</>}

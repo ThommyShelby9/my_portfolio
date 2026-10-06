@@ -17,21 +17,21 @@ export function FieldLabel({ children, required }: { children: ReactNode; requir
 
 export const labelClass = 'block text-[15px] font-medium leading-[1.45] text-ivory';
 export const hintClass = 'mt-1.5 max-w-[60ch] text-[13.5px] leading-[1.6] text-faint';
-export const errorClass = 'mt-2 flex items-start gap-2.5 text-[14px] font-medium leading-[1.5] text-champagne';
+export const errorClass = 'mt-2 flex items-start gap-2.5 text-[14px] font-medium leading-[1.5] text-signal';
 
 /** Field-level error, placed above the control so it is read before the input. */
 export function FieldError({ id, children }: { id: string; children: ReactNode }) {
   return (
     <p id={id} className={errorClass}>
-      <span aria-hidden="true" className="mt-[7px] size-[6px] shrink-0 bg-champagne" />
+      <span aria-hidden="true" className="mt-[7px] size-[6px] shrink-0 bg-signal" />
       <span>{children}</span>
     </p>
   );
 }
 
 const controlBase =
-  'mt-3 block w-full rounded-[2px] border bg-obsidian-2 px-4 py-3.5 text-[16px] leading-[1.5] text-ivory ' +
-  'transition-colors placeholder:text-faint hover:border-muted focus:border-champagne';
+  'mt-3 block w-full rounded-[2px] border bg-graphite-2 px-4 py-3.5 text-[16px] leading-[1.5] text-ivory ' +
+  'transition-colors placeholder:text-faint hover:border-muted focus:border-signal';
 
 type Props = {
   id: string;
@@ -67,7 +67,7 @@ export function Field({ id, name, label, required, hint, error, defaultValue, ty
     maxLength,
     autoComplete,
     placeholder,
-    className: `${controlBase} ${error ? 'border-champagne' : 'border-edge'}`,
+    className: `${controlBase} ${error ? 'border-signal' : 'border-edge'}`,
   } as const;
   return (
     <div id={`${id}-field`} className="scroll-mt-6">

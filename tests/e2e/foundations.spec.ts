@@ -64,7 +64,7 @@ test.describe('foundations', () => {
       await expect(page.getByRole('heading', { level: 1 }), path).toHaveText('Cette page n’existe pas.');
       // The site chrome and fonts, not the framework's bare page.
       await expect(page.getByRole('banner'), path).toBeVisible();
-      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Cormorant/i);
+      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Archivo/i);
       await expect(page.locator('main').getByRole('link', { name: 'Voir les réalisations' }), path).toHaveAttribute('href', '/realisations');
     }
   });
@@ -80,8 +80,8 @@ test.describe('foundations', () => {
       await expect(main.locator('[lang="en"]').getByText('This page does not exist.')).toBeVisible();
       await expect(main.getByRole('link', { name: 'Voir les réalisations' })).toHaveAttribute('href', '/realisations');
       await expect(main.getByRole('link', { name: 'Back to the home page' })).toHaveAttribute('href', '/en');
-      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Cormorant/i);
-      expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), path).toBe('rgb(16, 17, 18)');
+      expect(await page.getByRole('heading', { level: 1 }).evaluate((h) => getComputedStyle(h).fontFamily), path).toMatch(/Archivo/i);
+      expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), path).toBe('rgb(18, 18, 17)');
       await expect(page.locator('link[rel="icon"]').first()).toHaveAttribute('href', /favicon/);
       expect(await page.content(), path).not.toContain('—');
     }

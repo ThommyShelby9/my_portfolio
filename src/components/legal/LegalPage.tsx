@@ -27,10 +27,10 @@ export async function LegalPage({ locale, title, doc }: Props) {
   return (
     <>
       <header className="mx-auto max-w-[1280px] px-5 pt-[9vh] md:px-10 lg:pt-[14vh]">
-        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
+        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
           {t('kicker')}
         </p>
-        <h1 data-hero style={hero(1)} className="mt-5 max-w-[17ch] font-serif text-[clamp(40px,5.4vw,80px)] font-medium leading-[1.04] tracking-[-0.015em]">
+        <h1 data-hero style={hero(1)} className="mt-5 max-w-[17ch] font-display text-[clamp(40px,5.4vw,80px)] font-medium leading-[1.04] tracking-[-0.015em]">
           {title}
         </h1>
         <div data-hero style={hero(2)} className="mt-9 flex flex-col gap-6 border-b border-line pb-10 md:flex-row md:items-end md:justify-between md:gap-16">
@@ -51,7 +51,7 @@ export async function LegalPage({ locale, title, doc }: Props) {
             {doc.headings.map((h, i) => (
               <li key={h.id} className="border-b border-line">
                 <a href={`#${h.id}`} className="flex gap-4 py-3 text-[14.5px] leading-[1.45] text-muted no-underline transition-colors hover:text-ivory">
-                  <span aria-hidden="true" className="w-5 shrink-0 pt-[3px] font-mono text-[11px] text-champagne">
+                  <span aria-hidden="true" className="w-5 shrink-0 pt-[3px] font-mono text-[11px] text-signal">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   {h.text}

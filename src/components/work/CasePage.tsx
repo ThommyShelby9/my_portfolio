@@ -31,7 +31,7 @@ export async function CasePage({ kind, locale, slug }: Props) {
         <CaseHeader project={project} />
         {cover && (
           <figure className="mx-auto mt-[8vh] max-w-[1280px] px-5 md:px-10">
-            <div className="overflow-hidden border border-line bg-obsidian-2">
+            <div className="overflow-hidden border border-line bg-graphite-2">
               <Image
                 src={cover.src}
                 alt={cover.alt}

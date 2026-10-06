@@ -60,7 +60,7 @@ export function FormFeedback({
             ref={notice}
             tabIndex={-1}
             autoFocus
-            className="scroll-mt-6 border border-champagne bg-obsidian-2 px-6 py-6 text-[15.5px] leading-[1.65] text-ivory outline-offset-4 md:px-8"
+            className="scroll-mt-6 border border-signal bg-graphite-2 px-6 py-6 text-[15.5px] leading-[1.65] text-ivory outline-offset-4 md:px-8"
           >
             {message}
           </div>

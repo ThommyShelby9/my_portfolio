@@ -32,15 +32,15 @@ export function WorkCard({ project: p, index, headingLevel = 3 }: Props) {
         </span>
       </div>
       {p.kind === 'exploration' && <ExplorationBadge proposal={p.proposal} className="mt-5 self-start" />}
-      <Heading className="mt-4 font-serif text-[clamp(30px,2.6vw,38px)] font-medium leading-[1.05]">
+      <Heading className="mt-4 font-display text-[clamp(30px,2.6vw,38px)] font-medium leading-[1.05]">
         <Link
           href={caseHref(p)}
-          className="no-underline transition-colors duration-300 after:absolute after:inset-0 after:content-[''] group-hover:text-champagne"
+          className="no-underline transition-colors duration-300 after:absolute after:inset-0 after:content-[''] group-hover:text-signal"
         >
           {p.title}
         </Link>
       </Heading>
-      {p.sector && <p className="mt-2.5 font-mono text-xs font-medium uppercase tracking-[0.1em] text-champagne">{p.sector}</p>}
+      {p.sector && <p className="mt-2.5 font-mono text-xs font-medium uppercase tracking-[0.1em] text-signal">{p.sector}</p>}
       <p className="mt-4 text-[13px] text-faint">
         <strong className="font-medium text-ivory">{p.role}</strong>
       </p>

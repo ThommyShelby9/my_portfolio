@@ -23,7 +23,7 @@ type Props = {
 /**
  * Native radios or checkboxes styled as rectangular chips. The input stays in the accessibility tree
  * (visually hidden, not display:none) and drives the chip through `peer` states: keyboard focus draws the
- * champagne ring on the chip, checked turns it ivory with obsidian text.
+ * signal ring on the chip, checked turns it ivory with graphite text.
  */
 export function ChoiceGroup({ id, type, legend, choices, required, hint, error }: Props) {
   const hintId = hint ? `${id}-hint` : undefined;
@@ -53,9 +53,9 @@ export function ChoiceGroup({ id, type, legend, choices, required, hint, error }
               className={
                 'flex min-h-11 items-center gap-2.5 rounded-[2px] border px-4 py-2.5 text-[14.5px] leading-[1.35] text-ivory ' +
                 'transition-colors hover:border-ivory ' +
-                'peer-checked:border-ivory peer-checked:bg-ivory peer-checked:text-obsidian ' +
-                'peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-champagne peer-focus-visible:outline-solid ' +
-                (error ? 'border-champagne' : 'border-edge')
+                'peer-checked:border-ivory peer-checked:bg-ivory peer-checked:text-graphite ' +
+                'peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-signal peer-focus-visible:outline-solid ' +
+                (error ? 'border-signal' : 'border-edge')
               }
             >
               {type === 'checkbox' && (

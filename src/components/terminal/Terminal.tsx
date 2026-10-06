@@ -14,13 +14,13 @@ export type TerminalProps = {
 
 type Entry = { id: number; line: Line; echo?: boolean };
 
-const TONE = { muted: 'text-muted', accent: 'text-champagne' } as const;
+const TONE = { muted: 'text-muted', accent: 'text-signal' } as const;
 
 function Row({ line, echo }: { line: Line; echo?: boolean }) {
   if (echo) {
     return (
       <p className="whitespace-pre-wrap">
-        <span aria-hidden="true" className="text-champagne">{PROMPT} </span>
+        <span aria-hidden="true" className="text-signal">{PROMPT} </span>
         {lineText(line)}
       </p>
     );
@@ -130,10 +130,10 @@ export function Terminal({ ctx, labels, describedBy }: TerminalProps) {
       <div role="log" aria-live="polite" aria-label={labels.output}>
         {entries.map((e) => <Row key={e.id} line={e.line} echo={e.echo} />)}
       </div>
-      <form onSubmit={submit} className="group flex items-baseline gap-[1ch] border-b border-transparent focus-within:border-champagne">
+      <form onSubmit={submit} className="group flex items-baseline gap-[1ch] border-b border-transparent focus-within:border-signal">
         <label htmlFor={inputId} className="shrink-0">
           <span className="sr-only">{labels.input}</span>
-          <span aria-hidden="true" className="text-faint transition-colors group-focus-within:text-champagne">{PROMPT}</span>
+          <span aria-hidden="true" className="text-faint transition-colors group-focus-within:text-signal">{PROMPT}</span>
         </label>
         <input
           ref={inputRef}
@@ -151,7 +151,7 @@ export function Terminal({ ctx, labels, describedBy }: TerminalProps) {
           spellCheck={false}
           enterKeyHint="send"
           maxLength={200}
-          className="min-w-0 flex-1 bg-transparent p-0 text-ivory caret-champagne outline-hidden"
+          className="min-w-0 flex-1 bg-transparent p-0 text-ivory caret-signal outline-hidden"
         />
       </form>
     </div>

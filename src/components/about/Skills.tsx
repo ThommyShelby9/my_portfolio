@@ -15,7 +15,7 @@ export async function Skills({ locale }: { locale: Locale }) {
           {SKILL_GROUPS.map((group, i) => (
             <div key={group.id} data-reveal className="border-t border-line pt-6">
               <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="mt-3 font-serif text-[25px] font-medium leading-[1.15]">{group.label[locale]}</h3>
+              <h3 className="mt-3 font-display text-[25px] font-medium leading-[1.15]">{group.label[locale]}</h3>
               <ul className="mt-5 space-y-2.5 text-[15px] leading-[1.45] text-muted">
                 {group.items.map((item) => {
                   const name = term(item, locale);

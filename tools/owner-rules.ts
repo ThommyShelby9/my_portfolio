@@ -1,4 +1,4 @@
-export type RuleId = 'em-dash' | 'emoji' | 'pill' | 'purple-gradient' | 'ai-tag' | 'favicon' | 'custom-cursor' | 'required-page';
+export type RuleId = 'em-dash' | 'emoji' | 'pill' | 'purple-gradient' | 'ai-tag' | 'favicon' | 'custom-cursor' | 'required-page' | 'single-accent' | 'fake-status';
 export interface SourceFile { path: string; content: string }
 export interface Violation { rule: RuleId; path: string; detail: string }
 
@@ -91,6 +91,52 @@ function hasPurpleStop(args: string): boolean {
   return /var\(\s*--color-(?:purple|violet|fuchsia)-/i.test(args);
 }
 
+/** Hue of --color-signal (#ff5a1f) in HSL degrees; its darker print variant #b23a0e shares it. */
+const SIGNAL_HUE = 16;
+
+function hsl([r, g, b]: [number, number, number]): [number, number, number] {
+  const [rn, gn, bn] = [r / 255, g / 255, b / 255];
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const l = (max + min) / 2;
+  const d = max - min;
+  if (d === 0) return [0, 0, l];
+  const s = d / (1 - Math.abs(2 * l - 1));
+  let h: number;
+  if (max === rn) h = ((gn - bn) / d) % 6;
+  else if (max === gn) h = (bn - rn) / d + 2;
+  else h = (rn - gn) / d + 4;
+  return [(h * 60 + 360) % 360, s, l];
+}
+
+function isForeignAccentHsl(h: number, s: number, l: number): boolean {
+  if (s < 0.35 || l < 0.12 || l > 0.92) return false;
+  const distance = Math.min(Math.abs(h - SIGNAL_HUE), 360 - Math.abs(h - SIGNAL_HUE));
+  return distance > 12;
+}
+
+/** First saturated colour in a stylesheet that is not the signal orange, or null. */
+function foreignAccent(css: string): string | null {
+  for (const m of css.matchAll(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi)) {
+    const rgb = hexToRgb(m[0]);
+    if (rgb && isForeignAccentHsl(...hsl(rgb))) return m[0];
+  }
+  for (const m of css.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/gi)) {
+    if (isForeignAccentHsl(...hsl([Number(m[1]), Number(m[2]), Number(m[3])]))) return m[0];
+  }
+  for (const m of css.matchAll(/hsla?\(\s*(-?[\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/gi)) {
+    if (isForeignAccentHsl(((Number(m[1]) % 360) + 360) % 360, Number(m[2]) / 100, Number(m[3]) / 100)) return m[0];
+  }
+  for (const m of css.matchAll(/oklch\(\s*([\d.]+)%?\s+([\d.]+)\s+(-?[\d.]+)(?:deg)?/gi)) {
+    const h = ((Number(m[3]) % 360) + 360) % 360;
+    // #ff5a1f is about oklch(0.68 0.21 38).
+    if (Number(m[2]) >= 0.08 && (h < 25 || h > 55)) return m[0];
+  }
+  return null;
+}
+
+const FAKE_STATUS = /system (?:status|online|ready)|enter (?:the )?system|identity confirmed|mission (?:completed|status)/i;
+
 function isPillRadius(value: string): boolean {
   if (/infinity|var\(\s*--radius-full|9999/i.test(value)) return true;
   for (const m of value.matchAll(/(\d+(?:\.\d+)?)(px|rem|em)/g)) {
@@ -124,6 +170,9 @@ export function checkOwnerRules(files: SourceFile[], builtPaths?: readonly strin
       const tag = text.match(AI_TAG);
       if (tag) add('ai-tag', file.path, tag[0]);
 
+      const status = text.match(FAKE_STATUS);
+      if (status) add('fake-status', file.path, status[0]);
+
       if (!/<link\b[^>]*\brel\s*=\s*["'](?:shortcut )?icon["']/i.test(file.content)) {
         add('favicon', file.path, 'no <link rel="icon"> in the document');
       }
@@ -145,6 +194,9 @@ export function checkOwnerRules(files: SourceFile[], builtPaths?: readonly strin
         break;
       }
     }
+
+    const accent = foreignAccent(css);
+    if (accent) add('single-accent', file.path, accent);
 
     const cursor = css.match(/cursor\s*:\s*url\(/i);
     if (cursor) add('custom-cursor', file.path, cursor[0]);

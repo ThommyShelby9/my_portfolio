@@ -25,7 +25,7 @@ export async function Career({ locale }: { locale: Locale }) {
                 className="grid gap-x-10 gap-y-3 border-t border-line py-8 md:grid-cols-[190px_minmax(0,1fr)] lg:grid-cols-[210px_minmax(0,5fr)_minmax(0,6fr)] lg:py-9"
               >
                 <div className="md:col-start-2 md:row-start-1">
-                  <h3 className="font-serif text-[clamp(26px,2.4vw,32px)] font-medium leading-[1.1] [font-variant-numeric:lining-nums]">{role.organisation}</h3>
+                  <h3 className="font-display text-[clamp(26px,2.4vw,32px)] font-medium leading-[1.1] [font-variant-numeric:lining-nums]">{role.organisation}</h3>
                   <p className="mt-2 text-[14.5px] leading-[1.5] text-ivory">
                     {role.title[locale]}
                     {kind && <span className="text-muted"> · {kind}</span>}
@@ -33,12 +33,12 @@ export async function Career({ locale }: { locale: Locale }) {
                   {role.location && <p className="mt-1.5 font-mono text-xs text-faint">{role.location[locale]}</p>}
                 </div>
                 <div className="order-first md:col-start-1 md:row-start-1 md:pt-2">
-                  <p className={`font-mono text-xs ${current ? 'text-champagne' : 'text-faint'}`}>
+                  <p className={`font-mono text-xs ${current ? 'text-signal' : 'text-faint'}`}>
                     <PeriodTime period={role.period} locale={locale} />
                   </p>
                   {current && (
                     <p className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ivory">
-                      <span aria-hidden="true" className="block size-[7px] bg-champagne" />
+                      <span aria-hidden="true" className="block size-[7px] bg-signal" />
                       {t('current')}
                     </p>
                   )}

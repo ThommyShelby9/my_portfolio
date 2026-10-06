@@ -19,8 +19,8 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
         />
       </picture>
       <Reveal className="relative mx-auto max-w-[1280px] px-5 md:px-10">
-        <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{kicker ?? t('kicker')}</p>
-        <h2 data-reveal className="mt-3.5 max-w-[12ch] font-serif text-[clamp(46px,6vw,88px)] font-medium leading-[1.02]">{t('title')}</h2>
+        <p data-reveal className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{kicker ?? t('kicker')}</p>
+        <h2 data-reveal className="mt-3.5 max-w-[12ch] font-display text-[clamp(46px,6vw,88px)] font-medium leading-[1.02]">{t('title')}</h2>
         <p data-reveal className="mb-8 mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{t('text')}</p>
         <div className="flex flex-wrap gap-3.5">
           <div data-reveal>
@@ -31,11 +31,11 @@ export function Conversion({ kicker }: { kicker?: string } = {}) {
           </div>
         </div>
         <p data-reveal className="mt-10 flex gap-6 text-[13.5px] text-faint">
-          <a href="https://www.linkedin.com/in/rostelpanoumassi-6b6608335" rel="me noopener" className="border-b border-graphite pb-1 no-underline hover:border-champagne hover:text-champagne">LinkedIn</a>
-          <a href="https://github.com/ThommyShelby9" rel="me noopener" className="border-b border-graphite pb-1 no-underline hover:border-champagne hover:text-champagne">GitHub</a>
+          <a href="https://www.linkedin.com/in/rostelpanoumassi-6b6608335" rel="me noopener" className="border-b border-edge pb-1 no-underline hover:border-signal hover:text-signal">LinkedIn</a>
+          <a href="https://github.com/ThommyShelby9" rel="me noopener" className="border-b border-edge pb-1 no-underline hover:border-signal hover:text-signal">GitHub</a>
         </p>
-        <p data-reveal className="mt-[10vh] font-serif text-[22px] font-medium text-muted">
-          {sig('signatureA')} <em className="italic text-champagne">{sig('signatureB')}</em>
+        <p data-reveal className="mt-[10vh] font-display text-[22px] font-medium text-muted">
+          {sig('signatureA')} <em className="italic text-signal">{sig('signatureB')}</em>
         </p>
       </Reveal>
     </section>

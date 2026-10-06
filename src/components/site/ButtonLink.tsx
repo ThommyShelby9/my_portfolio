@@ -6,8 +6,8 @@ type Props = ComponentProps<typeof Link> & { variant?: 'primary' | 'ghost'; arro
 const base =
   'group inline-flex items-center gap-2.5 whitespace-nowrap rounded-[2px] px-5 py-3.5 text-[13.5px] font-semibold no-underline transition-colors';
 const variants = {
-  primary: 'bg-ivory text-obsidian hover:bg-champagne',
-  ghost: 'border border-[#3a3b3e] text-ivory hover:border-champagne hover:text-champagne',
+  primary: 'bg-ivory text-graphite hover:bg-signal',
+  ghost: 'border border-[#3a3936] text-ivory hover:border-signal hover:text-signal',
 };
 
 export function buttonClassName(variant: 'primary' | 'ghost'): string {

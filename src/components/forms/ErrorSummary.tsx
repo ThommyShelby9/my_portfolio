@@ -48,9 +48,9 @@ export function ErrorSummary({ title, text, items, generic, ref }: Props) {
       autoFocus
       role="group"
       aria-labelledby="error-summary-title"
-      className="scroll-mt-6 border border-champagne bg-obsidian-2 px-6 py-7 outline-offset-4 md:px-8"
+      className="scroll-mt-6 border border-signal bg-graphite-2 px-6 py-7 outline-offset-4 md:px-8"
     >
-      <h2 id="error-summary-title" className="font-serif text-[26px] font-medium leading-[1.2]">{title}</h2>
+      <h2 id="error-summary-title" className="font-display text-[26px] font-medium leading-[1.2]">{title}</h2>
       <p className="mt-2 text-[14.5px] leading-[1.6] text-muted">{items.length > 0 ? text : generic}</p>
       {items.length > 0 && (
         <ul className="mt-5 flex flex-col gap-2.5 border-t border-line pt-5">
@@ -59,7 +59,7 @@ export function ErrorSummary({ title, text, items, generic, ref }: Props) {
               <a
                 href={`#${item.anchor}`}
                 onClick={(event) => goToField(event, item)}
-                className="border-b border-champagne pb-0.5 font-medium text-ivory no-underline hover:text-champagne"
+                className="border-b border-signal pb-0.5 font-medium text-ivory no-underline hover:text-signal"
               >
                 {item.label}
               </a>

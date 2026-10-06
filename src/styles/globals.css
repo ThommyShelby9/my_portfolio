@@ -1,35 +1,41 @@
 @import 'tailwindcss';
+/* Only src/ holds markup. Tooling, tests and docs mention colour names (violet, purple) in rule definitions,
+   which would make Tailwind emit unused default-palette variables into the shipped CSS. */
+@source not "../../tools";
+@source not "../../tests";
+@source not "../../docs";
 /* Consumers: the Header row (min-h) and SculptureStage (top offset). Keep the header exactly this tall. */
 :root { --header-h: 88px; }
 
 @theme inline {
-  --color-obsidian: #101112;
-  --color-obsidian-2: #161719;
-  --color-ivory: #e9e5dc;
-  --color-champagne: #bca57b;
-  --color-muted: #a7a49c;
-  --color-faint: #8a8c90;
-  --color-graphite: #55575b;
-  --color-line: #26272a;
-  /* Form control boundaries (inputs, chips): 3.3:1 on obsidian and 3.2:1 on obsidian-2 (WCAG 1.4.11). Never text. */
-  --color-edge: #65676b;
+  --color-graphite: #121211;
+  --color-graphite-2: #1a1a18;
+  --color-ivory: #edeae4;
+  /* The only saturated colour of the site (owner rule, checked by tools/owner-rules.ts 'single-accent'). */
+  --color-signal: #ff5a1f;
+  --color-muted: #a8a59e;
+  --color-faint: #8b8984;
+  /* Hairlines and dividers. Never text. */
+  --color-line: #2a2a27;
+  /* Form control boundaries: >= 3:1 on graphite and graphite-2 (WCAG 1.4.11). Never text. */
+  --color-edge: #6b6964;
 
-  --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-manrope), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-archivo), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-archivo), system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, Consolas, monospace;
 }
 
 @layer base {
   html { color-scheme: dark; -webkit-text-size-adjust: 100%; scroll-padding-top: var(--header-h); }
   body {
-    background: var(--color-obsidian);
+    background: var(--color-graphite);
     color: var(--color-ivory);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-wrap: anywhere;
   }
-  :focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 3px; }
-  ::selection { background: var(--color-champagne); color: var(--color-obsidian); }
+  :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; }
+  ::selection { background: var(--color-signal); color: var(--color-graphite); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -118,16 +124,16 @@ html[data-poster='1'] .page-enter { animation: none; }
   .case-prose a {
     color: var(--color-ivory);
     text-decoration: none;
-    border-bottom: 1px solid var(--color-graphite);
+    border-bottom: 1px solid var(--color-edge);
     padding-bottom: 1px;
     transition: color 0.2s, border-color 0.2s;
   }
-  .case-prose a:hover { color: var(--color-champagne); border-color: var(--color-champagne); }
+  .case-prose a:hover { color: var(--color-signal); border-color: var(--color-signal); }
   .case-prose code {
     font-family: var(--font-mono);
     font-size: 0.86em;
     color: var(--color-ivory);
-    background: var(--color-obsidian-2);
+    background: var(--color-graphite-2);
     border: 1px solid var(--color-line);
     padding: 0.08em 0.36em;
   }
@@ -141,7 +147,7 @@ html[data-poster='1'] .page-enter { animation: none; }
     top: 0.72em;
     width: 6px;
     height: 6px;
-    background: var(--color-champagne);
+    background: var(--color-signal);
   }
   .case-prose ol { counter-reset: case-ol; }
   .case-prose ol > li { counter-increment: case-ol; }
@@ -152,20 +158,20 @@ html[data-poster='1'] .page-enter { animation: none; }
     top: 0.3em;
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--color-champagne);
+    color: var(--color-signal);
   }
   .case-prose h3 {
     margin-top: 2em;
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: 26px;
     font-weight: 500;
     line-height: 1.2;
     color: var(--color-ivory);
   }
   .case-prose blockquote {
-    border-left: 1px solid var(--color-champagne);
+    border-left: 1px solid var(--color-signal);
     padding-left: 1.2em;
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: 22px;
     line-height: 1.45;
     color: var(--color-ivory);
@@ -179,7 +185,7 @@ html[data-poster='1'] .page-enter { animation: none; }
     margin-top: 1.5em;
     padding-top: 1.1em;
     border-top: 1px solid var(--color-line);
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(28px, 2.6vw, 36px);
     font-weight: 500;
     line-height: 1.12;
@@ -194,7 +200,7 @@ html[data-poster='1'] .page-enter { animation: none; }
     font-family: var(--font-mono);
     font-size: 11px;
     line-height: 1;
-    color: var(--color-champagne);
+    color: var(--color-signal);
   }
   .legal-prose > h2 + * { margin-top: 0.9em; }
 }

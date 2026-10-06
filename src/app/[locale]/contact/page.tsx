@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/contact'
 }
 
 const hero = (i: number) => ({ '--hero-i': i }) as CSSProperties;
-const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-champagne hover:text-champagne';
+const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-signal hover:text-signal';
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -36,8 +36,8 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
   return (
     <section className="mx-auto grid max-w-[1280px] gap-x-24 gap-y-16 px-5 pb-[14vh] pt-[9vh] md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:pt-[14vh]">
       <div>
-        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">{t('kicker')}</p>
-        <h1 data-hero style={hero(1)} className="mt-5 max-w-[12ch] font-serif text-[clamp(42px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
+        <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">{t('kicker')}</p>
+        <h1 data-hero style={hero(1)} className="mt-5 max-w-[12ch] font-display text-[clamp(42px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
           {t('title')}
         </h1>
         <p data-hero style={hero(2)} className="mt-8 max-w-[44ch] text-[16.5px] leading-[1.7] text-muted">{t('lede')}</p>
@@ -56,7 +56,7 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
             <Row label={t('location')}>{t('locationValue')}</Row>
           </dl>
           <div className="mt-12 flex flex-col items-start gap-5">
-            <p className="max-w-[24ch] font-serif text-[26px] font-medium leading-[1.25] text-muted">{t('briefText')}</p>
+            <p className="max-w-[24ch] font-display text-[26px] font-medium leading-[1.25] text-muted">{t('briefText')}</p>
             <ButtonLink href="/brief" variant="ghost" arrow>{t('briefLink')}</ButtonLink>
           </div>
         </div>

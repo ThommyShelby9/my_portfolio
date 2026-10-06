@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/terminal
 }
 
 const KEYS_ID = 'terminal-keys';
-const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-champagne hover:text-champagne';
+const link = 'border-b border-edge pb-0.5 text-ivory no-underline transition-colors hover:border-signal hover:text-signal';
 
 // `ls` reads like a directory listing: alphabetical, as a shell sorts.
 const entries = (projects: Project[]): Entry[] =>
@@ -62,7 +62,7 @@ export default async function TerminalPage({ params }: PageProps<'/[locale]/term
   return (
     <section className="mx-auto max-w-[1040px] px-5 pb-[12vh] pt-[5vh] md:px-10 md:pt-[7vh]">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4">
-        <h1 className="font-serif text-[clamp(30px,3.6vw,44px)] font-medium leading-[1.1] tracking-[-0.01em]">{t('title')}</h1>
+        <h1 className="font-display text-[clamp(30px,3.6vw,44px)] font-medium leading-[1.1] tracking-[-0.01em]">{t('title')}</h1>
         <Link href="/" className={`inline-flex items-center gap-2 font-mono text-xs font-medium ${link}`}>
           <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
             <path d="M12 7H2M6 3 2 7l4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />
@@ -71,8 +71,8 @@ export default async function TerminalPage({ params }: PageProps<'/[locale]/term
         </Link>
       </div>
 
-      <div className="mt-8 border border-line bg-obsidian md:mt-10">
-        <p aria-hidden="true" className="border-b border-line bg-obsidian-2 px-4 py-2.5 font-mono text-[11px] text-faint sm:px-6">
+      <div className="mt-8 border border-line bg-graphite md:mt-10">
+        <p aria-hidden="true" className="border-b border-line bg-graphite-2 px-4 py-2.5 font-mono text-[11px] text-faint sm:px-6">
           rostel@cotonou: ~
         </p>
         <div className="h-[min(62svh,600px)] min-h-[320px]">

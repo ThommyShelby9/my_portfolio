@@ -26,7 +26,7 @@ export function CaseHeader({ project: p }: { project: Project }) {
     <header className="mx-auto max-w-[1280px] px-5 pt-[6vh] md:px-10 lg:pt-[8vh]">
       <Link
         href={isExploration ? '/explorations' : '/realisations'}
-        className="group inline-flex items-center gap-2.5 font-mono text-xs text-faint no-underline transition-colors hover:text-champagne"
+        className="group inline-flex items-center gap-2.5 font-mono text-xs text-faint no-underline transition-colors hover:text-signal"
       >
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false" className="transition-transform group-hover:-translate-x-0.5">
           <path d="M12 7H2M6 3 2 7l4 4" fill="none" stroke="currentColor" strokeWidth="1.4" />
@@ -40,11 +40,11 @@ export function CaseHeader({ project: p }: { project: Project }) {
           </div>
         )}
         {p.sector && (
-          <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
+          <p data-hero style={hero(0)} className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
             {p.sector}
           </p>
         )}
-        <h1 data-hero style={hero(1)} className="mt-5 max-w-[16ch] font-serif text-[clamp(52px,8vw,120px)] font-medium leading-[0.95] tracking-[-0.02em]">
+        <h1 data-hero style={hero(1)} className="mt-5 max-w-[16ch] font-display text-[clamp(52px,8vw,120px)] font-medium leading-[0.95] tracking-[-0.02em]">
           {p.title}
         </h1>
         <p data-hero style={hero(2)} className="mt-8 max-w-[58ch] text-[17.5px] leading-[1.7] text-muted">
@@ -68,7 +68,7 @@ export function CaseHeader({ project: p }: { project: Project }) {
               <a
                 href={p.liveUrl}
                 rel="noopener"
-                className="whitespace-nowrap border-b border-graphite pb-0.5 no-underline transition-colors hover:border-champagne hover:text-champagne"
+                className="whitespace-nowrap border-b border-edge pb-0.5 no-underline transition-colors hover:border-signal hover:text-signal"
               >
                 {t('visit')}
                 <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false" className="ml-1.5 inline-block align-[1px]">

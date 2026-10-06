@@ -15,7 +15,7 @@ export async function Education({ locale }: { locale: Locale }) {
         <ol className="mt-14 grid border-b border-line md:grid-cols-2 md:gap-x-14">
           {EDUCATION.map((e) => (
             <li key={e.id} data-reveal className="flex flex-col gap-y-3 border-t border-line py-8">
-              <h3 className="max-w-[30ch] font-serif text-[clamp(24px,2.2vw,29px)] font-medium leading-[1.15]">{educationHeading(e, locale)}</h3>
+              <h3 className="max-w-[30ch] font-display text-[clamp(24px,2.2vw,29px)] font-medium leading-[1.15]">{educationHeading(e, locale)}</h3>
               <p className="order-first font-mono text-xs text-faint">
                 <PeriodTime period={e.period} locale={locale} />
               </p>

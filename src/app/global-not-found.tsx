@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { buttonClassName } from '@/components/site/ButtonLink';
 import { localizedPath } from '@/lib/i18n/localized-path';
 import { OWNER } from '@/lib/site';
-import { mono, sans, serif } from '@/styles/fonts';
+import { archivo, mono } from '@/styles/fonts';
 import en from '../../messages/en.json';
 import fr from '../../messages/fr.json';
 import '@/styles/globals.css';
@@ -31,16 +31,16 @@ const ARROW = (
 
 export default function GlobalNotFound() {
   return (
-    <html lang="fr" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="fr" className={`${archivo.variable} ${mono.variable}`}>
       <body>
         <main id="main" data-global-not-found className="mx-auto flex min-h-svh max-w-[1280px] flex-col justify-center px-5 py-[12vh] md:px-10">
-          <a href="/" className="mb-[8vh] self-start font-serif text-[22px] font-medium tracking-[0.02em] text-ivory no-underline">
+          <a href="/" className="mb-[8vh] self-start font-display text-[22px] font-medium tracking-[0.02em] text-ivory no-underline">
             {OWNER.name}
           </a>
-          <p className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne">
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal">
             {fr.notFound.kicker} <span lang="en">· {en.notFound.kicker}</span>
           </p>
-          <h1 className="mt-5 max-w-[24ch] font-serif text-[clamp(44px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
+          <h1 className="mt-5 max-w-[24ch] font-display text-[clamp(44px,6vw,88px)] font-medium leading-[1.02] tracking-[-0.015em]">
             {fr.notFound.title}
           </h1>
           <p className="mt-6 max-w-[48ch] text-[16.5px] leading-[1.7] text-muted">{fr.notFound.text}</p>
@@ -54,13 +54,13 @@ export default function GlobalNotFound() {
             </a>
           </div>
           <div lang="en" className="mt-[8vh] max-w-[48ch] border-t border-line pt-8">
-            <p className="font-serif text-[clamp(24px,2.4vw,32px)] font-medium leading-[1.2]">{en.notFound.title}</p>
+            <p className="font-display text-[clamp(24px,2.4vw,32px)] font-medium leading-[1.2]">{en.notFound.title}</p>
             <p className="mt-3 text-[15px] leading-[1.7] text-muted">{en.notFound.text}</p>
             <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[14px]">
-              <a href={localizedPath('/realisations', 'en')} className="text-ivory underline decoration-edge underline-offset-4 hover:text-champagne hover:decoration-champagne">
+              <a href={localizedPath('/realisations', 'en')} className="text-ivory underline decoration-edge underline-offset-4 hover:text-signal hover:decoration-signal">
                 {en.notFound.work}
               </a>
-              <a href={localizedPath('/', 'en')} className="text-ivory underline decoration-edge underline-offset-4 hover:text-champagne hover:decoration-champagne">
+              <a href={localizedPath('/', 'en')} className="text-ivory underline decoration-edge underline-offset-4 hover:text-signal hover:decoration-signal">
                 {en.notFound.back}
               </a>
             </p>

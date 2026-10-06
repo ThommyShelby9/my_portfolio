@@ -22,10 +22,10 @@ export function FormSection({ legend, text, children }: { legend: string; text: 
   return (
     <fieldset className="grid min-w-0 gap-y-3 border-t border-line py-12 first-of-type:border-t-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:py-16">
       {/* float removes the legend's special fieldset rendering so it can sit in the grid (HTML rendering spec). */}
-      <legend className="float-left font-mono text-xs font-medium uppercase tracking-[0.14em] text-champagne lg:col-start-1 lg:row-start-1">
+      <legend className="float-left font-mono text-xs font-medium uppercase tracking-[0.14em] text-signal lg:col-start-1 lg:row-start-1">
         {legend}
       </legend>
-      <p className="max-w-[26ch] font-serif text-[24px] font-medium leading-[1.25] text-muted lg:col-start-1 lg:row-start-2">{text}</p>
+      <p className="max-w-[26ch] font-display text-[24px] font-medium leading-[1.25] text-muted lg:col-start-1 lg:row-start-2">{text}</p>
       <div className="mt-7 flex min-w-0 flex-col gap-10 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">{children}</div>
     </fieldset>
   );
