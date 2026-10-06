@@ -23,10 +23,10 @@ export function Header() {
           <Monogram />
         </Link>
         <nav aria-label={t('label')} className="ml-auto hidden md:block">
-          <ul className="flex gap-8 text-[13.5px] text-muted">
+          <ul className="flex gap-8 font-mono text-[11.5px] uppercase tracking-[0.14em] text-muted">
             {items.map((item) => (
               <li key={item.label}>
-                <Link href={item.href} className="no-underline hover:text-ivory">{item.label}</Link>
+                <Link href={item.href} className="no-underline transition-colors hover:text-ivory">{item.label}</Link>
               </li>
             ))}
           </ul>

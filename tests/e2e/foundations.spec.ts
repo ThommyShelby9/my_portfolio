@@ -192,3 +192,25 @@ test.describe('without JavaScript', () => {
     await expect(page.getByRole('link', { name: 'Voir les réalisations' })).toBeVisible();
   });
 });
+
+test('chrome uses the Instrument style', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const header = page.locator('header').first();
+  await expect(header.locator('> div')).toHaveCSS('min-height', '88px');
+  // Navigation menu items are IBM Plex Mono, uppercase (the monogram is a brand mark in Archivo).
+  const link = header.getByRole('navigation').getByRole('link', { name: 'Réalisations' });
+  await expect(link).toHaveCSS('text-transform', 'uppercase');
+  expect(await link.evaluate((el) => getComputedStyle(el).fontFamily)).toMatch(/Plex Mono/i);
+  // The primary call to action is an ivory rectangle.
+  const cta = header.getByRole('link', { name: /parler d’un projet/i });
+  await expect(cta).toHaveCSS('background-color', 'rgb(237, 234, 228)');
+  expect(parseFloat(await cta.evaluate((el) => getComputedStyle(el).borderTopLeftRadius))).toBeLessThanOrEqual(2);
+});
+
+test('language switch name contains its visible text (WCAG 2.5.3)', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('header').getByRole('link', { name: /^EN\b/ })).toBeVisible();
+  await page.goto('/en');
+  await expect(page.locator('header').getByRole('link', { name: /^FR\b/ })).toBeVisible();
+});

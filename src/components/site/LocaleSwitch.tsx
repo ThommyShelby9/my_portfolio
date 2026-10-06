@@ -18,7 +18,7 @@ export function LocaleSwitch({ label }: { label: string }) {
       hrefLang={other}
       lang={other}
       aria-label={label}
-      className="font-mono text-xs font-medium text-muted no-underline hover:text-ivory"
+      className="font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted no-underline hover:text-ivory"
     >
       {other.toUpperCase()}
     </Link>
