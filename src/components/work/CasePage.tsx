@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { DnaScene } from '@/components/dna/DnaScene';
 import { Conversion } from '@/components/home/Conversion';
 import { JsonLd } from '@/components/seo/JsonLd';
 import type { Locale } from '@/i18n/routing';
@@ -26,6 +27,8 @@ export async function CasePage({ kind, locale, slug }: Props) {
   const cover = project.images[0];
   return (
     <>
+      {/* The project's DNA signature, alive: the helix re-sequences into its ring. */}
+      <DnaScene mode="page" state={3} signatures={[project.genes]} />
       <JsonLd data={caseJsonLd(project, metaTitle)} />
       <article data-case={project.slug}>
         <CaseHeader project={project} />

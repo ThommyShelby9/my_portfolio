@@ -40,7 +40,7 @@ export default function DnaTrajectory({ stage, state, focus, tunnel }: Props) {
     };
 
     const triggers: ScrollTrigger[] = [];
-    for (const el of document.querySelectorAll<HTMLElement>('[data-dna-scene][data-dna-state]')) {
+    for (const el of document.querySelectorAll<HTMLElement>('main [data-dna-scene][data-dna-state]')) {
       const target = Number(el.dataset.dnaState);
       triggers.push(
         ScrollTrigger.create({

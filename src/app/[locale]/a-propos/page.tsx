@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DnaScene } from '@/components/dna/DnaScene';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { AboutHero } from '@/components/about/AboutHero';
 import { Career } from '@/components/about/Career';
@@ -24,6 +25,8 @@ export default async function AboutPage({ params }: PageProps<'/[locale]/a-propo
   const t = await getTranslations({ locale, namespace: 'about' });
   return (
     <>
+      {/* The layers of the construction sequence, the way he works. */}
+      <DnaScene mode="page" state={2} />
       <JsonLd data={aboutJsonLd(locale, t('metaTitle'))} />
       <AboutHero locale={locale} />
       <Career locale={locale} />

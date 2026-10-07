@@ -17,8 +17,10 @@ interface Props {
   frozen: boolean;
   running: boolean;
   tilt: RefObject<{ x: number; y: number }>;
-  /** Current state in [1, 5] (src/lib/dna/layout.ts STATE), driven by DnaTrajectory. */
+  /** Current state in [1, 5] (src/lib/dna/layout.ts STATE), driven by DnaTrajectory on the home. */
   state: RefObject<number>;
+  /** Inner pages: the state to ease into (null on the home). */
+  target: RefObject<number | null>;
   /** Highlighted group of the current state, -1 for none. */
   focus: RefObject<number>;
   /** Traversal: `mix` in [0, 1] (0 outside, 1 inside the helix), `z` how far the camera flew. */
@@ -44,15 +46,17 @@ const TUNNEL_FOV = 70;
 
 const mix = (a: number, b: number, k: number) => a + (b - a) * k;
 
-function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, onReady }: Omit<Props, 'running' | 'dpr' | 'onLost'>) {
+function Helix({ count, signatures, frozen, tilt, state, target, focus, tunnel, light, onReady }: Omit<Props, 'running' | 'dpr' | 'onLost'>) {
   const group = useRef<THREE.Group>(null);
   const current = useRef({ x: 0, y: 0 });
   const frames = useRef(0);
   const start = useRef<number | null>(null);
   const { gl, scene, camera, size } = useThree();
 
+  // Same genes, same geometry: a new array with equal content must not rebuild 40 000 particles.
+  const signaturesKey = JSON.stringify(signatures ?? null);
   const geometry = useMemo(() => {
-    const layout = buildLayout({ count, signatures });
+    const layout = buildLayout({ count, signatures: signatures ?? undefined });
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(layout.helix, 3));
     g.setAttribute('aCloud', new THREE.BufferAttribute(layout.cloud, 3));
@@ -69,7 +73,8 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
     // Shapes move far from the helix (and the traversal runs 60 units deep): never cull the cloud.
     g.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 80);
     return g;
-  }, [count, signatures]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed on content, not identity
+  }, [count, signaturesKey]);
 
   const material = useMemo(
     () =>
@@ -84,7 +89,7 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
           uIntro: { value: frozen ? 1 : 0 },
           uState: { value: 1 },
           uFocus: { value: -1 },
-          uSignatures: { value: signatures?.length ?? 3 },
+          uSignatures: { value: signatures?.length || 3 },
           uTunnel: { value: 0 },
           uTunnelZ: { value: 0 },
           uTunnelLen: { value: TUNNEL_LENGTH },
@@ -95,7 +100,7 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
           uSignal: { value: SIGNAL },
         },
       }),
-    [frozen, gl, signatures],
+    [frozen, gl, signatures?.length],
   );
 
   // Bloom: the glow that makes the particles read as light, not as dots.
@@ -112,7 +117,11 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
     composer.setSize(size.width, size.height);
   }, [composer, gl, size.width, size.height]);
 
-  useEffect(() => () => geometry.dispose(), [geometry]);
+  // A new geometry (another project's signature) re-sequences: the particles condense again.
+  useEffect(() => {
+    start.current = null;
+    return () => geometry.dispose();
+  }, [geometry]);
   useEffect(() => () => material.dispose(), [material]);
   useEffect(() => () => composer.dispose(), [composer]);
 
@@ -125,6 +134,7 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
       if (start.current === null) start.current = s.clock.elapsedTime;
       u.uTime.value += delta;
       u.uIntro.value = Math.min(1, (s.clock.elapsedTime - start.current) / INTRO_SECONDS);
+      if (target.current !== null) state.current += (target.current - state.current) * Math.min(1, delta * 1.6);
       u.uState.value = state.current;
       u.uFocus.value = focus.current;
       u.uTunnel.value = k;
@@ -142,7 +152,10 @@ function Helix({ count, signatures, frozen, tilt, state, focus, tunnel, light, o
 
     const g = group.current;
     if (g) {
-      const lean = Math.min(1, Math.max(0, u.uState.value - 1)) * LEAN;
+      // A single project ring (case pages) faces the camera so its shape reads; stacked shapes lean a little.
+      const single = (signatures?.length ?? 3) === 1;
+      const ringFace = single ? Math.max(0, 1 - Math.abs(u.uState.value - 3)) : 0;
+      const lean = Math.min(1, Math.max(0, u.uState.value - 1)) * LEAN + ringFace * 0.85;
       const spin = frozen ? 0.6 : u.uTime.value * 0.14;
       // In the traversal the group straightens up so the tunnel runs along the camera axis.
       g.rotation.set(mix(lean, 0, k), mix(spin, 0, k), mix(-0.36, u.uTime.value * 0.12, k));

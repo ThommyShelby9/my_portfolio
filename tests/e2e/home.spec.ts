@@ -154,7 +154,7 @@ test.describe('scene 00 Formation', () => {
     await expect(lede).toBeInViewport();
     await expect(scene.getByRole('link', { name: 'Parler d’un projet' })).toHaveAttribute('href', '/brief');
     await expect(scene.getByRole('link', { name: 'Voir les réalisations' })).toHaveAttribute('href', '/realisations');
-    await expect(scene.locator('[data-dna-stage]')).toBeAttached();
+    await expect(page.locator('[data-dna-stage]')).toHaveAttribute('data-dna-dim', 'false');
   });
 
   test('English hero', async ({ page }) => {

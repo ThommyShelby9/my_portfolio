@@ -1,9 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { usePathname } from '@/i18n/navigation';
 import { particleBudget } from '@/lib/dna/budget';
-import type { Gene } from '@/lib/dna/genes';
+import { DEFAULT_PAGE_SCENE, getDnaScene, subscribeDnaScene } from '@/lib/dna/scene-store';
 import { DnaBoundary } from './DnaBoundary';
 
 const DnaCanvas = dynamic(() => import('./DnaCanvas'), { ssr: false, loading: () => null });
@@ -23,23 +24,25 @@ function hasWebGL(): boolean {
 type NavigatorHints = Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
 
 /**
- * The DNA helix (spec §3.4): a still poster first, then the live particle scene once the browser is
- * idle, when motion is allowed and WebGL works. Any 3D failure goes back to the poster.
+ * The site-wide DNA helix (spec §3.4, §4.2 revised: 3D on every page), mounted once in the layout
+ * so it survives client navigation and morphs from one page's shape to the next. A still poster
+ * first, then the live particle scene once the browser is idle, when motion is allowed and WebGL
+ * works. Any 3D failure goes back to the poster. Pages pick their shape with <DnaScene>.
  */
-interface Props {
-  /** Home only: the live helix stays fixed behind the page and follows the scenes (spec §4.1). */
-  fixed?: boolean;
-  /** Genes of the featured projects, top ring first (scene 03). */
-  signatures?: readonly (readonly Gene[])[];
-}
-
-export function DnaStage({ fixed = false, signatures }: Props) {
+export function DnaStage() {
   const box = useRef<HTMLDivElement>(null);
   const tilt = useRef({ x: 0, y: 0 });
   const state = useRef(1);
+  /** Inner pages ease towards this state; null on the home, where the scroll drives `state`. */
+  const target = useRef<number | null>(null);
   const focus = useRef(-1);
   const tunnel = useRef({ mix: 0, z: 0 });
+  const pathname = usePathname();
+  const onHome = pathname === '/';
+  const scene = useSyncExternalStore(subscribeDnaScene, getDnaScene, () => DEFAULT_PAGE_SCENE);
+  const home = scene.mode === 'home';
   const [mode, setMode] = useState<'poster' | '3d'>('poster');
+  const [webgl, setWebgl] = useState(false);
   const [visible, setVisible] = useState(true);
   const [posterMode, setPosterMode] = useState(false);
   const [mobile, setMobile] = useState(false);
@@ -50,7 +53,7 @@ export function DnaStage({ fixed = false, signatures }: Props) {
   const fallback = useCallback(() => {
     setReady(false);
     setMode('poster');
-    delete document.documentElement.dataset.dnaFlight;
+    setWebgl(false);
   }, []);
 
   useEffect(() => {
@@ -76,8 +79,7 @@ export function DnaStage({ fixed = false, signatures }: Props) {
       return;
     }
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !hasWebGL()) return;
-    // Open the traversal space now, before idle: it sits below the fold, so the page does not jump.
-    if (fixed) document.documentElement.dataset.dnaFlight = '1';
+    setWebgl(true);
     const start = () => setMode('3d');
     if (typeof window.requestIdleCallback === 'function') {
       const id = requestIdleCallback(start, { timeout: 2000 });
@@ -85,18 +87,39 @@ export function DnaStage({ fixed = false, signatures }: Props) {
     }
     const id = window.setTimeout(start, 1200);
     return () => window.clearTimeout(id);
-  }, [fixed]);
+  }, []);
 
-  // Pause rendering when off screen or when the tab is hidden.
+  // The traversal space opens on the home as soon as the live helix can run (before idle: it sits
+  // below the fold, so nothing jumps), and closes on any other page or after a 3D failure.
   useEffect(() => {
-    const el = box.current;
-    if (!el) return;
-    let onScreen = true;
-    const update = () => setVisible(onScreen && document.visibilityState === 'visible');
-    const io = new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; update(); });
-    io.observe(el);
+    const root = document.documentElement;
+    if (webgl && home) root.dataset.dnaFlight = '1';
+    else delete root.dataset.dnaFlight;
+  }, [webgl, home]);
+
+  // Inner pages: ease into the page's state. The home leaves the state to DnaTrajectory.
+  useEffect(() => {
+    if (scene.mode === 'page') {
+      target.current = scene.state;
+      focus.current = -1;
+      tunnel.current = { mix: 0, z: 0 };
+    } else {
+      target.current = null;
+    }
+    // Exposed for tests; on the home DnaTrajectory writes it as the scroll moves.
+    if (box.current && scene.mode === 'page') {
+      box.current.dataset.dnaScene = String(scene.state);
+      // Left the home mid-flight: no traversal here.
+      delete box.current.dataset.dnaFlying;
+      delete box.current.dataset.dnaTunnel;
+    }
+  }, [scene]);
+
+  // Pause rendering when the tab is hidden (the stage is fixed: always on screen otherwise).
+  useEffect(() => {
+    const update = () => setVisible(document.visibilityState === 'visible');
     document.addEventListener('visibilitychange', update);
-    return () => { io.disconnect(); document.removeEventListener('visibilitychange', update); };
+    return () => document.removeEventListener('visibilitychange', update);
   }, []);
 
   // A few degrees of tilt towards a fine pointer; nothing follows the cursor (owner rule 7).
@@ -118,9 +141,11 @@ export function DnaStage({ fixed = false, signatures }: Props) {
       data-dna-state={mode}
       data-dna-ready={String(ready)}
       data-dna-running={String(running)}
-      data-dna-fixed={fixed ? 'true' : undefined}
+      data-dna-fixed="true"
+      // Inner pages: a quieter helix behind long text (full intensity on the home only).
+      data-dna-dim={String(!onHome)}
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 opacity-40 lg:opacity-100 ${fixed ? '' : 'lg:left-auto lg:w-[52vw]'}`}
+      className="pointer-events-none fixed inset-0 z-0"
     >
       {!posterMode && (
         <picture>
@@ -130,17 +155,18 @@ export function DnaStage({ fixed = false, signatures }: Props) {
             src="/dna/helix-desktop.webp"
             alt=""
             data-dna-poster
-            className={`absolute inset-0 m-auto h-full w-full object-contain ${fixed ? 'lg:object-[88%_50%]' : ''} transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${ready ? 'invisible opacity-0' : ''}`}
+            className={`absolute inset-0 m-auto h-full w-full object-cover lg:object-contain lg:object-[88%_50%] transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${ready ? 'invisible opacity-0' : ''}`}
           />
         </picture>
       )}
-      {mode === '3d' && fixed && !posterMode && <DnaTrajectory stage={box} state={state} focus={focus} tunnel={tunnel} />}
+      {mode === '3d' && home && !posterMode && <DnaTrajectory stage={box} state={state} focus={focus} tunnel={tunnel} />}
       {mode === '3d' && count > 0 && (
         <DnaBoundary onError={fallback}>
           <DnaCanvas
             count={count}
-            signatures={signatures}
+            signatures={scene.signatures}
             state={state}
+            target={target}
             focus={focus}
             tunnel={tunnel}
             light={mobile || count <= 6000}

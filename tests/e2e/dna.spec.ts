@@ -83,3 +83,38 @@ test.describe('traversal', () => {
     }
   });
 });
+
+test.describe('every page', () => {
+  test('inner pages carry the helix too, quieter, in their own shape', async ({ page }) => {
+    test.setTimeout(120_000);
+    for (const [path, scene] of [['/realisations', '1'], ['/realisations/ubbfy', '3'], ['/explorations', '4'], ['/a-propos', '2'], ['/contact', '5'], ['/cgu', '5']]) {
+      await page.goto(path, { waitUntil: 'domcontentloaded' });
+      const stage = page.locator('[data-dna-stage]');
+      await expect(stage, path).toHaveAttribute('data-dna-dim', 'true');
+      await expect(stage, path).toHaveAttribute('data-dna-scene', scene, { timeout: 10_000 });
+    }
+  });
+
+  test('the helix survives client navigation and goes live on an inner page', async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.goto('/realisations');
+    test.skip(!(await hasWebGL(page)), 'no WebGL in this browser');
+    const stage = page.locator('[data-dna-stage]');
+    await expect(stage).toHaveAttribute('data-dna-ready', 'true', { timeout: 20_000 });
+    await page.locator('main a[href="/realisations/ubbfy"]').first().click();
+    await expect(page).toHaveURL(/\/realisations\/ubbfy$/);
+    await expect(stage).toHaveAttribute('data-dna-scene', '3');
+    await expect(stage).toHaveAttribute('data-dna-ready', 'true');
+    await expect(stage.locator('canvas')).toHaveCount(1);
+  });
+
+  test('inner pages show the poster under reduced motion', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/a-propos', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1500);
+    await expect(page.locator('[data-dna-stage] canvas')).toHaveCount(0);
+    await expect(page.locator('img[data-dna-poster]')).toBeVisible();
+    await context.close();
+  });
+});

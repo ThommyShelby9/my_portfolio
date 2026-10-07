@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DnaScene } from '@/components/dna/DnaScene';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Conversion } from '@/components/home/Conversion';
 import { Reveal } from '@/components/motion/Reveal';
@@ -29,6 +30,8 @@ export default async function WorkIndexPage({ params }: PageProps<'/[locale]/rea
   const years = projects.map((p) => p.year);
   return (
     <>
+      {/* The helix, pulses running: everything shipped comes from it. */}
+      <DnaScene mode="page" state={1} />
       <IndexHeader
         kicker={t('kicker')}
         title={t('title')}

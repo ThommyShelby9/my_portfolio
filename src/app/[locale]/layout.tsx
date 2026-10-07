@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { HelixOrnament } from '@/components/dna/HelixOrnament';
+import { DnaStage } from '@/components/dna/DnaStage';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
 import { HitBeacon } from '@/components/site/HitBeacon';
@@ -63,8 +63,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <NextIntlClientProvider messages={null}>
           <SkipLink />
           <Header />
-          <main id="main" tabIndex={-1} className="relative focus:outline-none">
-            <HelixOrnament />
+          {/* One live helix for the whole site: it survives navigation and morphs per page. */}
+          <DnaStage />
+          <main id="main" tabIndex={-1} className="relative z-10 focus:outline-none">
             {children}
           </main>
           <Footer />

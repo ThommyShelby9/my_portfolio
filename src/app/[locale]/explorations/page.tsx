@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DnaScene } from '@/components/dna/DnaScene';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Conversion } from '@/components/home/Conversion';
 import { Reveal } from '@/components/motion/Reveal';
@@ -26,6 +27,8 @@ export default async function ExplorationsPage({ params }: PageProps<'/[locale]/
   const years = [...new Set(projects.map((p) => p.year))].sort();
   return (
     <>
+      {/* The lab: the helix breaks into mutations. */}
+      <DnaScene mode="page" state={4} />
       <IndexHeader
         kicker={t('kicker')}
         title={t('title')}

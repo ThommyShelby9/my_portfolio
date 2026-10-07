@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { DnaScene } from '@/components/dna/DnaScene';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Construction } from '@/components/home/Construction';
 import { Conversion } from '@/components/home/Conversion';
@@ -28,7 +29,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
   return (
     <>
       <JsonLd data={homeJsonLd(locale)} />
-      <Hero signatures={featured.map((p) => p.genes)} />
+      <DnaScene mode="home" signatures={featured.map((p) => p.genes)} />
+      <Hero />
       <Traversal />
       <Sequencing />
       <Construction />

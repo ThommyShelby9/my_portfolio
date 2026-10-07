@@ -77,12 +77,15 @@ html[data-poster='1'], html[data-poster='1'] body { background: transparent; }
 html[data-poster='1'] body *:not([data-dna-stage]):not([data-dna-stage] *):not(:has([data-dna-stage])) { visibility: hidden; }
 html[data-poster='1'] .page-enter { animation: none; }
 
-/* Home: once live, the helix stays fixed behind every scene (scenes and footer sit at z-10);
-   the poster fallback (no JS, no WebGL, reduced motion) stays inside the hero. */
-[data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { position: fixed; height: 100svh; }
+/* The site-wide helix (layout): fixed behind every page, content and footer at z-10. Full intensity
+   on the home, quieter behind the long texts of inner pages, quieter still on phones. */
+[data-dna-stage] { height: 100svh; transition: opacity 0.5s ease; }
+[data-dna-stage][data-dna-dim='true'] { opacity: 0.42; }
 @media (max-width: 1023px) {
-  /* Behind full-width text on phones: quieter. */
-  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { opacity: 0.22; }
+  [data-dna-stage] { opacity: 0.22; }
+  [data-dna-stage][data-dna-dim='true'] { opacity: 0.16; }
+  /* No text over the home traversal: the stage lights up fully meanwhile. */
+  [data-dna-stage][data-dna-flying='true'] { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -200,18 +203,11 @@ html[data-poster='1'] .page-enter { animation: none; }
   .legal-prose > h2 + * { margin-top: 0.9em; }
 }
 
-/* The inner-page still is redundant on the home, which has the live helix. */
-html:has([data-dna-stage]) [data-helix-ornament] { display: none; }
-
 @media print {
   /* Decoration never prints (the CV PDF, any page a visitor prints). */
-  [data-helix-ornament], [data-dna-stage] { display: none !important; }
+  [data-dna-stage] { display: none !important; }
 }
 
 /* The traversal space (home): closed unless the live helix runs, then about one and a half screens. */
 [data-dna-traverse] { display: none; }
 html[data-dna-flight='1'] [data-dna-traverse] { display: block; height: 170svh; }
-@media (max-width: 1023px) {
-  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { transition: opacity 0.4s ease; }
-  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'][data-dna-flying='true'] { opacity: 1; }
-}

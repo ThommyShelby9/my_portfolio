@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { OWNER } from '../../src/lib/site';
-import { requireEmulator } from './helpers/require-emulator';
+import { EMULATOR_SKIP_REASON, emulatorActive } from './helpers/require-emulator';
 import { getDoc, statsDay, submissionsWith, uniqueToken } from './helpers/emulator';
 
 // Full delivery path: the app server writes to the Firestore emulator (playwright.config.ts), never to
@@ -33,7 +33,7 @@ async function fillContact(page: Page, name: string, message = 'Une question sur
 
 test.describe('forms on the Firestore emulator', () => {
   test.beforeAll(async ({ request }) => {
-    await requireEmulator(request);
+    test.skip(!(await emulatorActive(request)), EMULATOR_SKIP_REASON);
   });
 
   test('brief with JS: every step filled, a pitch at its limit with line breaks, stored once', async ({ page }) => {
@@ -179,7 +179,7 @@ test.describe('forms on the Firestore emulator', () => {
 
 test.describe('forms on the Firestore emulator, without JavaScript', () => {
   test.beforeAll(async ({ request }) => {
-    await requireEmulator(request);
+    test.skip(!(await emulatorActive(request)), EMULATOR_SKIP_REASON);
   });
 
   test.use({ javaScriptEnabled: false });

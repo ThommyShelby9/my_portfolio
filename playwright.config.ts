@@ -2,6 +2,11 @@ import { defineConfig, devices } from '@playwright/test';
 import { EMULATOR_HOST, EMULATOR_PROJECT } from './tests/e2e/helpers/emulator';
 
 const PORT = Number(process.env.PW_PORT ?? 3000);
+/**
+ * The Firestore emulator (Java) is opt-in: PW_EMULATOR=1 pnpm test:e2e. Without it, the specs that
+ * write to Firestore skip themselves, and the app server has no credentials: nothing can be written.
+ */
+const EMULATOR = process.env.PW_EMULATOR === '1';
 
 export default defineConfig({
   testDir: 'tests/e2e',
@@ -16,13 +21,13 @@ export default defineConfig({
     launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
   },
   webServer: [
-    {
+    ...(EMULATOR ? [{
       // Forms and the visit counter write here: never to the real Firebase project.
       command: `firebase emulators:start --only firestore --project ${EMULATOR_PROJECT}`,
       url: `http://${EMULATOR_HOST}`,
       reuseExistingServer: false,
       timeout: 120_000,
-    },
+    }] : []),
     {
       command: 'pnpm build && node .next/standalone/server.js',
       url: `http://127.0.0.1:${PORT}/api/health`,
@@ -35,7 +40,7 @@ export default defineConfig({
         HOSTNAME: '0.0.0.0',
         // The standalone server does not read .env.local; these explicit values also win over any shell env.
         // With FIRESTORE_EMULATOR_HOST set, firebase-admin talks to the emulator and ignores credentials.
-        FIRESTORE_EMULATOR_HOST: EMULATOR_HOST,
+        FIRESTORE_EMULATOR_HOST: EMULATOR ? EMULATOR_HOST : '',
         FIREBASE_PROJECT_ID: EMULATOR_PROJECT,
         FIREBASE_SERVICE_ACCOUNT: '',
         // Without credentials the Google auth library probes the GCE metadata server; skip that lookup.
