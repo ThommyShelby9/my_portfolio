@@ -28,6 +28,13 @@ export interface ParticleLayout {
   clusters: Float32Array;
   /** State « calm » (scene 05): xyz per particle. */
   calm: Float32Array;
+  /**
+   * The traversal (between scenes 00 and 01): a long helix around the camera's axis (z), from
+   * z = 2 to z = -TUNNEL_LENGTH + 2, which the camera flies through.
+   */
+  tunnel: Float32Array;
+  /** Position along the helix in [0, 1] for strands and rungs (the light pulse runs on it), -1 for dust. */
+  along: Float32Array;
   /** ROLE value per particle. */
   role: Float32Array;
   /** Base pair index 0..2 (helix third), -1 for dust. */
@@ -64,6 +71,10 @@ export const CLUSTER_CENTRES: readonly (readonly [number, number, number])[] = [
 ];
 const CLUSTER_RADIUS = 0.55;
 const CALM_SCALE = 0.8;
+export const TUNNEL_LENGTH = 60;
+const TUNNEL_RADIUS = 1.7;
+const TUNNEL_TURNS = 14;
+const TUNNEL_PAIRS = 160;
 
 /** Precomputes every particle position for each state. Pure and deterministic for a seed. */
 export function buildLayout({
@@ -87,6 +98,11 @@ export function buildLayout({
   const sig = new Float32Array(count * 3);
   const clusters = new Float32Array(count * 3);
   const calm = new Float32Array(count * 3);
+  const tunnel = new Float32Array(count * 3);
+  const along = new Float32Array(count);
+  // A third stream for the traversal, so adding it changed none of the other states.
+  const rnd3 = mulberry32(seed + 202);
+  const gauss3 = () => (rnd3() + rnd3() + rnd3() - 1.5) / 1.5;
   const role = new Float32Array(count);
   const pair = new Float32Array(count);
   const group = new Float32Array(count);
@@ -170,5 +186,33 @@ export function buildLayout({
     calm[o + 1] = helix[o + 1];
     calm[o + 2] = helix[o + 2] * CALM_SCALE;
   }
-  return { count, cloud, helix, layers, signatures: sig, clusters, calm, role, pair, group, seed: seeds };
+  // Traversal positions and the along-helix parameter (recovered from the helix height).
+  for (let i = 0; i < count; i++) {
+    const o = i * 3;
+    if (role[i] === ROLE.dust) {
+      tunnel[o] = (rnd3() - 0.5) * 14;
+      tunnel[o + 1] = (rnd3() - 0.5) * 10;
+      tunnel[o + 2] = 2 - rnd3() * TUNNEL_LENGTH;
+      along[i] = -1;
+      continue;
+    }
+    along[i] = Math.min(1, Math.max(0, helix[o + 1] / shape.length + 0.5));
+    if (role[i] === ROLE.rung) {
+      const p = Math.floor(rnd3() * TUNNEL_PAIRS);
+      const u = (p + 0.5) / TUNNEL_PAIRS;
+      const a = u * TUNNEL_TURNS * Math.PI * 2;
+      const t = 1 - 2 * rnd3();
+      tunnel[o] = Math.cos(a) * TUNNEL_RADIUS * t;
+      tunnel[o + 1] = Math.sin(a) * TUNNEL_RADIUS * t;
+      tunnel[o + 2] = 2 - u * TUNNEL_LENGTH;
+    } else {
+      const u = rnd3();
+      const a = u * TUNNEL_TURNS * Math.PI * 2 + (role[i] === ROLE.strandB ? Math.PI : 0);
+      const r = TUNNEL_RADIUS + gauss3() * 0.1;
+      tunnel[o] = Math.cos(a) * r;
+      tunnel[o + 1] = Math.sin(a) * r;
+      tunnel[o + 2] = 2 - u * TUNNEL_LENGTH;
+    }
+  }
+  return { count, cloud, helix, layers, signatures: sig, clusters, calm, tunnel, along, role, pair, group, seed: seeds };
 }

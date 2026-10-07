@@ -8,6 +8,8 @@ export default defineConfig({
   fullyParallel: true,
   // Headless Chromium renders WebGL in software; more workers starve the main thread and make timings flaky.
   workers: 2,
+  // The home renders a 40 000-particle helix with bloom in software here: give each test room.
+  timeout: 60_000,
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
     // Software WebGL (SwiftShader) so the live DNA helix renders and is tested in headless runs.

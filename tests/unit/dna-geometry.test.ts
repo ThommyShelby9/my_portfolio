@@ -2,8 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { particleBudget } from '@/lib/dna/budget';
 import { GENES, PAIRS } from '@/lib/dna/genes';
 import { HELIX, helixPoint } from '@/lib/dna/helix';
-import { buildLayout, CLUSTER_CENTRES, CLUSTER_COUNT, GROUPS, LAYER_COUNT, ROLE } from '@/lib/dna/layout';
+import { buildLayout, CLUSTER_CENTRES, CLUSTER_COUNT, GROUPS, LAYER_COUNT, ROLE, TUNNEL_LENGTH } from '@/lib/dna/layout';
 import { signaturePath, signatureRadius } from '@/lib/dna/signature';
+import { traversal, TRAVEL } from '@/lib/dna/traversal';
 import { mulberry32 } from '@/lib/dna/rng';
 
 describe('mulberry32', () => {
@@ -91,16 +92,16 @@ describe('buildLayout', () => {
 });
 
 describe('particleBudget', () => {
-  it('gives desktops 20 000 particles', () => {
-    expect(particleBudget({ width: 1440, cores: 8, saveData: false, deviceMemory: 8 })).toBe(20000);
+  it('gives desktops 40 000 particles', () => {
+    expect(particleBudget({ width: 1440, cores: 8, saveData: false, deviceMemory: 8 })).toBe(40000);
   });
-  it('gives phones 6 000', () => {
-    expect(particleBudget({ width: 390, cores: 8, saveData: false })).toBe(6000);
+  it('gives phones 12 000', () => {
+    expect(particleBudget({ width: 390, cores: 8, saveData: false })).toBe(12000);
   });
-  it('drops to 4 000 on weak devices or Save-Data', () => {
-    expect(particleBudget({ width: 1440, cores: 2, saveData: false })).toBe(4000);
-    expect(particleBudget({ width: 1440, cores: 8, saveData: true })).toBe(4000);
-    expect(particleBudget({ width: 1440, cores: 8, saveData: false, deviceMemory: 2 })).toBe(4000);
+  it('drops to 6 000 on weak devices or Save-Data', () => {
+    expect(particleBudget({ width: 1440, cores: 2, saveData: false })).toBe(6000);
+    expect(particleBudget({ width: 1440, cores: 8, saveData: true })).toBe(6000);
+    expect(particleBudget({ width: 1440, cores: 8, saveData: false, deviceMemory: 2 })).toBe(6000);
   });
 });
 
@@ -193,5 +194,43 @@ describe('layout states', () => {
 
   it('requires at least one signature', () => {
     expect(() => buildLayout({ count: 10, signatures: [] })).toThrow();
+  });
+});
+
+describe('traversal', () => {
+  const layout = buildLayout({ count: 6000, seed: 5 });
+  it('lays a long helix around the camera axis', () => {
+    expect(layout.tunnel).toHaveLength(18000);
+    for (let i = 0; i < layout.count; i++) {
+      const [x, y, z] = [layout.tunnel[i * 3], layout.tunnel[i * 3 + 1], layout.tunnel[i * 3 + 2]];
+      expect(z).toBeLessThanOrEqual(2 + 1e-6);
+      expect(z).toBeGreaterThanOrEqual(2 - TUNNEL_LENGTH - 1e-6);
+      if (layout.role[i] !== ROLE.dust) expect(Math.hypot(x, y)).toBeLessThanOrEqual(1.7 + 0.45);
+    }
+  });
+  it('gives every helix particle its place along the helix, and dust none', () => {
+    for (let i = 0; i < layout.count; i++) {
+      const a = layout.along[i];
+      if (layout.role[i] === ROLE.dust) expect(a).toBe(-1);
+      else {
+        expect(a).toBeGreaterThanOrEqual(0);
+        expect(a).toBeLessThanOrEqual(1);
+      }
+    }
+  });
+  it('leaves the other states unchanged', () => {
+    expect(buildLayout({ count: 500, seed: 7 }).helix).toEqual(buildLayout({ count: 500, seed: 7 }).helix);
+  });
+});
+
+describe('traversal progress', () => {
+  it('is closed outside, fully inside in the middle, and flies deeper with the scroll', () => {
+    expect(traversal(-1)).toEqual({ mix: 0, z: 0 });
+    expect(traversal(0).mix).toBe(0);
+    expect(traversal(0.09).mix).toBeCloseTo(0.5, 5);
+    expect(traversal(0.5).mix).toBe(1);
+    expect(traversal(1).mix).toBe(0);
+    expect(traversal(0.5).z).toBeCloseTo(TRAVEL / 2, 5);
+    expect(traversal(0.6).z).toBeGreaterThan(traversal(0.4).z);
   });
 });

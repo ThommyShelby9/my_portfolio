@@ -207,3 +207,11 @@ html:has([data-dna-stage]) [data-helix-ornament] { display: none; }
   /* Decoration never prints (the CV PDF, any page a visitor prints). */
   [data-helix-ornament], [data-dna-stage] { display: none !important; }
 }
+
+/* The traversal space (home): closed unless the live helix runs, then about one and a half screens. */
+[data-dna-traverse] { display: none; }
+html[data-dna-flight='1'] [data-dna-traverse] { display: block; height: 170svh; }
+@media (max-width: 1023px) {
+  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'] { transition: opacity 0.4s ease; }
+  [data-dna-stage][data-dna-fixed='true'][data-dna-state='3d'][data-dna-flying='true'] { opacity: 1; }
+}

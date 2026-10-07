@@ -166,7 +166,8 @@ test.describe('scene 00 Formation', () => {
   test('works without JavaScript', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
-    await page.goto('/');
+    // Static content only: the DOM is enough (the full load event can lag on a busy machine).
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByText(/Je conçois et je livre/)).toBeVisible();
     await expect(page.locator('img[data-dna-poster]')).toBeVisible();

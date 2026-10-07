@@ -54,3 +54,32 @@ test.describe('DNA stage', () => {
     await expect(stage).toHaveAttribute('data-dna-running', 'false');
   });
 });
+
+test.describe('traversal', () => {
+  test('opens a space after the hero and flies into the helix on scroll', async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.goto('/');
+    test.skip(!(await hasWebGL(page)), 'no WebGL in this browser');
+    const stage = page.locator('[data-dna-stage]');
+    await expect(stage).toHaveAttribute('data-dna-ready', 'true', { timeout: 20_000 });
+    const space = page.locator('div[data-dna-traverse]');
+    const box = await space.boundingBox();
+    expect(box!.height).toBeGreaterThan(600);
+    await space.evaluate((el) => scrollTo(0, el.getBoundingClientRect().top + scrollY + (el as HTMLElement).offsetHeight * 0.3));
+    await expect.poll(async () => Number(await stage.getAttribute('data-dna-tunnel')), { timeout: 5000 }).toBeGreaterThan(0.9);
+    await page.locator('#adn').evaluate((el) => el.scrollIntoView({ block: 'start' }));
+    await expect.poll(async () => Number(await stage.getAttribute('data-dna-tunnel')), { timeout: 5000 }).toBe(0);
+  });
+
+  test('takes no room without the live helix', async ({ browser }) => {
+    for (const options of [{ reducedMotion: 'reduce' as const }, { javaScriptEnabled: false }]) {
+      const context = await browser.newContext(options);
+      const page = await context.newPage();
+      // Static content only: the DOM is enough (the full load event can lag on a busy machine).
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(1500);
+      await expect(page.locator('div[data-dna-traverse]')).toBeHidden();
+      await context.close();
+    }
+  });
+});

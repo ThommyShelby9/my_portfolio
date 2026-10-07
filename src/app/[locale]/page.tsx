@@ -7,6 +7,7 @@ import { Expression } from '@/components/home/Expression';
 import { Hero } from '@/components/home/Hero';
 import { Lab } from '@/components/home/Lab';
 import { Sequencing } from '@/components/home/Sequencing';
+import { Traversal } from '@/components/home/Traversal';
 import type { Locale } from '@/i18n/routing';
 import { getProjects } from '@/lib/content/load';
 import { homeJsonLd } from '@/lib/seo/home-jsonld';
@@ -28,6 +29,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     <>
       <JsonLd data={homeJsonLd(locale)} />
       <Hero signatures={featured.map((p) => p.genes)} />
+      <Traversal />
       <Sequencing />
       <Construction />
       <Expression projects={featured} />
