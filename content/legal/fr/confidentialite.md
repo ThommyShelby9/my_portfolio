@@ -27,7 +27,7 @@ Dans les deux cas, la langue de la page est enregistrée avec votre envoi, pour 
 
 ## Finalités et base légale
 
-Vos réponses servent uniquement à étudier votre demande, à vous répondre et à assurer le suivi de nos échanges. Elles ne sont ni vendues, ni louées, ni utilisées pour de la prospection, et aucune décision automatisée n’est prise à partir d’elles.
+Vos réponses servent uniquement à étudier votre demande, à vous répondre et à assurer le suivi de nos échanges. Juste après l’envoi, un accusé de réception part vers l’adresse e-mail indiquée : il reprend vos choix du brief, jamais le texte que vous avez écrit. Elles ne sont ni vendues, ni louées, ni utilisées pour de la prospection, et aucune décision automatisée n’est prise à partir d’elles.
 
 La base légale est l’exécution de mesures précontractuelles prises à votre demande (un brief ou une demande de devis) et, pour un simple message, l’intérêt légitime à répondre aux personnes qui écrivent.
 

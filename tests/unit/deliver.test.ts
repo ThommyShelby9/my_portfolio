@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { deliver, NotConfiguredError, SAVE_TIMEOUT_MS, RETENTION_MONTHS, submissionDoc, type DeliverDeps } from '@/lib/server/deliver';
-import { buildSubmissionEmail } from '@/lib/server/submission-email';
+import { buildConfirmationEmail, buildSubmissionEmail } from '@/lib/server/submission-email';
 
 function deps(over: Partial<DeliverDeps> = {}) {
   const d = {
@@ -118,30 +118,105 @@ describe('deliver', () => {
   });
 });
 
-describe('buildSubmissionEmail', () => {
-  it('builds a contact email with replyTo and escaped html', () => {
-    const m = buildSubmissionEmail({
-      type: 'contact',
-      locale: 'fr',
-      payload: { name: '<b>Ada</b>', email: 'a@b.co', message: 'x <script>1</script> & y' },
-    });
-    expect(m.subject).toBe('[Contact] <b>Ada</b>');
-    expect(m.replyTo).toBe('a@b.co');
-    expect(m.text).toContain('x <script>1</script> & y');
-    expect(m.html).not.toContain('<script>');
-    expect(m.html).toContain('&lt;script&gt;1&lt;/script&gt; &amp; y');
-    expect(m.html).not.toContain('<b>Ada</b>');
+const brief = {
+  type: 'brief' as const,
+  locale: 'fr' as const,
+  payload: {
+    projectType: 'new',
+    pitch: 'Une plateforme <b>RH</b> & paie',
+    currentState: 'design',
+    teamSize: '2-5',
+    hasTechTeam: true,
+    hasDesigner: false,
+    hasProductOwner: false,
+    deadline: '1-3m',
+    budget: '15-40k',
+    firstName: 'Merlux',
+    lastName: 'PANOUMASSI',
+    email: 'merlux@example.com',
+    prefersCall: true,
+  },
+};
+
+describe('buildSubmissionEmail (owner copy)', () => {
+  it('uses the form labels and readable answers, never raw keys', () => {
+    const m = buildSubmissionEmail(brief);
+    expect(m.subject).toBe('Nouveau brief · Un nouveau produit · Merlux PANOUMASSI');
+    for (const shown of ['Type de besoin', 'Un nouveau produit', 'Des maquettes ou un cahier des charges', '2 à 5 personnes', 'Des développeurs', '1 à 3 mois', 'Oui : je préfère commencer par un appel', 'Français']) {
+      expect(m.text, shown).toContain(shown);
+    }
+    expect(m.text).toMatch(/15\s000 à 40\s000\s€/);
+    for (const raw of ['projectType', 'currentState', 'hasTechTeam', 'prefersCall', '15-40k', 'locale']) {
+      expect(m.text, raw).not.toContain(raw);
+    }
+    expect(m.replyTo).toBe('merlux@example.com');
+    expect(m.html).toContain('mailto:merlux@example.com');
   });
 
-  it('builds a brief subject and strips newlines from it', () => {
-    const m = buildSubmissionEmail({
-      type: 'brief',
-      locale: 'en',
-      payload: { projectType: 'new', firstName: 'Ada\r\nBcc: x', lastName: 'L', email: 'a@b.co', pitch: 'p', hasTechTeam: true },
-    });
-    expect(m.subject).toBe('[Brief] new · Ada Bcc: x L');
-    expect(m.text).toContain('hasTechTeam');
-    expect(m.replyTo).toBe('a@b.co');
+  it('escapes what the visitor typed in the HTML', () => {
+    const m = buildSubmissionEmail(brief);
+    expect(m.html).not.toContain('<b>RH</b>');
+    expect(m.html).toContain('&lt;b&gt;RH&lt;/b&gt; &amp; paie');
+  });
+
+  it('keeps names out of header injection', () => {
+    const m = buildSubmissionEmail({ ...brief, payload: { ...brief.payload, firstName: 'Ada\r\nBcc: x' } });
+    expect(m.subject).not.toMatch(/[\r\n]/);
+  });
+
+  it('builds a contact copy', () => {
+    const m = buildSubmissionEmail({ type: 'contact', locale: 'en', payload: { name: 'Ada L', email: 'a@b.co', message: 'x <script>1</script>' } });
+    expect(m.subject).toBe('Nouveau message · Ada L');
+    expect(m.text).toContain('Anglais');
+    expect(m.html).not.toContain('<script>');
+  });
+});
+
+describe('buildConfirmationEmail (visitor acknowledgement)', () => {
+  it('goes to the visitor, in the form language, and replies reach the owner', () => {
+    const fr = buildConfirmationEmail(brief);
+    expect(fr.to).toBe('merlux@example.com');
+    expect(fr.subject).toBe('Votre brief est bien arrivé');
+    expect(fr.text).toContain('Bonjour Merlux,');
+    expect(fr.text).toContain('sous 48 heures');
+    expect(fr.replyTo).toBe('rmissimawu@gmail.com');
+    const en = buildConfirmationEmail({ ...brief, locale: 'en' });
+    expect(en.subject).toBe('Your brief arrived');
+    expect(en.text).toContain('Hello Merlux,');
+    expect(en.text).toContain('2 to 5 people');
+  });
+
+  it('never repeats free text the visitor typed', () => {
+    const m = buildConfirmationEmail({ ...brief, payload: { ...brief.payload, pitch: 'Buy pills at spam.example', notes: 'more spam' } });
+    expect(m.text).not.toContain('spam');
+    expect(m.html).not.toContain('spam');
+    const c = buildConfirmationEmail({ type: 'contact', locale: 'fr', payload: { name: 'Ada Lovelace', email: 'a@b.co', message: 'spam spam' } });
+    expect(c.subject).toBe('Votre message est bien arrivé');
+    expect(c.text).toContain('Bonjour Ada,');
+    expect(c.text).not.toContain('spam');
+  });
+});
+
+describe('deliver confirmation', () => {
+  it('sends the acknowledgement after a successful delivery', async () => {
+    const confirm = vi.fn(async () => 'sent' as const);
+    const d = deps({ confirm });
+    expect(await deliver(input, d)).toEqual({ status: 'ok', stored: true, mailed: 'sent' });
+    expect(confirm).toHaveBeenCalledTimes(1);
+  });
+
+  it('a failing acknowledgement never changes the result', async () => {
+    const d = deps({ confirm: vi.fn(boom('smtp down')) });
+    expect(await deliver(input, d)).toEqual({ status: 'ok', stored: true, mailed: 'sent' });
+    expect(d.log.error).toHaveBeenCalledWith('[deliver] confirmation email failed', expect.any(Error));
+  });
+
+  it('sends nothing to the visitor when the honeypot is filled, when rate-limited or when delivery failed', async () => {
+    const confirm = vi.fn(async () => 'sent' as const);
+    await deliver({ ...input, honeypot: 'bot' }, deps({ confirm }));
+    await deliver(input, deps({ confirm, limiter: { check: () => ({ allowed: false, retryAfterMs: 1 }) } }));
+    await deliver(input, deps({ confirm, save: vi.fn(boom('down')), mail: vi.fn(boom('down')) }));
+    expect(confirm).not.toHaveBeenCalled();
   });
 });
 

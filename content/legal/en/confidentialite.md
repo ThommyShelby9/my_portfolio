@@ -27,7 +27,7 @@ In both cases, the language of the page is saved with your submission so the rep
 
 ## Purpose and legal basis
 
-Your answers are used only to study your request, reply to you and follow up on our exchanges. They are never sold, rented or used for marketing, and no automated decision is made from them.
+Your answers are used only to study your request, reply to you and follow up on our exchanges. Right after you send them, an acknowledgement goes to the email address you gave: it repeats your choices in the brief, never the text you wrote. They are never sold, rented or used for marketing, and no automated decision is made from them.
 
 The legal basis is taking pre-contractual steps at your request (a brief or a quote request) and, for a simple message, the legitimate interest in replying to people who write.
 

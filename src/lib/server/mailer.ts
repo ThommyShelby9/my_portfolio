@@ -2,6 +2,8 @@ import 'server-only';
 import nodemailer from 'nodemailer';
 
 export interface MailInput {
+  /** Recipient; defaults to the owner (MAIL_TO, NOTIFICATION_EMAIL, then the fallback). */
+  to?: string;
   subject: string;
   text: string;
   html?: string;
@@ -14,7 +16,7 @@ export async function sendMail(input: MailInput): Promise<'sent' | 'skipped'> {
   const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return 'skipped';
   // SMTP_FROM / NOTIFICATION_EMAIL: names already configured on the Coolify app (previous site).
-  const to = process.env.MAIL_TO || process.env.NOTIFICATION_EMAIL || FALLBACK_TO;
+  const to = input.to || process.env.MAIL_TO || process.env.NOTIFICATION_EMAIL || FALLBACK_TO;
   const port = Number(process.env.SMTP_PORT) || 587;
   const transport = nodemailer.createTransport({
     host: SMTP_HOST,

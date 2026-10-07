@@ -3,7 +3,7 @@ import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getDb } from './firestore';
 import { sendMail } from './mailer';
 import { formLimiter, type RateLimiter } from './rate-limit';
-import { buildSubmissionEmail, type Submission } from './submission-email';
+import { buildConfirmationEmail, buildSubmissionEmail, type Submission } from './submission-email';
 
 export type { Submission };
 
@@ -28,6 +28,8 @@ function withTimeout<T>(work: Promise<T>, ms: number): Promise<T> {
 export interface DeliverDeps {
   save(sub: Submission): Promise<string>;
   mail(sub: Submission): Promise<'sent' | 'skipped'>;
+  /** Acknowledgement to the visitor, best effort: its failure never changes the result. */
+  confirm?(sub: Submission): Promise<'sent' | 'skipped'>;
   limiter: RateLimiter;
   log: Pick<Console, 'error' | 'warn'>;
 }
@@ -70,6 +72,7 @@ async function defaultSave(sub: Submission): Promise<string> {
 const defaultDeps: DeliverDeps = {
   save: defaultSave,
   mail: (sub) => sendMail(buildSubmissionEmail(sub)),
+  confirm: (sub) => sendMail(buildConfirmationEmail(sub)),
   limiter: formLimiter,
   log: console,
 };
@@ -101,5 +104,12 @@ export async function deliver(
   }
 
   const ok = stored || mailed === 'sent';
+  if (ok && deps.confirm) {
+    try {
+      await deps.confirm(sub);
+    } catch (err) {
+      deps.log.error('[deliver] confirmation email failed', err);
+    }
+  }
   return { status: ok ? 'ok' : 'failed', stored, mailed };
 }
