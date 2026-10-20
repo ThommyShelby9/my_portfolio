@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { countryCode, createRefCap, dayKey, encodeKey, isBot, isSameOrigin, knownPath, knownPaths, OTHER, recordHit, refHost } from '@/lib/server/stats';
 import { getAllSlugs } from '@/lib/content/load';
+import { getServiceSlugs } from '@/lib/content/services';
 import knownSlugs from '@/lib/server/known-slugs.json';
 import { POST } from '@/app/api/hit/route';
 
@@ -28,11 +29,11 @@ describe('encodeKey', () => {
 });
 
 describe('knownPath', () => {
-  it('keeps every localized route and every case study and exploration, in both locales', () => {
-    for (const p of ['/', '/en', '/realisations', '/en/work', '/explorations', '/en/explorations', '/a-propos', '/en/about', '/brief', '/en/brief', '/brief/merci', '/en/brief/thanks', '/contact', '/en/contact/thanks', '/cv', '/en/cv', '/confidentialite', '/en/privacy', '/cgu', '/en/terms', '/terminal', '/en/terminal', '/realisations/ubbfy', '/en/work/ubbfy', '/explorations/procom', '/en/explorations/procom']) {
+  it('keeps every localized route and every case study, exploration and service, in both locales', () => {
+    for (const p of ['/', '/en', '/realisations', '/en/work', '/explorations', '/en/explorations', '/a-propos', '/en/about', '/brief', '/en/brief', '/brief/merci', '/en/brief/thanks', '/contact', '/en/contact/thanks', '/cv', '/en/cv', '/confidentialite', '/en/privacy', '/cgu', '/en/terms', '/terminal', '/en/terminal', '/realisations/ubbfy', '/en/work/ubbfy', '/explorations/procom', '/en/explorations/procom', '/services', '/en/services', '/services/developpement-saas', '/en/services/developpement-saas']) {
       expect(knownPath(p), p).toBe(p);
     }
-    expect(knownPaths()).toHaveLength(2 * (12 + knownSlugs.realisations.length + knownSlugs.explorations.length));
+    expect(knownPaths()).toHaveLength(2 * (13 + knownSlugs.realisations.length + knownSlugs.explorations.length + knownSlugs.services.length));
   });
   it('ignores a trailing slash and rejects anything else', () => {
     expect(knownPath('/en/work/')).toBe('/en/work');
@@ -42,7 +43,7 @@ describe('knownPath', () => {
     }
   });
   it('is built from the slugs in content/ (run scripts/known-slugs.mjs, or pnpm build, after adding a page)', () => {
-    expect(knownSlugs).toEqual({ realisations: getAllSlugs('realisation'), explorations: getAllSlugs('exploration') });
+    expect(knownSlugs).toEqual({ realisations: getAllSlugs('realisation'), explorations: getAllSlugs('exploration'), services: getServiceSlugs() });
   });
 });
 

@@ -16,6 +16,14 @@ export function caseUrl(p: Pick<Project, 'kind' | 'slug' | 'locale'>): string {
   return new URL(localizedPath(CASE_HREF[p.kind], p.locale, { slug: p.slug }), SITE_URL).toString();
 }
 
+/**
+ * The name a case study carries in its page title: the project, then its sector, which holds the words
+ * people search for (« ERP, RH, multi-entreprises ») where the product name alone says nothing to a search engine.
+ */
+export function caseTitleSubject(p: Pick<Project, 'title' | 'sector'>): string {
+  return p.sector ? `${p.title} (${p.sector})` : p.title;
+}
+
 /** Page metadata for a case study; the share image comes from the colocated opengraph-image. */
 export function caseMetadata(p: Project, title: string): Metadata {
   const base = pageMetadata({ locale: p.locale, href: CASE_HREF[p.kind], params: { slug: p.slug }, title, description: p.seoDescription });

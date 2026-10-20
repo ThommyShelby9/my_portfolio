@@ -6,7 +6,7 @@ import { Conversion } from '@/components/home/Conversion';
 import { JsonLd } from '@/components/seo/JsonLd';
 import type { Locale } from '@/i18n/routing';
 import { getNeighbours, getProject, type ProjectKind } from '@/lib/content/load';
-import { caseJsonLd } from '@/lib/seo/case-study';
+import { caseJsonLd, caseTitleSubject } from '@/lib/seo/case-study';
 import { CaseBody } from './CaseBody';
 import { CaseHeader } from './CaseHeader';
 import { CaseNav } from './CaseNav';
@@ -23,7 +23,7 @@ export async function CasePage({ kind, locale, slug }: Props) {
     getTranslations({ locale, namespace: 'explorations' }),
   ]);
   // Same title as the page metadata.
-  const metaTitle = kind === 'exploration' ? tx('caseMetaTitle', { title: project.title }) : t('metaTitle', { title: project.title });
+  const metaTitle = kind === 'exploration' ? tx('caseMetaTitle', { title: project.title }) : t('metaTitle', { title: caseTitleSubject(project) });
   const cover = project.images[0];
   return (
     <>

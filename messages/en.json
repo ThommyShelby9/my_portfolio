@@ -1,12 +1,13 @@
 {
   "meta": {
-    "title": "Rostel Panoumassi · Digital product engineering",
-    "description": "I design and ship SaaS, payment and management platforms, from architecture to production. Six years of experience, three as tech lead. Cotonou, Benin."
+    "title": "Freelance full-stack developer and tech lead, SaaS and AI · Rostel Panoumassi",
+    "description": "Freelance full-stack developer and tech lead in Cotonou: I design and ship SaaS, Mobile Money payment and HR platforms with Django, Laravel, Vue and Flutter. Six years of experience, fully remote."
   },
   "nav": {
     "label": "Main navigation",
     "skip": "Skip to content",
     "work": "Work",
+    "services": "Services",
     "expertise": "DNA",
     "about": "About",
     "explorations": "Lab",
@@ -17,9 +18,9 @@
     "home": "Home, Rostel Panoumassi"
   },
   "hero": {
-    "eyebrow": "Rostel Panoumassi · Digital product engineering · Cotonou",
+    "eyebrow": "Rostel Panoumassi · Freelance full-stack developer and tech lead · Cotonou",
     "title": "Engineering is in the DNA.",
-    "lede": "I design and ship digital products, from architecture to production: SaaS, payment and management platforms. Head of Engineering & Innovation at KPS Groupe, six years of experience, three as tech lead.",
+    "lede": "I design and ship digital products, from architecture to production: SaaS platforms, Mobile Money payments, HR software and mobile apps, with Django, Laravel, Vue, React and Flutter. Head of Engineering & Innovation at KPS Groupe, six years of experience, three as tech lead, working remotely for Africa and Europe.",
     "ctaProject": "Discuss a project",
     "ctaWork": "See the work",
     "ctaCv": "Download the CV (PDF)",
@@ -60,6 +61,22 @@
     "othersTitle": "From HR platforms to mobile payments, the rest of the shipped work.",
     "explorationsText": "Redesign proposals made on my own initiative, shown for what they are.",
     "explorationsLink": "See the explorations"
+  },
+  "services": {
+    "metaTitle": "Services: SaaS development, AI, payroll, Mobile Money, mobile · Rostel Panoumassi",
+    "metaDescription": "Freelance developer and tech lead: custom SaaS platforms, AI integration, payroll and HR software, Mobile Money payments and mobile apps, backed by projects in production.",
+    "kicker": "Services",
+    "title": "What I design and ship for you.",
+    "lede": "Six areas where I have already shipped to production: each page details what I do, how I work, the projects that prove it and the questions I am asked most.",
+    "count": "{count} services · freelance, remote",
+    "more": "Read more",
+    "back": "All services",
+    "onThisPage": "On this page",
+    "cta": "Discuss my project",
+    "related": "Related work",
+    "relatedLede": "Shipped projects that show this service in real conditions, with my exact role and the stack.",
+    "faq": "Frequently asked questions",
+    "conversionKicker": "Your project"
   },
   "caseStudy": {
     "metaTitle": "{title}, case study · Rostel Panoumassi",

@@ -11,12 +11,12 @@ test.describe('seo', () => {
   test('every sitemap URL returns 200 with a single canonical equal to itself', async ({ request }) => {
     const xml = await (await request.get('/sitemap.xml')).text();
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    // 9 static pages (home, work, explorations, about, CV, brief, contact, privacy, terms), 17 cases, 4 explorations.
-    expect(locs.length).toBeGreaterThanOrEqual(2 * (9 + 17 + 4));
+    // 10 static pages (home, work, services, explorations, about, CV, brief, contact, privacy, terms), 17 cases, 4 explorations, 6 services.
+    expect(locs.length).toBeGreaterThanOrEqual(2 * (10 + 17 + 4 + 6));
     expect(new Set(locs).size).toBe(locs.length);
     const paths = locs.map((loc) => new URL(loc).pathname);
     expect(paths).toEqual(expect.arrayContaining([
-      '/a-propos', '/en/about', '/cv', '/en/cv', '/brief', '/en/brief', '/contact', '/en/contact', '/confidentialite', '/en/privacy', '/cgu', '/en/terms',
+      '/services', '/en/services', '/services/developpement-saas', '/en/services/developpement-saas', '/a-propos', '/en/about', '/cv', '/en/cv', '/brief', '/en/brief', '/contact', '/en/contact', '/confidentialite', '/en/privacy', '/cgu', '/en/terms',
     ]));
     for (const noindex of ['/brief/merci', '/en/brief/thanks', '/contact/merci', '/en/contact/thanks']) {
       expect(paths).not.toContain(noindex);

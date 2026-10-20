@@ -1,12 +1,13 @@
 {
   "meta": {
-    "title": "Rostel Panoumassi · Ingénierie de produits numériques",
-    "description": "Je conçois et je livre des plateformes SaaS, de paiement et de gestion, de l’architecture à la production. Six ans d’expérience, dont trois comme tech lead. Cotonou, Bénin."
+    "title": "Développeur full-stack freelance et tech lead, SaaS et IA · Rostel Panoumassi",
+    "description": "Développeur full-stack freelance et tech lead à Cotonou : je conçois et je livre des plateformes SaaS, de paiement Mobile Money et de gestion RH, en Django, Laravel, Vue et Flutter. Six ans d’expérience, en télétravail."
   },
   "nav": {
     "label": "Navigation principale",
     "skip": "Aller au contenu",
     "work": "Réalisations",
+    "services": "Services",
     "expertise": "ADN",
     "about": "À propos",
     "explorations": "Laboratoire",
@@ -17,9 +18,9 @@
     "home": "Accueil, Rostel Panoumassi"
   },
   "hero": {
-    "eyebrow": "Rostel Panoumassi · Ingénierie de produits numériques · Cotonou",
+    "eyebrow": "Rostel Panoumassi · Développeur full-stack freelance et tech lead · Cotonou",
     "title": "L’ingénierie est dans l’ADN.",
-    "lede": "Je conçois et je livre des produits numériques, de l’architecture à la production : plateformes SaaS, de paiement et de gestion. Head of Engineering & Innovation chez KPS Groupe, six ans d’expérience, dont trois comme tech lead.",
+    "lede": "Je conçois et je livre des produits numériques, de l’architecture à la production : plateformes SaaS, paiement Mobile Money, logiciels RH et applications mobiles, en Django, Laravel, Vue, React et Flutter. Head of Engineering & Innovation chez KPS Groupe, six ans d’expérience, dont trois comme tech lead, en télétravail pour l’Afrique et l’Europe.",
     "ctaProject": "Parler d’un projet",
     "ctaWork": "Voir les réalisations",
     "ctaCv": "Télécharger le CV (PDF)",
@@ -60,6 +61,22 @@
     "othersTitle": "Du SIRH au paiement mobile, les autres projets livrés.",
     "explorationsText": "Des propositions de refonte menées de ma propre initiative, présentées comme telles.",
     "explorationsLink": "Voir les explorations"
+  },
+  "services": {
+    "metaTitle": "Services : développement SaaS, IA, paie, Mobile Money, mobile · Rostel Panoumassi",
+    "metaDescription": "Développeur freelance et tech lead : plateformes SaaS sur mesure, intégration de l’IA, logiciels de paie et RH, paiement Mobile Money et applications mobiles, avec des réalisations en production.",
+    "kicker": "Services",
+    "title": "Ce que je conçois et livre pour vous.",
+    "lede": "Six domaines où j’ai déjà livré en production : chaque page détaille ce que je fais, comment je travaille, les projets qui le prouvent et les questions qu’on me pose le plus.",
+    "count": "{count} services · freelance, en télétravail",
+    "more": "Voir le détail",
+    "back": "Tous les services",
+    "onThisPage": "Sur cette page",
+    "cta": "Parler de mon projet",
+    "related": "Réalisations liées",
+    "relatedLede": "Des projets livrés qui montrent ce service en conditions réelles, avec mon rôle exact et la stack.",
+    "faq": "Questions fréquentes",
+    "conversionKicker": "Votre projet"
   },
   "caseStudy": {
     "metaTitle": "{title}, étude de cas · Rostel Panoumassi",

@@ -1,4 +1,4 @@
-// Writes src/lib/server/known-slugs.json, the case-study and exploration slugs, at build time.
+// Writes src/lib/server/known-slugs.json, the case-study, exploration and service slugs, at build time.
 // The visit counter builds its allow-list of pages from it, so the server never reads content/
 // at request time. tests/unit/stats.test.ts fails when the file drifts from content/.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -15,7 +15,7 @@ function slugs(folder) {
   return [...all].sort();
 }
 
-const next = `${JSON.stringify({ realisations: slugs('realisations'), explorations: slugs('explorations') }, null, 2)}\n`;
+const next = `${JSON.stringify({ realisations: slugs('realisations'), explorations: slugs('explorations'), services: slugs('services') }, null, 2)}\n`;
 const current = existsSync(OUT) ? readFileSync(OUT, 'utf8').replace(/\r\n/g, '\n') : '';
 if (current !== next) {
   writeFileSync(OUT, next);

@@ -5,15 +5,17 @@ import { NOINDEX_OR_LATER, STATIC_HREFS, buildSitemapEntries } from '@/lib/seo/s
 import { SITE_URL } from '@/lib/site';
 
 describe('buildSitemapEntries', () => {
-  const entries = buildSitemapEntries({ realisations: ['ubbfy'], explorations: ['procom'] });
+  const entries = buildSitemapEntries({ realisations: ['ubbfy'], explorations: ['procom'], services: ['developpement-saas'] });
   const urls = entries.map((e) => e.url);
 
-  it('lists fr and en for static, case and exploration pages', () => {
+  it('lists fr and en for static, case, exploration and service pages', () => {
     expect(urls).toEqual([
       'https://rostelmissimawu.com',
       'https://rostelmissimawu.com/en',
       'https://rostelmissimawu.com/realisations',
       'https://rostelmissimawu.com/en/work',
+      'https://rostelmissimawu.com/services',
+      'https://rostelmissimawu.com/en/services',
       'https://rostelmissimawu.com/explorations',
       'https://rostelmissimawu.com/en/explorations',
       'https://rostelmissimawu.com/a-propos',
@@ -32,6 +34,8 @@ describe('buildSitemapEntries', () => {
       'https://rostelmissimawu.com/en/work/ubbfy',
       'https://rostelmissimawu.com/explorations/procom',
       'https://rostelmissimawu.com/en/explorations/procom',
+      'https://rostelmissimawu.com/services/developpement-saas',
+      'https://rostelmissimawu.com/en/services/developpement-saas',
     ]);
   });
 
@@ -43,11 +47,11 @@ describe('buildSitemapEntries', () => {
 
 describe('sitemap coverage guard', () => {
   it('every routing pathname is in the sitemap or explicitly listed as noindex or later', () => {
-    const entries = buildSitemapEntries({ realisations: ['ubbfy'], explorations: ['procom'] });
+    const entries = buildSitemapEntries({ realisations: ['ubbfy'], explorations: ['procom'], services: ['developpement-saas'] });
     const urls = new Set(entries.map((e) => e.url));
     const later = new Set(NOINDEX_OR_LATER);
     const abs = (href: keyof typeof routing.pathnames, locale: Locale) => {
-      const slug = href.startsWith('/realisations') ? 'ubbfy' : 'procom';
+      const slug = href.startsWith('/realisations') ? 'ubbfy' : href.startsWith('/services') ? 'developpement-saas' : 'procom';
       const path = localizedPath(href, locale, { slug });
       return new URL(path, SITE_URL).toString().replace(/\/$/, '');
     };

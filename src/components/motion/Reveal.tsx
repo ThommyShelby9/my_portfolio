@@ -2,7 +2,7 @@
 
 import { createElement, useEffect, useRef, type ReactNode } from 'react';
 
-type Props = { children: ReactNode; className?: string; as?: 'div' | 'section' | 'ul' | 'article' };
+type Props = { children: ReactNode; className?: string; as?: 'div' | 'section' | 'ul' | 'ol' | 'article' };
 
 /**
  * Reveal-once for below-the-fold content. CSS owns the motion: items are hidden only while

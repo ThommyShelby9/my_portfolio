@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { CasePage } from '@/components/work/CasePage';
 import type { Locale } from '@/i18n/routing';
 import { getAllSlugs, getProject } from '@/lib/content/load';
-import { caseMetadata } from '@/lib/seo/case-study';
+import { caseMetadata, caseTitleSubject } from '@/lib/seo/case-study';
 
 // Every case study is prerendered; any other slug is a 404.
 export const dynamicParams = false;
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/realisat
   const project = await getProject('realisation', locale as Locale, slug);
   if (!project) notFound();
   const t = await getTranslations({ locale: locale as Locale, namespace: 'caseStudy' });
-  return caseMetadata(project, t('metaTitle', { title: project.title }));
+  return caseMetadata(project, t('metaTitle', { title: caseTitleSubject(project) }));
 }
 
 export default async function RealisationPage({ params }: PageProps<'/[locale]/realisations/[slug]'>) {

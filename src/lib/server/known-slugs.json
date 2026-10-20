@@ -23,5 +23,13 @@
     "lecentre",
     "najaexperts",
     "procom"
+  ],
+  "services": [
+    "application-mobile",
+    "developpement-saas",
+    "developpeur-freelance-cotonou",
+    "integration-ia",
+    "logiciel-paie-rh",
+    "paiement-mobile-money"
   ]
 }

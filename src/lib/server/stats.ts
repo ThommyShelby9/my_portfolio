@@ -42,6 +42,7 @@ const KNOWN_PATHS: ReadonlySet<string> = new Set(
     ...(Object.keys(routing.pathnames) as Href[]).filter((href) => !href.includes('[')).map((href) => localizedPath(href, locale)),
     ...slugs.realisations.map((slug) => localizedPath('/realisations/[slug]', locale, { slug })),
     ...slugs.explorations.map((slug) => localizedPath('/explorations/[slug]', locale, { slug })),
+    ...slugs.services.map((slug) => localizedPath('/services/[slug]', locale, { slug })),
   ]),
 );
 

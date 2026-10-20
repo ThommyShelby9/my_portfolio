@@ -12,6 +12,7 @@ export function Header() {
   const t = useTranslations('nav');
   const items: NavItem[] = [
     { href: '/realisations', label: t('work') },
+    { href: '/services', label: t('services') },
     { href: { pathname: '/', hash: 'adn' }, label: t('expertise') },
     { href: '/a-propos', label: t('about') },
     { href: '/explorations', label: t('explorations') },
