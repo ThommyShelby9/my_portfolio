@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const EXPLORATIONS = ['beninbouge', 'lecentre', 'najaexperts', 'procom'];
+const EXPLORATIONS = ['gounou', 'beninbouge', 'lecentre', 'najaexperts', 'procom'];
 
 /** Unique case-study links in <main>, as slugs. */
 async function caseSlugs(page: Page, prefix: string): Promise<string[]> {
