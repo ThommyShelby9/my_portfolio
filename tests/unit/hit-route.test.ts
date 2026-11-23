@@ -148,4 +148,43 @@ describe('POST /api/hit', () => {
     await hit({ path: '/', ref: 'https://__x__.com/' });
     expect(recordHit.mock.calls.at(-1)![0].ref).toBe('_x___com');
   });
+  it('forwards the visit to the assistant without the IP or the user agent, never for the owner', async () => {
+    vi.stubEnv('TRUST_CF_CONNECTING_IP', '');
+    vi.stubEnv('VISIT_WEBHOOK_URL', 'https://assistant.example/visite');
+    vi.stubEnv('VISIT_WEBHOOK_SECRET', 's3cret');
+    const send = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(null, { status: 204 }));
+    const android = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Mobile Safari/537.36';
+    await hit(
+      { path: '/en/work/', ref: 'https://www.linkedin.com/feed/', sid: 'c0ffee00-1234', n: 2, lang: 'en-US', scr: '412x915' },
+      { 'user-agent': android, 'cf-ipcountry': 'US', 'cf-ipcity': 'Los Angeles', 'x-real-ip': '10.7.7.7' },
+    );
+    expect(send).toHaveBeenCalledTimes(1);
+    const [url, init] = send.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe('https://assistant.example/visite');
+    expect((init.headers as Record<string, string>).authorization).toBe('Bearer s3cret');
+    expect(JSON.parse(String(init.body))).toEqual({
+      sid: 'c0ffee00-1234', path: '/en/work', visits: 2, src: 'linkedin.com', country: 'US', city: 'Los Angeles', region: null,
+      lang: 'en-US', device: 'mobile', os: 'Android', browser: 'Chrome', screen: '412x915',
+    });
+    expect(String(init.body)).not.toContain('10.7.7.7');
+    expect(String(init.body)).not.toContain('Pixel');
+    // The owner browsers and beacons without a visit id are counted but never announced.
+    await hit({ path: '/', me: true });
+    await hit({ path: '/' });
+    expect(send).toHaveBeenCalledTimes(1);
+    expect(recordHit).toHaveBeenCalledTimes(3);
+  });
+
+  it('sends nothing without the webhook settings, and a failing assistant changes nothing', async () => {
+    const send = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('down'));
+    await hit({ path: '/', sid: 'c0ffee00-1234', n: 1 });
+    expect(send).not.toHaveBeenCalled();
+    vi.stubEnv('VISIT_WEBHOOK_URL', 'https://assistant.example/visite');
+    vi.stubEnv('VISIT_WEBHOOK_SECRET', 's3cret');
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await hit({ path: '/', sid: 'c0ffee00-1234', n: 1 });
+    expect(res.status).toBe(204);
+    expect(recordHit).toHaveBeenCalledTimes(2);
+    expect(error).toHaveBeenCalledWith('visit: could not reach the assistant:', 'down');
+  });
 });

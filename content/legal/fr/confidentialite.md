@@ -1,8 +1,8 @@
 ---
-updated: "2026-09-30"
+updated: "2026-11-23"
 ---
 
-Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. En dehors des données techniques de connexion décrites plus bas (réseau et journaux du serveur), les seules données personnelles qu’il recueille sont celles que vous choisissez de lui envoyer ; les visites, elles, sont seulement comptées, de façon anonyme. Cette page explique quelles données, pourquoi, où elles sont conservées et comment exercer vos droits.
+Ce site présente le travail de Rostel Panoumassi, ingénieur produit à Cotonou. En dehors des données techniques de connexion décrites plus bas (réseau et journaux du serveur), les seules données personnelles qu’il recueille sont celles que vous choisissez de lui envoyer ; les visites, elles, sont comptées sans cookie ni adresse IP, et signalées à Rostel Panoumassi (voir la mesure d’audience). Cette page explique quelles données, pourquoi, où elles sont conservées et comment exercer vos droits.
 
 ## Responsable du traitement
 
@@ -42,7 +42,7 @@ Seul Rostel Panoumassi consulte vos réponses. Elles sont hébergées par les pr
 - une base de données Google Cloud Firestore (projet Firebase), hébergée par Google aux États-Unis (emplacement multirégional nam5). Ce transfert est encadré par les clauses contractuelles types de la Commission européenne intégrées aux conditions de traitement des données de Google Cloud ;
 - la boîte Gmail de Rostel Panoumassi (Google, États-Unis), qui reçoit une copie de chaque envoi par l’intermédiaire d’un prestataire d’envoi d’e-mails.
 
-Avant d’atteindre le site, chaque visite passe par Cloudflare, Inc. (États-Unis), prestataire de réseau et de sécurité placé devant le site : il achemine les échanges et les protège contre les attaques. Il voit donc passer votre adresse IP et la page demandée, qu’il traite pour son service selon ses propres conditions de traitement des données. C’est aussi Cloudflare qui indique au site le pays d’où vient une visite (voir la mesure d’audience).
+Avant d’atteindre le site, chaque visite passe par Cloudflare, Inc. (États-Unis), prestataire de réseau et de sécurité placé devant le site : il achemine les échanges et les protège contre les attaques. Il voit donc passer votre adresse IP et la page demandée, qu’il traite pour son service selon ses propres conditions de traitement des données. C’est aussi Cloudflare qui indique au site le pays et la ville d’où vient une visite (voir la mesure d’audience).
 
 Le site est hébergé sur un serveur privé loué auprès d’un hébergeur professionnel et administré par Rostel Panoumassi. Comme tout serveur web, il tient des journaux techniques : l’adresse IP et la page demandée y sont conservées pour une durée limitée, à des fins de sécurité et de diagnostic.
 
@@ -63,7 +63,11 @@ Pour savoir quelles pages sont lues, le site tient un simple compteur quotidien 
 - le pays d’où vient la visite (par exemple BJ), tel que Cloudflare le déduit de votre adresse IP ;
 - le total de pages vues de la journée.
 
-Le compteur n’enregistre ni adresse IP, ni identifiant, ni aucune information permettant de vous reconnaître d’une visite à l’autre. Ces chiffres sont stockés dans la même base Firestore.
+Le compteur n’enregistre ni adresse IP, ni identifiant. Ces chiffres sont stockés dans la même base Firestore.
+
+Pour suivre l’intérêt porté à son travail, Rostel Panoumassi reçoit aussi un court avis pour chaque visite, sur sa messagerie WhatsApp (Meta). Il contient : les pages vues pendant la visite et sa durée, le site d’où vous venez, le pays et la ville que Cloudflare déduit de votre adresse IP, la langue de votre navigateur, le type d’appareil, son système, le navigateur et la taille de l’écran, et s’il s’agit de votre première visite. Votre adresse IP n’y figure jamais. Ces avis restent dans sa messagerie et sont gardés 30 jours sur le serveur de son assistant, puis effacés.
+
+Pour regrouper les pages d’une même visite et reconnaître une visite de retour, votre navigateur garde sur votre appareil deux informations, qui ne servent qu’à cet avis : un numéro tiré au hasard, effacé à la fermeture de l’onglet, et le nombre de vos visites. Vous pouvez les effacer à tout moment en supprimant les données du site dans votre navigateur ; si votre navigateur les bloque, la visite est seulement comptée.
 
 ## Sécurité
 

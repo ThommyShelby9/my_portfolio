@@ -3,6 +3,7 @@ import { clientIp, trustCloudflare } from '@/lib/server/client-ip';
 import { getDb } from '@/lib/server/firestore';
 import { hitLimiter } from '@/lib/server/rate-limit';
 import { capRef, countryCode, dayKey, isBot, isSameOrigin, knownPath, OTHER, recordHit, refHost } from '@/lib/server/stats';
+import { notifyVisit, visitFromHit } from '@/lib/server/visit-notify';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,7 +40,8 @@ async function readCapped(body: ReadableStream<Uint8Array> | null, max: number):
 
 /**
  * Receives `{ path, ref }` from HitBeacon and increments today's counters. The IP only keys the
- * in-memory throttle (60 hits per minute): it is never stored.
+ * in-memory throttle (60 hits per minute): it is never stored. The view is also forwarded to the
+ * owner's WhatsApp assistant (visit-notify), with the visit fields the beacon adds.
  */
 export async function POST(request: Request): Promise<Response> {
   try {
@@ -59,6 +61,9 @@ export async function POST(request: Request): Promise<Response> {
     if (!body || typeof body !== 'object') return done();
     const { path, ref } = body as { path?: unknown; ref?: unknown };
     if (typeof path !== 'string' || !path.startsWith('/') || path.length > MAX_PATH) return done();
+
+    const visit = visitFromHit(body as Record<string, unknown>, knownPath(path) ?? path, headers);
+    if (visit) await notifyVisit(visit);
 
     const db = getDb();
     if (!db) return done();

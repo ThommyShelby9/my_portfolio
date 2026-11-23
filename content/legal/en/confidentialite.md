@@ -1,8 +1,8 @@
 ---
-updated: "2026-09-30"
+updated: "2026-11-23"
 ---
 
-This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. Apart from the technical connection data described below (network and server logs), the only personal data it collects is what you choose to send; visits are only counted, anonymously. This page explains what data, why, where it is kept and how to exercise your rights.
+This site presents the work of Rostel Panoumassi, a product engineer based in Cotonou. Apart from the technical connection data described below (network and server logs), the only personal data it collects is what you choose to send; visits are counted without cookies or IP addresses, and reported to Rostel Panoumassi (see audience measurement). This page explains what data, why, where it is kept and how to exercise your rights.
 
 ## Data controller
 
@@ -42,7 +42,7 @@ Only Rostel Panoumassi reads your answers. They are hosted by the following prov
 - a Google Cloud Firestore database (Firebase project), hosted by Google in the United States (nam5 multi-region location). This transfer is covered by the European Commission’s standard contractual clauses, incorporated into Google Cloud’s data processing terms;
 - Rostel Panoumassi’s Gmail mailbox (Google, United States), which receives a copy of each submission through an email delivery provider.
 
-Before reaching the site, every visit goes through Cloudflare, Inc. (United States), a network and security provider placed in front of the site: it routes the traffic and protects it against attacks. It therefore sees your IP address and the requested page in transit, which it processes for its service under its own data processing terms. Cloudflare is also what tells the site which country a visit comes from (see audience measurement).
+Before reaching the site, every visit goes through Cloudflare, Inc. (United States), a network and security provider placed in front of the site: it routes the traffic and protects it against attacks. It therefore sees your IP address and the requested page in transit, which it processes for its service under its own data processing terms. Cloudflare is also what tells the site which country and city a visit comes from (see audience measurement).
 
 The site is hosted on a private server rented from a professional hosting provider and administered by Rostel Panoumassi. Like any web server, it keeps technical logs: the IP address and the requested page are kept there for a limited period, for security and diagnosis.
 
@@ -63,7 +63,11 @@ To know which pages are read, the site keeps a simple, anonymous daily count. Fo
 - the country the visit comes from (for example BJ), as Cloudflare derives it from your IP address;
 - the day’s total of page views.
 
-The counter saves no IP address, no identifier and no information that could recognise you from one visit to the next. These figures are stored in the same Firestore database.
+The counter saves no IP address and no identifier. These figures are stored in the same Firestore database.
+
+To follow the interest in his work, Rostel Panoumassi also receives a short notice for each visit, in his WhatsApp messaging (Meta). It contains: the pages viewed during the visit and its length, the site you came from, the country and city Cloudflare derives from your IP address, your browser language, the type of device, its system, the browser and the screen size, and whether it is your first visit. Your IP address is never in it. These notices stay in his messaging and are kept for 30 days on his assistant’s server, then deleted.
+
+To group the pages of one visit and recognise a returning visit, your browser keeps two pieces of information on your device, used only for this notice: a random number, erased when the tab closes, and the number of your visits. You can erase them at any time by clearing the site’s data in your browser; if your browser blocks them, the visit is only counted.
 
 ## Security
 
