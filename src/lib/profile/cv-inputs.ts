@@ -41,8 +41,14 @@ export function cvInputs(locale: Locale, projects: readonly CvProject[]): Record
     education: EDUCATION,
     skills: SKILL_GROUPS,
     projects,
-    messages: { cv: m.cv, about: { title: m.about.title, lede: m.about.lede, careerNote: m.about.career.note } },
+    // metaTitle and metaDescription only describe the web page in search results: the PDF never prints them.
+    messages: { cv: withoutSearchMeta(m.cv), about: { title: m.about.title, lede: m.about.lede, careerNote: m.about.career.note } },
   };
+}
+
+function withoutSearchMeta<T extends { metaTitle?: string; metaDescription?: string }>(cv: T): Omit<T, 'metaTitle' | 'metaDescription'> {
+  const { metaTitle: _title, metaDescription: _description, ...printed } = cv;
+  return printed;
 }
 
 export function cvInputsHash(locale: Locale, projects: readonly CvProject[]): string {

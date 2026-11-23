@@ -17,7 +17,8 @@ images:
   - { src: /work/whatspay/01.webp, alt: "Site WhatsPay", kind: public }
   - { src: /work/whatspay/02.webp, alt: "Page d’accueil en ligne", kind: public }
 proofs: []
-seoDescription: "WhatsPay, marketing d’influence sur WhatsApp : Laravel 12, RabbitMQ, WaSender API et PayPlus. Liens suivis, portefeuilles, commissions, retraits."
+seoTitle: "WhatsPay, campagnes WhatsApp payées en Mobile Money · Rostel Panoumassi"
+seoDescription: "Comment WhatsPay paie des diffuseurs pour relayer des campagnes sur WhatsApp : clics suivis sans cookie, portefeuilles, retraits Mobile Money. Les coulisses techniques."
 ---
 
 ## Les enjeux

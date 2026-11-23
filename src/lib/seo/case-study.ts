@@ -25,7 +25,8 @@ export function caseTitleSubject(p: Pick<Project, 'title' | 'sector'>): string {
 }
 
 /** Page metadata for a case study; the share image comes from the colocated opengraph-image. */
-export function caseMetadata(p: Project, title: string): Metadata {
+export function caseMetadata(p: Project, generated: string): Metadata {
+  const title = p.seoTitle ?? generated;
   const base = pageMetadata({ locale: p.locale, href: CASE_HREF[p.kind], params: { slug: p.slug }, title, description: p.seoDescription });
   return {
     ...base,

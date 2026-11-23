@@ -42,6 +42,8 @@ const base = z.object({
     .min(2)
     .max(4)
     .refine((g) => new Set(g).size === g.length, 'genes must be distinct'),
+  /** Optional search-result title, used instead of the generated one when it reads better in Google. */
+  seoTitle: z.string().min(1).max(80).optional(),
   seoDescription: z.string().min(1).max(170),
 }).strict();
 
